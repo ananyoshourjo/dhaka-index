@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: ../../security/advisories/new
+    about: Report authentication, authorization, private-data, or network/file access vulnerabilities privately.

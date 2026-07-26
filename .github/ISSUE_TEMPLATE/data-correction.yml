@@ -1,0 +1,32 @@
+name: Job data correction or removal
+description: Report an incorrect public title, company, deadline, or link.
+title: "[Data]: "
+labels:
+  - data
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Canonical job URL
+      placeholder: https://company.example/careers/role
+    validations:
+      required: true
+  - type: dropdown
+    id: correction
+    attributes:
+      label: Request
+      options:
+        - Correct title
+        - Correct company
+        - Correct deadline
+        - Correct URL
+        - Remove listing
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Correction and publisher evidence
+      description: Link to the authoritative publisher page and describe the change.
+    validations:
+      required: true

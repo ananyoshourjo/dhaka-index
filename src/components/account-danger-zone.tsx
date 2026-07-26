@@ -1,0 +1,93 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+
+import { Button } from "@/components/ui/button";
+import { authClient } from "@/lib/auth-client";
+
+export function AccountDangerZone() {
+  const router = useRouter();
+  const [confirmation, setConfirmation] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const canDelete = confirmation === "DELETE" && password.length >= 8;
+
+  return (
+    <section className="overflow-hidden rounded-2xl border border-destructive/30 bg-card text-card-foreground">
+      <div className="border-b border-destructive/20 px-6 py-5">
+        <p className="font-mono text-xs uppercase tracking-[0.16em] text-destructive">
+          Irreversible
+        </p>
+        <h2 className="mt-2 text-xl font-semibold">Delete local account</h2>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+          This permanently removes your account, sessions, bookmarks, archive,
+          resume, cover letter, and profile photo from this installation.
+        </p>
+      </div>
+
+      <form
+        className="grid gap-4 p-6 sm:grid-cols-2"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setError(null);
+
+          startTransition(async () => {
+            const result = await authClient.deleteUser({
+              callbackURL: "/signup",
+              password,
+            });
+
+            if (result.error) {
+              setError(result.error.message || "The account could not be deleted.");
+              return;
+            }
+
+            router.push("/signup");
+            router.refresh();
+          });
+        }}
+      >
+        <label className="grid gap-1.5 text-sm font-medium">
+          Password
+          <input
+            autoComplete="current-password"
+            className="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
+            minLength={8}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+            type="password"
+            value={password}
+          />
+        </label>
+        <label className="grid gap-1.5 text-sm font-medium">
+          Type DELETE
+          <input
+            autoComplete="off"
+            className="h-10 rounded-md border bg-background px-3 font-mono text-sm outline-none focus:ring-2 focus:ring-ring"
+            onChange={(event) => setConfirmation(event.target.value)}
+            pattern="DELETE"
+            required
+            type="text"
+            value={confirmation}
+          />
+        </label>
+
+        {error ? (
+          <p className="text-sm text-destructive sm:col-span-2">{error}</p>
+        ) : null}
+
+        <div className="sm:col-span-2">
+          <Button
+            disabled={!canDelete || isPending}
+            type="submit"
+            variant="destructive"
+          >
+            {isPending ? "Deleting account" : "Delete account permanently"}
+          </Button>
+        </div>
+      </form>
+    </section>
+  );
+}

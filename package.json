@@ -1,0 +1,75 @@
+{
+  "name": "@dhaka-index/web",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "admin-portal"
+  ],
+  "scripts": {
+    "setup": "tsx scripts/setup.ts && playwright install chromium",
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "admin:dev": "npm --prefix admin-portal run dev",
+    "admin:build": "npm --prefix admin-portal run build",
+    "admin:start": "npm --prefix admin-portal run start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit && npm --prefix admin-portal run typecheck",
+    "test": "tsx --test tests/**/*.test.ts",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build && npm run admin:build"
+  },
+  "keywords": [
+    "bangladesh",
+    "dhaka",
+    "jobs",
+    "local-first",
+    "resume-builder",
+    "self-hosted"
+  ],
+  "license": "Apache-2.0",
+  "description": "A local-first Dhaka job index and polished resume builder.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ananyoshourjo/dhaka-index.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ananyoshourjo/dhaka-index/issues"
+  },
+  "homepage": "https://github.com/ananyoshourjo/dhaka-index#readme",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "postcss": "^8.5.23",
+    "sharp": "^0.35.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.2.11",
+    "tailwindcss": "^4.2.4",
+    "tsx": "^4.21.0",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "better-auth": "^1.6.22",
+    "better-sqlite3": "^12.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "lucide-react": "^1.11.0",
+    "next": "^16.2.11",
+    "playwright": "1.59.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

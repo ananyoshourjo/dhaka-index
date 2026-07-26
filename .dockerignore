@@ -1,0 +1,15 @@
+.git
+.github
+.next*
+admin-portal/.next
+node_modules
+data
+tmp
+.runs
+.agents
+.codex
+*.log
+*.pid
+*.tsbuildinfo
+.env*
+scrollbar-check.png

@@ -1,0 +1,43 @@
+services:
+  web:
+    image: dhaka-index:0.1.0
+    build:
+      context: .
+    environment:
+      ADMIN_PORTAL_URL: http://localhost:3010
+      BETTER_AUTH_URL: http://localhost:3000
+      DHAKA_INDEX_DATA_DIR: /app/data
+      DHAKA_INDEX_JOB_FEED_URL: ${DHAKA_INDEX_JOB_FEED_URL}
+      DHAKA_INDEX_TRUSTED_ORIGINS: http://localhost:3000,http://localhost:3010
+      NEXT_TELEMETRY_DISABLED: "1"
+    ports:
+      - "3000:3000"
+    volumes:
+      - dhaka-index-data:/app/data
+
+  admin:
+    image: dhaka-index:0.1.0
+    depends_on:
+      - web
+    working_dir: /app/admin-portal
+    command:
+      - node
+      - ../node_modules/next/dist/bin/next
+      - start
+      - --hostname
+      - 0.0.0.0
+      - --port
+      - "3010"
+    environment:
+      ADMIN_AUTH_URL: http://localhost:3010
+      BETTER_AUTH_URL: http://localhost:3000
+      DHAKA_INDEX_DATA_DIR: /app/data
+      DHAKA_INDEX_TRUSTED_ORIGINS: http://localhost:3000,http://localhost:3010
+      NEXT_TELEMETRY_DISABLED: "1"
+    ports:
+      - "3010:3010"
+    volumes:
+      - dhaka-index-data:/app/data
+
+volumes:
+  dhaka-index-data:
