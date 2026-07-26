@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/playwright:v1.59.1-noble
+FROM mcr.microsoft.com/playwright:v1.61.1-noble
 
 ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
