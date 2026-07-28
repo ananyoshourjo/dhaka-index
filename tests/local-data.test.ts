@@ -64,6 +64,36 @@ test("keeps admin ownership, user data, and feed overrides local", async () => {
     assert.equal(jobs[0]?.title, "Local corrected title");
     assert.equal(jobs[0]?.company, "Updated feed company");
 
+    const resume = await import("../src/lib/resume");
+    const legacyResume = {
+      ...resume.defaultResumeContent,
+      layout: { multiPage: false },
+    };
+    database.db
+      .prepare(`
+        INSERT INTO resume_profiles (id, content_json, updated_at)
+        VALUES (?, ?, ?)
+      `)
+      .run(`profile:${userId}`, JSON.stringify(legacyResume), timestamp);
+
+    const normalizedResume = resume.getResumeContent(userId);
+    assert.equal("layout" in normalizedResume, false);
+
+    const legacyRuntimeResume = {
+      ...normalizedResume,
+      layout: { multiPage: false },
+    };
+    resume.saveResumeContent(userId, legacyRuntimeResume);
+    const savedResume = database.db
+      .prepare<[string], { content_json: string }>(
+        `SELECT content_json FROM resume_profiles WHERE id = ?`,
+      )
+      .get(`profile:${userId}`);
+    assert.equal(
+      "layout" in JSON.parse(savedResume?.content_json ?? "{}"),
+      false,
+    );
+
     const exported = JSON.stringify(database.getUserDataExport(userId));
     assert.match(exported, /local@example\.com/);
     assert.doesNotMatch(exported, /password|session|accessToken|refreshToken/);

@@ -291,12 +291,11 @@ function buildResumeHtml(
       <head>
         <meta charset="utf-8" />
         <style>
-          @page { size: letter; margin: ${resume.layout?.multiPage === false ? "0" : ".25in"}; }
+          @page { size: letter; margin: .25in; }
           * { box-sizing: border-box; }
           body { margin: 0; font-family: Arial, sans-serif; color: #000; }
           main {
-            width: ${resume.layout?.multiPage === false ? "8.5in" : "100%"};
-            ${resume.layout?.multiPage === false ? "height: 11in; padding: .25in; overflow: hidden;" : ""}
+            width: 100%;
           }
           header { display: grid; grid-template-columns: 1fr 1.28in; gap: .25in; }
           h2 { margin: 0; font-size: 18px; line-height: 1.2; text-transform: uppercase; }

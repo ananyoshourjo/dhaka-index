@@ -430,7 +430,6 @@ export function ResumeBuilder({
       body: "",
       closing: "Sincerely,",
     },
-    layout: initialResume.layout ?? { multiPage: true },
     sectionOrder: normalizeSectionOrder(initialResume.sectionOrder),
   });
   const [saveState, setSaveState] = useState<SaveState>("saved");
@@ -477,7 +476,7 @@ export function ResumeBuilder({
   useLayoutEffect(() => {
     const preview = resumePreviewRef.current;
 
-    if (!showPreview || !preview || !resume.layout.multiPage) {
+    if (!showPreview || !preview) {
       setResumePageCount(1);
       return;
     }
@@ -1158,37 +1157,6 @@ export function ResumeBuilder({
                   }))
                 }
               />
-            </div>
-          </EditorSection>
-
-          <EditorSection title="Document settings">
-            <div className="flex items-start gap-3 rounded-lg border bg-muted/35 p-3">
-              <Toggle
-                checked={resume.layout.multiPage}
-                label={
-                  resume.layout.multiPage
-                    ? "Use a single resume page"
-                    : "Allow multiple resume pages"
-                }
-                onClick={() =>
-                  setResume((current) => ({
-                    ...current,
-                    layout: {
-                      ...current.layout,
-                      multiPage: !current.layout.multiPage,
-                    },
-                  }))
-                }
-              />
-              <span className="grid gap-1">
-                <span className="text-sm font-semibold text-foreground">
-                  Automatic multi-page resume
-                </span>
-                <span className="text-xs leading-relaxed text-muted-foreground">
-                  Continue content onto additional Letter pages instead of
-                  clipping anything that does not fit.
-                </span>
-              </span>
             </div>
           </EditorSection>
 
@@ -2424,19 +2392,12 @@ export function ResumeBuilder({
           </div>
           <article
             ref={resumePreviewRef}
-            className={cn(
-              "absolute top-0 z-10 h-[11in] w-[8.5in] px-[0.25in] py-[0.25in] font-sans text-black",
-              resume.layout.multiPage ? "overflow-visible" : "overflow-hidden",
-            )}
+            className="absolute top-0 z-10 h-[11in] w-[8.5in] overflow-visible px-[0.25in] py-[0.25in] font-sans text-black"
             style={{
               left: resume.coverLetter.included ? "9in" : "0",
-              ...(resume.layout.multiPage
-                ? {
-                    columnFill: "auto",
-                    columnGap: "1in",
-                    columnWidth: "8in",
-                  }
-                : {}),
+              columnFill: "auto",
+              columnGap: "1in",
+              columnWidth: "8in",
             }}
           >
             <header className="grid grid-cols-[1fr_1.28in] gap-[0.25in]">
