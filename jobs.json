@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-28T15:40:37.252Z",
+  "generatedAt": "2026-07-28T15:43:11.674Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1108,10 +1108,22 @@
       "url": "https://jobs.lever.co/fieldnation/1031d39f-65c9-48cd-8a62-30a82e5160b8"
     },
     {
+      "title": "Senior Software Engineer (Full stack)",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/2f84fe38-8c6d-4a85-b887-af459dd8f10d"
+    },
+    {
       "title": "Software Engineer",
       "company": "Field Nation",
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/6a0bb6af-674c-4691-9976-f591d2b81642"
+    },
+    {
+      "title": "Senior Software Engineer - Data Team",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/6bf76790-47ff-4006-bed6-617921e03aaf"
     },
     {
       "title": "Associate Product Marketing Manager",
