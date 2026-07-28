@@ -3,8 +3,8 @@ export const dynamic = "force-dynamic";
 import { revalidatePath } from "next/cache";
 import Link from "next/link";
 
+import { JobFeedSync } from "@/components/job-feed-sync";
 import { JobList } from "@/components/job-list";
-import { JobFeedStatus } from "@/components/job-feed-status";
 import { Button } from "@/components/ui/button";
 import {
   archiveJobById,
@@ -13,7 +13,6 @@ import {
   isFirstRegisteredUser,
   unbookmarkJobById,
 } from "@/lib/db";
-import { getJobFeedStatus } from "@/lib/job-feed";
 import { getActiveJobs } from "@/lib/jobs";
 import { requireUser } from "@/lib/session";
 
@@ -54,18 +53,18 @@ async function toggleBookmarkJobAction(formData: FormData) {
 export default async function HomePage() {
   const user = await requireUser();
   const jobs = getActiveJobs(user.id);
-  const feedStatus = getJobFeedStatus();
   const shouldClaimAdmin = !hasAnyAdmin() && isFirstRegisteredUser(user.id);
 
   return (
-    <JobList
-      action={archiveJobAction}
-      actionLabel="Archive"
-      bookmarkAction={toggleBookmarkJobAction}
-      emptyLabel="No active jobs are listed right now."
-      header={
-        <div className="grid gap-3">
-          {shouldClaimAdmin ? (
+    <>
+      <JobFeedSync />
+      <JobList
+        action={archiveJobAction}
+        actionLabel="Archive"
+        bookmarkAction={toggleBookmarkJobAction}
+        emptyLabel="No active jobs are listed right now."
+        header={
+          shouldClaimAdmin ? (
             <section className="flex flex-col gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-amber-950 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm font-semibold">Finish administrator setup</p>
@@ -77,11 +76,10 @@ export default async function HomePage() {
                 <Link href="/setup">Continue setup</Link>
               </Button>
             </section>
-          ) : null}
-          <JobFeedStatus initialStatus={feedStatus} />
-        </div>
-      }
-      jobs={jobs}
-    />
+          ) : null
+        }
+        jobs={jobs}
+      />
+    </>
   );
 }
