@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-28T15:23:54.693Z",
+  "generatedAt": "2026-07-28T15:40:28.840Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -676,12 +676,6 @@
       "url": "https://brandpractitioners.com/executive-agro-ltd-is-hiring-sales-manager"
     },
     {
-      "title": "Associate Product Marketing Manager",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://brandpractitioners.com/field-nation-is-hiring-associate-product-marketing-manager"
-    },
-    {
       "title": "Executive / Sr. Executive – Marketing, Paid Digital Media",
       "company": "Foodi",
       "deadline": null,
@@ -862,24 +856,6 @@
       "url": "https://brandpractitioners.com/upay-is-hiring-executive-sr-executive-brand-communications"
     },
     {
-      "title": "Full-stack Python Developer (Lead / Architect)",
-      "company": "Cefalo Bangladesh Ltd.",
-      "deadline": null,
-      "url": "https://career.cefalo.com/job/fullstack-python-developer-lead-architect-35"
-    },
-    {
-      "title": "Lead C#/.NET Developer",
-      "company": "Cefalo Bangladesh Ltd.",
-      "deadline": null,
-      "url": "https://career.cefalo.com/job/lead-c-hash-dot-net-developer-18"
-    },
-    {
-      "title": "People Operations Associate",
-      "company": "Cefalo Bangladesh Ltd.",
-      "deadline": null,
-      "url": "https://career.cefalo.com/job/people-operations-associate-37"
-    },
-    {
       "title": "Area Sales Manager (Aarong Dairy)",
       "company": "BRAC",
       "deadline": null,
@@ -1000,6 +976,12 @@
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11783"
     },
     {
+      "title": "Head of Organization Development",
+      "company": "Banglalink",
+      "deadline": "2026-07-31",
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11794"
+    },
+    {
       "title": "Head of Employee Relations, Engagement, and Internal Communications",
       "company": "Banglalink",
       "deadline": null,
@@ -1118,6 +1100,60 @@
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
       "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60"
+    },
+    {
+      "title": "Staff Platform Engineer, Infrastructure",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/1031d39f-65c9-48cd-8a62-30a82e5160b8"
+    },
+    {
+      "title": "Software Engineer",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/6a0bb6af-674c-4691-9976-f591d2b81642"
+    },
+    {
+      "title": "Associate Product Marketing Manager",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/7c4a002f-2186-4d70-a055-dc93956e9a19"
+    },
+    {
+      "title": "Senior Information Security Analyst, GRC",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/7cecef53-6686-45b0-b7a6-8c9b69b0d989"
+    },
+    {
+      "title": "Support Coordinator (Night Shift)",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/8b600331-0a88-4218-9dd5-90da25adc840"
+    },
+    {
+      "title": "Manager, Customer Success",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/95212eee-c53c-4594-af32-5e57ea4d95b3"
+    },
+    {
+      "title": "Senior Security Operations Engineer",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/9d87097f-8012-420a-94a9-e4d493351d7b"
+    },
+    {
+      "title": "Onboarding Program Manager",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/da2ee919-29fa-4f76-bcf2-631b88b0a03a"
+    },
+    {
+      "title": "Senior Billing Specialist",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/e51a3437-8bfa-462a-bc50-9fe01f8957f0"
     },
     {
       "title": "Artist/Designer",
@@ -1256,12 +1292,6 @@
       "company": "M",
       "deadline": null,
       "url": "https://thecvguy.net/career-tips/ats-friendly-cv-banano-guide-bangla"
-    },
-    {
-      "title": "Head of Organization Development",
-      "company": "Banglalink",
-      "deadline": "2026-07-31",
-      "url": "https://thecvguy.net/jobs-in-bd/banglalink-is-hiring-head-of-organization-development"
     },
     {
       "title": "Key Account Manager – Electronics, Commercial",
