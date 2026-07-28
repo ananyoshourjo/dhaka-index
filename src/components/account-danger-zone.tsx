@@ -15,20 +15,25 @@ export function AccountDangerZone() {
   const canDelete = confirmation === "DELETE" && password.length >= 8;
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-destructive/30 bg-card text-card-foreground">
-      <div className="border-b border-destructive/20 px-6 py-5">
-        <p className="font-mono text-xs uppercase tracking-[0.16em] text-destructive">
-          Irreversible
-        </p>
-        <h2 className="mt-2 text-xl font-semibold">Delete local account</h2>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">
+    <section
+      aria-labelledby="delete-account-heading"
+      className="grid gap-6 py-7 sm:grid-cols-[minmax(0,14rem)_1fr]"
+    >
+      <div>
+        <h2
+          id="delete-account-heading"
+          className="font-semibold text-destructive"
+        >
+          Delete account
+        </h2>
+        <p className="mt-1 text-sm leading-6 text-muted-foreground">
           This permanently removes your account, sessions, bookmarks, archive,
           resume, cover letter, and profile photo from this installation.
         </p>
       </div>
 
       <form
-        className="grid gap-4 p-6 sm:grid-cols-2"
+        className="grid max-w-md gap-4"
         onSubmit={(event) => {
           event.preventDefault();
           setError(null);
@@ -65,7 +70,7 @@ export function AccountDangerZone() {
           Type DELETE
           <input
             autoComplete="off"
-            className="h-10 rounded-md border bg-background px-3 font-mono text-sm outline-none focus:ring-2 focus:ring-ring"
+            className="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             onChange={(event) => setConfirmation(event.target.value)}
             pattern="DELETE"
             required
@@ -75,10 +80,10 @@ export function AccountDangerZone() {
         </label>
 
         {error ? (
-          <p className="text-sm text-destructive sm:col-span-2">{error}</p>
+          <p className="text-sm text-destructive">{error}</p>
         ) : null}
 
-        <div className="sm:col-span-2">
+        <div>
           <Button
             disabled={!canDelete || isPending}
             type="submit"
