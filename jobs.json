@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-27T08:17:34.802Z",
+  "generatedAt": "2026-07-28T10:54:14.550Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -26,6 +26,12 @@
       "company": "Dynamic Solution Innovators",
       "deadline": "2026-08-24",
       "url": "https://app.hrythmic.com/recruit/openings/d046352f-0f59-4b77-8149-871f001d043f"
+    },
+    {
+      "title": "Trainee Design & Verification Engineer",
+      "company": "Dynamic Solution Innovators",
+      "deadline": "2026-08-27",
+      "url": "https://app.hrythmic.com/recruit/openings/d0f2f8c4-53db-4d63-8359-d89226d2de17"
     },
     {
       "title": "Executive / Senior Executive – Marketing",
@@ -622,22 +628,16 @@
       "url": "https://careers.brac.net/jobs/territory-sales-officer-agri-machineries-brac-seed-and-agro-enterprise-2895?bulk=false"
     },
     {
-      "title": "Associate, Content & Digital Engagement",
+      "title": "Executive, Rides",
       "company": "Pathao",
-      "deadline": "2026-07-27",
-      "url": "https://careers.pathao.com/jobs/associate-content-digital-engagement"
+      "deadline": "2026-08-06",
+      "url": "https://careers.pathao.com/jobs/executive-rides"
     },
     {
       "title": "Manager, Growth & Strategy",
       "company": "Pathao",
       "deadline": "2026-08-09",
       "url": "https://careers.pathao.com/jobs/manager-growth-strategy"
-    },
-    {
-      "title": "Internal Audit Senior Manager",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11772"
     },
     {
       "title": "Head of Sales- Cloud & Infra",
@@ -670,12 +670,6 @@
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11783"
     },
     {
-      "title": "Head of Organization Development",
-      "company": "Banglalink",
-      "deadline": "2026-07-31",
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11794"
-    },
-    {
       "title": "Head of Employee Relations, Engagement, and Internal Communications",
       "company": "Banglalink",
       "deadline": null,
@@ -686,6 +680,12 @@
       "company": "Banglalink",
       "deadline": null,
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11799"
+    },
+    {
+      "title": "GEN AI Lead/Chartered Engineer",
+      "company": "Banglalink",
+      "deadline": null,
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11802"
     },
     {
       "title": "Android Developer (Native)",
@@ -844,6 +844,12 @@
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6909"
     },
     {
+      "title": "Manager/ Senior Manager, Strategic Planning, Corporate Strategy (Reff. July 27, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-03",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6912"
+    },
+    {
       "title": "Jr. Executive, Customer Experience",
       "company": "Shikho",
       "deadline": null,
@@ -916,6 +922,18 @@
       "url": "https://thecvguy.net/bank-jobs/standard-chartered-universal-banker-2026"
     },
     {
+      "title": "ATS-ফ্রেন্ডলি সিভি কীভাবে বানাবেন? বাংলাদেশি চাকরিপ্রার্থীদের জন্য সম্পূর্ণ গাইড",
+      "company": "M",
+      "deadline": null,
+      "url": "https://thecvguy.net/career-tips/ats-friendly-cv-banano-guide-bangla"
+    },
+    {
+      "title": "Head of Organization Development",
+      "company": "Banglalink",
+      "deadline": "2026-07-31",
+      "url": "https://thecvguy.net/jobs-in-bd/banglalink-is-hiring-head-of-organization-development"
+    },
+    {
       "title": "Key Account Manager – Electronics, Commercial",
       "company": "Daraz Bangladesh",
       "deadline": "2026-08-10",
@@ -938,6 +956,12 @@
       "company": "Foodpanda",
       "deadline": "2026-08-01",
       "url": "https://thecvguy.net/mnc-jobs/foodpanda-bangladesh-head-retail-media-2026"
+    },
+    {
+      "title": "People Experience Associate",
+      "company": "JTI",
+      "deadline": "2026-08-05",
+      "url": "https://thecvguy.net/mnc-jobs/jti-bangladesh-people-experience-associate"
     },
     {
       "title": "Trade Marketing Manager",
