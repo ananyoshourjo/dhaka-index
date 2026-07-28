@@ -102,9 +102,6 @@ export type ResumeContent = {
   skills: ResumeSkillGroup[];
   references: ResumeReference[];
   coverLetter: ResumeCoverLetter;
-  layout: {
-    multiPage: boolean;
-  };
   sectionOrder: ResumeSectionKey[];
 };
 
@@ -160,9 +157,6 @@ export const defaultResumeContent: ResumeContent = {
     salutation: "Dear Hiring Manager,",
     body: "",
     closing: "Sincerely,",
-  },
-  layout: {
-    multiPage: true,
   },
   sectionOrder: defaultResumeSectionOrder,
 };
@@ -252,8 +246,13 @@ function readResumeContent(id: string): ResumeContent | null {
         sectionOrder.splice(previousIndex + 1, 0, section);
       });
 
+      const normalized = { ...parsed } as ResumeContent & {
+        layout?: unknown;
+      };
+      delete normalized.layout;
+
       return {
-        ...parsed,
+        ...normalized,
         contact: {
           ...parsed.contact,
           website:
@@ -273,10 +272,6 @@ function readResumeContent(id: string): ResumeContent | null {
         coverLetter: {
           ...defaultResumeContent.coverLetter,
           ...(parsed.coverLetter ?? {}),
-        },
-        layout: {
-          ...defaultResumeContent.layout,
-          ...(parsed.layout ?? {}),
         },
         sectionOrder,
       };
@@ -312,13 +307,14 @@ export function saveResumeContent(
   content: ResumeContent,
 ) {
   initDb();
-  const localContent = {
+  const localContent: ResumeContent & { layout?: unknown } = {
     ...content,
     contact: {
       ...content.contact,
       photoUrl: sanitizeLocalPhoto(content.contact.photoUrl),
     },
   };
+  delete localContent.layout;
 
   db.prepare(`
     INSERT INTO resume_profiles (id, content_json, updated_at)
