@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-28T15:43:11.674Z",
+  "generatedAt": "2026-07-28T15:47:17.850Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1208,6 +1208,18 @@
       "company": "Ollyo",
       "deadline": null,
       "url": "https://ollyo.com/job/ui-ux-designer"
+    },
+    {
+      "title": "Executive Assistant (Technical)",
+      "company": "WellDev",
+      "deadline": "2026-07-30",
+      "url": "https://recruitment.welldev.io/public/jobs/5702b752-ac13-4e4e-be68-279127fb050a"
+    },
+    {
+      "title": "Quality Assurance (QA) Engineer",
+      "company": "WellDev",
+      "deadline": "2026-07-31",
+      "url": "https://recruitment.welldev.io/public/jobs/bb8544ff-1407-451a-877c-44cd6e71135a"
     },
     {
       "title": "Manager, Relationship Management, Axentec PLC, a fully owned subsidiary of Robi Axiata PLC. (Ref. July 21, 2026)",
