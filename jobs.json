@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-28T16:15:58.264Z",
+  "generatedAt": "2026-07-29T15:30:51.228Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1108,6 +1108,12 @@
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11802"
     },
     {
+      "title": "SME Director",
+      "company": "Banglalink",
+      "deadline": null,
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11807"
+    },
+    {
       "title": "Android Developer (Native)",
       "company": "Inument Solution Limited",
       "deadline": null,
@@ -1348,10 +1354,10 @@
       "url": "https://recruitment.welldev.io/public/jobs/bb8544ff-1407-451a-877c-44cd6e71135a"
     },
     {
-      "title": "Manager, Relationship Management, Axentec PLC, a fully owned subsidiary of Robi Axiata PLC. (Ref. July 21, 2026)",
+      "title": "Senior Associate or Associate Manager, Corporate Business, axentec PLC ‘a fully owned subsidiary of Robi Axiata PLC’ (Reff. June 18, 2026)",
       "company": "Robi Axiata Limited",
-      "deadline": "2026-07-28",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6906"
+      "deadline": "2026-07-29",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6877"
     },
     {
       "title": "Manager or Senior Manager, Media Relations, Corporate and Regulatory Officer (Reff. July 22, 2026)",
@@ -1364,6 +1370,24 @@
       "company": "Robi Axiata Limited",
       "deadline": "2026-08-03",
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6912"
+    },
+    {
+      "title": "Area Manager/ Senior Area Manager, Market Operation (Ref July 29, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-06",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6913"
+    },
+    {
+      "title": "Senior Associate or Associcate Manager, Visibility & Outdoor, Market Operation (Ref. July, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-06",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6918"
+    },
+    {
+      "title": "Senior Associate or Associate Manager, AI & Data Science, ACE, Corporate Strategy (Ref. July 29, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-06",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6921"
     },
     {
       "title": "Jr. Executive, Customer Experience",
