@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-29T15:31:01.179Z",
+  "generatedAt": "2026-07-29T15:32:29.122Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -62,6 +62,12 @@
       "company": "Executive / Sr. Executive, ACI PLC",
       "deadline": "2026-08-01",
       "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/brand-executive-sr-brand-executive/head-office"
+    },
+    {
+      "title": "Executive, Medico Marketing",
+      "company": "ACI PLC",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/executive-medico-marketing-pharmaceutical-business/gulshan/dhaka"
     },
     {
       "title": "Marketing Intern – Consumer Brands",
@@ -220,6 +226,12 @@
       "url": "https://bdrecruit.net/jobs-in-bd/fiberhome-ltd./career-bd/intern-marketing-sales/gulshan-1/dhaka/bay-office"
     },
     {
+      "title": "Financial Consultant",
+      "company": "First4Freelancers",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/first4freelancers/career-bd/financial-consultant/gulshan-1/dhaka"
+    },
+    {
       "title": "Bangladesh",
       "company": "Foodi Hiring Executive – Accounts & Finance",
       "deadline": "2026-07-31",
@@ -230,6 +242,12 @@
       "company": "Foodi",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/foodi/career-bd/sr-executive-executive-shops/2026"
+    },
+    {
+      "title": "Senior Manager, Performance Analytics",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/foodpanda/senior-manager-performance-analytics/dhaka"
     },
     {
       "title": "Management Trainee Officer (MTO) R&D",
@@ -514,6 +532,12 @@
       "url": "https://brandpractitioners.com/aci-is-hiring-assistant-manager-trade-marketing"
     },
     {
+      "title": "Brand Executive, Electrical",
+      "company": "Advanced Chemical Industries PLC (ACI)",
+      "deadline": "2026-08-25",
+      "url": "https://brandpractitioners.com/aci-is-hiring-brand-executive"
+    },
+    {
       "title": "Brand Executive",
       "company": "Advanced Chemical Industries PLC (ACI)",
       "deadline": "2026-07-31",
@@ -524,6 +548,12 @@
       "company": "Advanced Chemical Industries PLC (ACI)",
       "deadline": null,
       "url": "https://brandpractitioners.com/aci-is-hiring-brand-promotion-officer-aci-stationary-business"
+    },
+    {
+      "title": "Executive / Senior Executive, Export",
+      "company": "Not mentioned",
+      "deadline": "2026-08-16",
+      "url": "https://brandpractitioners.com/aci-is-hiring-executive-senior-executive-export"
     },
     {
       "title": "Sr./ Manager, Sales Excellence & Capability Development",
@@ -550,10 +580,10 @@
       "url": "https://brandpractitioners.com/akij-light-engineering-limited-is-hiring-assistant-manager-corporate-sales"
     },
     {
-      "title": "Officer / Senior Officer Sales",
-      "company": "Akij Consumer Electronics Ltd.",
-      "deadline": "2026-07-28",
-      "url": "https://brandpractitioners.com/akij-resources-is-hiring-officer-senior-officer-sales"
+      "title": "Assistant Manager, Sales (Packaging Unit)",
+      "company": "Akij Paper Mills Ltd.",
+      "deadline": "2026-08-09",
+      "url": "https://brandpractitioners.com/akij-venture-ltd-is-hiring-assistant-manager-sales-packaging-unit"
     },
     {
       "title": "Executive, Brand",
@@ -572,6 +602,12 @@
       "company": "AKIJBASHIR Group",
       "deadline": "2026-07-31",
       "url": "https://brandpractitioners.com/akijbashir-group-is-hiring-executive-senior-executive-sales"
+    },
+    {
+      "title": "Regional Manager Sales",
+      "company": "AKIJBASHIR Group",
+      "deadline": "2026-08-04",
+      "url": "https://brandpractitioners.com/akijbashir-group-is-hiring-regional-manager-sales-2"
     },
     {
       "title": "Marketing Executive/Senior Executive – Lab & Doctor Consultancy",
@@ -668,6 +704,12 @@
       "company": "Easy Fashion Ltd.",
       "deadline": "2026-08-18",
       "url": "https://brandpractitioners.com/easy-fashion-ltd-is-hiring-performance-marketing-executive"
+    },
+    {
+      "title": "Retail Showroom Manager (Sales)",
+      "company": "Edison Electronics Ltd.",
+      "deadline": "2026-08-27",
+      "url": "https://brandpractitioners.com/edison-electronics-ltd-is-hiring-retail-showroom-manager-sales"
     },
     {
       "title": "Sales Manager",
@@ -832,6 +874,12 @@
       "url": "https://brandpractitioners.com/swish-is-hiring-creative-director"
     },
     {
+      "title": "Growth Marketing Manager",
+      "company": "Synesis IT PLC",
+      "deadline": null,
+      "url": "https://brandpractitioners.com/synesis-it-is-hiring-growth-marketing-manager"
+    },
+    {
       "title": "Digital Marketing Executive",
       "company": "TQIU International (BD) Ltd.",
       "deadline": "2026-08-22",
@@ -850,10 +898,10 @@
       "url": "https://brandpractitioners.com/upay-is-hiring-asst-manager-manager-strategic-communications-pr-marketing"
     },
     {
-      "title": "Executive / Sr. Executive, Brand Communications",
-      "company": "upay",
-      "deadline": "2026-07-28",
-      "url": "https://brandpractitioners.com/upay-is-hiring-executive-sr-executive-brand-communications"
+      "title": "Executive Creative Director",
+      "company": "Walton",
+      "deadline": "2026-08-01",
+      "url": "https://brandpractitioners.com/walton-is-hiring-executive-creative-director"
     },
     {
       "title": "Area Sales Manager (Aarong Dairy)",
@@ -976,12 +1024,6 @@
       "url": "https://careers.optimizely.com/job/Dhaka-Product-Manager-1212-BD/1360527755"
     },
     {
-      "title": "Product Manager",
-      "company": "Optimizely",
-      "deadline": "2026-08-01",
-      "url": "https://careers.optimizely.com/job/Dhaka-Product-Manager-1212-BD/1361842955"
-    },
-    {
       "title": "Senior Customer Success Manager",
       "company": "Optimizely",
       "deadline": null,
@@ -1082,12 +1124,6 @@
       "company": "Banglalink",
       "deadline": null,
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11783"
-    },
-    {
-      "title": "Head of Organization Development",
-      "company": "Banglalink",
-      "deadline": "2026-07-31",
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11794"
     },
     {
       "title": "Head of Employee Relations, Engagement, and Internal Communications",
@@ -1444,12 +1480,6 @@
       "url": "https://thecvguy.net/bank-jobs/citizens-bank-plc-trainee-cash-officer-2026"
     },
     {
-      "title": "Associate Director, Investment Products",
-      "company": "Standard Chartered",
-      "deadline": "2026-07-28",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-is-hiring-associate-dip"
-    },
-    {
       "title": "Relationship Manager, Supply Chain Finance",
       "company": "Standard Chartered",
       "deadline": "2026-08-07",
@@ -1468,6 +1498,12 @@
       "url": "https://thecvguy.net/career-tips/ats-friendly-cv-banano-guide-bangla"
     },
     {
+      "title": "Head of Organization Development",
+      "company": "Banglalink",
+      "deadline": "2026-07-31",
+      "url": "https://thecvguy.net/jobs-in-bd/banglalink-is-hiring-head-of-organization-development"
+    },
+    {
       "title": "Key Account Manager – Electronics, Commercial",
       "company": "Daraz Bangladesh",
       "deadline": "2026-08-10",
@@ -1478,6 +1514,12 @@
       "company": "IPDC Finance",
       "deadline": "2026-08-01",
       "url": "https://thecvguy.net/jobs-in-bd/ipdc-finance-plc-career-lead-it-operations-vacancy-in-bangladesh"
+    },
+    {
+      "title": "Manufacturing HRBP - Savar",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-08-15",
+      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-hiring-manufacturing-hrbp"
     },
     {
       "title": "Head, Retail Media and Partnership",
