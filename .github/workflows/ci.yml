@@ -30,6 +30,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Check version consistency
+        run: node scripts/version.mjs check
+
       - name: Verify applications
         run: npm run verify
 
