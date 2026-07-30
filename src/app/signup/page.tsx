@@ -2,12 +2,12 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 import { AuthForm } from "@/components/auth-form";
-import { hasAnyAdmin } from "@/lib/db";
 import { getSession } from "@/lib/session";
+
+export const dynamic = "force-dynamic";
 
 export default async function SignupPage() {
   const session = await getSession();
-  const requiresSetupCode = !hasAnyAdmin();
 
   if (session) {
     redirect("/");
@@ -23,7 +23,7 @@ export default async function SignupPage() {
           </p>
         </div>
         <Suspense>
-          <AuthForm mode="signup" requiresSetupCode={requiresSetupCode} />
+          <AuthForm mode="signup" />
         </Suspense>
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { db } from "@/app/lib/db";
+import { statement } from "@/app/lib/cloud-db";
 
 export type AdminJob = {
   id: number;
@@ -30,10 +30,9 @@ function isValidDateOnly(value: string) {
   );
 }
 
-export function getAdminJobs() {
-  return db
-    .prepare<unknown[], AdminJob>(
-      `
+export async function getAdminJobs() {
+  const result = await statement(
+    `
         SELECT
           id,
           COALESCE(admin_title, title) AS title,
@@ -48,12 +47,13 @@ export function getAdminJobs() {
         WHERE expired_at IS NULL
           AND deleted_at IS NULL
         ORDER BY first_listed_at DESC, id DESC
-      `,
-    )
-    .all();
+    `,
+  ).all<AdminJob>();
+
+  return result.results;
 }
 
-export function updateAdminJobField(
+export async function updateAdminJobField(
   jobId: number,
   field: EditableJobField,
   rawValue: string,
@@ -67,8 +67,8 @@ export function updateAdminJobField(
       throw new Error("Deadline must use YYYY-MM-DD format.");
     }
 
-    return db
-      .prepare(`
+    return statement(
+      `
         UPDATE jobs
         SET
           admin_deadline_at = ?,
@@ -76,8 +76,9 @@ export function updateAdminJobField(
           admin_edited_at = ?
         WHERE id = ?
           AND deleted_at IS NULL
-      `)
-      .run(value || null, editedAt, jobId);
+      `,
+      [value || null, editedAt, jobId],
+    ).run();
   }
 
   const value = rawValue.trim();
@@ -93,29 +94,31 @@ export function updateAdminJobField(
   const overrideColumn = field === "title" ? "admin_title" : "admin_company";
   const scrapedColumn = field === "title" ? "title" : "company";
 
-  return db
-    .prepare(`
+  return statement(
+    `
       UPDATE jobs
       SET
         ${overrideColumn} = CASE WHEN ? = ${scrapedColumn} THEN NULL ELSE ? END,
         admin_edited_at = ?
       WHERE id = ?
         AND deleted_at IS NULL
-    `)
-    .run(value, value, editedAt, jobId);
+    `,
+    [value, value, editedAt, jobId],
+  ).run();
 }
 
-export function deleteAdminJob(jobId: number) {
+export async function deleteAdminJob(jobId: number) {
   const deletedAt = new Date().toISOString();
 
-  return db
-    .prepare(`
+  return statement(
+    `
       UPDATE jobs
       SET
         deleted_at = ?,
         admin_edited_at = ?
       WHERE id = ?
         AND deleted_at IS NULL
-    `)
-    .run(deletedAt, deletedAt, jobId);
+    `,
+    [deletedAt, deletedAt, jobId],
+  ).run();
 }

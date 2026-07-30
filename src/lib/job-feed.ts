@@ -1,11 +1,12 @@
 import "server-only";
 
 import {
-  db,
-  expireMissingSourceJobs,
-  initDb,
-  upsertOfficialFeedJob,
-} from "@/lib/db";
+  applyOfficialFeed,
+  getJobFeedState,
+  saveJobFeedState,
+  type JobFeedStateRow,
+} from "@/lib/cloud-db";
+import { getCloudflareEnv } from "@/lib/cloudflare";
 import { validateJobFeed } from "@/lib/job-feed-schema";
 import { nowDhakaIso } from "@/lib/time";
 
@@ -21,17 +22,8 @@ export type JobFeedStatus = {
   lastError: string | null;
 };
 
-type JobFeedStateRow = {
-  feed_url: string | null;
-  etag: string | null;
-  last_checked_at: string | null;
-  last_success_at: string | null;
-  feed_generated_at: string | null;
-  last_error: string | null;
-};
-
 function getConfiguredFeedUrl() {
-  const value = process.env.DHAKA_INDEX_JOB_FEED_URL?.trim();
+  const value = getCloudflareEnv().DHAKA_INDEX_JOB_FEED_URL?.trim();
 
   if (!value) {
     return null;
@@ -44,17 +36,6 @@ function getConfiguredFeedUrl() {
   }
 
   return url.toString();
-}
-
-function readState() {
-  initDb();
-  return (
-    db
-      .prepare<unknown[], JobFeedStateRow>(
-        `SELECT * FROM job_feed_state WHERE id = 1`,
-      )
-      .get() ?? null
-  );
 }
 
 function publicStatus(
@@ -71,60 +52,22 @@ function publicStatus(
   };
 }
 
-function saveState(input: {
-  feedUrl: string;
-  etag: string | null;
-  lastCheckedAt: string;
-  lastSuccessAt: string | null;
-  feedGeneratedAt: string | null;
-  lastError: string | null;
-}) {
-  db.prepare(`
-    INSERT INTO job_feed_state (
-      id,
-      feed_url,
-      etag,
-      last_checked_at,
-      last_success_at,
-      feed_generated_at,
-      last_error
-    )
-    VALUES (1, ?, ?, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      feed_url = excluded.feed_url,
-      etag = excluded.etag,
-      last_checked_at = excluded.last_checked_at,
-      last_success_at = excluded.last_success_at,
-      feed_generated_at = excluded.feed_generated_at,
-      last_error = excluded.last_error
-  `).run(
-    input.feedUrl,
-    input.etag,
-    input.lastCheckedAt,
-    input.lastSuccessAt,
-    input.feedGeneratedAt,
-    input.lastError,
-  );
-}
-
-export function getJobFeedStatus() {
-  let configuredUrl: string | null = null;
+export async function getJobFeedStatus() {
+  const state = await getJobFeedState();
 
   try {
-    configuredUrl = getConfiguredFeedUrl();
+    return publicStatus(getConfiguredFeedUrl(), state);
   } catch (error) {
     return {
-      ...publicStatus(null, readState()),
+      ...publicStatus(null, state),
       lastError: error instanceof Error ? error.message : String(error),
     };
   }
-
-  return publicStatus(configuredUrl, readState());
 }
 
 export async function syncJobFeed(options: { force?: boolean } = {}) {
   const feedUrl = getConfiguredFeedUrl();
-  const state = readState();
+  const state = await getJobFeedState();
 
   if (!feedUrl) {
     return publicStatus(null, state);
@@ -151,7 +94,7 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
     });
 
     if (response.status === 304) {
-      saveState({
+      await saveJobFeedState({
         feedUrl,
         etag: state?.etag ?? null,
         lastCheckedAt: checkedAt,
@@ -179,50 +122,26 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
     }
 
     const feed = validateJobFeed(JSON.parse(body) as unknown);
-    let inserted = 0;
-    let updated = 0;
-    let resurfaced = 0;
-
-    const applyFeed = db.transaction(() => {
-      for (const job of feed.jobs) {
-        const result = upsertOfficialFeedJob({
-          title: job.title,
-          company: job.company,
-          deadlineAt: job.deadline,
-          canonicalUrl: job.url,
-        });
-
-        if (result.inserted) inserted += 1;
-        if (result.updated) updated += 1;
-        if (result.resurfaced) resurfaced += 1;
-      }
-
-      const expired = expireMissingSourceJobs(
-        "dhaka-index-feed",
-        feed.jobs.map((job) => job.url),
-        "missing-from-official-feed",
-      );
-
-      saveState({
-        feedUrl,
+    const changes = await applyOfficialFeed(
+      feed.jobs.map((job) => ({
+        title: job.title,
+        company: job.company,
+        deadlineAt: job.deadline,
+        canonicalUrl: job.url,
+      })),
+      {
+        checkedAt,
         etag: response.headers.get("etag"),
-        lastCheckedAt: checkedAt,
-        lastSuccessAt: checkedAt,
         feedGeneratedAt: feed.generatedAt,
-        lastError: null,
-      });
+        feedUrl,
+      },
+    );
 
-      return { inserted, updated, resurfaced, expired };
-    });
-
-    return {
-      ...getJobFeedStatus(),
-      changes: applyFeed(),
-    };
+    return { ...(await getJobFeedStatus()), changes };
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
 
-    saveState({
+    await saveJobFeedState({
       feedUrl,
       etag: state?.etag ?? null,
       lastCheckedAt: checkedAt,

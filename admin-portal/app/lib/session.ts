@@ -1,11 +1,11 @@
 import { headers } from "next/headers";
 import { forbidden, redirect } from "next/navigation";
 
-import { auth, type AuthSession } from "@/app/lib/auth";
-import { db } from "@/app/lib/db";
+import { getAuth, type AuthSession } from "@/app/lib/auth";
+import { statement } from "@/app/lib/cloud-db";
 
 export async function getSession() {
-  return auth.api.getSession({
+  return getAuth().api.getSession({
     headers: await headers(),
   });
 }
@@ -17,9 +17,10 @@ export async function requireAdmin(): Promise<AuthSession["user"]> {
     redirect("/login");
   }
 
-  const isAdmin = db
-    .prepare<[string]>(`SELECT 1 FROM app_admins WHERE user_id = ?`)
-    .get(session.user.id);
+  const isAdmin = await statement(
+    `SELECT 1 AS present FROM app_admins WHERE user_id = ?`,
+    [session.user.id],
+  ).first();
 
   if (!isAdmin) {
     forbidden();

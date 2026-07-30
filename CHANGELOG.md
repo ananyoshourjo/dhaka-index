@@ -2,6 +2,13 @@
 
 All notable changes are documented here.
 
+## 0.3.0 - 2026-07-30
+
+- Reframe Dhaka Index as an experimental project and publish the live public demo
+- Replace the local SQLite and Docker deployment contract with Cloudflare Workers and shared D1 storage
+- Keep registration open while assigning the first registered account as the sole administrator
+- Generate authenticated PDFs with Cloudflare Browser Rendering and seed only the sanitized public job feed
+
 ## 0.2.0 - 2026-07-30
 
 - Refresh settings, job cards, and administrator workflows

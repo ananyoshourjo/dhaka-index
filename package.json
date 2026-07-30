@@ -1,17 +1,25 @@
 {
   "name": "@dhaka-index/web",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "workspaces": [
     "admin-portal"
   ],
   "scripts": {
-    "setup": "tsx scripts/setup.ts && playwright install chromium",
-    "dev": "next dev --hostname 127.0.0.1",
+    "dev": "next dev --webpack --hostname 127.0.0.1",
     "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "cf:migrate:local": "wrangler d1 migrations apply dhaka-index --local",
+    "cf:migrate": "wrangler d1 migrations apply dhaka-index --remote",
+    "cf:seed-jobs": "node scripts/seed-cloudflare-jobs.mjs",
     "admin:dev": "npm --prefix admin-portal run dev",
     "admin:build": "npm --prefix admin-portal run build",
+    "admin:cf:build": "npm --prefix admin-portal run cf:build",
+    "admin:cf:deploy": "npm --prefix admin-portal run cf:deploy",
     "admin:start": "npm --prefix admin-portal run start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit && npm --prefix admin-portal run typecheck",
@@ -22,12 +30,12 @@
     "bangladesh",
     "dhaka",
     "jobs",
-    "local-first",
+    "cloudflare",
     "resume-builder",
-    "self-hosted"
+    "d1"
   ],
   "license": "Apache-2.0",
-  "description": "A local-first Dhaka job index and polished resume builder.",
+  "description": "An experimental Dhaka job index and resume-building project.",
   "repository": {
     "type": "git",
     "url": "https://github.com/ananyoshourjo/dhaka-index.git"
@@ -45,8 +53,9 @@
     "sharp": "^0.35.3"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260730.1",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@tailwindcss/postcss": "^4.2.4",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -54,18 +63,17 @@
     "eslint-config-next": "^16.2.11",
     "tailwindcss": "^4.2.4",
     "tsx": "^4.21.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.116.0"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
     "better-auth": "^1.6.22",
-    "better-sqlite3": "^12.9.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^1.11.0",
     "next": "^16.2.11",
-    "playwright": "1.59.1",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "server-only": "^0.0.1",

@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { syncJobFeed } from "@/lib/job-feed";
 import { getSession } from "@/lib/session";
 
-export const runtime = "nodejs";
-
 export async function POST() {
   const session = await getSession();
 

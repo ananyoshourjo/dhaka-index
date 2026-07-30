@@ -1,4 +1,4 @@
-import { db, initDb } from "@/lib/db";
+import { getCloudflareDb } from "@/lib/cloudflare";
 import { sanitizeLocalPhoto } from "@/lib/photo";
 import { nowDhakaIso } from "@/lib/time";
 
@@ -203,14 +203,11 @@ function scopedResumeId(userId: string) {
   return `${PROFILE_RESUME_PREFIX}:${userId || DEFAULT_RESUME_ID}`;
 }
 
-function readResumeContent(id: string): ResumeContent | null {
-  initDb();
-
-  const row = db
-    .prepare<unknown[], ResumeProfileRow>(
-      `SELECT content_json FROM resume_profiles WHERE id = ?`,
-    )
-    .get(id);
+async function readResumeContent(id: string): Promise<ResumeContent | null> {
+  const row = await getCloudflareDb()
+    .prepare(`SELECT content_json FROM resume_profiles WHERE id = ?`)
+    .bind(id)
+    .first<ResumeProfileRow>();
 
   if (!row) {
     return null;
@@ -283,30 +280,29 @@ function readResumeContent(id: string): ResumeContent | null {
   return null;
 }
 
-export function getResumeContent(userId: string): ResumeContent {
+export async function getResumeContent(userId: string): Promise<ResumeContent> {
   const profileId = scopedResumeId(userId);
   const legacyId = userId || DEFAULT_RESUME_ID;
-  const profile = readResumeContent(profileId);
+  const profile = await readResumeContent(profileId);
 
   if (profile) {
     return profile;
   }
 
-  const legacy = readResumeContent(legacyId);
+  const legacy = await readResumeContent(legacyId);
   const initialContent = legacy ?? defaultResumeContent;
-  saveResumeContent(userId, initialContent);
+  await saveResumeContent(userId, initialContent);
   return initialContent;
 }
 
-export function getProfilePhotoUrl(userId: string): string {
-  return getResumeContent(userId).contact.photoUrl;
+export async function getProfilePhotoUrl(userId: string): Promise<string> {
+  return (await getResumeContent(userId)).contact.photoUrl;
 }
 
-export function saveResumeContent(
+export async function saveResumeContent(
   userId: string,
   content: ResumeContent,
 ) {
-  initDb();
   const localContent: ResumeContent & { layout?: unknown } = {
     ...content,
     contact: {
@@ -316,17 +312,29 @@ export function saveResumeContent(
   };
   delete localContent.layout;
 
-  db.prepare(`
-    INSERT INTO resume_profiles (id, content_json, updated_at)
-    VALUES (?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      content_json = excluded.content_json,
-      updated_at = excluded.updated_at
-  `).run(scopedResumeId(userId), JSON.stringify(localContent), nowDhakaIso());
+  const db = getCloudflareDb();
+  const updatedAt = nowDhakaIso();
 
-  db.prepare(`UPDATE "user" SET "image" = ?, "updatedAt" = ? WHERE "id" = ?`).run(
-    localContent.contact.photoUrl || null,
-    nowDhakaIso(),
-    userId,
-  );
+  await db.batch([
+    db
+      .prepare(
+        `
+          INSERT INTO resume_profiles (id, content_json, updated_at)
+          VALUES (?, ?, ?)
+          ON CONFLICT(id) DO UPDATE SET
+            content_json = excluded.content_json,
+            updated_at = excluded.updated_at
+        `,
+      )
+      .bind(
+        scopedResumeId(userId),
+        JSON.stringify(localContent),
+        updatedAt,
+      ),
+    db
+      .prepare(
+        `UPDATE "user" SET "image" = ?, "updatedAt" = ? WHERE "id" = ?`,
+      )
+      .bind(localContent.contact.photoUrl || null, updatedAt, userId),
+  ]);
 }

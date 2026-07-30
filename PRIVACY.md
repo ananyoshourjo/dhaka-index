@@ -1,26 +1,30 @@
 # Privacy
 
-Dhaka Index is local-first software. The project maintainers do not receive
-data from independently operated installations.
+Dhaka Index is an experimental hosted project operated in a Cloudflare account.
+No existing user database is imported during deployment. Data entered by users
+after launch is stored in the deployment's Cloudflare D1 database.
 
-## Data stored by an installation
+## Data stored by the hosted application
 
 - Account name, email, password hash, and session records
 - Session IP address and user agent when recorded by the authentication library
 - Resume, cover letter, references, and embedded profile photo
 - Bookmarked and archived job identifiers
-- Administrator assignments and local job corrections
+- Administrator assignments and job corrections
 - The last valid public job snapshot and synchronization status
 
-This information is stored in the operator's configured data directory.
+Cloudflare processes and stores this information as the hosting and database
+provider. Operators with access to the Cloudflare account can administer the
+deployment and database.
 
 ## Data sent by the application
 
 The server retrieves the configured public job-feed URL. When a user opens a
-job, their browser navigates directly to the linked external site.
+job, their browser navigates directly to that external site. Authenticated PDF
+generation is processed by Cloudflare Browser Rendering.
 
-There is no analytics, advertising, crash-reporting, tracking pixel, or product
-telemetry in v0.1.0.
+There is no application analytics, advertising, tracking pixel, or product
+telemetry.
 
 ## Controls
 
@@ -28,11 +32,11 @@ Authenticated users can download a JSON export from **Settings**. They can
 also permanently delete their account, resume, profile photo, sessions,
 bookmarks, and archive.
 
-Deleting an installation's final administrator causes a new local setup code
-to be generated so the first remaining registered account can establish
-ownership according to the setup rules.
+The first successfully registered account is automatically assigned as the
+sole administrator. Deleting that account removes the administrator assignment;
+the next newly registered account becomes administrator if none exists.
 
-## Self-hosted deployments
+## Operator responsibility
 
-The installation operator—not the upstream project—is responsible for that
-deployment's privacy notice, retention, security, backups, and user requests.
+The Cloudflare account operator is responsible for the deployment's privacy
+notice, retention, security, backups, and user requests.

@@ -1,7 +1,10 @@
 node_modules/
 .next/
 .next-*/
+.open-next/
+.wrangler/
 admin-portal/.next/
+admin-portal/.open-next/
 out/
 coverage/
 data/
@@ -14,6 +17,8 @@ tmp/
 *.tsbuildinfo
 .env*
 !.env.example
+wrangler.jsonc
+admin-portal/wrangler.jsonc
 src/data/sources.generated.json*
 scrollbar-check.png
 private-*

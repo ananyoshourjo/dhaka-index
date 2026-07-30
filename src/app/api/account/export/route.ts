@@ -1,4 +1,4 @@
-import { getUserDataExport } from "@/lib/db";
+import { getUserDataExport } from "@/lib/cloud-db";
 import { getSession } from "@/lib/session";
 
 export async function GET() {
@@ -8,7 +8,7 @@ export async function GET() {
     return Response.json({ error: "Unauthorized." }, { status: 401 });
   }
 
-  const body = `${JSON.stringify(getUserDataExport(session.user.id), null, 2)}\n`;
+  const body = `${JSON.stringify(await getUserDataExport(session.user.id), null, 2)}\n`;
   const date = new Date().toISOString().slice(0, 10);
 
   return new Response(body, {

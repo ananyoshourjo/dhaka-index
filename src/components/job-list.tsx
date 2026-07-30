@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import type { ActiveJob } from "@/lib/db";
+import type { ActiveJob } from "@/lib/cloud-db";
 
 type JobListProps = {
   action: (formData: FormData) => void | Promise<void>;

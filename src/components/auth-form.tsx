@@ -9,16 +9,14 @@ import { authClient } from "@/lib/auth-client";
 
 type AuthFormProps = {
   mode: "login" | "signup";
-  requiresSetupCode?: boolean;
 };
 
-export function AuthForm({ mode, requiresSetupCode = false }: AuthFormProps) {
+export function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [setupCode, setSetupCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
@@ -49,25 +47,6 @@ export function AuthForm({ mode, requiresSetupCode = false }: AuthFormProps) {
             return;
           }
 
-          if (isSignup && requiresSetupCode) {
-            const claimResponse = await fetch("/api/setup/claim", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ code: setupCode }),
-            });
-            const claimResult = (await claimResponse.json()) as {
-              error?: string;
-            };
-
-            if (!claimResponse.ok) {
-              setError(
-                claimResult.error ||
-                  "Your account was created, but administrator setup failed.",
-              );
-              return;
-            }
-          }
-
           router.push(callbackUrl);
           router.refresh();
         });
@@ -82,24 +61,6 @@ export function AuthForm({ mode, requiresSetupCode = false }: AuthFormProps) {
             className="h-10 rounded-md border bg-background px-3 text-sm outline-none focus:ring-2 focus:ring-ring"
             autoComplete="name"
           />
-        </label>
-      ) : null}
-
-      {isSignup && requiresSetupCode ? (
-        <label className="grid gap-1.5 text-sm font-medium">
-          Initial administrator code
-          <input
-            value={setupCode}
-            onChange={(event) => setSetupCode(event.target.value)}
-            className="h-10 rounded-md border bg-background px-3 font-mono text-sm uppercase outline-none focus:ring-2 focus:ring-ring"
-            autoComplete="one-time-code"
-            maxLength={128}
-            required
-            type="text"
-          />
-          <span className="text-xs font-normal text-muted-foreground">
-            Printed in the server console on first launch.
-          </span>
         </label>
       ) : null}
 

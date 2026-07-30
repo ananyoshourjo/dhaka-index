@@ -1,29 +1,28 @@
 import { betterAuth } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 
-import { getAuthSecret } from "@/app/lib/auth-secret";
-import { db } from "@/app/lib/db";
+import { getCloudflareEnv } from "@/app/lib/cloudflare";
 
-const configuredOrigins =
-  process.env.DHAKA_INDEX_TRUSTED_ORIGINS?.split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean) ?? [];
+export function getAuth() {
+  const env = getCloudflareEnv();
+  const configuredOrigins =
+    env.DHAKA_INDEX_TRUSTED_ORIGINS?.split(",")
+      .map((origin) => origin.trim())
+      .filter(Boolean) ?? [];
 
-export const auth = betterAuth({
-  database: db,
-  emailAndPassword: {
-    enabled: true,
-    minPasswordLength: 8,
-  },
-  plugins: [nextCookies()],
-  secret: getAuthSecret(),
-  baseURL: process.env.ADMIN_AUTH_URL ?? "http://127.0.0.1:3010",
-  trustedOrigins: [
-    "http://127.0.0.1:3010",
-    "http://localhost:3010",
-    process.env.ADMIN_AUTH_URL ?? "",
-    ...configuredOrigins,
-  ].filter(Boolean),
-});
+  return betterAuth({
+    database: env.DB,
+    emailAndPassword: {
+      enabled: true,
+      minPasswordLength: 8,
+    },
+    plugins: [nextCookies()],
+    secret: env.BETTER_AUTH_SECRET,
+    baseURL: env.ADMIN_AUTH_URL,
+    trustedOrigins: [env.ADMIN_AUTH_URL, ...configuredOrigins].filter(Boolean),
+  });
+}
 
-export type AuthSession = typeof auth.$Infer.Session;
+type Auth = ReturnType<typeof getAuth>;
+
+export type AuthSession = Auth["$Infer"]["Session"];
