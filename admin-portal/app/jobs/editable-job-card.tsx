@@ -1,10 +1,18 @@
 "use client";
 
+import { format, parseISO } from "date-fns";
 import { ArrowUpRight, CalendarDays, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 
 import type { AdminJob, EditableJobField } from "@/app/lib/jobs";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 type JobAction = (formData: FormData) => Promise<void>;
 
@@ -49,8 +57,8 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
     setEditing(false);
   }
 
-  function save() {
-    const nextValue = draftValue.trim();
+  function save(valueOverride?: string) {
+    const nextValue = (valueOverride ?? draftValue).trim();
 
     if (field !== "deadline" && !nextValue) {
       cancelEditing();
@@ -87,16 +95,75 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
       ? "w-full rounded-md border bg-background px-2 py-1 text-base font-semibold leading-snug outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-lg"
       : "w-full rounded-md border bg-background px-2 py-1 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
+  if (field === "deadline") {
+    const selectedDate = draftValue ? parseISO(draftValue) : undefined;
+
+    return (
+      <Popover
+        open={editing}
+        onOpenChange={(open) => {
+          if (open) {
+            setDraftValue(currentValue);
+          }
+          setEditing(open);
+        }}
+      >
+        <PopoverTrigger asChild>
+          <button
+            type="button"
+            aria-label="Edit deadline"
+            className={`-mx-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-left text-sm text-muted-foreground transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+              isPending ? "opacity-60" : ""
+            }`}
+            disabled={isPending}
+          >
+            <CalendarDays className="size-4" aria-hidden="true" />
+            <span>{formatDeadline(currentValue || null)}</span>
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="single"
+            required
+            selected={selectedDate}
+            defaultMonth={selectedDate}
+            onSelect={(date) => {
+              const nextValue = format(date, "yyyy-MM-dd");
+              setDraftValue(nextValue);
+              save(nextValue);
+            }}
+          />
+          {currentValue ? (
+            <div className="border-t p-3">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="w-full text-muted-foreground"
+                onClick={() => {
+                  setDraftValue("");
+                  save("");
+                }}
+              >
+                Clear deadline
+              </Button>
+            </div>
+          ) : null}
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
   if (editing) {
     return (
       <input
         ref={inputRef}
-        type={field === "deadline" ? "date" : "text"}
+        type="text"
         value={draftValue}
         aria-label={`Edit job ${field}`}
         className={inputClassName}
-        maxLength={field === "deadline" ? undefined : 240}
-        onBlur={save}
+        maxLength={240}
+        onBlur={() => save()}
         onChange={(event) => setDraftValue(event.target.value)}
         onKeyDown={(event) => {
           if (event.key === "Enter") {
@@ -110,25 +177,6 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
           }
         }}
       />
-    );
-  }
-
-  if (field === "deadline") {
-    return (
-      <button
-        type="button"
-        aria-label="Edit deadline"
-        className={`-mx-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-left text-sm text-muted-foreground transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
-          isPending ? "opacity-60" : ""
-        }`}
-        onClick={() => {
-          setDraftValue(currentValue);
-          setEditing(true);
-        }}
-      >
-        <CalendarDays className="size-4" aria-hidden="true" />
-        <span>{formatDeadline(currentValue || null)}</span>
-      </button>
     );
   }
 
