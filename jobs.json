@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-30T09:57:41.082Z",
+  "generatedAt": "2026-07-30T10:23:38.968Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -26,6 +26,18 @@
       "company": "Dynamic Solution Innovators",
       "deadline": "2026-08-27",
       "url": "https://app.hrythmic.com/recruit/openings/d0f2f8c4-53db-4d63-8359-d89226d2de17"
+    },
+    {
+      "title": "Call Quality Expert, IDLC Asset Management Limited",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-08-03",
+      "url": "https://apps.idlc.com/career/jobsDetails/1176"
+    },
+    {
+      "title": "Sales Team Leader/Manager, Consumer Division (Barishal/Faridpur/Khulna/Jashore/Kushtia) IDLC Finance PLC.",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-08-02",
+      "url": "https://apps.idlc.com/career/jobsDetails/1177"
     },
     {
       "title": "Assistant Manager - IA",
@@ -248,12 +260,6 @@
       "company": "Foodi",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/foodi/career-bd/sr-executive-executive-shops/2026"
-    },
-    {
-      "title": "Senior Manager, Performance Analytics",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/foodpanda/senior-manager-performance-analytics/dhaka"
     },
     {
       "title": "Management Trainee Officer (MTO) R&D",
@@ -1006,6 +1012,168 @@
       "url": "https://careers.brac.net/jobs/territory-sales-officer-agri-machineries-brac-seed-and-agro-enterprise-2895?bulk=false"
     },
     {
+      "title": "Agent, Incubation & Experience",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-2527"
+    },
+    {
+      "title": "Agent, Incubation & Experience",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-2729"
+    },
+    {
+      "title": "Assistant Manager, Partner Operations (CX)",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/assistant-manager-partner-operations-cx-in-dhaka-bangladesh-jid-3003"
+    },
+    {
+      "title": "Associate, Content & Onboarding",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-2730"
+    },
+    {
+      "title": "Customer Service Agent",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/customer-service-agent-in-dhaka-bangladesh-jid-2897"
+    },
+    {
+      "title": "Director, Commercial",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/director-commercial-in-dhaka-bangladesh-jid-2717"
+    },
+    {
+      "title": "Kitchen Runner",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-2962"
+    },
+    {
+      "title": "Kitchen Runner",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-2968"
+    },
+    {
+      "title": "Lead, Corporate Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/lead-corporate-sales-in-dhaka-bangladesh-jid-2539"
+    },
+    {
+      "title": "Lead, Telesales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-2242"
+    },
+    {
+      "title": "Manager, Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/manager-sales-in-dhaka-bangladesh-jid-2688"
+    },
+    {
+      "title": "Partner Service Agent",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-2878"
+    },
+    {
+      "title": "Partner Service Agent",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3004"
+    },
+    {
+      "title": "Senior Manager, Growth Analytics & Partnership Acquisitions",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-manager-growth-analytics-and-partnership-acquisitions-in-dhaka-bangladesh-jid-2972"
+    },
+    {
+      "title": "Senior Manager, Performance Analytics",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-manager-performance-analytics-in-dhaka-bangladesh-jid-2912"
+    },
+    {
+      "title": "Shift Lead, Partner Service",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/shift-lead-partner-service-in-dhaka-bangladesh-jid-3043"
+    },
+    {
+      "title": "Specialist, Account Management",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-account-management-in-dhaka-bangladesh-jid-2679"
+    },
+    {
+      "title": "Specialist, Account Management",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-account-management-in-dhaka-bangladesh-jid-2681"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2674"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2807"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2808"
+    },
+    {
+      "title": "Specialist, Operations (Shops)",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-operations-shops-in-dhaka-bangladesh-jid-3010"
+    },
+    {
+      "title": "Specialist, Strategic Account Management",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-strategic-account-management-in-dhaka-bangladesh-jid-2423"
+    },
+    {
+      "title": "Specialist, Telesales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-telesales-in-dhaka-bangladesh-jid-2673"
+    },
+    {
+      "title": "Team Lead - Content & Onboarding",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/team-lead-content-and-onboarding-in-dhaka-bangladesh-jid-3013"
+    },
+    {
+      "title": "Warehouse Supervisor",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/warehouse-supervisor-in-chattogram-bangladesh-jid-2997"
+    },
+    {
+      "title": "Warehouse Supervisor",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/warehouse-supervisor-in-dhaka-bangladesh-jid-2979"
+    },
+    {
       "title": "Associate Customer Success Manager",
       "company": "Optimizely",
       "deadline": null,
@@ -1148,6 +1316,12 @@
       "company": "Ding",
       "deadline": null,
       "url": "https://ding.bamboohr.com/careers/337"
+    },
+    {
+      "title": "UN Women: National Consultant-Coordination Officer, Dhaka Bangladesh",
+      "company": "UNDP Bangladesh",
+      "deadline": "2026-07-30",
+      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/requisitions/job/35436"
     },
     {
       "title": "Head of Sales- Cloud & Infra",
@@ -1324,6 +1498,18 @@
       "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60"
     },
     {
+      "title": "PEOPLE EXPERIENCE ASSOCIATE",
+      "company": "JTI Bangladesh",
+      "deadline": "2026-08-05",
+      "url": "https://jobs.jti.com/job/DHAKA-PEOPLE-EXPERIENCE-ASSOCIATE-1212/1417587633"
+    },
+    {
+      "title": "CELL LEAD, FMD",
+      "company": "JTI Bangladesh",
+      "deadline": null,
+      "url": "https://jobs.jti.com/job/TONGI-CELL-LEAD%2C-FMD-1710/1401800733"
+    },
+    {
       "title": "Staff Platform Engineer, Infrastructure",
       "company": "Field Nation",
       "deadline": null,
@@ -1390,6 +1576,42 @@
       "url": "https://jobs.lever.co/fieldnation/e51a3437-8bfa-462a-bc50-9fe01f8957f0"
     },
     {
+      "title": "Business Development Officer, Employee Banking",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-03",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/58779-en_GB"
+    },
+    {
+      "title": "Chief Compliance Officer, Bangladesh",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-06",
+      "url": "https://jobs.standardchartered.com/job/Chief-Compliance-Officer%2C-Bangladesh/58078-en_GB"
+    },
+    {
+      "title": "Officer, Inward Remittance",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-06",
+      "url": "https://jobs.standardchartered.com/job/Officer%2C-Inward-Remittance/59193-en_GB"
+    },
+    {
+      "title": "Officer, Trade Operations",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-06",
+      "url": "https://jobs.standardchartered.com/job/Officer%2C-Trade-Operations/59215-en_GB"
+    },
+    {
+      "title": "Relationship Manager, Priority",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-05",
+      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-Priority/58731-en_GB"
+    },
+    {
+      "title": "Relationship Manager, Supply Chain Finance",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-06",
+      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-Supply-Chain-Finance/58743-en_GB"
+    },
+    {
       "title": "Artist/Designer",
       "company": "Ollyo",
       "deadline": null,
@@ -1430,6 +1652,12 @@
       "company": "Ollyo",
       "deadline": null,
       "url": "https://ollyo.com/job/ui-ux-designer"
+    },
+    {
+      "title": "Manager, Structured Finance",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774611967603"
     },
     {
       "title": "Executive Assistant (Technical)",
@@ -1540,12 +1768,6 @@
       "url": "https://thecvguy.net/bank-jobs/citizens-bank-plc-trainee-cash-officer-2026"
     },
     {
-      "title": "Relationship Manager, Supply Chain Finance",
-      "company": "Standard Chartered",
-      "deadline": "2026-08-07",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-is-hiring-relationship"
-    },
-    {
       "title": "Universal Banker",
       "company": "Standard Chartered Bank",
       "deadline": "2026-08-03",
@@ -1580,12 +1802,6 @@
       "company": "Foodpanda",
       "deadline": "2026-08-01",
       "url": "https://thecvguy.net/mnc-jobs/foodpanda-bangladesh-head-retail-media-2026"
-    },
-    {
-      "title": "People Experience Associate",
-      "company": "JTI",
-      "deadline": "2026-08-05",
-      "url": "https://thecvguy.net/mnc-jobs/jti-bangladesh-people-experience-associate"
     },
     {
       "title": "Trade Marketing Manager",
