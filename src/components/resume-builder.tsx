@@ -3,14 +3,24 @@
 import {
   Check,
   Download,
+  Eye,
   FileText,
   GripVertical,
   Loader2,
+  Maximize2,
   Minus,
+  PencilLine,
   Plus,
   Trash2,
 } from "lucide-react";
-import { useEffect, useLayoutEffect, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
@@ -440,6 +450,7 @@ export function ResumeBuilder({
   const [dropIndicator, setDropIndicator] = useState<DropIndicator | null>(null);
   const [previewZoom, setPreviewZoom] = useState(0.78);
   const [previewPan, setPreviewPan] = useState({ x: 0, y: 0 });
+  const [mobilePane, setMobilePane] = useState<"edit" | "preview">("edit");
   const [resumePageCount, setResumePageCount] = useState(1);
   const [isPanning, setIsPanning] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -448,12 +459,131 @@ export function ResumeBuilder({
   const photoInputRef = useRef<HTMLInputElement>(null);
   const previewViewportRef = useRef<HTMLDivElement>(null);
   const resumePreviewRef = useRef<HTMLElement>(null);
+  const previewZoomRef = useRef(previewZoom);
+  const activePreviewPointersRef = useRef(
+    new Map<number, { x: number; y: number }>(),
+  );
+  const pinchStartRef = useRef<{ distance: number; zoom: number } | null>(null);
   const panStartRef = useRef({
     pointerX: 0,
     pointerY: 0,
     x: 0,
     y: 0,
   });
+
+  useEffect(() => {
+    previewZoomRef.current = previewZoom;
+  }, [previewZoom]);
+
+  const fitPreviewToViewport = useCallback(() => {
+    const viewport = previewViewportRef.current;
+
+    if (!viewport) {
+      return;
+    }
+
+    const pageWidth = 8.5 * 96;
+    const pageHeight = 11 * 96;
+    const nextZoom = Math.min(
+      1,
+      (viewport.clientWidth - 24) / pageWidth,
+      (viewport.clientHeight - 24) / pageHeight,
+    );
+
+    setPreviewZoom(Math.max(0.32, nextZoom));
+    setPreviewPan({ x: 0, y: 0 });
+  }, []);
+
+  useEffect(() => {
+    if (mobilePane !== "preview") {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(fitPreviewToViewport);
+    window.addEventListener("resize", fitPreviewToViewport);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("resize", fitPreviewToViewport);
+    };
+  }, [fitPreviewToViewport, mobilePane]);
+
+  useEffect(() => {
+    const viewport = previewViewportRef.current;
+
+    if (!showPreview || !viewport) {
+      return;
+    }
+
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      const sensitivity = event.ctrlKey ? 0.01 : 0.002;
+      const factor = Math.exp(-event.deltaY * sensitivity);
+
+      setPreviewZoom((current) =>
+        Math.min(2, Math.max(0.32, current * factor)),
+      );
+    };
+    const preventBrowserGesture = (event: Event) => event.preventDefault();
+
+    viewport.addEventListener("wheel", handleWheel, { passive: false });
+    viewport.addEventListener("gesturestart", preventBrowserGesture, {
+      passive: false,
+    });
+    viewport.addEventListener("gesturechange", preventBrowserGesture, {
+      passive: false,
+    });
+    viewport.addEventListener("gestureend", preventBrowserGesture, {
+      passive: false,
+    });
+
+    return () => {
+      viewport.removeEventListener("wheel", handleWheel);
+      viewport.removeEventListener("gesturestart", preventBrowserGesture);
+      viewport.removeEventListener("gesturechange", preventBrowserGesture);
+      viewport.removeEventListener("gestureend", preventBrowserGesture);
+    };
+  }, [showPreview]);
+
+  useEffect(() => {
+    if (mobilePane !== "preview" || !window.matchMedia("(max-width: 1023px)").matches) {
+      return;
+    }
+
+    let viewportMeta = document.querySelector<HTMLMetaElement>(
+      'meta[name="viewport"]',
+    );
+    const createdViewportMeta = !viewportMeta;
+
+    if (!viewportMeta) {
+      viewportMeta = document.createElement("meta");
+      viewportMeta.name = "viewport";
+      document.head.appendChild(viewportMeta);
+    }
+
+    const previousContent = viewportMeta.content;
+    viewportMeta.content =
+      "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+    const preventBrowserGesture = (event: Event) => event.preventDefault();
+
+    document.addEventListener("gesturestart", preventBrowserGesture, {
+      passive: false,
+    });
+    document.addEventListener("gesturechange", preventBrowserGesture, {
+      passive: false,
+    });
+
+    return () => {
+      document.removeEventListener("gesturestart", preventBrowserGesture);
+      document.removeEventListener("gesturechange", preventBrowserGesture);
+
+      if (createdViewportMeta) {
+        viewportMeta.remove();
+      } else {
+        viewportMeta.content = previousContent;
+      }
+    };
+  }, [mobilePane]);
 
   useEffect(() => {
     if (!didMount.current) {
@@ -866,18 +996,6 @@ export function ResumeBuilder({
     scrollEditorDuringDrag(event.clientY);
   };
 
-  const handlePreviewWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const direction = event.deltaY > 0 ? -1 : 1;
-    const amount = Math.min(0.12, Math.abs(event.deltaY) / 900);
-    setPreviewZoom((current) =>
-      Math.min(
-        2,
-        Math.max(0.45, current + direction * Math.max(0.025, amount)),
-      ),
-    );
-  };
-
   const handlePreviewPointerDown = (
     event: React.PointerEvent<HTMLDivElement>,
   ) => {
@@ -887,6 +1005,23 @@ export function ResumeBuilder({
 
     event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
+    activePreviewPointersRef.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+
+    const pointers = [...activePreviewPointersRef.current.values()];
+
+    if (pointers.length >= 2) {
+      const [first, second] = pointers;
+      pinchStartRef.current = {
+        distance: Math.hypot(second.x - first.x, second.y - first.y),
+        zoom: previewZoomRef.current,
+      };
+      setIsPanning(false);
+      return;
+    }
+
     panStartRef.current = {
       pointerX: event.clientX,
       pointerY: event.clientY,
@@ -899,6 +1034,31 @@ export function ResumeBuilder({
   const handlePreviewPointerMove = (
     event: React.PointerEvent<HTMLDivElement>,
   ) => {
+    if (!activePreviewPointersRef.current.has(event.pointerId)) {
+      return;
+    }
+
+    event.preventDefault();
+    activePreviewPointersRef.current.set(event.pointerId, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+    const pointers = [...activePreviewPointersRef.current.values()];
+
+    if (pointers.length >= 2) {
+      const [first, second] = pointers;
+      const distance = Math.hypot(second.x - first.x, second.y - first.y);
+      const pinchStart = pinchStartRef.current;
+
+      if (pinchStart && pinchStart.distance > 0) {
+        setPreviewZoom(
+          Math.min(2, Math.max(0.32, pinchStart.zoom * (distance / pinchStart.distance))),
+        );
+      }
+
+      return;
+    }
+
     if (!isPanning) {
       return;
     }
@@ -913,8 +1073,25 @@ export function ResumeBuilder({
   const handlePreviewPointerUp = (
     event: React.PointerEvent<HTMLDivElement>,
   ) => {
-    if (isPanning) {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
       event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+
+    activePreviewPointersRef.current.delete(event.pointerId);
+    pinchStartRef.current = null;
+    const remainingPointer = [
+      ...activePreviewPointersRef.current.values(),
+    ][0];
+
+    if (remainingPointer) {
+      panStartRef.current = {
+        pointerX: remainingPointer.x,
+        pointerY: remainingPointer.y,
+        x: previewPan.x,
+        y: previewPan.y,
+      };
+      setIsPanning(true);
+    } else {
       setIsPanning(false);
     }
   };
@@ -999,21 +1176,22 @@ export function ResumeBuilder({
       className={cn(
         "grid bg-muted",
         showPreview
-          ? "h-[calc(100vh-61px)] overflow-hidden lg:grid-cols-[minmax(720px,48vw)_minmax(0,1fr)]"
-          : "mx-auto min-h-[calc(100vh-61px)] w-full max-w-3xl border-l lg:grid-cols-1",
+          ? "h-[calc(100dvh-7.5rem-env(safe-area-inset-bottom))] overflow-hidden sm:h-[calc(100dvh-3.5rem)] lg:grid-cols-[minmax(720px,48vw)_minmax(0,1fr)]"
+          : "mx-auto min-h-[calc(100dvh-7.5rem-env(safe-area-inset-bottom))] w-full max-w-3xl sm:min-h-[calc(100dvh-3.5rem)] lg:grid-cols-1",
       )}
     >
       <section
         className={cn(
-          "flex min-h-0 flex-col border-r bg-background",
+          "min-h-0 flex-col bg-background lg:border-r",
           showPreview && "overflow-hidden",
+          showPreview && mobilePane === "preview" ? "hidden lg:flex" : "flex",
         )}
       >
         {showPreview ? (
-          <div className="z-[1] flex h-16 shrink-0 items-center justify-between border-b bg-background px-5">
-            <div>
+          <div className="z-[1] flex min-h-16 shrink-0 items-center justify-between gap-3 border-b bg-background px-4 py-3 sm:px-5">
+            <div className="min-w-0">
               <h1 className="text-base font-semibold">{title}</h1>
-              <p className="text-xs text-muted-foreground">{subtitle}</p>
+              <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -1030,6 +1208,15 @@ export function ResumeBuilder({
                       : "Unsaved"}
                 </span>
               </div>
+              <Button
+                type="button"
+                size="sm"
+                className="lg:hidden"
+                onClick={() => setMobilePane("preview")}
+              >
+                <Eye className="size-4" />
+                Preview
+              </Button>
             </div>
           </div>
         ) : null}
@@ -1037,7 +1224,7 @@ export function ResumeBuilder({
         <div
           ref={editorScrollRef}
           className={cn(
-            "flex min-h-0 flex-1 flex-col gap-6 px-5 py-5",
+            "flex min-h-0 flex-1 flex-col gap-7 px-4 py-5 sm:gap-6 sm:px-5",
             showPreview && "overflow-y-auto",
           )}
           onDragOver={handleEditorDragOver}
@@ -1049,7 +1236,7 @@ export function ResumeBuilder({
                   Photo
                   <div className="grid gap-3 rounded-md border bg-background p-3 sm:grid-cols-[auto_1fr] sm:items-center">
                     <div
-                      className="h-[1.55in] w-[1.28in] overflow-hidden border bg-muted"
+                      className="h-[1.55in] w-[1.28in] justify-self-center overflow-hidden border bg-muted sm:justify-self-auto"
                       aria-hidden="true"
                     >
                       {resume.contact.photoUrl ? (
@@ -2286,21 +2473,46 @@ export function ResumeBuilder({
       </section>
 
       {showPreview ? (
-      <section className="flex min-h-0 flex-col overflow-hidden bg-muted/40">
-        <div className="flex h-16 shrink-0 items-center justify-between gap-3 border-b bg-background px-5">
-          <div className="grid gap-0.5 text-xs text-muted-foreground">
-            <span className="font-medium text-foreground">Document preview</span>
-            <span>
-              {resume.coverLetter.included
-                ? `Cover letter - 1 page | Resume - ${resumePageCount} ${
-                    resumePageCount === 1 ? "page" : "pages"
-                  }`
-                : `Resume - ${resumePageCount} ${
-                    resumePageCount === 1 ? "page" : "pages"
-                  }`}
-            </span>
+      <section
+        className={cn(
+          "min-h-0 flex-col overflow-hidden bg-muted/40",
+          mobilePane === "edit" ? "hidden lg:flex" : "flex",
+        )}
+      >
+        <div className="flex min-h-16 shrink-0 items-center justify-between gap-2 border-b bg-background px-3 py-2 sm:gap-3 sm:px-5">
+          <div className="flex min-w-0 items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="shrink-0 lg:hidden"
+              onClick={() => setMobilePane("edit")}
+            >
+              <PencilLine className="size-4" />
+              Edit
+            </Button>
+            <div className="grid min-w-0 gap-0.5 text-xs text-muted-foreground">
+              <span className="font-medium text-foreground">Preview</span>
+              <span className="truncate">
+                {resume.coverLetter.included
+                  ? `Letter 1 · Resume ${resumePageCount}`
+                  : `Resume · ${resumePageCount} ${
+                      resumePageCount === 1 ? "page" : "pages"
+                    }`}
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="size-9 p-0 lg:hidden"
+              aria-label="Fit page to screen"
+              onClick={fitPreviewToViewport}
+            >
+              <Maximize2 className="size-4" />
+            </Button>
             <Button
               type="button"
               variant="outline"
@@ -2308,7 +2520,7 @@ export function ResumeBuilder({
               className="size-9 p-0"
               aria-label="Zoom out"
               onClick={() =>
-                setPreviewZoom((current) => Math.max(0.45, current - 0.08))
+                setPreviewZoom((current) => Math.max(0.32, current - 0.08))
               }
             >
               <Minus className="size-4" />
@@ -2316,13 +2528,13 @@ export function ResumeBuilder({
             <input
               aria-label="Preview zoom"
               type="range"
-              min="45"
+              min="32"
               max="200"
               value={Math.round(previewZoom * 100)}
               onChange={(event) =>
                 setPreviewZoom(Number(event.target.value) / 100)
               }
-              className="w-28"
+              className="hidden w-28 sm:block"
             />
             <Button
               type="button"
@@ -2336,7 +2548,7 @@ export function ResumeBuilder({
             >
               <Plus className="size-4" />
             </Button>
-            <span className="w-10 text-right text-xs text-muted-foreground">
+            <span className="hidden w-10 text-right text-xs text-muted-foreground sm:block">
               {Math.round(previewZoom * 100)}%
             </span>
             <Button
@@ -2350,7 +2562,10 @@ export function ResumeBuilder({
               ) : (
                 <Download className="size-4" />
               )}
-              {resume.coverLetter.included ? "2 PDFs" : "PDF"}
+              <span className="hidden sm:inline">
+                {resume.coverLetter.included ? "2 PDFs" : "PDF"}
+              </span>
+              <span className="sr-only sm:hidden">Download PDF</span>
             </Button>
           </div>
         </div>
@@ -2363,10 +2578,9 @@ export function ResumeBuilder({
           ref={previewViewportRef}
           className={cn(
             "relative min-h-0 flex-1 overflow-hidden",
-            "cursor-grab",
+            "cursor-grab touch-none overscroll-contain",
             isPanning && "cursor-grabbing",
           )}
-          onWheel={handlePreviewWheel}
           onPointerDown={handlePreviewPointerDown}
           onPointerMove={handlePreviewPointerMove}
           onPointerUp={handlePreviewPointerUp}

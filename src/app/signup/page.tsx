@@ -14,7 +14,7 @@ export default async function SignupPage() {
   }
 
   return (
-    <main className="mx-auto grid min-h-[calc(100vh-61px)] w-full max-w-sm place-items-center px-4">
+    <main className="mx-auto grid min-h-[calc(100dvh-56px)] w-full max-w-sm place-items-center px-4 py-8">
       <section className="grid w-full gap-6">
         <div className="grid gap-2 text-center">
           <h1 className="text-2xl font-semibold">Create account</h1>

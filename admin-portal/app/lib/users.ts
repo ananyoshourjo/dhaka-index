@@ -98,3 +98,17 @@ export function getRegisteredUsers() {
     };
   });
 }
+
+export function deleteRegisteredUser(userId: string) {
+  const deleteUser = db.transaction(() => {
+    db.prepare(`DELETE FROM job_user_state WHERE user_id = ?`).run(userId);
+    db.prepare(`DELETE FROM resume_profiles WHERE id = ?`).run(
+      `profile:${userId}`,
+    );
+    db.prepare(`DELETE FROM app_admins WHERE user_id = ?`).run(userId);
+
+    return db.prepare(`DELETE FROM "user" WHERE id = ?`).run(userId);
+  });
+
+  return deleteUser();
+}

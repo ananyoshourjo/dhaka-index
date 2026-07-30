@@ -1,7 +1,7 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
-import { ArrowUpRight, CalendarDays, Trash2 } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Pencil, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 
@@ -92,7 +92,7 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
 
   const inputClassName =
     field === "title"
-      ? "w-full rounded-md border bg-background px-2 py-1 text-base font-semibold leading-snug outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-lg"
+      ? "h-9 w-full rounded-md border bg-background px-2 !text-xl font-semibold leading-[1.2] outline-none focus-visible:ring-2 focus-visible:ring-ring"
       : "w-full rounded-md border bg-background px-2 py-1 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   if (field === "deadline") {
@@ -112,13 +112,17 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
           <button
             type="button"
             aria-label="Edit deadline"
-            className={`-mx-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-left text-sm text-muted-foreground transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+            className={`group/edit -mx-2 flex items-center gap-1.5 rounded-md px-2 text-left text-sm text-muted-foreground transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
               isPending ? "opacity-60" : ""
             }`}
             disabled={isPending}
           >
             <CalendarDays className="size-4" aria-hidden="true" />
             <span>{formatDeadline(currentValue || null)}</span>
+            <Pencil
+              className="size-3 shrink-0 opacity-55 transition-opacity sm:opacity-0 sm:group-hover/edit:opacity-55 sm:group-focus-visible/edit:opacity-55"
+              aria-hidden="true"
+            />
           </button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
@@ -184,9 +188,9 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
     <button
       type="button"
       aria-label={`Edit ${field === "title" ? "role" : "company"}`}
-      className={`-mx-2 block max-w-full rounded-md px-2 py-1 text-left transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
+      className={`group/edit -mx-2 flex max-w-full items-center gap-2 rounded-md px-2 text-left transition-colors hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${
         field === "title"
-          ? "text-base font-semibold leading-snug sm:text-lg"
+          ? "text-xl font-semibold leading-[1.2]"
           : "text-sm text-muted-foreground"
       } ${isPending ? "opacity-60" : ""}`}
       onClick={() => {
@@ -194,7 +198,11 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
         setEditing(true);
       }}
     >
-      {currentValue}
+      <span>{currentValue}</span>
+      <Pencil
+        className="size-3 shrink-0 text-muted-foreground opacity-55 transition-opacity sm:opacity-0 sm:group-hover/edit:opacity-55 sm:group-focus-visible/edit:opacity-55"
+        aria-hidden="true"
+      />
     </button>
   );
 }
@@ -228,8 +236,8 @@ export function EditableJobCard({
   }
 
   return (
-    <article className="rounded-xl border bg-card text-card-foreground">
-      <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+    <article className="overflow-hidden rounded-xl border bg-card text-card-foreground">
+      <div className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="min-w-0 flex-1 space-y-1">
           <EditableField
             key={`company-${job.company}`}
@@ -254,27 +262,33 @@ export function EditableJobCard({
           />
         </div>
 
-        <div className="flex shrink-0 items-center gap-2">
-          <button
+        <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             aria-label={`Delete ${job.title}`}
-            className="inline-flex size-10 items-center justify-center rounded-md border bg-background text-destructive transition-colors hover:bg-destructive hover:text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+            className="size-11 text-destructive hover:bg-destructive hover:text-white sm:size-10"
             disabled={isDeleting}
             onClick={deleteJob}
           >
             <Trash2 className="size-4" aria-hidden="true" />
-          </button>
+          </Button>
 
-          <a
-            href={job.detailUrl}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Open ${job.title}`}
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+          <Button
+            asChild
+            className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none"
           >
-            Open
-            <ArrowUpRight className="size-4" aria-hidden="true" />
-          </a>
+            <a
+              href={job.detailUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${job.title}`}
+            >
+              Open
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+            </a>
+          </Button>
         </div>
       </div>
     </article>

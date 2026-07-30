@@ -36,7 +36,7 @@ export function JobList({
   jobs,
 }: JobListProps) {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-4 px-4 py-6 sm:px-6 sm:py-8">
+    <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-4 sm:gap-4 sm:px-6 sm:py-8">
       {header}
       {jobs.length === 0 ? (
         <Card className="border-dashed">
@@ -46,11 +46,11 @@ export function JobList({
         </Card>
       ) : (
         jobs.map((job) => (
-          <Card key={job.id}>
-            <CardContent className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
+          <Card key={job.id} className="overflow-hidden">
+            <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div className="min-w-0 space-y-1">
                 <p className="text-sm text-muted-foreground">{job.company}</p>
-                <h1 className="text-base font-semibold leading-snug sm:text-lg">
+                <h1 className="text-xl font-semibold leading-[1.2]">
                   {job.title}
                 </h1>
                 <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -59,7 +59,7 @@ export function JobList({
                 </p>
               </div>
 
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
                 {bookmarkAction ? (
                   <form action={bookmarkAction}>
                     <input type="hidden" name="jobId" value={job.id} />
@@ -71,7 +71,7 @@ export function JobList({
                     <Button
                       type="submit"
                       variant={job.bookmarkedAt ? "default" : "outline"}
-                      className="size-10 p-0"
+                      className="size-11 p-0 sm:size-10"
                       aria-label={
                         job.bookmarkedAt
                           ? `Remove bookmark for ${job.title}`
@@ -91,14 +91,14 @@ export function JobList({
                   <Button
                     type="submit"
                     variant="outline"
-                    className="size-10 p-0"
+                    className="size-11 p-0 sm:size-10"
                     aria-label={`${actionLabel} ${job.title}`}
                   >
                     <Archive className="size-4" aria-hidden="true" />
                   </Button>
                 </form>
 
-                <Button asChild>
+                <Button asChild className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none">
                   <a
                     href={job.detailUrl}
                     target="_blank"

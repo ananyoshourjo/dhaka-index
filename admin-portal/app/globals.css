@@ -88,11 +88,30 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   min-height: 100%;
+  overflow-x: clip;
+}
+
+@layer base {
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 }
 
 button,
+a,
 input,
 textarea,
 select {
-  font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 639px) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
 }
