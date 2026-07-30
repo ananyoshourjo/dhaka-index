@@ -14,15 +14,15 @@ export default async function SettingsPage() {
   const adminUrl = process.env.ADMIN_PORTAL_URL ?? "http://127.0.0.1:3010";
 
   return (
-    <main className="mx-auto min-h-screen w-full max-w-3xl px-4 py-8 sm:px-6">
+    <main className="mx-auto min-h-screen w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 sm:py-8">
       <header>
-        <h1 className="text-3xl font-semibold tracking-tight">Settings</h1>
+        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Settings</h1>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
           Manage your account, security, and local data.
         </p>
       </header>
 
-      <div className="mt-8 divide-y border-y">
+      <div className="mt-6 divide-y border-y sm:mt-8">
         <section className="grid gap-6 py-7 sm:grid-cols-[minmax(0,14rem)_1fr]">
           <div>
             <h2 className="font-semibold">Account</h2>
@@ -56,7 +56,7 @@ export default async function SettingsPage() {
               Download a portable copy of your profile, resume, bookmarks, and
               archive.
             </p>
-            <Button asChild className="mt-4" variant="outline">
+            <Button asChild className="mt-4 w-full sm:w-auto" variant="outline">
               <a href="/api/account/export">
                 <Download className="size-4" />
                 Export my data
@@ -77,7 +77,7 @@ export default async function SettingsPage() {
               <p className="text-sm leading-6 text-muted-foreground">
                 Review users and apply local corrections to job records.
               </p>
-              <Button asChild className="mt-4" variant="outline">
+              <Button asChild className="mt-4 w-full sm:w-auto" variant="outline">
                 <a href={adminUrl} rel="noreferrer" target="_blank">
                   Open admin portal
                   <ArrowUpRight className="size-4" />

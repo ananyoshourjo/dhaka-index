@@ -85,6 +85,7 @@ export function AccountDangerZone() {
 
         <div>
           <Button
+            className="w-full sm:w-auto"
             disabled={!canDelete || isPending}
             type="submit"
             variant="destructive"

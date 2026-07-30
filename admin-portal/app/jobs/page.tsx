@@ -57,19 +57,10 @@ export default async function AdminJobsPage() {
   const jobs = getAdminJobs();
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-4 px-4 py-6 sm:px-6 sm:py-8">
-      <section className="mb-2 space-y-1">
-        <p className="text-sm text-muted-foreground">Admin Portal</p>
-        <div className="flex flex-wrap items-end justify-between gap-2">
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Jobs</h1>
-          <p className="font-mono text-xs text-muted-foreground">
-            {jobs.length} active {jobs.length === 1 ? "job" : "jobs"}
-          </p>
-        </div>
-        <p className="max-w-2xl text-sm text-muted-foreground">
-          Click a company, role, or deadline to edit it. Changes appear on the main job board.
-        </p>
-      </section>
+    <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-5 sm:gap-4 sm:px-6 sm:py-8">
+      <h1 className="mb-1 text-xl font-semibold">
+        {jobs.length} active {jobs.length === 1 ? "job" : "jobs"}
+      </h1>
 
       {jobs.length === 0 ? (
         <section className="rounded-xl border border-dashed bg-card px-6 py-10 text-center text-card-foreground">

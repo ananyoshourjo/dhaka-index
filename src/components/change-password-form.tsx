@@ -109,7 +109,7 @@ export function ChangePasswordForm() {
         </div>
 
         <div>
-          <Button disabled={isPending} type="submit">
+          <Button className="w-full sm:w-auto" disabled={isPending} type="submit">
             {isPending ? "Updating password" : "Update password"}
           </Button>
         </div>
