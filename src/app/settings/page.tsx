@@ -3,22 +3,23 @@ import { ArrowUpRight, Download } from "lucide-react";
 import { AccountDangerZone } from "@/components/account-danger-zone";
 import { ChangePasswordForm } from "@/components/change-password-form";
 import { Button } from "@/components/ui/button";
-import { isAdmin } from "@/lib/db";
+import { isAdmin } from "@/lib/cloud-db";
+import { getCloudflareEnv } from "@/lib/cloudflare";
 import { requireUser } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 
 export default async function SettingsPage() {
   const user = await requireUser();
-  const administrator = isAdmin(user.id);
-  const adminUrl = process.env.ADMIN_PORTAL_URL ?? "http://127.0.0.1:3010";
+  const administrator = await isAdmin(user.id);
+  const adminUrl = getCloudflareEnv().ADMIN_PORTAL_URL ?? "#";
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 sm:py-8">
       <header>
         <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Settings</h1>
         <p className="mt-2 text-sm leading-6 text-muted-foreground">
-          Manage your account, security, and local data.
+          Manage your account, security, and hosted data.
         </p>
       </header>
 
@@ -27,7 +28,7 @@ export default async function SettingsPage() {
           <div>
             <h2 className="font-semibold">Account</h2>
             <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              The identity used to sign in to this installation.
+              The identity used to sign in to Dhaka Index.
             </p>
           </div>
           <dl className="grid max-w-md gap-4 text-sm">
@@ -48,7 +49,7 @@ export default async function SettingsPage() {
           <div>
             <h2 className="font-semibold">Your data</h2>
             <p className="mt-1 text-sm leading-6 text-muted-foreground">
-              Your account and resume data stay inside this installation.
+              Your account and resume data stay inside the Dhaka Index database.
             </p>
           </div>
           <div className="max-w-md">
@@ -70,12 +71,12 @@ export default async function SettingsPage() {
             <div>
               <h2 className="font-semibold">Administration</h2>
               <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                Manage this local installation.
+                Manage this Dhaka Index deployment.
               </p>
             </div>
             <div className="max-w-md">
               <p className="text-sm leading-6 text-muted-foreground">
-                Review users and apply local corrections to job records.
+                Review users and apply corrections to job records.
               </p>
               <Button asChild className="mt-4 w-full sm:w-auto" variant="outline">
                 <a href={adminUrl} rel="noreferrer" target="_blank">

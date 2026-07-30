@@ -4,7 +4,11 @@ const config = [
   {
     ignores: [
       ".next*/**",
+      ".open-next/**",
       "admin-portal/.next/**",
+      "admin-portal/.open-next/**",
+      ".wrangler/**",
+      "admin-portal/.wrangler/**",
       ".runs/**",
       "data/**",
       "node_modules/**",

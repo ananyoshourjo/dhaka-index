@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
-import { chromium } from "playwright";
 
 import type { ResumeContent, ResumeSectionKey } from "@/lib/resume";
 import { defaultResumeSectionOrder } from "@/lib/resume";
+import { getCloudflareEnv } from "@/lib/cloudflare";
 import { sanitizeLocalPhoto } from "@/lib/photo";
 import { getSession } from "@/lib/session";
 
-export const runtime = "nodejs";
 const MAX_REQUEST_BYTES = 1024 * 1024;
-const MAX_CONCURRENT_PDF_JOBS = 2;
-let activePdfJobs = 0;
 
 function escapeHtml(value: string) {
   return value
@@ -444,13 +441,6 @@ export async function POST(request: Request) {
     );
   }
 
-  if (activePdfJobs >= MAX_CONCURRENT_PDF_JOBS) {
-    return NextResponse.json(
-      { error: "PDF generation is busy. Try again shortly." },
-      { status: 429 },
-    );
-  }
-
   let payload: {
     document?: "resume" | "coverLetter";
     resume?: ResumeContent;
@@ -479,62 +469,49 @@ export async function POST(request: Request) {
     );
   }
 
-  let pdfSlotAcquired = false;
-
   try {
     if (!payload.resume) {
       return NextResponse.json({ error: "Missing resume." }, { status: 400 });
     }
 
-    activePdfJobs += 1;
-    pdfSlotAcquired = true;
     const resume = sanitizeResumeForPdf(payload.resume);
-    const browser = await chromium.launch({ headless: true });
-
-    try {
-      const page = await browser.newPage({ javaScriptEnabled: false });
-      await page.route("http://**/*", (route) => route.abort());
-      await page.route("https://**/*", (route) => route.abort());
-      page.setDefaultTimeout(15_000);
-      const requestedDocument = payload.document ?? "resume";
-      await page.setContent(
-        requestedDocument === "coverLetter"
-          ? buildCoverLetterHtml(resume)
-          : buildResumeHtml(
-              resume,
-              normalizeSectionOrder(payload.sectionOrder),
-            ),
-        { waitUntil: "load", timeout: 15_000 },
-      );
-      const pdf = await page.pdf({
-        format: "Letter",
+    const requestedDocument = payload.document ?? "resume";
+    const html =
+      requestedDocument === "coverLetter"
+        ? buildCoverLetterHtml(resume)
+        : buildResumeHtml(
+            resume,
+            normalizeSectionOrder(payload.sectionOrder),
+          );
+    const pdf = await getCloudflareEnv().BROWSER.quickAction("pdf", {
+      html,
+      pdfOptions: {
+        format: "letter",
         preferCSSPageSize: true,
         printBackground: true,
         margin: { bottom: "0", left: "0", right: "0", top: "0" },
-      });
+      },
+    });
 
-      return new Response(new Uint8Array(pdf), {
-        headers: {
-          "Content-Disposition":
-            requestedDocument === "coverLetter"
-              ? 'attachment; filename="cover-letter.pdf"'
-              : 'attachment; filename="resume.pdf"',
-          "Content-Type": "application/pdf",
-          "Cache-Control": "no-store",
-        },
-      });
-    } finally {
-      await browser.close();
+    if (!pdf.ok) {
+      throw new Error(`Browser Rendering returned HTTP ${pdf.status}.`);
     }
+
+    return new Response(pdf.body, {
+      headers: {
+        "Content-Disposition":
+          requestedDocument === "coverLetter"
+            ? 'attachment; filename="cover-letter.pdf"'
+            : 'attachment; filename="resume.pdf"',
+        "Content-Type": "application/pdf",
+        "Cache-Control": "no-store",
+      },
+    });
   } catch (error) {
     console.error("Failed to generate resume PDF", error);
     return NextResponse.json(
       { error: "Could not generate the resume PDF." },
       { status: 500 },
     );
-  } finally {
-    if (pdfSlotAcquired) {
-      activePdfJobs -= 1;
-    }
   }
 }

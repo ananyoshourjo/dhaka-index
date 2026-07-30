@@ -1,4 +1,5 @@
-import { db } from "@/app/lib/db";
+import { getCloudflareDb } from "@/app/lib/cloudflare";
+import { statement } from "@/app/lib/cloud-db";
 
 export type RegisteredUser = {
   id: string;
@@ -36,24 +37,25 @@ function readProfilePhotoUrl(contentJson: string | null) {
   }
 }
 
-export function getUserAvatarUrl(userId: string, fallback: string | null) {
-  const profile = db
-    .prepare<[string], { contentJson: string }>(
-      `
+export async function getUserAvatarUrl(
+  userId: string,
+  fallback: string | null,
+) {
+  const profile = await statement(
+    `
         SELECT content_json AS contentJson
         FROM resume_profiles
         WHERE id = ?
-      `,
-    )
-    .get(`profile:${userId}`);
+    `,
+    [`profile:${userId}`],
+  ).first<{ contentJson: string }>();
 
   return readProfilePhotoUrl(profile?.contentJson ?? null) || fallback;
 }
 
-export function getRegisteredUsers() {
-  const users = db
-    .prepare<unknown[], RegisteredUserRow>(
-      `
+export async function getRegisteredUsers() {
+  const result = await statement(
+    `
         SELECT
           "user"."id",
           "user"."name",
@@ -85,11 +87,10 @@ export function getRegisteredUsers() {
           AND archived_job.deleted_at IS NULL
         GROUP BY "user"."id"
         ORDER BY "user"."createdAt" DESC
-      `,
-    )
-    .all();
+    `,
+  ).all<RegisteredUserRow>();
 
-  return users.map(({ profileContentJson, ...user }) => {
+  return result.results.map(({ profileContentJson, ...user }) => {
     const profilePhotoUrl = readProfilePhotoUrl(profileContentJson);
 
     return {
@@ -99,16 +100,20 @@ export function getRegisteredUsers() {
   });
 }
 
-export function deleteRegisteredUser(userId: string) {
-  const deleteUser = db.transaction(() => {
-    db.prepare(`DELETE FROM job_user_state WHERE user_id = ?`).run(userId);
-    db.prepare(`DELETE FROM resume_profiles WHERE id = ?`).run(
-      `profile:${userId}`,
-    );
-    db.prepare(`DELETE FROM app_admins WHERE user_id = ?`).run(userId);
+export async function deleteRegisteredUser(userId: string) {
+  const db = getCloudflareDb();
+  const results = await db.batch([
+    db
+      .prepare(`DELETE FROM job_user_state WHERE user_id = ?`)
+      .bind(userId),
+    db
+      .prepare(`DELETE FROM resume_profiles WHERE id = ?`)
+      .bind(`profile:${userId}`),
+    db
+      .prepare(`DELETE FROM app_admins WHERE user_id = ?`)
+      .bind(userId),
+    db.prepare(`DELETE FROM "user" WHERE id = ?`).bind(userId),
+  ]);
 
-    return db.prepare(`DELETE FROM "user" WHERE id = ?`).run(userId);
-  });
-
-  return deleteUser();
+  return results.at(-1);
 }

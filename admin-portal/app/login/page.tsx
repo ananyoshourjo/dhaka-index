@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import { getSession } from "@/app/lib/session";
 import { AdminLoginForm } from "@/app/login/admin-login-form";
 
+export const dynamic = "force-dynamic";
+
 export default async function LoginPage() {
   const session = await getSession();
 

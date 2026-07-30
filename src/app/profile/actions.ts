@@ -11,10 +11,10 @@ import { requireUser } from "@/lib/session";
 export async function saveResumeAction(content: ResumeContent) {
   const user = await requireUser();
 
-  if (Buffer.byteLength(JSON.stringify(content), "utf8") > 1_900_000) {
-    throw new Error("The resume is larger than the local storage limit.");
+  if (Buffer.byteLength(JSON.stringify(content), "utf8") > 1_500_000) {
+    throw new Error("The resume is larger than the hosted storage limit.");
   }
 
-  saveResumeContent(user.id, content);
+  await saveResumeContent(user.id, content);
   revalidatePath("/profile");
 }

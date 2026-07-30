@@ -31,7 +31,7 @@ async function updateJobAction(formData: FormData) {
     throw new Error("Invalid job update.");
   }
 
-  updateAdminJobField(jobId, field, value);
+  await updateAdminJobField(jobId, field, value);
   revalidatePath("/jobs");
 }
 
@@ -46,7 +46,7 @@ async function deleteJobAction(formData: FormData) {
     throw new Error("Invalid job deletion.");
   }
 
-  deleteAdminJob(jobId);
+  await deleteAdminJob(jobId);
   revalidatePath("/");
   revalidatePath("/jobs");
 }
@@ -54,7 +54,7 @@ async function deleteJobAction(formData: FormData) {
 export default async function AdminJobsPage() {
   await requireAdmin();
 
-  const jobs = getAdminJobs();
+  const jobs = await getAdminJobs();
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-5 sm:gap-4 sm:px-6 sm:py-8">

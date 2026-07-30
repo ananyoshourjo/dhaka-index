@@ -65,7 +65,9 @@ export function TopTabs() {
 
     fetch("/api/profile/photo")
       .then((response) => (response.ok ? response.json() : { photoUrl: "" }))
-      .then((data: { photoUrl?: string }) => {
+      .then((value: unknown) => {
+        const data = value as { photoUrl?: string };
+
         if (!cancelled) {
           setProfilePhotoUrl(data.photoUrl || "");
         }

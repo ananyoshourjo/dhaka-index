@@ -6,7 +6,7 @@ import { requireUser } from "@/lib/session";
 
 export default async function ProfilePage() {
   const user = await requireUser();
-  const resume = getResumeContent(user.id);
+  const resume = await getResumeContent(user.id);
 
   return (
     <ResumeBuilder

@@ -1,0 +1,36 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "dhaka-index",
+  "main": ".open-next/worker.js",
+  "workers_dev": true,
+  "preview_urls": false,
+  "compatibility_date": "2026-07-30",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "browser": {
+    "binding": "BROWSER"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dhaka-index",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "BETTER_AUTH_URL": "https://your-public-app.example.workers.dev",
+    "ADMIN_PORTAL_URL": "https://your-private-admin.example.workers.dev",
+    "DHAKA_INDEX_JOB_FEED_URL": "https://raw.githubusercontent.com/ananyoshourjo/dhaka-index/jobs-data/jobs.json",
+    "DHAKA_INDEX_TRUSTED_ORIGINS": "https://your-public-app.example.workers.dev,https://your-private-admin.example.workers.dev"
+  }
+}

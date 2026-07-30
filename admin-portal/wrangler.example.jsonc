@@ -1,0 +1,30 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "dhaka-index-admin",
+  "main": ".open-next/worker.js",
+  "workers_dev": true,
+  "preview_urls": false,
+  "compatibility_date": "2026-07-30",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dhaka-index",
+      "database_id": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "ADMIN_AUTH_URL": "https://your-private-admin.example.workers.dev",
+    "DHAKA_INDEX_TRUSTED_ORIGINS": "https://your-public-app.example.workers.dev,https://your-private-admin.example.workers.dev"
+  }
+}

@@ -21,7 +21,7 @@ removal request. Include the canonical publisher page as evidence.
 ## Code style
 
 - Use TypeScript with strict typing.
-- Preserve local-first behavior and the public/private data boundary.
+- Preserve the hosted-data privacy model and the public/private crawler boundary.
 - Keep network destinations configured by the operator, never supplied by an
   untrusted request.
 - Maintain keyboard access, visible focus, semantic HTML, and readable error

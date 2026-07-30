@@ -34,9 +34,9 @@ async function deleteUserAction(formData: FormData) {
     throw new Error("Invalid user deletion.");
   }
 
-  const result = deleteRegisteredUser(userId);
+  const result = await deleteRegisteredUser(userId);
 
-  if (result.changes !== 1) {
+  if (result?.meta.changes !== 1) {
     throw new Error("User not found.");
   }
 
@@ -46,7 +46,7 @@ async function deleteUserAction(formData: FormData) {
 export default async function AdminPortalPage() {
   const admin = await requireAdmin();
 
-  const users = getRegisteredUsers();
+  const users = await getRegisteredUsers();
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-6xl px-3 pb-24 pt-5 sm:px-6 sm:py-8">

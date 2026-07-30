@@ -1,42 +1,32 @@
 # Self-hosting and security
 
-Dhaka Index defaults to loopback-only listeners. A reverse proxy is required
-for a network or internet deployment.
+Dhaka Index is deployed as two Cloudflare Workers backed by one D1 database.
+The member Worker is public; the admin Worker also enforces the application's
+administrator role on every protected page and operation.
 
 ## Minimum deployment requirements
 
-1. Use HTTPS at the reverse proxy.
-2. Set `BETTER_AUTH_URL` and `ADMIN_AUTH_URL` to their public HTTPS origins.
+1. Create one D1 database and bind it as `DB` in both Wrangler configurations.
+2. Set `BETTER_AUTH_URL` and `ADMIN_AUTH_URL` to their exact public HTTPS
+   origins.
 3. Set `ADMIN_PORTAL_URL` to the browser-accessible admin origin.
 4. List both origins in `DHAKA_INDEX_TRUSTED_ORIGINS`.
-5. Persist and back up `DHAKA_INDEX_DATA_DIR`.
-6. Complete the first-administrator claim before opening registration to an
-   untrusted network.
-7. Keep the admin portal behind additional network controls when possible.
-8. Apply dependency and container updates promptly.
-
-Example:
-
-```dotenv
-BETTER_AUTH_URL=https://jobs.example.com
-ADMIN_AUTH_URL=https://admin.example.com
-ADMIN_PORTAL_URL=https://admin.example.com
-DHAKA_INDEX_TRUSTED_ORIGINS=https://jobs.example.com,https://admin.example.com
-DHAKA_INDEX_DATA_DIR=/var/lib/dhaka-index
-DHAKA_INDEX_JOB_FEED_URL=https://raw.githubusercontent.com/ananyoshourjo/dhaka-index/jobs-data/jobs.json
-```
+5. Store the same strong `BETTER_AUTH_SECRET` as a Worker secret on both apps.
+6. Apply all remote D1 migrations before accepting registrations.
+7. Register the intended owner first; that first account becomes administrator.
+8. Back up D1 and apply dependency and Worker runtime updates promptly.
+9. Consider placing the admin Worker behind Cloudflare Access as an additional
+   layer. Application authorization is still required.
 
 ## Operator responsibility
 
-The person operating an installation controls the accounts and resumes stored
-there. They are responsible for access controls, backups, retention, user
-requests, applicable privacy notices, and applicable law.
-
-The project does not provide a hosted service and cannot recover a lost local
-database, password, administrator code, or authentication secret.
+The Cloudflare account owner controls the accounts and resumes stored in D1.
+They are responsible for access controls, backups, retention, user requests,
+applicable privacy notices, and applicable law. A lost authentication secret
+invalidates sessions; it cannot be recovered from the repository.
 
 ## Feed availability
 
 The feed is a convenience index rather than an authoritative employment
-record. If GitHub or the configured feed is unavailable, the application keeps
-the last valid snapshot. Users must verify every listing at its canonical URL.
+record. If the configured feed is unavailable, the application keeps the last
+valid D1 snapshot. Users must verify every listing at its canonical URL.

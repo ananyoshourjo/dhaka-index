@@ -6,6 +6,8 @@ import { getUserAvatarUrl } from "@/app/lib/users";
 
 import "./globals.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   applicationName: "Dhaka Index Admin Portal",
   title: "Dhaka Index Admin Portal",
@@ -45,7 +47,7 @@ export default async function RootLayout({
 }>) {
   const session = await getSession();
   const avatarUrl = session
-    ? getUserAvatarUrl(session.user.id, session.user.image ?? null)
+    ? await getUserAvatarUrl(session.user.id, session.user.image ?? null)
     : null;
 
   return (

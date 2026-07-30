@@ -11,6 +11,6 @@ export async function GET() {
   }
 
   return NextResponse.json({
-    photoUrl: getProfilePhotoUrl(session.user.id),
+    photoUrl: await getProfilePhotoUrl(session.user.id),
   });
 }

@@ -22,6 +22,6 @@ Do not access data belonging to other users while investigating.
 
 ## Operational security
 
-Self-hosters are responsible for HTTPS, reverse-proxy configuration, data
-directory permissions, backups, dependency updates, and access to the admin
-portal. See [docs/self-hosting.md](docs/self-hosting.md).
+Operators are responsible for Worker secrets, Cloudflare account access, D1
+backups, dependency updates, and access to the admin portal. See
+[docs/self-hosting.md](docs/self-hosting.md).

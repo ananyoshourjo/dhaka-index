@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   applicationName: "Dhaka Index",
   title: "Dhaka Index",
   description:
-    "A local-first Dhaka job index with a polished resume and cover-letter builder.",
+    "An experimental Dhaka job index and resume-building project.",
   icons: {
     icon: [
       {

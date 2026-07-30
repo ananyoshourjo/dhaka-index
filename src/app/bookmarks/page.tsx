@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { revalidatePath } from "next/cache";
 
 import { JobList } from "@/components/job-list";
-import { archiveJobById, unbookmarkJobById } from "@/lib/db";
+import { archiveJobById, unbookmarkJobById } from "@/lib/cloud-db";
 import { getBookmarkedJobs } from "@/lib/jobs";
 import { requireUser } from "@/lib/session";
 
@@ -15,7 +15,7 @@ async function archiveJobAction(formData: FormData) {
   const jobId = Number(rawJobId);
 
   if (Number.isFinite(jobId)) {
-    archiveJobById(user.id, jobId);
+    await archiveJobById(user.id, jobId);
     revalidatePath("/");
     revalidatePath("/bookmarks");
     revalidatePath("/archive");
@@ -30,7 +30,7 @@ async function unbookmarkJobAction(formData: FormData) {
   const jobId = Number(rawJobId);
 
   if (Number.isFinite(jobId)) {
-    unbookmarkJobById(user.id, jobId);
+    await unbookmarkJobById(user.id, jobId);
     revalidatePath("/");
     revalidatePath("/bookmarks");
   }
@@ -38,7 +38,7 @@ async function unbookmarkJobAction(formData: FormData) {
 
 export default async function BookmarksPage() {
   const user = await requireUser();
-  const jobs = getBookmarkedJobs(user.id);
+  const jobs = await getBookmarkedJobs(user.id);
 
   return (
     <JobList

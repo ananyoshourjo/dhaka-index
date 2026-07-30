@@ -1,70 +1,75 @@
 # Dhaka Index
 
-Dhaka Index is a local-first, multi-user web application for browsing a
-curated index of Dhaka job openings and building polished resumes and cover
-letters. It stores accounts, bookmarks, local job corrections, and resume data
-inside the installation's own SQLite database.
+Dhaka Index is an experimental project exploring a focused jobs and
+application toolkit for Dhaka. Try the live experiment at
+[dhaka-index.ananyosshourjo.workers.dev](https://dhaka-index.ananyosshourjo.workers.dev).
 
-The public repository does **not** contain a crawler. A private maintainer
-workflow publishes a sanitized CC0 snapshot containing only job titles,
-companies, deadlines, and canonical application links. Each installation
-checks that feed at startup and every six hours, then keeps the last successful
-snapshot for offline use.
+The project combines a curated job index with resume and cover-letter tools.
+Its public app and private administration service run on Cloudflare Workers and
+share a Cloudflare D1 database. It is an early experiment, not a production
+employment service, and its direction will be shaped by user feedback.
+
+The public repository does **not** contain the crawler or any user data. A
+private maintainer workflow publishes a sanitized CC0 snapshot containing only
+job titles, companies, deadlines, and canonical application links.
 
 ## Included applications
 
-- **Web app (`:3000`)** — jobs, bookmarks, personal archive, account settings,
-  resume builder, cover-letter builder, and PDF export.
-- **Admin portal (`:3010`)** — registered-user overview and local job
-  corrections or deletions.
+- **Member app** — jobs, bookmarks, personal archive, account settings, resume
+  builder, cover-letter builder, and PDF export.
+- **Admin portal** — registered-user overview and job corrections or deletions.
 
-Both applications use the same local SQLite database. Admin changes are local
-overrides and are never uploaded.
+Registration is open. A D1 trigger assigns the first successfully registered
+account as the sole administrator; later registrations are normal member
+accounts. Register the intended owner before sharing the member URL.
 
-## Quick start with Node.js
+No existing accounts, sessions, resumes, bookmarks, or profile photos are
+imported by the deployment process. New data entered after launch is stored in
+the deployment's D1 database.
+
+## Cloudflare deployment
 
 Requirements:
 
 - Node.js 20.9 or newer
 - npm
+- a Cloudflare account authenticated with Wrangler
 
 ```powershell
-git clone <repository-url>
-cd dhaka-index
-Copy-Item .env.example .env.local
 npm install
-npm run setup
-npm run dev
+npx wrangler d1 create dhaka-index
+Copy-Item wrangler.example.jsonc wrangler.jsonc
+Copy-Item admin-portal/wrangler.example.jsonc admin-portal/wrangler.jsonc
 ```
 
-Open `http://127.0.0.1:3000`. The server prints a one-time administrator code
-on first launch. The first registered user must enter it to become the
-installation owner.
-
-Run the admin portal in another terminal:
+Copy the returned D1 database ID into both local `wrangler.jsonc` files.
+Configure the Worker origins there, then apply the schema and upload the
+sanitized job snapshot. Production Wrangler files are intentionally ignored so
+account-specific database IDs and private service origins are not published:
 
 ```powershell
-npm run admin:dev
+npm run cf:migrate
+npm run cf:seed-jobs
 ```
 
-Then open `http://127.0.0.1:3010` and sign in with the administrator account.
-
-The default feed comes from the repository's `jobs-data` branch. Operators may
-set `DHAKA_INDEX_JOB_FEED_URL` to another compatible schema-v1 feed.
-
-## Docker
+Generate one strong authentication secret and store the same value on both
+Workers:
 
 ```powershell
-Copy-Item .env.example .env
-docker compose up --build
+npx wrangler secret put BETTER_AUTH_SECRET
+npx wrangler secret put BETTER_AUTH_SECRET --config admin-portal/wrangler.jsonc
 ```
 
-The named `dhaka-index-data` volume contains every account, session, resume,
-bookmark, administrator assignment, local job override, and cached job
-snapshot. Back up that volume as you would any personal database.
+Deploy both applications:
 
-Read [docs/self-hosting.md](docs/self-hosting.md) before exposing either
-application beyond the local machine.
+```powershell
+npm run cf:deploy
+npm run admin:cf:deploy
+```
+
+Cloudflare Browser Rendering provides authenticated PDF export. See
+[docs/self-hosting.md](docs/self-hosting.md) for the complete deployment and
+security checklist.
 
 ## Job updates
 
@@ -86,26 +91,33 @@ The feed document uses this stable shape:
 }
 ```
 
-Successful snapshots update base job records. A canonical URL missing from a
-later successful snapshot is marked expired locally. Bookmarks, archives,
+Successful snapshots update base job records in D1. A canonical URL missing
+from a later successful snapshot is marked expired. Bookmarks, archives,
 deleted-job tombstones, and administrator overrides remain intact.
 
 The app never treats a failed download as an empty feed. It continues showing
-the last successful local snapshot and displays the error.
+the last successful D1 snapshot and records the error.
 
 ## Privacy
 
-No telemetry is included. The application does not upload:
-
-- names, email addresses, password hashes, or sessions;
-- resumes, cover letters, references, or profile photos;
-- bookmarks, personal archives, or local administrator changes;
-- SQLite databases, logs, or generated PDFs.
+No analytics or advertising telemetry is included. The deployment does not
+import pre-existing user data. Information that users enter into the hosted
+app—including account credentials, resumes, bookmarks, and profile data—is
+stored in Cloudflare D1 so it is available across devices.
 
 Users can export or permanently delete their account data from **Settings**.
-See [PRIVACY.md](PRIVACY.md) for the complete local-data model.
+See [PRIVACY.md](PRIVACY.md) for the complete hosted-data model.
 
 ## Development
+
+Apply the schema to the local D1 emulator before the first development run:
+
+```powershell
+npm run cf:migrate:local
+npm run dev
+```
+
+Use these commands for verification and deployment:
 
 ```powershell
 npm run lint
@@ -114,10 +126,12 @@ npm test
 npm run build
 npm run admin:build
 npm run verify
+npm run cf:build
+npm run admin:cf:build
 ```
 
-Deterministic tests use temporary databases and synthetic job records. The
-open-source CI does not crawl external sites.
+Deterministic tests use schema fixtures and synthetic job records. The
+open-source CI does not crawl external sites or use production user data.
 
 ## Project policies
 
