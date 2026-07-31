@@ -1,6 +1,6 @@
 {
   "name": "@dhaka-index/web",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "workspaces": [
     "admin-portal"
@@ -10,6 +10,7 @@
     "build": "next build --webpack",
     "start": "next start --hostname 127.0.0.1",
     "cf:build": "opennextjs-cloudflare build",
+    "cf:prepare-build": "node scripts/prepare-cloudflare-build.mjs",
     "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",

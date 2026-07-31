@@ -264,6 +264,34 @@ export async function saveJobFeedState(input: {
   ).run();
 }
 
+export async function acquireJobFeedSyncLease(input: {
+  owner: string;
+  acquiredAt: string;
+  expiresAt: string;
+}) {
+  const result = await statement(
+    `
+      INSERT INTO job_feed_sync_lock (id, owner, acquired_at, expires_at)
+      VALUES (1, ?, ?, ?)
+      ON CONFLICT(id) DO UPDATE SET
+        owner = excluded.owner,
+        acquired_at = excluded.acquired_at,
+        expires_at = excluded.expires_at
+      WHERE job_feed_sync_lock.expires_at <= excluded.acquired_at
+    `,
+    [input.owner, input.acquiredAt, input.expiresAt],
+  ).run();
+
+  return result.meta.changes === 1;
+}
+
+export async function releaseJobFeedSyncLease(owner: string) {
+  return statement(
+    `DELETE FROM job_feed_sync_lock WHERE id = 1 AND owner = ?`,
+    [owner],
+  ).run();
+}
+
 export async function applyOfficialFeed(
   jobs: OfficialFeedJob[],
   input: {
