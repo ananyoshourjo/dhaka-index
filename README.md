@@ -79,8 +79,12 @@ visitor-triggered checks from running at the same time.
 
 ## Automatic deployments
 
-Both Workers can use Cloudflare Workers Builds with the same GitHub repository
-and `main` as the production branch. Add these encrypted build variables to
+The production member and administration Workers are connected to this
+repository. Changes merged into `main` trigger both builds; non-production
+branch builds are disabled.
+
+For another deployment, connect both Workers to the same GitHub repository
+with `main` as the production branch. Add these encrypted build variables to
 each Worker:
 
 - `DHAKA_INDEX_D1_DATABASE_ID`
