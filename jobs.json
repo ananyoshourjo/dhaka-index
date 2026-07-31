@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-31T07:40:49.913Z",
+  "generatedAt": "2026-07-31T07:41:29.086Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -937,12 +937,6 @@
       "title": "Agent, Incubation & Experience",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-2527"
-    },
-    {
-      "title": "Agent, Incubation & Experience",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-2729"
     },
     {
@@ -973,12 +967,6 @@
       "title": "Kitchen Runner",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-2962"
-    },
-    {
-      "title": "Kitchen Runner",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-2968"
     },
     {
@@ -998,12 +986,6 @@
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/manager-sales-in-dhaka-bangladesh-jid-2688"
-    },
-    {
-      "title": "Partner Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-2878"
     },
     {
       "title": "Partner Service Agent",
@@ -1033,31 +1015,13 @@
       "title": "Specialist, Account Management",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-account-management-in-dhaka-bangladesh-jid-2679"
-    },
-    {
-      "title": "Specialist, Account Management",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-account-management-in-dhaka-bangladesh-jid-2681"
     },
     {
       "title": "Specialist, Field Sales",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2674"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2807"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2808"
     },
     {
       "title": "Specialist, Operations (Shops)",
@@ -1082,12 +1046,6 @@
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/team-lead-content-and-onboarding-in-dhaka-bangladesh-jid-3013"
-    },
-    {
-      "title": "Warehouse Supervisor",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/warehouse-supervisor-in-chattogram-bangladesh-jid-2997"
     },
     {
       "title": "Warehouse Supervisor",
@@ -1120,12 +1078,6 @@
       "url": "https://careers.optimizely.com/job/Dhaka-GTM-Operations-Analyst-1212-BD/1356344455"
     },
     {
-      "title": "GTM Operations Analyst",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-GTM-Operations-Analyst-1212-BD/1356345655"
-    },
-    {
       "title": "Marketing Operations Associate (Six-Month Contract)",
       "company": "Optimizely",
       "deadline": null,
@@ -1144,22 +1096,10 @@
       "url": "https://careers.optimizely.com/job/Dhaka-Product-Manager-1212-BD/1360527755"
     },
     {
-      "title": "Product Manager",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Product-Manager-1212-BD/1361842955"
-    },
-    {
       "title": "Senior Customer Success Manager",
       "company": "Optimizely",
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Senior-Customer-Success-Manager-1212-BD/1350837155"
-    },
-    {
-      "title": "Senior Software Engineer",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Senior-Software-Engineer-1212-BD/1360606655"
     },
     {
       "title": "Senior Software Engineer/ SE II (DevOps/ SRE)",
@@ -1192,6 +1132,18 @@
       "url": "https://careers.pathao.com/jobs/manager-growth-strategy"
     },
     {
+      "title": "People Partner - Bangladesh",
+      "company": "Unilever Bangladesh",
+      "deadline": "2026-08-05",
+      "url": "https://careers.unilever.com/en/job/dhaka/people-partner-bangladesh/34155/98449067024"
+    },
+    {
+      "title": "Territory Manager",
+      "company": "Unilever Bangladesh",
+      "deadline": "2026-08-03",
+      "url": "https://careers.unilever.com/en/job/dhaka/territory-manager/34155/98449067408"
+    },
+    {
       "title": "Junior Network Engineer",
       "company": "Ding",
       "deadline": null,
@@ -1220,42 +1172,6 @@
       "company": "Ding",
       "deadline": null,
       "url": "https://ding.bamboohr.com/careers/333"
-    },
-    {
-      "title": "Junior QA Engineer",
-      "company": "Ding",
-      "deadline": null,
-      "url": "https://ding.bamboohr.com/careers/337"
-    },
-    {
-      "title": "UN Women: National Consultant-Coordination Officer, Dhaka Bangladesh",
-      "company": "UNDP Bangladesh",
-      "deadline": "2026-07-30",
-      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/requisitions/job/35436"
-    },
-    {
-      "title": "Head of Sales- Cloud & Infra",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11777"
-    },
-    {
-      "title": "Senior Sales Manager-Enterprise Business App",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11778"
-    },
-    {
-      "title": "Head of Sales-Cyber Security",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11781"
-    },
-    {
-      "title": "Head of Project & Delivery",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11782"
     },
     {
       "title": "Head of Geo Marketing",
@@ -1298,12 +1214,6 @@
       "company": "Inument Solution Limited",
       "deadline": null,
       "url": "https://inument.com/job/android-developer-native"
-    },
-    {
-      "title": "Full Stack Developer",
-      "company": "Inument Solution Limited",
-      "deadline": "2026-07-30",
-      "url": "https://inument.com/job/full-stack-developer"
     },
     {
       "title": "Growth & Business Development Specialist",
@@ -1414,6 +1324,18 @@
       "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60"
     },
     {
+      "title": "PEOPLE EXPERIENCE ASSOCIATE",
+      "company": "JTI Bangladesh",
+      "deadline": "2026-08-05",
+      "url": "https://jobs.jti.com/job/DHAKA-PEOPLE-EXPERIENCE-ASSOCIATE-1212/1417587633"
+    },
+    {
+      "title": "Planning & Budgeting Manager",
+      "company": "JTI Bangladesh",
+      "deadline": null,
+      "url": "https://jobs.jti.com/job/DHAKA-Planning-&-Budgeting-Manager-1212/1420819233"
+    },
+    {
       "title": "CELL LEAD, FMD",
       "company": "JTI Bangladesh",
       "deadline": null,
@@ -1426,22 +1348,10 @@
       "url": "https://jobs.lever.co/fieldnation/1031d39f-65c9-48cd-8a62-30a82e5160b8"
     },
     {
-      "title": "Senior Software Engineer (Full stack)",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/2f84fe38-8c6d-4a85-b887-af459dd8f10d"
-    },
-    {
       "title": "Software Engineer",
       "company": "Field Nation",
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/6a0bb6af-674c-4691-9976-f591d2b81642"
-    },
-    {
-      "title": "Senior Software Engineer - Data Team",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/6bf76790-47ff-4006-bed6-617921e03aaf"
     },
     {
       "title": "Associate Product Marketing Manager",
@@ -1516,6 +1426,12 @@
       "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-Priority/58731-en_GB"
     },
     {
+      "title": "Relationship Manager, Supply Chain Finance",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-06",
+      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-Supply-Chain-Finance/58743-en_GB"
+    },
+    {
       "title": "Artist/Designer",
       "company": "Ollyo",
       "deadline": null,
@@ -1564,22 +1480,10 @@
       "url": "https://portal.careers.hsbc.com/careers/job/563774611967603"
     },
     {
-      "title": "Executive Assistant (Technical)",
-      "company": "WellDev",
-      "deadline": "2026-07-30",
-      "url": "https://recruitment.welldev.io/public/jobs/5702b752-ac13-4e4e-be68-279127fb050a"
-    },
-    {
       "title": "Quality Assurance (QA) Engineer",
       "company": "WellDev",
       "deadline": "2026-07-31",
       "url": "https://recruitment.welldev.io/public/jobs/bb8544ff-1407-451a-877c-44cd6e71135a"
-    },
-    {
-      "title": "Senior Associate or Associate Manager, Corporate Business, axentec PLC ‘a fully owned subsidiary of Robi Axiata PLC’ (Reff. June 18, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-07-30",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6877"
     },
     {
       "title": "Manager/ Senior Manager, Strategic Planning, Corporate Strategy (Reff. July 27, 2026)",
@@ -1678,12 +1582,6 @@
       "url": "https://thecvguy.net/bank-jobs/internship-bank-jobs/city-bank-intern-2026"
     },
     {
-      "title": "Relationship Manager, Supply Chain Finance",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-08-07",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-is-hiring-relationship"
-    },
-    {
       "title": "Universal Banker",
       "company": "Standard Chartered Bank",
       "deadline": "2026-08-03",
@@ -1726,28 +1624,10 @@
       "url": "https://thecvguy.net/mnc-jobs/foodpanda-bangladesh-head-retail-media-2026"
     },
     {
-      "title": "People Experience Associate",
-      "company": "JTI",
-      "deadline": "2026-08-05",
-      "url": "https://thecvguy.net/mnc-jobs/jti-bangladesh-people-experience-associate"
-    },
-    {
       "title": "Trade Marketing Manager",
       "company": "Remark HB Limited",
       "deadline": "2026-08-20",
       "url": "https://thecvguy.net/mnc-jobs/remark-hb-limited-is-hiring-tmm-2026"
-    },
-    {
-      "title": "People Partner",
-      "company": "Unilever Bangladesh",
-      "deadline": "2026-08-05",
-      "url": "https://thecvguy.net/mnc-jobs/unilever-bangladesh-people-partner-2026"
-    },
-    {
-      "title": "Territory Manager",
-      "company": "Unilever Bangladesh",
-      "deadline": "2026-08-03",
-      "url": "https://thecvguy.net/mnc-jobs/unilever-is-hiring-territory-manager-fmcg"
     },
     {
       "title": "Associate System Administrator",
@@ -1760,12 +1640,6 @@
       "company": "Therap (BD) Ltd.",
       "deadline": null,
       "url": "https://therap.hire.trakstar.com/jobs/fk0hw8d"
-    },
-    {
-      "title": "Software Engineer",
-      "company": "Therap (BD) Ltd.",
-      "deadline": null,
-      "url": "https://therap.hire.trakstar.com/jobs/fk0hw8r"
     },
     {
       "title": "Associate Training and Content Specialist",
@@ -1808,12 +1682,6 @@
       "company": "Asian Development Bank",
       "deadline": "2026-08-07",
       "url": "https://www.adb.org/careers/260741"
-    },
-    {
-      "title": "Senior Software Engineer, Backend (Remote India or Bangladesh)",
-      "company": "MonetizeNow",
-      "deadline": null,
-      "url": "https://www.monetizenow.ai/career/senior-software-engineer-full-stack"
     },
     {
       "title": "Senior Software Engineer (Full-Stack)",
