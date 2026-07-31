@@ -53,11 +53,13 @@ npm run cf:seed-jobs
 ```
 
 Generate one strong authentication secret and store the same value on both
-Workers:
+Workers. Generate a different secret for the member Worker's scheduled feed
+refresh:
 
 ```powershell
 npx wrangler secret put BETTER_AUTH_SECRET
 npx wrangler secret put BETTER_AUTH_SECRET --config admin-portal/wrangler.jsonc
+npx wrangler secret put JOB_SYNC_SECRET
 ```
 
 Deploy both applications:
@@ -70,6 +72,38 @@ npm run admin:cf:deploy
 Cloudflare Browser Rendering provides authenticated PDF export. See
 [docs/self-hosting.md](docs/self-hosting.md) for the complete deployment and
 security checklist.
+
+The member Worker checks the sanitized feed every 30 minutes through a
+Cloudflare Cron Trigger. An expiring D1 lease prevents scheduled and
+visitor-triggered checks from running at the same time.
+
+## Automatic deployments
+
+Both Workers can use Cloudflare Workers Builds with the same GitHub repository
+and `main` as the production branch. Add these encrypted build variables to
+each Worker:
+
+- `DHAKA_INDEX_D1_DATABASE_ID`
+- `DHAKA_INDEX_PUBLIC_URL`
+- `DHAKA_INDEX_ADMIN_URL`
+
+Use the repository root for both builds. Configure the member Worker with:
+
+```text
+Build command: npm run cf:prepare-build && npm run cf:build
+Deploy command: npx wrangler deploy
+```
+
+Configure the administration Worker with:
+
+```text
+Build command: npm run cf:prepare-build && npm run admin:cf:build
+Deploy command: npx wrangler deploy --config admin-portal/wrangler.jsonc
+```
+
+The preparation script creates ignored, account-specific Wrangler files during
+the build. Production database identifiers and private service origins remain
+outside the repository.
 
 ## Job updates
 

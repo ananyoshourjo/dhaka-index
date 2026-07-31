@@ -8,6 +8,7 @@ export type DhakaIndexCloudflareEnv = CloudflareEnv & {
   DB: D1Database;
   DHAKA_INDEX_JOB_FEED_URL?: string;
   DHAKA_INDEX_TRUSTED_ORIGINS?: string;
+  JOB_SYNC_SECRET?: string;
 };
 
 export function getCloudflareEnv() {

@@ -1,8 +1,10 @@
 import "server-only";
 
 import {
+  acquireJobFeedSyncLease,
   applyOfficialFeed,
   getJobFeedState,
+  releaseJobFeedSyncLease,
   saveJobFeedState,
   type JobFeedStateRow,
 } from "@/lib/cloud-db";
@@ -11,6 +13,7 @@ import { validateJobFeed } from "@/lib/job-feed-schema";
 import { nowDhakaIso } from "@/lib/time";
 
 const CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
+const SYNC_LEASE_MS = 2 * 60 * 1000;
 const MAX_FEED_BYTES = 5 * 1024 * 1024;
 
 export type JobFeedStatus = {
@@ -67,7 +70,7 @@ export async function getJobFeedStatus() {
 
 export async function syncJobFeed(options: { force?: boolean } = {}) {
   const feedUrl = getConfiguredFeedUrl();
-  const state = await getJobFeedState();
+  let state = await getJobFeedState();
 
   if (!feedUrl) {
     return publicStatus(null, state);
@@ -78,6 +81,32 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
     state?.last_checked_at &&
     Date.now() - new Date(state.last_checked_at).getTime() < CHECK_INTERVAL_MS
   ) {
+    return publicStatus(feedUrl, state);
+  }
+
+  const leaseOwner = crypto.randomUUID();
+  const acquiredAt = new Date().toISOString();
+  const leaseAcquired = await acquireJobFeedSyncLease({
+    owner: leaseOwner,
+    acquiredAt,
+    expiresAt: new Date(Date.now() + SYNC_LEASE_MS).toISOString(),
+  });
+
+  if (!leaseAcquired) {
+    return {
+      ...publicStatus(feedUrl, state),
+      skipped: "sync-in-progress" as const,
+    };
+  }
+
+  state = await getJobFeedState();
+
+  if (
+    !options.force &&
+    state?.last_checked_at &&
+    Date.now() - new Date(state.last_checked_at).getTime() < CHECK_INTERVAL_MS
+  ) {
+    await releaseJobFeedSyncLease(leaseOwner);
     return publicStatus(feedUrl, state);
   }
 
@@ -150,5 +179,7 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
       lastError: message,
     });
     throw error;
+  } finally {
+    await releaseJobFeedSyncLease(leaseOwner).catch(() => undefined);
   }
 }

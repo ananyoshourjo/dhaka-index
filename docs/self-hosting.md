@@ -12,10 +12,11 @@ administrator role on every protected page and operation.
 3. Set `ADMIN_PORTAL_URL` to the browser-accessible admin origin.
 4. List both origins in `DHAKA_INDEX_TRUSTED_ORIGINS`.
 5. Store the same strong `BETTER_AUTH_SECRET` as a Worker secret on both apps.
-6. Apply all remote D1 migrations before accepting registrations.
-7. Register the intended owner first; that first account becomes administrator.
-8. Back up D1 and apply dependency and Worker runtime updates promptly.
-9. Consider placing the admin Worker behind Cloudflare Access as an additional
+6. Store a separate `JOB_SYNC_SECRET` on the member Worker for Cron requests.
+7. Apply all remote D1 migrations before accepting registrations.
+8. Register the intended owner first; that first account becomes administrator.
+9. Back up D1 and apply dependency and Worker runtime updates promptly.
+10. Consider placing the admin Worker behind Cloudflare Access as an additional
    layer. Application authorization is still required.
 
 ## Operator responsibility
@@ -30,3 +31,6 @@ invalidates sessions; it cannot be recovered from the repository.
 The feed is a convenience index rather than an authoritative employment
 record. If the configured feed is unavailable, the application keeps the last
 valid D1 snapshot. Users must verify every listing at its canonical URL.
+
+The member Worker checks the configured feed every 30 minutes. Cloudflare Cron
+events and Worker logs are the operational record for scheduled refreshes.

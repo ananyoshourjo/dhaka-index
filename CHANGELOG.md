@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 0.4.0 - 2026-07-31
+
+- Refresh the public job feed every 30 minutes with Cloudflare Cron, independent of signed-in visitors.
+- Prevent overlapping feed updates with an expiring D1 synchronization lease.
+- Prepare repeatable Cloudflare Git builds for the main app and admin portal.
+
 ## 0.3.0 - 2026-07-30
 
 - Reframe Dhaka Index as an experimental project and publish the live public demo
