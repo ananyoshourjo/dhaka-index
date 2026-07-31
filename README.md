@@ -81,7 +81,8 @@ visitor-triggered checks from running at the same time.
 
 The production member and administration Workers are connected to this
 repository. Changes merged into `main` trigger both builds; non-production
-branch builds are disabled.
+branch builds are disabled. The Cloudflare GitHub App is limited to this
+repository rather than receiving access to every repository in the account.
 
 For another deployment, connect both Workers to the same GitHub repository
 with `main` as the production branch. Add these encrypted build variables to
