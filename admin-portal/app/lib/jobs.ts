@@ -1,4 +1,8 @@
 import { statement } from "@/app/lib/cloud-db";
+import {
+  classifyJobFunctions,
+  serializeJobFunctions,
+} from "../../../src/lib/job-functions";
 
 export type AdminJob = {
   id: number;
@@ -93,6 +97,27 @@ export async function updateAdminJobField(
 
   const overrideColumn = field === "title" ? "admin_title" : "admin_company";
   const scrapedColumn = field === "title" ? "title" : "company";
+
+  if (field === "title") {
+    return statement(
+      `
+        UPDATE jobs
+        SET
+          admin_title = CASE WHEN ? = title THEN NULL ELSE ? END,
+          job_functions = ?,
+          admin_edited_at = ?
+        WHERE id = ?
+          AND deleted_at IS NULL
+      `,
+      [
+        value,
+        value,
+        serializeJobFunctions(classifyJobFunctions(value)),
+        editedAt,
+        jobId,
+      ],
+    ).run();
+  }
 
   return statement(
     `

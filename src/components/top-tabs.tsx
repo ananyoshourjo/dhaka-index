@@ -29,10 +29,17 @@ export function TopTabs() {
   const router = useRouter();
   const session = authClient.useSession();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [profilePhotoUrl, setProfilePhotoUrl] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState<{
+    url: string;
+    userId: string;
+  } | null>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const user = session.data?.user;
-  const avatarImage = (session.data ? profilePhotoUrl : "") || user?.image || "";
+  const avatarImage = session.data
+    ? profilePhoto && profilePhoto.userId === user?.id
+      ? profilePhoto.url
+      : "/api/profile/photo"
+    : "";
   const avatarInitial =
     user?.name?.trim().charAt(0).toUpperCase() ||
     user?.email?.trim().charAt(0).toUpperCase() ||
@@ -57,42 +64,18 @@ export function TopTabs() {
   }, [menuOpen]);
 
   useEffect(() => {
-    if (!session.data) {
-      return;
-    }
-
-    let cancelled = false;
-
-    fetch("/api/profile/photo")
-      .then((response) => (response.ok ? response.json() : { photoUrl: "" }))
-      .then((value: unknown) => {
-        const data = value as { photoUrl?: string };
-
-        if (!cancelled) {
-          setProfilePhotoUrl(data.photoUrl || "");
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setProfilePhotoUrl("");
-        }
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [session.data]);
-
-  useEffect(() => {
     function handleProfilePhotoChange(event: Event) {
       const customEvent = event as CustomEvent<{ photoUrl?: string }>;
-      setProfilePhotoUrl(customEvent.detail?.photoUrl || "");
+      setProfilePhoto({
+        url: customEvent.detail?.photoUrl || "",
+        userId: user?.id || "",
+      });
     }
 
     window.addEventListener("profile-photo-change", handleProfilePhotoChange);
     return () =>
       window.removeEventListener("profile-photo-change", handleProfilePhotoChange);
-  }, []);
+  }, [user?.id]);
 
   if (pathname === "/login" || pathname === "/signup") {
     return (
@@ -171,10 +154,15 @@ export function TopTabs() {
               onClick={() => setMenuOpen((open) => !open)}
             >
               {avatarImage ? (
-                <span
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
                   aria-hidden="true"
-                  className="size-full bg-cover bg-center"
-                  style={{ backgroundImage: `url("${avatarImage}")` }}
+                  alt=""
+                  className="size-full object-cover"
+                  src={avatarImage}
+                  onError={() =>
+                    setProfilePhoto({ url: "", userId: user?.id || "" })
+                  }
                 />
               ) : (
                 <span

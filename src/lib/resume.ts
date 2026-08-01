@@ -1,5 +1,5 @@
 import { getCloudflareDb } from "@/lib/cloudflare";
-import { sanitizeLocalPhoto } from "@/lib/photo";
+import { migrateLegacyProfilePhoto } from "@/lib/profile-photo";
 import { nowDhakaIso } from "@/lib/time";
 
 export type ResumeBullet = {
@@ -285,18 +285,24 @@ export async function getResumeContent(userId: string): Promise<ResumeContent> {
   const legacyId = userId || DEFAULT_RESUME_ID;
   const profile = await readResumeContent(profileId);
 
-  if (profile) {
-    return profile;
+  const legacy = profile ? null : await readResumeContent(legacyId);
+  const initialContent = profile ?? legacy ?? defaultResumeContent;
+  const photoUrl = await migrateLegacyProfilePhoto(
+    userId,
+    initialContent.contact.photoUrl,
+  );
+
+  if (!profile || initialContent.contact.photoUrl) {
+    await saveResumeContent(userId, initialContent);
   }
 
-  const legacy = await readResumeContent(legacyId);
-  const initialContent = legacy ?? defaultResumeContent;
-  await saveResumeContent(userId, initialContent);
-  return initialContent;
-}
-
-export async function getProfilePhotoUrl(userId: string): Promise<string> {
-  return (await getResumeContent(userId)).contact.photoUrl;
+  return {
+    ...initialContent,
+    contact: {
+      ...initialContent.contact,
+      photoUrl,
+    },
+  };
 }
 
 export async function saveResumeContent(
@@ -307,7 +313,7 @@ export async function saveResumeContent(
     ...content,
     contact: {
       ...content.contact,
-      photoUrl: sanitizeLocalPhoto(content.contact.photoUrl),
+      photoUrl: "",
     },
   };
   delete localContent.layout;
@@ -315,26 +321,16 @@ export async function saveResumeContent(
   const db = getCloudflareDb();
   const updatedAt = nowDhakaIso();
 
-  await db.batch([
-    db
-      .prepare(
-        `
-          INSERT INTO resume_profiles (id, content_json, updated_at)
-          VALUES (?, ?, ?)
-          ON CONFLICT(id) DO UPDATE SET
-            content_json = excluded.content_json,
-            updated_at = excluded.updated_at
-        `,
-      )
-      .bind(
-        scopedResumeId(userId),
-        JSON.stringify(localContent),
-        updatedAt,
-      ),
-    db
-      .prepare(
-        `UPDATE "user" SET "image" = ?, "updatedAt" = ? WHERE "id" = ?`,
-      )
-      .bind(localContent.contact.photoUrl || null, updatedAt, userId),
-  ]);
+  await db
+    .prepare(
+      `
+        INSERT INTO resume_profiles (id, content_json, updated_at)
+        VALUES (?, ?, ?)
+        ON CONFLICT(id) DO UPDATE SET
+          content_json = excluded.content_json,
+          updated_at = excluded.updated_at
+      `,
+    )
+    .bind(scopedResumeId(userId), JSON.stringify(localContent), updatedAt)
+    .run();
 }

@@ -1,6 +1,6 @@
 {
   "name": "@dhaka-index/web",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "workspaces": [
     "admin-portal"
@@ -16,7 +16,8 @@
     "cf:typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
     "cf:migrate:local": "wrangler d1 migrations apply dhaka-index --local",
     "cf:migrate": "wrangler d1 migrations apply dhaka-index --remote",
-    "cf:seed-jobs": "node scripts/seed-cloudflare-jobs.mjs",
+    "cf:seed-jobs": "tsx scripts/seed-cloudflare-jobs.mjs",
+    "health:hosted": "node scripts/check-hosted-routes.mjs",
     "admin:dev": "npm --prefix admin-portal run dev",
     "admin:build": "npm --prefix admin-portal run build",
     "admin:cf:build": "npm --prefix admin-portal run cf:build",

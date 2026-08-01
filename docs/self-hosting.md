@@ -32,5 +32,25 @@ The feed is a convenience index rather than an authoritative employment
 record. If the configured feed is unavailable, the application keeps the last
 valid D1 snapshot. Users must verify every listing at its canonical URL.
 
-The member Worker checks the configured feed every 30 minutes. Cloudflare Cron
+The member Worker checks the configured feed every six hours. Cloudflare Cron
 events and Worker logs are the operational record for scheduled refreshes.
+
+## Hosted route health checks
+
+Use a dedicated normal member account to exercise every authenticated member
+route after deployment. Supply either its email and password or an existing
+Cookie header value through local environment variables; the checker never
+prints them. Email/password checks sign their temporary session out when done.
+
+```powershell
+$env:DHAKA_INDEX_HEALTH_BASE_URL = "https://your-public-app.example.workers.dev"
+$env:DHAKA_INDEX_HEALTH_EMAIL = "synthetic-check@example.com"
+$env:DHAKA_INDEX_HEALTH_PASSWORD = "use-a-secret-manager-value"
+npm run health:hosted
+```
+
+The default run makes 20 sequential requests to Jobs, Profile, Bookmarks,
+Archive, and Settings, fails on redirects/errors or Cloudflare 1102 content,
+and reports p50, p95, maximum wall time, and largest response size. Requests
+carry `X-Dhaka-Index-Health-Check: 1`, which forces a minimal structured timing
+entry in Worker logs without recording query strings, cookies, or user data.

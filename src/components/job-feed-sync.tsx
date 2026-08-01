@@ -42,7 +42,8 @@ export function JobFeedSync() {
   }, [router]);
 
   useEffect(() => {
-    void synchronize();
+    // Cron is authoritative. Keep a long-lived signed-in tab as a fallback,
+    // but avoid an extra authenticated Worker invocation on every Jobs mount.
     const interval = window.setInterval(() => void synchronize(), SIX_HOURS_MS);
     return () => window.clearInterval(interval);
   }, [synchronize]);

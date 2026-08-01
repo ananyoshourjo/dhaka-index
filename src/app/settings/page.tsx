@@ -2,9 +2,11 @@ import { ArrowUpRight, Download } from "lucide-react";
 
 import { AccountDangerZone } from "@/components/account-danger-zone";
 import { ChangePasswordForm } from "@/components/change-password-form";
+import { JobInterestForm } from "@/components/job-interest-form";
 import { Button } from "@/components/ui/button";
 import { isAdmin } from "@/lib/cloud-db";
 import { getCloudflareEnv } from "@/lib/cloudflare";
+import { isJobFunction } from "@/lib/job-functions";
 import { requireUser } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +15,9 @@ export default async function SettingsPage() {
   const user = await requireUser();
   const administrator = await isAdmin(user.id);
   const adminUrl = getCloudflareEnv().ADMIN_PORTAL_URL ?? "#";
+  const currentJobFunction = isJobFunction(user.preferredJobFunction)
+    ? user.preferredJobFunction
+    : "Other";
 
   return (
     <main className="mx-auto min-h-screen w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 sm:py-8">
@@ -42,6 +47,8 @@ export default async function SettingsPage() {
             </div>
           </dl>
         </section>
+
+        <JobInterestForm currentJobFunction={currentJobFunction} />
 
         <ChangePasswordForm />
 

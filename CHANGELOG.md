@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 0.5.0 - 2026-08-01
+
+- Add job-function interests, search, company and function filters, sorting, and indexed pagination.
+- Move profile photos into dedicated D1 storage with optimized uploads and efficient avatar and PDF delivery.
+- Reduce hosted Worker load and add authenticated route health monitoring.
+
 ## 0.4.0 - 2026-07-31
 
 - Refresh the public job feed every 30 minutes with Cloudflare Cron, independent of signed-in visitors.

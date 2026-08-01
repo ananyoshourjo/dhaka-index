@@ -19,7 +19,7 @@ export default async function SignupPage() {
         <div className="grid gap-2 text-center">
           <h1 className="text-2xl font-semibold">Create account</h1>
           <p className="text-sm text-muted-foreground">
-            Email and password only. No social sign-in.
+            Create your account and tell us what kind of work interests you.
           </p>
         </div>
         <Suspense>
