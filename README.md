@@ -153,8 +153,13 @@ Apply the schema to the local D1 emulator before the first development run:
 
 ```powershell
 npm run cf:migrate:local
+npm run cf:seed-jobs:local
 npm run dev
 ```
+
+The local seeder imports the same sanitized feed used by the hosted Worker. A
+signed-in local Jobs page also performs one development-only sync on mount, so
+fresh local D1 state can bootstrap without a Cloudflare Cron trigger.
 
 Use these commands for verification and deployment:
 

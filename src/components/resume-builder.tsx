@@ -4,7 +4,6 @@ import {
   Check,
   Download,
   Eye,
-  FileText,
   GripVertical,
   Loader2,
   Maximize2,
@@ -25,14 +24,27 @@ import {
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
 import { createPhotoThumbnail } from "@/lib/photo-client";
+import {
+  hasResumeContent,
+  normalizeResumeCustomSections,
+  normalizeResumeSectionOrder,
+  normalizeResumeSectionTitles,
+} from "@/lib/resume-schema";
 import type {
   ResumeAchievement,
   ResumeActivity,
   ResumeBullet,
+  ResumeCertification,
+  ResumeCertificationStatus,
   ResumeContent,
+  ResumeCustomEntry,
+  ResumeCustomSection,
+  ResumeCustomSectionId,
   ResumeEducation,
-  ResumeProject,
+  ResumePublication,
+  ResumePublicationStatus,
   ResumeReference,
+  ResumeSectionId,
   ResumeSectionKey,
   ResumeSkillGroup,
   ResumeWorkExperience,
@@ -55,25 +67,38 @@ type DropIndicator = DragTarget & {
   position: "before" | "after";
 };
 
-const sectionLabels: Record<ResumeSectionKey, string> = {
-  workExperience: "Work Experience",
-  projects: "Projects",
-  education: "Education",
-  achievements: "Achievements",
-  activities: "Extracurricular Activities",
-  skills: "Skills",
-  references: "References",
-};
-
-const resumeSectionOrder: ResumeSectionKey[] = [
-  "workExperience",
-  "projects",
-  "education",
-  "achievements",
-  "activities",
-  "skills",
-  "references",
+const certificationStatusOptions: ReadonlyArray<{
+  label: string;
+  value: ResumeCertificationStatus;
+}> = [
+  { label: "Completed", value: "completed" },
+  { label: "In progress", value: "inProgress" },
 ];
+
+const publicationStatusOptions: ReadonlyArray<{
+  label: string;
+  value: ResumePublicationStatus;
+}> = [
+  { label: "Published", value: "published" },
+  { label: "In press", value: "inPress" },
+  { label: "Under review", value: "underReview" },
+];
+
+function publicationStatusLabel(status: ResumePublicationStatus) {
+  return publicationStatusOptions.find((option) => option.value === status)?.label ?? "Published";
+}
+
+function publicationDateLabel(status: ResumePublicationStatus) {
+  if (status === "inPress") {
+    return "Expected publication date";
+  }
+
+  if (status === "underReview") {
+    return "Submission date";
+  }
+
+  return "Publication date";
+}
 
 const EMERGENCY_DRAFT_KEY = "dhaka-index:resume-emergency-draft:v1";
 
@@ -111,6 +136,32 @@ function newId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
+function newCustomSectionId() {
+  return `custom:${newId("section")}` as ResumeCustomSectionId;
+}
+
+function newCustomEntry(): ResumeCustomEntry {
+  return {
+    id: newId("custom-entry"),
+    included: true,
+    heading: "",
+    subheading: "",
+    place: "",
+    dates: "",
+    useBullets: false,
+    description: "",
+    bullets: [],
+  };
+}
+
+function newResumeBullet(): ResumeBullet {
+  return {
+    id: newId("bullet"),
+    included: true,
+    text: "",
+  };
+}
+
 function reorderById<T extends { id: string }>(
   items: T[],
   fromId: string,
@@ -131,47 +182,6 @@ function reorderById<T extends { id: string }>(
   return next;
 }
 
-function findPreviousSection(
-  order: ResumeSectionKey[],
-  candidateSections: ResumeSectionKey[],
-) {
-  for (let index = candidateSections.length - 1; index >= 0; index -= 1) {
-    const candidate = candidateSections[index];
-
-    if (order.includes(candidate)) {
-      return candidate;
-    }
-  }
-
-  return undefined;
-}
-
-function normalizeSectionOrder(order: ResumeSectionKey[] | undefined) {
-  const current = Array.isArray(order) ? order : [];
-  const next = current.filter((section): section is ResumeSectionKey =>
-    resumeSectionOrder.includes(section as ResumeSectionKey),
-  );
-
-  if (next.length === 0) {
-    return [...resumeSectionOrder];
-  }
-
-  resumeSectionOrder.forEach((section, index) => {
-    if (next.includes(section)) {
-      return;
-    }
-
-    const previousSection = findPreviousSection(
-      next,
-      resumeSectionOrder.slice(0, index),
-    );
-    const previousIndex = previousSection ? next.indexOf(previousSection) : -1;
-    next.splice(previousIndex + 1, 0, section);
-  });
-
-  return next;
-}
-
 function Toggle({
   checked,
   label,
@@ -184,6 +194,7 @@ function Toggle({
   return (
     <button
       type="button"
+      draggable={false}
       onClick={onClick}
       className={cn(
         "inline-flex size-5 shrink-0 items-center justify-center rounded border",
@@ -215,6 +226,69 @@ function Field({
         onChange={(event) => onChange(event.target.value)}
         className="h-9 rounded-md border bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
       />
+    </label>
+  );
+}
+
+function Switch({
+  checked,
+  label,
+  onClick,
+}: {
+  checked: boolean;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      draggable={false}
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={onClick}
+      className={cn(
+        "inline-flex h-5 w-9 shrink-0 items-center rounded-full border p-0.5 transition-colors",
+        checked
+          ? "border-primary bg-primary"
+          : "border-input bg-muted",
+      )}
+    >
+      <span
+        className={cn(
+          "size-3.5 rounded-full bg-background shadow-sm transition-transform",
+          checked ? "translate-x-4" : "translate-x-0",
+        )}
+      />
+    </button>
+  );
+}
+
+function SelectField<T extends string>({
+  label,
+  value,
+  options,
+  onChange,
+}: {
+  label: string;
+  value: T;
+  options: ReadonlyArray<{ label: string; value: T }>;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
+      {label}
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value as T)}
+        className="h-9 rounded-md border bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </label>
   );
 }
@@ -259,6 +333,7 @@ function TextArea({
 
 function EditorSection({
   title,
+  onTitleChange,
   children,
   action,
   dragId,
@@ -272,6 +347,7 @@ function EditorSection({
   dropIndicator,
 }: {
   title: string;
+  onTitleChange?: (value: string) => void;
   children: React.ReactNode;
   action?: React.ReactNode;
   dragId?: string;
@@ -314,6 +390,11 @@ function EditorSection({
       )}
       draggable={draggable}
       onDragStart={(event) => {
+        if ((event.target as Element | null)?.closest("input,button,textarea,select")) {
+          event.preventDefault();
+          return;
+        }
+
         if (dragGroup && dragId) {
           onDragStart?.(dragGroup, dragId, event);
         }
@@ -338,7 +419,17 @@ function EditorSection({
               aria-hidden="true"
             />
           ) : null}
-          <h2 className="text-sm font-semibold text-foreground">{title}</h2>
+          {onTitleChange ? (
+            <input
+              value={title}
+              onChange={(event) => onTitleChange(event.target.value)}
+              aria-label={`${title || "Section"} title`}
+              draggable={false}
+              className="min-w-0 bg-transparent text-sm font-semibold text-foreground outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring/30"
+            />
+          ) : (
+            <h2 className="text-sm font-semibold text-foreground">{title}</h2>
+          )}
         </div>
         {action}
       </div>
@@ -361,9 +452,11 @@ function PreviewSection({
       className="grid gap-[7px]"
       style={order === undefined ? undefined : { order }}
     >
-      <h3 className="border-b-[2px] border-black pb-[2px] text-[13px] font-bold uppercase leading-none">
-        {title}
-      </h3>
+      {title.trim() ? (
+        <h3 className="border-b-[2px] border-black pb-[2px] text-[13px] font-bold uppercase leading-none">
+          {title}
+        </h3>
+      ) : null}
       {children}
     </section>
   );
@@ -386,6 +479,75 @@ function splitParagraphs(value: string) {
     .filter(Boolean);
 }
 
+function safeExternalUrl(value: string) {
+  const normalized = value.trim();
+
+  if (!normalized) {
+    return "";
+  }
+
+  const candidate = normalized.startsWith("//")
+    ? `https:${normalized}`
+    : /^[a-z][a-z\d+.-]*:/i.test(normalized)
+      ? normalized
+      : `https://${normalized}`;
+
+  try {
+    const url = new URL(candidate);
+    return ["http:", "https:"].includes(url.protocol) ? url.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
+const previewLinkClassName = "text-blue-700 underline";
+
+function contactUrl(protocol: "mailto" | "tel", value: string) {
+  const normalized = value.trim();
+  return normalized ? `${protocol}:${encodeURIComponent(normalized)}` : "";
+}
+
+function safeLinkedInUrl(value: string) {
+  const normalized = value.trim();
+
+  if (!normalized) {
+    return "";
+  }
+
+  const candidate = /^https?:\/\//i.test(normalized)
+    ? normalized
+    : /^(www\.)?linkedin\.com/i.test(normalized)
+      ? `https://${normalized}`
+      : `https://linkedin.com/${normalized.replace(/^\/+/, "")}`;
+
+  return safeExternalUrl(candidate);
+}
+
+function ResumePreviewLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  if (!href) {
+    return <>{children}</>;
+  }
+
+  const opensNewTab = /^https?:/i.test(href);
+
+  return (
+    <a
+      href={href}
+      target={opensNewTab ? "_blank" : undefined}
+      rel={opensNewTab ? "noreferrer" : undefined}
+      className={previewLinkClassName}
+    >
+      {children}
+    </a>
+  );
+}
+
 function CoverLetterPreview({
   left,
   resume,
@@ -394,12 +556,6 @@ function CoverLetterPreview({
   resume: ResumeContent;
 }) {
   const coverLetter = resume.coverLetter;
-  const recipientLines = [
-    coverLetter.recipientName,
-    coverLetter.recipientTitle,
-    coverLetter.company,
-    ...coverLetter.address.split("\n"),
-  ].filter((line) => line.trim());
 
   return (
     <article
@@ -417,33 +573,12 @@ function CoverLetterPreview({
         </p>
       </header>
 
-      <div className="mt-[0.42in]">
-        {coverLetter.date ? <p>{coverLetter.date}</p> : null}
-
-        {recipientLines.length > 0 ? (
-          <div className="mt-[0.28in]">
-            {recipientLines.map((line, index) => (
-              <p key={`${line}-${index}`}>{line}</p>
-            ))}
-          </div>
-        ) : null}
-
-        <p className="mt-[0.28in]">
-          {coverLetter.salutation || "Dear Hiring Manager,"}
-        </p>
-
-        <div className="mt-[0.22in] grid gap-[0.18in]">
+      <div className="mt-[0.42in] grid gap-[0.18in]">
           {splitParagraphs(coverLetter.body).map((paragraph, index) => (
             <p key={index} className="whitespace-pre-line">
               {paragraph}
             </p>
           ))}
-        </div>
-
-        <div className="mt-[0.32in]">
-          <p>{coverLetter.closing || "Sincerely,"}</p>
-          <p className="mt-[0.34in] font-semibold">{resume.contact.name}</p>
-        </div>
       </div>
     </article>
   );
@@ -455,6 +590,9 @@ export function ResumeBuilder({
   subtitle = "CV format editor",
   title = "Resume Builder",
 }: ResumeBuilderProps) {
+  const initialCustomSections = normalizeResumeCustomSections(
+    initialResume.customSections,
+  );
   const [resume, setResume] = useState<ResumeContent>({
     ...initialResume,
     contact: {
@@ -463,6 +601,10 @@ export function ResumeBuilder({
       photoUrl: "",
     },
     projects: initialResume.projects ?? [],
+    publications: initialResume.publications ?? [],
+    certifications: initialResume.certifications ?? [],
+    sectionTitles: normalizeResumeSectionTitles(initialResume.sectionTitles),
+    customSections: initialCustomSections,
     coverLetter: initialResume.coverLetter ?? {
       included: false,
       date: "",
@@ -474,7 +616,10 @@ export function ResumeBuilder({
       body: "",
       closing: "Sincerely,",
     },
-    sectionOrder: normalizeSectionOrder(initialResume.sectionOrder),
+    sectionOrder: normalizeResumeSectionOrder(
+      initialResume.sectionOrder,
+      initialCustomSections.map((section) => section.id),
+    ),
   });
   const [photoUrl, setPhotoUrl] = useState(initialResume.contact.photoUrl);
   const [saveState, setSaveState] = useState<SaveState>("saved");
@@ -703,11 +848,23 @@ export function ResumeBuilder({
     }
 
     const frame = window.requestAnimationFrame(() => {
+      const customSections = normalizeResumeCustomSections(
+        emergencyDraft.customSections,
+      );
       setResume({
         ...emergencyDraft,
         contact: { ...emergencyDraft.contact, photoUrl: "" },
         projects: emergencyDraft.projects ?? [],
-        sectionOrder: normalizeSectionOrder(emergencyDraft.sectionOrder),
+        publications: emergencyDraft.publications ?? [],
+        certifications: emergencyDraft.certifications ?? [],
+        sectionTitles: normalizeResumeSectionTitles(
+          emergencyDraft.sectionTitles,
+        ),
+        customSections,
+        sectionOrder: normalizeResumeSectionOrder(
+          emergencyDraft.sectionOrder,
+          customSections.map((section) => section.id),
+        ),
       });
       setSaveState("unsaved");
     });
@@ -949,13 +1106,25 @@ export function ResumeBuilder({
     }));
   };
 
-  const updateProject = (
+  const updateCertification = (
     id: string,
-    updater: (item: ResumeProject) => ResumeProject,
+    updater: (item: ResumeCertification) => ResumeCertification,
   ) => {
     setResume((current) => ({
       ...current,
-      projects: current.projects.map((item) =>
+      certifications: current.certifications.map((item) =>
+        item.id === id ? updater(item) : item,
+      ),
+    }));
+  };
+
+  const updatePublication = (
+    id: string,
+    updater: (item: ResumePublication) => ResumePublication,
+  ) => {
+    setResume((current) => ({
+      ...current,
+      publications: current.publications.map((item) =>
         item.id === id ? updater(item) : item,
       ),
     }));
@@ -1021,6 +1190,110 @@ export function ResumeBuilder({
     }));
   };
 
+  const updateSectionTitle = (key: ResumeSectionKey, value: string) => {
+    setResume((current) => ({
+      ...current,
+      sectionTitles: {
+        ...current.sectionTitles,
+        [key]: value,
+      },
+    }));
+  };
+
+  const updateCustomSection = (
+    id: ResumeCustomSectionId,
+    updater: (section: ResumeCustomSection) => ResumeCustomSection,
+  ) => {
+    setResume((current) => ({
+      ...current,
+      customSections: current.customSections.map((section) =>
+        section.id === id ? updater(section) : section,
+      ),
+    }));
+  };
+
+  const updateCustomEntry = (
+    sectionId: ResumeCustomSectionId,
+    entryId: string,
+    updater: (entry: ResumeCustomEntry) => ResumeCustomEntry,
+  ) => {
+    updateCustomSection(sectionId, (section) => ({
+      ...section,
+      entries: section.entries.map((entry) =>
+        entry.id === entryId ? updater(entry) : entry,
+      ),
+    }));
+  };
+
+  const addCustomSection = () => {
+    const section = {
+      id: newCustomSectionId(),
+      title: "untitled",
+      entries: [],
+    } satisfies ResumeCustomSection;
+
+    setResume((current) => ({
+      ...current,
+      customSections: [...current.customSections, section],
+      sectionOrder: [
+        ...normalizeResumeSectionOrder(
+          current.sectionOrder,
+          current.customSections.map((item) => item.id),
+        ),
+        section.id,
+      ],
+    }));
+  };
+
+  const addCustomEntry = (sectionId: ResumeCustomSectionId) => {
+    updateCustomSection(sectionId, (section) => ({
+      ...section,
+      entries: [...section.entries, newCustomEntry()],
+    }));
+  };
+
+  const removeCustomSection = (sectionId: ResumeCustomSectionId) => {
+    setResume((current) => {
+      const customSections = current.customSections.filter(
+        (section) => section.id !== sectionId,
+      );
+
+      return {
+        ...current,
+        customSections,
+        sectionOrder: normalizeResumeSectionOrder(
+          current.sectionOrder,
+          customSections.map((section) => section.id),
+        ),
+      };
+    });
+  };
+
+  const reorderCustomEntry = (
+    sectionId: ResumeCustomSectionId,
+    fromId: string,
+    toId: string,
+    position: "before" | "after",
+  ) => {
+    updateCustomSection(sectionId, (section) => ({
+      ...section,
+      entries: reorderById(section.entries, fromId, toId, position),
+    }));
+  };
+
+  const reorderCustomBullet = (
+    sectionId: ResumeCustomSectionId,
+    entryId: string,
+    fromBulletId: string,
+    toBulletId: string,
+    position: "before" | "after",
+  ) => {
+    updateCustomEntry(sectionId, entryId, (entry) => ({
+      ...entry,
+      bullets: reorderById(entry.bullets, fromBulletId, toBulletId, position),
+    }));
+  };
+
   const reorderSection = (
     fromId: string,
     toId: string,
@@ -1029,11 +1302,14 @@ export function ResumeBuilder({
     setResume((current) => ({
       ...current,
       sectionOrder: reorderById(
-        normalizeSectionOrder(current.sectionOrder).map((id) => ({ id })),
+        normalizeResumeSectionOrder(
+          current.sectionOrder,
+          current.customSections.map((section) => section.id),
+        ).map((id) => ({ id })),
         fromId,
         toId,
         position,
-      ).map((item) => item.id as ResumeSectionKey),
+      ).map((item) => item.id as ResumeSectionId),
     }));
   };
 
@@ -1055,10 +1331,25 @@ export function ResumeBuilder({
               position,
             ),
           };
-        case "projects":
+        case "certifications":
           return {
             ...current,
-            projects: reorderById(current.projects, fromId, toId, position),
+            certifications: reorderById(
+              current.certifications,
+              fromId,
+              toId,
+              position,
+            ),
+          };
+        case "publications":
+          return {
+            ...current,
+            publications: reorderById(
+              current.publications,
+              fromId,
+              toId,
+              position,
+            ),
           };
         case "education":
           return {
@@ -1105,18 +1396,6 @@ export function ResumeBuilder({
     updateWork(workId, (work) => ({
       ...work,
       bullets: reorderById(work.bullets, fromBulletId, toBulletId, position),
-    }));
-  };
-
-  const reorderProjectBullet = (
-    projectId: string,
-    fromBulletId: string,
-    toBulletId: string,
-    position: "before" | "after",
-  ) => {
-    updateProject(projectId, (project) => ({
-      ...project,
-      bullets: reorderById(project.bullets, fromBulletId, toBulletId, position),
     }));
   };
 
@@ -1210,13 +1489,6 @@ export function ResumeBuilder({
       reorderSection(dragTarget.id, id, position);
     } else if (group.startsWith("bullets:")) {
       reorderWorkBullet(group.replace("bullets:", ""), dragTarget.id, id, position);
-    } else if (group.startsWith("projectBullets:")) {
-      reorderProjectBullet(
-        group.replace("projectBullets:", ""),
-        dragTarget.id,
-        id,
-        position,
-      );
     } else if (group.startsWith("activityBullets:")) {
       reorderActivityBullet(
         group.replace("activityBullets:", ""),
@@ -1224,6 +1496,31 @@ export function ResumeBuilder({
         id,
         position,
       );
+    } else if (group.startsWith("customEntries|")) {
+      const [sectionId] = group.slice("customEntries|".length).split("|");
+
+      if (sectionId) {
+        reorderCustomEntry(
+          sectionId as ResumeCustomSectionId,
+          dragTarget.id,
+          id,
+          position,
+        );
+      }
+    } else if (group.startsWith("customBullets|")) {
+      const [sectionId, entryId] = group
+        .slice("customBullets|".length)
+        .split("|");
+
+      if (sectionId && entryId) {
+        reorderCustomBullet(
+          sectionId as ResumeCustomSectionId,
+          entryId,
+          dragTarget.id,
+          id,
+          position,
+        );
+      }
     } else {
       reorderCollection(group, dragTarget.id, id, position);
     }
@@ -1379,16 +1676,11 @@ export function ResumeBuilder({
       const safeName = (resume.contact.name || "resume")
         .trim()
         .replace(/[<>:"/\\|?*]+/g, "-");
-      const documents: Array<Promise<Blob>> = [requestPdf("resume")];
-
-      if (resume.coverLetter.included) {
-        documents.push(requestPdf("coverLetter"));
-      }
-
-      const [resumePdf, coverLetterPdf] = await Promise.all(documents);
+      const resumePdf = await requestPdf("resume");
       saveDownloadedBlob(resumePdf, `${safeName}-resume.pdf`);
 
-      if (coverLetterPdf) {
+      if (resume.coverLetter.included) {
+        const coverLetterPdf = await requestPdf("coverLetter");
         saveDownloadedBlob(coverLetterPdf, `${safeName}-cover-letter.pdf`);
       }
 
@@ -1402,15 +1694,46 @@ export function ResumeBuilder({
   };
 
   const visibleWork = resume.workExperience.filter((item) => item.included);
-  const visibleProjects = resume.projects.filter((item) => item.included);
   const visibleEducation = resume.education.filter((item) => item.included);
+  const visiblePublications = resume.publications.filter(
+    (item) => item.included,
+  );
+  const visibleCertifications = resume.certifications.filter(
+    (item) => item.included,
+  );
   const visibleAchievements = resume.achievements.filter((item) => item.included);
   const visibleActivities = resume.activities.filter((item) => item.included);
   const visibleSkills = resume.skills.filter((item) => item.included);
   const visibleReferences = resume.references.filter((item) => item.included);
-  const sectionOrder = normalizeSectionOrder(resume.sectionOrder);
+  const sectionOrder = normalizeResumeSectionOrder(
+    resume.sectionOrder,
+    resume.customSections.map((section) => section.id),
+  );
   const totalPreviewPages =
     resumePageCount + (resume.coverLetter.included ? 1 : 0);
+  const hasPreviewContent = hasResumeContent(resume, photoUrl);
+  const previewContactItems = [
+    {
+      label: "Phone",
+      value: resume.contact.phone,
+      href: contactUrl("tel", resume.contact.phone),
+    },
+    {
+      label: "Email",
+      value: resume.contact.email,
+      href: contactUrl("mailto", resume.contact.email),
+    },
+    {
+      label: "LinkedIn",
+      value: resume.contact.linkedin,
+      href: safeLinkedInUrl(resume.contact.linkedin),
+    },
+    {
+      label: "Website",
+      value: resume.contact.website,
+      href: safeExternalUrl(resume.contact.website),
+    },
+  ].filter((item) => item.value.trim());
 
   return (
     <main
@@ -1594,8 +1917,21 @@ export function ResumeBuilder({
             </div>
           </EditorSection>
 
+          <div className="flex justify-end">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={addCustomSection}
+            >
+              <Plus className="size-4" />
+              Add custom section
+            </Button>
+          </div>
+
           <EditorSection
-            title="Work Experience"
+            title={resume.sectionTitles.workExperience}
+            onTitleChange={(value) => updateSectionTitle("workExperience", value)}
             dragGroup="sections"
             dragId="workExperience"
             order={sectionOrder.indexOf("workExperience") + 1}
@@ -1801,203 +2137,8 @@ export function ResumeBuilder({
           </EditorSection>
 
           <EditorSection
-            title="Projects"
-            dragGroup="sections"
-            dragId="projects"
-            order={sectionOrder.indexOf("projects") + 1}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDragOverTarget={handleDragOverTarget}
-            onDrop={handleDrop}
-            dragTarget={dragTarget}
-            dropIndicator={dropIndicator}
-            action={
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() =>
-                  setResume((current) => ({
-                    ...current,
-                    projects: [
-                      ...current.projects,
-                      {
-                        id: newId("project"),
-                        included: true,
-                        title: "",
-                        dates: "",
-                        bullets: [
-                          {
-                            id: newId("bullet"),
-                            included: true,
-                            text: "",
-                          },
-                        ],
-                      },
-                    ],
-                  }))
-                }
-              >
-                <Plus className="size-4" />
-                Add
-              </Button>
-            }
-          >
-            {resume.projects.map((item) => (
-              <div
-                key={item.id}
-                className={cn(
-                  "relative grid gap-3 rounded-md border p-3",
-                  dropIndicator?.group === "projects" &&
-                    dropIndicator.id === item.id &&
-                    dropIndicator.position === "before" &&
-                    "before:absolute before:-top-2 before:left-0 before:right-0 before:h-0.5 before:bg-foreground",
-                  dropIndicator?.group === "projects" &&
-                    dropIndicator.id === item.id &&
-                    dropIndicator.position === "after" &&
-                    "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
-                )}
-                draggable
-                onDragStart={(event) => {
-                  event.stopPropagation();
-                  handleDragStart("projects", item.id);
-                }}
-                onDragOver={(event) =>
-                  handleDragOverTarget(event, "projects", item.id)
-                }
-                onDrop={(event) => {
-                  event.stopPropagation();
-                  handleDrop("projects", item.id);
-                }}
-              >
-                <div className="flex items-center justify-between gap-2">
-                  <div className="inline-flex items-center gap-2 text-left text-sm font-semibold">
-                    <GripVertical
-                      className="size-4 cursor-grab text-muted-foreground"
-                      aria-hidden="true"
-                    />
-                    <Toggle
-                      checked={item.included}
-                      label={item.included ? "Hide project" : "Show project"}
-                      onClick={() =>
-                        updateProject(item.id, (project) => ({
-                          ...project,
-                          included: !project.included,
-                        }))
-                      }
-                    />
-                    {item.title}
-                  </div>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() =>
-                      setResume((current) => ({
-                        ...current,
-                        projects: current.projects.filter(
-                          (project) => project.id !== item.id,
-                        ),
-                      }))
-                    }
-                    aria-label="Remove project"
-                  >
-                    <Trash2 className="size-4" />
-                  </Button>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Field
-                    label="Project"
-                    value={item.title}
-                    onChange={(value) =>
-                      updateProject(item.id, (project) => ({
-                        ...project,
-                        title: value,
-                      }))
-                    }
-                  />
-                  <Field
-                    label="Dates"
-                    value={item.dates}
-                    onChange={(value) =>
-                      updateProject(item.id, (project) => ({
-                        ...project,
-                        dates: value,
-                      }))
-                    }
-                  />
-                </div>
-                <div className="grid gap-2">
-                  {item.bullets.map((bullet) => (
-                    <BulletEditor
-                      key={bullet.id}
-                      bullet={bullet}
-                      onToggle={() =>
-                        updateProject(item.id, (project) => ({
-                          ...project,
-                          bullets: project.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? {
-                                  ...currentBullet,
-                                  included: !currentBullet.included,
-                                }
-                              : currentBullet,
-                          ),
-                        }))
-                      }
-                      onChange={(value) =>
-                        updateProject(item.id, (project) => ({
-                          ...project,
-                          bullets: project.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? { ...currentBullet, text: value }
-                              : currentBullet,
-                          ),
-                        }))
-                      }
-                      onRemove={() =>
-                        updateProject(item.id, (project) => ({
-                          ...project,
-                          bullets: project.bullets.filter(
-                            (currentBullet) => currentBullet.id !== bullet.id,
-                          ),
-                        }))
-                      }
-                      dragGroup={`projectBullets:${item.id}`}
-                      onDragStart={handleDragStart}
-                      onDragOverTarget={handleDragOverTarget}
-                      onDrop={handleDrop}
-                      dropIndicator={dropIndicator}
-                    />
-                  ))}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      updateProject(item.id, (project) => ({
-                        ...project,
-                        bullets: [
-                          ...project.bullets,
-                          {
-                            id: newId("bullet"),
-                            included: true,
-                            text: "",
-                          },
-                        ],
-                      }))
-                    }
-                  >
-                    <Plus className="size-4" />
-                    Add bullet
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </EditorSection>
-
-          <EditorSection
-            title="Education"
+            title={resume.sectionTitles.education}
+            onTitleChange={(value) => updateSectionTitle("education", value)}
             dragGroup="sections"
             dragId="education"
             order={sectionOrder.indexOf("education") + 1}
@@ -2116,7 +2257,302 @@ export function ResumeBuilder({
           </EditorSection>
 
           <EditorSection
-            title="Achievements"
+            title={resume.sectionTitles.publications}
+            onTitleChange={(value) => updateSectionTitle("publications", value)}
+            dragGroup="sections"
+            dragId="publications"
+            order={sectionOrder.indexOf("publications") + 1}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragOverTarget={handleDragOverTarget}
+            onDrop={handleDrop}
+            dragTarget={dragTarget}
+            dropIndicator={dropIndicator}
+            action={
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() =>
+                  setResume((current) => ({
+                    ...current,
+                    publications: [
+                      {
+                        id: newId("publication"),
+                        included: true,
+                        title: "",
+                        authors: "",
+                        venue: "",
+                        status: "published",
+                        date: "",
+                        details: "",
+                        url: "",
+                      },
+                      ...current.publications,
+                    ],
+                  }))
+                }
+              >
+                <Plus className="size-4" />
+                Add
+              </Button>
+            }
+          >
+            {resume.publications.map((item) => (
+              <GridRowEditor
+                key={item.id}
+                included={item.included}
+                title={item.title}
+                dragGroup="publications"
+                dragId={item.id}
+                onDragStart={handleDragStart}
+                onDragOverTarget={handleDragOverTarget}
+                onDrop={handleDrop}
+                dropIndicator={dropIndicator}
+                onToggle={() =>
+                  updatePublication(item.id, (publication) => ({
+                    ...publication,
+                    included: !publication.included,
+                  }))
+                }
+                onRemove={() =>
+                  setResume((current) => ({
+                    ...current,
+                    publications: current.publications.filter(
+                      (publication) => publication.id !== item.id,
+                    ),
+                  }))
+                }
+              >
+                <Field
+                  label="Title"
+                  value={item.title}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      title: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Authors"
+                  value={item.authors}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      authors: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Publication / journal"
+                  value={item.venue}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      venue: value,
+                    }))
+                  }
+                />
+                <SelectField
+                  label="Status"
+                  value={item.status}
+                  options={publicationStatusOptions}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      status: value,
+                    }))
+                  }
+                />
+                <Field
+                  label={publicationDateLabel(item.status)}
+                  value={item.date}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      date: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Publication details (optional)"
+                  value={item.details}
+                  onChange={(value) =>
+                    updatePublication(item.id, (publication) => ({
+                      ...publication,
+                      details: value,
+                    }))
+                  }
+                />
+                <div className="sm:col-span-2">
+                  <Field
+                    label="DOI or publication URL (optional)"
+                    value={item.url}
+                    onChange={(value) =>
+                      updatePublication(item.id, (publication) => ({
+                        ...publication,
+                        url: value,
+                      }))
+                    }
+                  />
+                </div>
+              </GridRowEditor>
+            ))}
+          </EditorSection>
+
+          <EditorSection
+            title={resume.sectionTitles.certifications}
+            onTitleChange={(value) => updateSectionTitle("certifications", value)}
+            dragGroup="sections"
+            dragId="certifications"
+            order={sectionOrder.indexOf("certifications") + 1}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragOverTarget={handleDragOverTarget}
+            onDrop={handleDrop}
+            dragTarget={dragTarget}
+            dropIndicator={dropIndicator}
+            action={
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() =>
+                  setResume((current) => ({
+                    ...current,
+                    certifications: [
+                      ...current.certifications,
+                      {
+                        id: newId("certification"),
+                        included: true,
+                        name: "",
+                        issuer: "",
+                        status: "completed",
+                        issueDate: "",
+                        expirationDate: "",
+                        credentialId: "",
+                        credentialUrl: "",
+                      },
+                    ],
+                  }))
+                }
+              >
+                <Plus className="size-4" />
+                Add
+              </Button>
+            }
+          >
+            {resume.certifications.map((item) => (
+              <GridRowEditor
+                key={item.id}
+                included={item.included}
+                title={item.name}
+                dragGroup="certifications"
+                dragId={item.id}
+                onDragStart={handleDragStart}
+                onDragOverTarget={handleDragOverTarget}
+                onDrop={handleDrop}
+                dropIndicator={dropIndicator}
+                onToggle={() =>
+                  updateCertification(item.id, (certification) => ({
+                    ...certification,
+                    included: !certification.included,
+                  }))
+                }
+                onRemove={() =>
+                  setResume((current) => ({
+                    ...current,
+                    certifications: current.certifications.filter(
+                      (certification) => certification.id !== item.id,
+                    ),
+                  }))
+                }
+              >
+                <Field
+                  label="Certification"
+                  value={item.name}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      name: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Issuing organization"
+                  value={item.issuer}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      issuer: value,
+                    }))
+                  }
+                />
+                <SelectField
+                  label="Status"
+                  value={item.status}
+                  options={certificationStatusOptions}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      status: value,
+                    }))
+                  }
+                />
+                <Field
+                  label={
+                    item.status === "inProgress"
+                      ? "Expected completion date"
+                      : "Issue date"
+                  }
+                  value={item.issueDate}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      issueDate: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Expiration / renewal date (optional)"
+                  value={item.expirationDate}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      expirationDate: value,
+                    }))
+                  }
+                />
+                <Field
+                  label="Credential ID (optional)"
+                  value={item.credentialId}
+                  onChange={(value) =>
+                    updateCertification(item.id, (certification) => ({
+                      ...certification,
+                      credentialId: value,
+                    }))
+                  }
+                />
+                <div className="sm:col-span-2">
+                  <Field
+                    label="Credential URL (optional)"
+                    value={item.credentialUrl}
+                    onChange={(value) =>
+                      updateCertification(item.id, (certification) => ({
+                        ...certification,
+                        credentialUrl: value,
+                      }))
+                    }
+                  />
+                </div>
+              </GridRowEditor>
+            ))}
+          </EditorSection>
+
+          <EditorSection
+             title={resume.sectionTitles.achievements}
+             onTitleChange={(value) => updateSectionTitle("achievements", value)}
             dragGroup="sections"
             dragId="achievements"
             order={sectionOrder.indexOf("achievements") + 1}
@@ -2202,7 +2638,8 @@ export function ResumeBuilder({
           </EditorSection>
 
           <EditorSection
-            title="Extracurricular Activities"
+            title={resume.sectionTitles.activities}
+            onTitleChange={(value) => updateSectionTitle("activities", value)}
             dragGroup="sections"
             dragId="activities"
             order={sectionOrder.indexOf("activities") + 1}
@@ -2411,7 +2848,8 @@ export function ResumeBuilder({
           </EditorSection>
 
           <EditorSection
-            title="Skills"
+            title={resume.sectionTitles.skills}
+            onTitleChange={(value) => updateSectionTitle("skills", value)}
             dragGroup="sections"
             dragId="skills"
             order={sectionOrder.indexOf("skills") + 1}
@@ -2491,7 +2929,8 @@ export function ResumeBuilder({
           </EditorSection>
 
           <EditorSection
-            title="References"
+            title={resume.sectionTitles.references}
+            onTitleChange={(value) => updateSectionTitle("references", value)}
             dragGroup="sections"
             dragId="references"
             order={sectionOrder.indexOf("references") + 1}
@@ -2609,111 +3048,278 @@ export function ResumeBuilder({
             ))}
           </EditorSection>
 
+          {resume.customSections.map((section) => (
+            <EditorSection
+              key={section.id}
+              title={section.title}
+              onTitleChange={(value) =>
+                updateCustomSection(section.id, (currentSection) => ({
+                  ...currentSection,
+                  title: value,
+                }))
+              }
+              dragGroup="sections"
+              dragId={section.id}
+              order={sectionOrder.indexOf(section.id) + 1}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+              onDragOverTarget={handleDragOverTarget}
+              onDrop={handleDrop}
+              dragTarget={dragTarget}
+              dropIndicator={dropIndicator}
+              action={
+                <div className="flex items-center gap-1">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => addCustomEntry(section.id)}
+                  >
+                    <Plus className="size-4" />
+                    Add
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => removeCustomSection(section.id)}
+                    aria-label={`Remove ${section.title || "custom"} section`}
+                  >
+                    <Trash2 className="size-4" />
+                  </Button>
+                </div>
+              }
+            >
+              {section.entries.map((item) => (
+                <div
+                  key={item.id}
+                  className={cn(
+                    "relative grid gap-3 rounded-md border p-3",
+                    dropIndicator?.group === `customEntries|${section.id}` &&
+                      dropIndicator.id === item.id &&
+                      dropIndicator.position === "before" &&
+                      "before:absolute before:-top-2 before:left-0 before:right-0 before:h-0.5 before:bg-foreground",
+                    dropIndicator?.group === `customEntries|${section.id}` &&
+                      dropIndicator.id === item.id &&
+                      dropIndicator.position === "after" &&
+                      "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
+                  )}
+                  draggable
+                  onDragStart={(event) => {
+                    event.stopPropagation();
+                    handleDragStart(`customEntries|${section.id}`, item.id);
+                  }}
+                  onDragOver={(event) =>
+                    handleDragOverTarget(
+                      event,
+                      `customEntries|${section.id}`,
+                      item.id,
+                    )
+                  }
+                  onDrop={(event) => {
+                    event.stopPropagation();
+                    handleDrop(`customEntries|${section.id}`, item.id);
+                  }}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="inline-flex items-center gap-2 text-left text-sm font-semibold">
+                      <GripVertical
+                        className="size-4 cursor-grab text-muted-foreground"
+                        aria-hidden="true"
+                      />
+                      <Toggle
+                        checked={item.included}
+                        label={
+                          item.included
+                            ? "Hide custom entry"
+                            : "Show custom entry"
+                        }
+                        onClick={() =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            included: !entry.included,
+                          }))
+                        }
+                      />
+                      {item.heading}
+                    </div>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() =>
+                        updateCustomSection(section.id, (currentSection) => ({
+                          ...currentSection,
+                          entries: currentSection.entries.filter(
+                            (entry) => entry.id !== item.id,
+                          ),
+                        }))
+                      }
+                      aria-label="Remove custom entry"
+                    >
+                      <Trash2 className="size-4" />
+                    </Button>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <Field
+                      label="Heading"
+                      value={item.heading}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          heading: value,
+                        }))
+                      }
+                    />
+                    <Field
+                      label="Subheading"
+                      value={item.subheading}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          subheading: value,
+                        }))
+                      }
+                    />
+                    <Field
+                      label="Place"
+                      value={item.place}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          place: value,
+                        }))
+                      }
+                    />
+                    <Field
+                      label="Dates"
+                      value={item.dates}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          dates: value,
+                        }))
+                      }
+                    />
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                    <Switch
+                      checked={item.useBullets}
+                      label="Use bullet points"
+                      onClick={() =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          useBullets: !entry.useBullets,
+                          bullets:
+                            !entry.useBullets && entry.bullets.length === 0
+                              ? [newResumeBullet()]
+                              : entry.bullets,
+                        }))
+                      }
+                    />
+                    <span>Use bullet points</span>
+                  </div>
+                  {item.useBullets ? (
+                    <div className="grid gap-2">
+                      {item.bullets.map((bullet) => (
+                        <BulletEditor
+                          key={bullet.id}
+                          bullet={bullet}
+                          onToggle={() =>
+                            updateCustomEntry(section.id, item.id, (entry) => ({
+                              ...entry,
+                              bullets: entry.bullets.map((currentBullet) =>
+                                currentBullet.id === bullet.id
+                                  ? {
+                                      ...currentBullet,
+                                      included: !currentBullet.included,
+                                    }
+                                  : currentBullet,
+                              ),
+                            }))
+                          }
+                          onChange={(value) =>
+                            updateCustomEntry(section.id, item.id, (entry) => ({
+                              ...entry,
+                              bullets: entry.bullets.map((currentBullet) =>
+                                currentBullet.id === bullet.id
+                                  ? { ...currentBullet, text: value }
+                                  : currentBullet,
+                              ),
+                            }))
+                          }
+                          onRemove={() =>
+                            updateCustomEntry(section.id, item.id, (entry) => ({
+                              ...entry,
+                              bullets: entry.bullets.filter(
+                                (currentBullet) => currentBullet.id !== bullet.id,
+                              ),
+                            }))
+                          }
+                          dragGroup={`customBullets|${section.id}|${item.id}`}
+                          onDragStart={handleDragStart}
+                          onDragOverTarget={handleDragOverTarget}
+                          onDrop={handleDrop}
+                          dropIndicator={dropIndicator}
+                        />
+                      ))}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            bullets: [...entry.bullets, newResumeBullet()],
+                          }))
+                        }
+                      >
+                        <Plus className="size-4" />
+                        Add bullet
+                      </Button>
+                    </div>
+                  ) : (
+                    <TextArea
+                      label="Description"
+                      rows={4}
+                      value={item.description}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          description: value,
+                        }))
+                      }
+                    />
+                  )}
+                </div>
+              ))}
+            </EditorSection>
+          ))}
+
           <EditorSection
             title="Cover Letter"
-            order={resumeSectionOrder.length + 1}
-            action={
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground">
-                  {resume.coverLetter.included ? "Included" : "Not included"}
-                </span>
-                <Toggle
-                  checked={resume.coverLetter.included}
-                  label={
-                    resume.coverLetter.included
-                      ? "Remove cover letter"
-                      : "Add cover letter"
-                  }
-                  onClick={() => {
-                    const included = !resume.coverLetter.included;
-                    updateCoverLetter("included", included);
-                    setPreviewPan({ x: 0, y: 0 });
-                  }}
-                />
-              </div>
-            }
+            order={sectionOrder.length + 1}
           >
-            <div className="grid gap-4 rounded-lg border bg-muted/25 p-4">
-              <div className="flex items-start gap-3">
-                <div className="flex size-9 shrink-0 items-center justify-center rounded-md border bg-background">
-                  <FileText className="size-4 text-muted-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    Separate, one-page cover letter
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    When included, it appears after the resume in this preview
-                    and downloads as its own PDF.
-                  </p>
-                </div>
-              </div>
-
-              {resume.coverLetter.included ? (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Field
-                    label="Date"
-                    value={resume.coverLetter.date}
-                    onChange={(value) => updateCoverLetter("date", value)}
-                  />
-                  <Field
-                    label="Recipient name"
-                    value={resume.coverLetter.recipientName}
-                    onChange={(value) =>
-                      updateCoverLetter("recipientName", value)
-                    }
-                  />
-                  <Field
-                    label="Recipient title"
-                    value={resume.coverLetter.recipientTitle}
-                    onChange={(value) =>
-                      updateCoverLetter("recipientTitle", value)
-                    }
-                  />
-                  <Field
-                    label="Company"
-                    value={resume.coverLetter.company}
-                    onChange={(value) => updateCoverLetter("company", value)}
-                  />
-                  <div className="sm:col-span-2">
-                    <TextArea
-                      label="Company address"
-                      rows={2}
-                      value={resume.coverLetter.address}
-                      onChange={(value) => updateCoverLetter("address", value)}
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <Field
-                      label="Salutation"
-                      value={resume.coverLetter.salutation}
-                      onChange={(value) =>
-                        updateCoverLetter("salutation", value)
-                      }
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <TextArea
-                      label="Letter body"
-                      rows={10}
-                      value={resume.coverLetter.body}
-                      onChange={(value) => updateCoverLetter("body", value)}
-                    />
-                    <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
-                      Separate paragraphs with a blank line.
-                    </p>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <Field
-                      label="Closing"
-                      value={resume.coverLetter.closing}
-                      onChange={(value) =>
-                        updateCoverLetter("closing", value)
-                      }
-                    />
-                  </div>
-                </div>
-              ) : null}
+            <div className="grid grid-cols-[auto_1fr] gap-3">
+              <Toggle
+                checked={resume.coverLetter.included}
+                label={
+                  resume.coverLetter.included
+                    ? "Hide cover letter"
+                    : "Show cover letter"
+                }
+                onClick={() => {
+                  const included = !resume.coverLetter.included;
+                  updateCoverLetter("included", included);
+                  setPreviewPan({ x: 0, y: 0 });
+                }}
+              />
+              <TextArea
+                label="Cover letter"
+                rows={8}
+                value={resume.coverLetter.body}
+                onChange={(value) => updateCoverLetter("body", value)}
+              />
             </div>
           </EditorSection>
         </div>
@@ -2810,9 +3416,9 @@ export function ResumeBuilder({
                 <Download className="size-4" />
               )}
               <span className="hidden sm:inline">
-                {resume.coverLetter.included ? "2 PDFs" : "PDF"}
+                Download
               </span>
-              <span className="sr-only sm:hidden">Download PDF</span>
+              <span className="sr-only sm:hidden">Download</span>
             </Button>
           </div>
         </div>
@@ -2861,60 +3467,54 @@ export function ResumeBuilder({
               columnWidth: "8in",
             }}
           >
-            <header className="grid grid-cols-[1fr_1.28in] gap-[0.25in]">
-              <div>
-                <h2 className="text-[18px] font-bold uppercase leading-tight">
-                  {resume.contact.name}
-                </h2>
-                <p className="mt-[6px] text-[11.5px] leading-tight">
-                  Phone:{" "}
-                  <span className="text-blue-700 underline">
-                    {resume.contact.phone}
-                  </span>{" "}
-                  | Email:{" "}
-                  <span className="text-blue-700 underline">
-                    {resume.contact.email}
-                  </span>{" "}
-                  | LinkedIn:{" "}
-                  <span className="text-blue-700 underline">
-                    {resume.contact.linkedin}
-                  </span>
-                  {resume.contact.website ? (
-                    <>
-                      {" "}
-                      | Website:{" "}
-                      <span className="text-blue-700 underline">
-                        {resume.contact.website}
-                      </span>
-                    </>
-                  ) : null}
-                </p>
-                {resume.summary.included ? (
-                  <p className="mt-[15px] max-w-[6.35in] text-[11.5px] leading-[1.18]">
-                    {resume.summary.value}
-                  </p>
-                ) : null}
-              </div>
-              <div className="h-[1.55in] w-[1.28in] border border-black">
-                {photoUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={photoUrl}
-                    alt=""
-                    className="size-full object-cover"
-                  />
-                ) : (
-                  <div className="flex size-full items-center justify-center text-[10px] text-neutral-500">
-                    Photo
+            {hasPreviewContent ? (
+              <>
+                <header
+                  className={cn(
+                    photoUrl && "grid grid-cols-[1fr_1.28in] gap-[0.25in]",
+                  )}
+                >
+                  <div>
+                    {resume.contact.name ? (
+                      <h2 className="text-[18px] font-bold uppercase leading-tight">
+                        {resume.contact.name}
+                      </h2>
+                    ) : null}
+                    {previewContactItems.length > 0 ? (
+                      <p className="mt-[6px] text-[11.5px] leading-tight">
+                        {previewContactItems.map((item, index) => (
+                          <span key={item.label}>
+                            {index > 0 ? " | " : null}
+                            {item.label}: {" "}
+                            <ResumePreviewLink href={item.href}>
+                              {item.value}
+                            </ResumePreviewLink>
+                          </span>
+                        ))}
+                      </p>
+                    ) : null}
+                    {resume.summary.included && resume.summary.value ? (
+                      <p className="mt-[15px] max-w-[6.35in] text-[11.5px] leading-[1.18]">
+                        {resume.summary.value}
+                      </p>
+                    ) : null}
                   </div>
-                )}
-              </div>
-            </header>
+                  {photoUrl ? (
+                    <div className="h-[1.55in] w-[1.28in] border border-black">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={photoUrl}
+                        alt=""
+                        className="size-full object-cover"
+                      />
+                    </div>
+                  ) : null}
+                </header>
 
-            <div className="mt-[12px] grid gap-[9px] text-[11.5px] leading-[1.18]">
+                <div className="mt-[12px] grid gap-[9px] text-[11.5px] leading-[1.18]">
               {visibleWork.length > 0 ? (
                 <PreviewSection
-                  title="Work Experience"
+                  title={resume.sectionTitles.workExperience}
                   order={sectionOrder.indexOf("workExperience") + 1}
                 >
                   <div className="grid gap-[7px]">
@@ -2950,38 +3550,9 @@ export function ResumeBuilder({
                 </PreviewSection>
               ) : null}
 
-              {visibleProjects.length > 0 ? (
-                <PreviewSection
-                  title="Projects"
-                  order={sectionOrder.indexOf("projects") + 1}
-                >
-                  <div className="grid gap-[7px]">
-                    {visibleProjects.map((item, index) => (
-                      <div key={item.id}>
-                        <div className="grid grid-cols-[1fr_auto] gap-4 font-bold">
-                          <p>
-                            {index + 1}. {item.title}
-                          </p>
-                          <p>{item.dates}</p>
-                        </div>
-                        <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
-                          {item.bullets
-                            .filter((bullet) => bullet.included && bullet.text)
-                            .map((bullet) => (
-                              <li key={bullet.id} className="pl-[0.02in]">
-                                {bullet.text}
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </PreviewSection>
-              ) : null}
-
               {visibleEducation.length > 0 ? (
                 <PreviewSection
-                  title="Education"
+                  title={resume.sectionTitles.education}
                   order={sectionOrder.indexOf("education") + 1}
                 >
                   <table className="w-full border-collapse text-center text-[11px] leading-tight">
@@ -3009,9 +3580,111 @@ export function ResumeBuilder({
                 </PreviewSection>
               ) : null}
 
+              {visiblePublications.length > 0 ? (
+                <PreviewSection
+                  title={resume.sectionTitles.publications}
+                  order={sectionOrder.indexOf("publications") + 1}
+                >
+                  <div className="grid gap-[7px]">
+                    {visiblePublications.map((item) => {
+                      const publicationUrl = safeExternalUrl(item.url);
+                      const statusLabel =
+                        item.status === "published"
+                          ? ""
+                          : publicationStatusLabel(item.status);
+                      const publicationTitle = item.title ? (
+                        publicationUrl ? (
+                          <ResumePreviewLink href={publicationUrl}>
+                            {item.title}
+                          </ResumePreviewLink>
+                        ) : (
+                          item.title
+                        )
+                      ) : null;
+                      const venue = [item.venue, item.details]
+                        .filter(Boolean)
+                        .join(", ");
+
+                      return (
+                        <div key={item.id}>
+                          <div className="grid grid-cols-[1fr_auto] gap-4 font-bold">
+                            <p>
+                              {publicationTitle}
+                              {statusLabel ? (
+                                <span className="font-normal italic">
+                                  {publicationTitle ? ` (${statusLabel})` : statusLabel}
+                                </span>
+                              ) : null}
+                            </p>
+                            <p>{item.date}</p>
+                          </div>
+                          {item.authors ? <p>{item.authors}</p> : null}
+                          {venue ? (
+                            <p className="font-normal italic">{venue}</p>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </PreviewSection>
+              ) : null}
+
+              {visibleCertifications.length > 0 ? (
+                <PreviewSection
+                  title={resume.sectionTitles.certifications}
+                  order={sectionOrder.indexOf("certifications") + 1}
+                >
+                  <div className="grid gap-[7px]">
+                    {visibleCertifications.map((item) => {
+                      const verificationUrl = safeExternalUrl(item.credentialUrl);
+                      const dateLabel =
+                        item.status === "inProgress" ? "Expected" : "Issued";
+                      const metadata = [
+                        item.expirationDate
+                          ? `Expires: ${item.expirationDate}`
+                          : "",
+                        item.credentialId
+                          ? `Credential ID: ${item.credentialId}`
+                          : "",
+                      ].filter(Boolean);
+
+                      return (
+                        <div key={item.id}>
+                          <div className="grid grid-cols-[1fr_auto] gap-4 font-bold">
+                            <p>
+                              {item.name}
+                              {item.status === "inProgress"
+                                ? " (in progress)"
+                                : ""}
+                            </p>
+                            <p>
+                              {item.issueDate
+                                ? `${dateLabel}: ${item.issueDate}`
+                                : ""}
+                            </p>
+                          </div>
+                          <p className="font-normal italic">{item.issuer}</p>
+                          {metadata.length > 0 || verificationUrl ? (
+                            <p className="text-[10.5px]">
+                              {metadata.join(" · ")}
+                              {metadata.length > 0 && verificationUrl ? " · " : ""}
+                              {verificationUrl ? (
+                                <ResumePreviewLink href={verificationUrl}>
+                                  Verify credential
+                                </ResumePreviewLink>
+                              ) : null}
+                            </p>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </PreviewSection>
+              ) : null}
+
               {visibleAchievements.length > 0 ? (
                 <PreviewSection
-                  title="Achievements"
+                  title={resume.sectionTitles.achievements}
                   order={sectionOrder.indexOf("achievements") + 1}
                 >
                   <table className="w-full border-collapse text-center text-[11px] leading-tight">
@@ -3039,7 +3712,7 @@ export function ResumeBuilder({
 
               {visibleActivities.length > 0 ? (
                 <PreviewSection
-                  title="Extracurricular Activities"
+                  title={resume.sectionTitles.activities}
                   order={sectionOrder.indexOf("activities") + 1}
                 >
                   <div className="grid gap-[7px]">
@@ -3071,7 +3744,7 @@ export function ResumeBuilder({
 
               {visibleSkills.length > 0 ? (
                 <PreviewSection
-                  title="Skills"
+                  title={resume.sectionTitles.skills}
                   order={sectionOrder.indexOf("skills") + 1}
                 >
                   <div className="grid gap-[2px]">
@@ -3087,7 +3760,7 @@ export function ResumeBuilder({
 
               {visibleReferences.length > 0 ? (
                 <PreviewSection
-                  title="References"
+                  title={resume.sectionTitles.references}
                   order={sectionOrder.indexOf("references") + 1}
                 >
                   <div className="grid grid-cols-2 border border-black text-[11px] leading-tight">
@@ -3098,20 +3771,90 @@ export function ResumeBuilder({
                           {item.title}, {item.organization}
                         </p>
                         <p>
-                          <span className="text-blue-700 underline">
+                          <ResumePreviewLink
+                            href={contactUrl("mailto", item.email)}
+                          >
                             {item.email}
-                          </span>{" "}
+                          </ResumePreviewLink>{" "}
                           |{" "}
-                          <span className="text-blue-700 underline">
+                          <ResumePreviewLink href={contactUrl("tel", item.phone)}>
                             {item.phone}
-                          </span>
+                          </ResumePreviewLink>
                         </p>
                       </div>
                     ))}
                   </div>
                 </PreviewSection>
               ) : null}
-            </div>
+
+              {resume.customSections.map((section) => {
+                const visibleEntries = section.entries.filter(
+                  (item) => item.included,
+                );
+
+                if (visibleEntries.length === 0) {
+                  return null;
+                }
+
+                return (
+                  <PreviewSection
+                    key={section.id}
+                    title={section.title}
+                    order={sectionOrder.indexOf(section.id) + 1}
+                  >
+                    <div className="grid gap-[7px]">
+                      {visibleEntries.map((item) => {
+                        const visibleBullets = item.bullets.filter(
+                          (bullet) => bullet.included && bullet.text,
+                        );
+
+                        return (
+                          <div key={item.id}>
+                            <div className="grid grid-cols-[1fr_auto] gap-4 font-bold">
+                              <p>
+                                {item.heading}
+                                {item.heading && item.subheading ? " - " : ""}
+                                {item.subheading ? (
+                                  <span className="font-normal italic">
+                                    {item.subheading}
+                                  </span>
+                                ) : null}
+                              </p>
+                              <p>
+                                {item.place ? (
+                                  <span className="font-normal">
+                                    {item.place}
+                                  </span>
+                                ) : null}
+                                {item.place && item.dates ? " Â· " : ""}
+                                {item.dates}
+                              </p>
+                            </div>
+                            {item.useBullets ? (
+                              visibleBullets.length > 0 ? (
+                                <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
+                                  {visibleBullets.map((bullet) => (
+                                    <li key={bullet.id} className="pl-[0.02in]">
+                                      {bullet.text}
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : null
+                            ) : item.description ? (
+                              <p className="mt-[4px] whitespace-pre-line">
+                                {item.description}
+                              </p>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </PreviewSection>
+                );
+              })}
+                </div>
+              </>
+            ) : null}
           </article>
           {resume.coverLetter.included ? (
             <CoverLetterPreview left="0" resume={resume} />

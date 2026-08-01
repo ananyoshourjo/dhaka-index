@@ -47,7 +47,6 @@ export default async function BookmarksPage() {
       bookmarkAction={unbookmarkJobAction}
       emptyLabel="No bookmarked jobs are listed right now."
       jobs={jobs}
-      title="Bookmarks"
     />
   );
 }

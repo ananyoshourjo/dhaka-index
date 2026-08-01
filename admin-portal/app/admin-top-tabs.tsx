@@ -42,11 +42,11 @@ export function AdminTopTabs({ user }: AdminTopTabsProps) {
           <Image
             alt=""
             aria-hidden="true"
-            className="size-7"
-            height={28}
+            className="h-7 w-auto"
+            height={1415}
             priority
             src="/brand/di-logo-transparent.svg"
-            width={28}
+            width={1226}
           />
         </Link>
 

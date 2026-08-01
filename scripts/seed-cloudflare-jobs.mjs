@@ -3,14 +3,14 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
-import {
-  classifyJobFunctions,
-  serializeJobFunctions,
-} from "../src/lib/job-functions.ts";
+import jobFunctions from "../src/lib/job-functions.ts";
+
+const { classifyJobFunctions, serializeJobFunctions } = jobFunctions;
 
 const DEFAULT_FEED_URL =
   "https://raw.githubusercontent.com/ananyoshourjo/dhaka-index/jobs-data/jobs.json";
 const feedUrl = process.env.DHAKA_INDEX_JOB_FEED_URL?.trim() || DEFAULT_FEED_URL;
+const target = process.argv.includes("--local") ? "--local" : "--remote";
 const response = await fetch(feedUrl, {
   headers: { Accept: "application/json" },
   signal: AbortSignal.timeout(30_000),
@@ -170,7 +170,7 @@ try {
       "d1",
       "execute",
       "dhaka-index",
-      "--remote",
+      target,
       "--file",
       temporaryFile,
     ],
@@ -193,5 +193,5 @@ try {
 }
 
 console.log(
-  `Seeded ${jobs.length} sanitized jobs from feed generated at ${feed.generatedAt}.`,
+  `Seeded ${jobs.length} sanitized jobs into ${target === "--local" ? "local" : "remote"} D1 from feed generated at ${feed.generatedAt}.`,
 );

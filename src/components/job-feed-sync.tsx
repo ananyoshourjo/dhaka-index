@@ -42,8 +42,12 @@ export function JobFeedSync() {
   }, [router]);
 
   useEffect(() => {
-    // Cron is authoritative. Keep a long-lived signed-in tab as a fallback,
-    // but avoid an extra authenticated Worker invocation on every Jobs mount.
+    // Cron is authoritative in production. Local development has no Cron
+    // trigger, so bootstrap the local D1 snapshot after a signed-in mount.
+    if (process.env.NODE_ENV === "development") {
+      void synchronize();
+    }
+
     const interval = window.setInterval(() => void synchronize(), SIX_HOURS_MS);
     return () => window.clearInterval(interval);
   }, [synchronize]);

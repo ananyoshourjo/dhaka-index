@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 0.6.0 - 2026-08-01
+
+- Expand the resume builder with publications, certifications, custom sections, editable titles, and flexible section ordering.
+- Refresh job discovery controls, local D1 bootstrap, and shared select and navigation UI.
+- Update Dhaka Index branding and improve resume PDF links, validation, and rendering.
+
 ## 0.5.0 - 2026-08-01
 
 - Add job-function interests, search, company and function filters, sorting, and indexed pagination.

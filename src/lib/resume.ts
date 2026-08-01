@@ -1,6 +1,21 @@
 import { getCloudflareDb } from "@/lib/cloudflare";
 import { migrateLegacyProfilePhoto } from "@/lib/profile-photo";
+import {
+  defaultResumeSectionOrder,
+  defaultResumeSectionTitles,
+  normalizeResumeCustomSections,
+  normalizeResumeSectionOrder,
+  normalizeResumeSectionTitles,
+} from "@/lib/resume-schema";
 import { nowDhakaIso } from "@/lib/time";
+
+export {
+  defaultResumeSectionOrder,
+  defaultResumeSectionTitles,
+  normalizeResumeCustomSections,
+  normalizeResumeSectionOrder,
+  normalizeResumeSectionTitles,
+} from "@/lib/resume-schema";
 
 export type ResumeBullet = {
   id: string;
@@ -24,6 +39,34 @@ export type ResumeProject = {
   title: string;
   dates: string;
   bullets: ResumeBullet[];
+};
+
+export type ResumeCertificationStatus = "completed" | "inProgress";
+
+export type ResumeCertification = {
+  id: string;
+  included: boolean;
+  name: string;
+  issuer: string;
+  status: ResumeCertificationStatus;
+  issueDate: string;
+  expirationDate: string;
+  credentialId: string;
+  credentialUrl: string;
+};
+
+export type ResumePublicationStatus = "published" | "inPress" | "underReview";
+
+export type ResumePublication = {
+  id: string;
+  included: boolean;
+  title: string;
+  authors: string;
+  venue: string;
+  status: ResumePublicationStatus;
+  date: string;
+  details: string;
+  url: string;
 };
 
 export type ResumeEducation = {
@@ -50,6 +93,37 @@ export type ResumeActivity = {
   organization: string;
   dates: string;
   bullets: ResumeBullet[];
+};
+
+export type ResumeSectionKey =
+  | "workExperience"
+  | "education"
+  | "publications"
+  | "certifications"
+  | "achievements"
+  | "activities"
+  | "skills"
+  | "references";
+
+export type ResumeCustomSectionId = `custom:${string}`;
+export type ResumeSectionId = ResumeSectionKey | ResumeCustomSectionId;
+
+export type ResumeCustomEntry = {
+  id: string;
+  included: boolean;
+  heading: string;
+  subheading: string;
+  place: string;
+  dates: string;
+  useBullets: boolean;
+  description: string;
+  bullets: ResumeBullet[];
+};
+
+export type ResumeCustomSection = {
+  id: ResumeCustomSectionId;
+  title: string;
+  entries: ResumeCustomEntry[];
 };
 
 export type ResumeSkillGroup = {
@@ -97,35 +171,19 @@ export type ResumeContent = {
   workExperience: ResumeWorkExperience[];
   projects: ResumeProject[];
   education: ResumeEducation[];
+  publications: ResumePublication[];
+  certifications: ResumeCertification[];
   achievements: ResumeAchievement[];
   activities: ResumeActivity[];
   skills: ResumeSkillGroup[];
   references: ResumeReference[];
   coverLetter: ResumeCoverLetter;
-  sectionOrder: ResumeSectionKey[];
+  sectionTitles: ResumeSectionTitles;
+  customSections: ResumeCustomSection[];
+  sectionOrder: ResumeSectionId[];
 };
 
-const DEFAULT_RESUME_ID = "default";
-const PROFILE_RESUME_PREFIX = "profile";
-
-export type ResumeSectionKey =
-  | "workExperience"
-  | "projects"
-  | "education"
-  | "achievements"
-  | "activities"
-  | "skills"
-  | "references";
-
-export const defaultResumeSectionOrder: ResumeSectionKey[] = [
-  "workExperience",
-  "projects",
-  "education",
-  "achievements",
-  "activities",
-  "skills",
-  "references",
-];
+export type ResumeSectionTitles = Record<ResumeSectionKey, string>;
 
 export const defaultResumeContent: ResumeContent = {
   contact: {
@@ -143,10 +201,14 @@ export const defaultResumeContent: ResumeContent = {
   workExperience: [],
   projects: [],
   education: [],
+  publications: [],
+  certifications: [],
   achievements: [],
   activities: [],
   skills: [],
   references: [],
+  sectionTitles: defaultResumeSectionTitles,
+  customSections: [],
   coverLetter: {
     included: false,
     date: "",
@@ -161,20 +223,8 @@ export const defaultResumeContent: ResumeContent = {
   sectionOrder: defaultResumeSectionOrder,
 };
 
-function findPreviousSection(
-  order: ResumeSectionKey[],
-  candidateSections: ResumeSectionKey[],
-) {
-  for (let index = candidateSections.length - 1; index >= 0; index -= 1) {
-    const candidate = candidateSections[index];
-
-    if (order.includes(candidate)) {
-      return candidate;
-    }
-  }
-
-  return undefined;
-}
+const DEFAULT_RESUME_ID = "default";
+const PROFILE_RESUME_PREFIX = "profile";
 
 type ResumeProfileRow = {
   content_json: string;
@@ -192,10 +242,19 @@ function isResumeContent(value: unknown): value is ResumeContent {
     Array.isArray(candidate.workExperience) &&
     (candidate.projects === undefined || Array.isArray(candidate.projects)) &&
     Array.isArray(candidate.education) &&
+    (candidate.publications === undefined ||
+      Array.isArray(candidate.publications)) &&
+    (candidate.certifications === undefined ||
+      Array.isArray(candidate.certifications)) &&
     Array.isArray(candidate.achievements) &&
     Array.isArray(candidate.activities) &&
     Array.isArray(candidate.skills) &&
-    Array.isArray(candidate.references)
+    Array.isArray(candidate.references) &&
+    (candidate.sectionTitles === undefined ||
+      (typeof candidate.sectionTitles === "object" &&
+        candidate.sectionTitles !== null)) &&
+    (candidate.customSections === undefined ||
+      Array.isArray(candidate.customSections))
   );
 }
 
@@ -217,32 +276,9 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
     const parsed = JSON.parse(row.content_json) as unknown;
 
     if (isResumeContent(parsed)) {
-      const existingSectionOrder = Array.isArray(parsed.sectionOrder)
-        ? parsed.sectionOrder.filter((section): section is ResumeSectionKey =>
-            defaultResumeSectionOrder.includes(section as ResumeSectionKey),
-          )
-        : [];
-      const sectionOrder =
-        existingSectionOrder.length > 0
-          ? [...existingSectionOrder]
-          : [...defaultResumeSectionOrder];
-
-      defaultResumeSectionOrder.forEach((section, index) => {
-        if (sectionOrder.includes(section)) {
-          return;
-        }
-
-        const previousSection = findPreviousSection(
-          sectionOrder,
-          defaultResumeSectionOrder.slice(0, index),
-        );
-        const previousIndex = previousSection
-          ? sectionOrder.indexOf(previousSection)
-          : -1;
-
-        sectionOrder.splice(previousIndex + 1, 0, section);
-      });
-
+      const customSections = normalizeResumeCustomSections(
+        parsed.customSections,
+      );
       const normalized = { ...parsed } as ResumeContent & {
         layout?: unknown;
       };
@@ -262,6 +298,31 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
           place: item.place ?? "",
         })),
         projects: parsed.projects ?? defaultResumeContent.projects,
+        sectionTitles: normalizeResumeSectionTitles(parsed.sectionTitles),
+        customSections,
+        publications: (parsed.publications ?? []).map((item) => ({
+          ...item,
+          title: item.title ?? "",
+          authors: item.authors ?? "",
+          venue: item.venue ?? "",
+          status:
+            item.status === "inPress" || item.status === "underReview"
+              ? item.status
+              : "published",
+          date: item.date ?? "",
+          details: item.details ?? "",
+          url: item.url ?? "",
+        })),
+        certifications: (parsed.certifications ?? []).map((item) => ({
+          ...item,
+          name: item.name ?? "",
+          issuer: item.issuer ?? "",
+          status: item.status === "inProgress" ? "inProgress" : "completed",
+          issueDate: item.issueDate ?? "",
+          expirationDate: item.expirationDate ?? "",
+          credentialId: item.credentialId ?? "",
+          credentialUrl: item.credentialUrl ?? "",
+        })),
         activities: parsed.activities.map((item) => ({
           ...item,
           bullets: item.bullets ?? [],
@@ -270,7 +331,10 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
           ...defaultResumeContent.coverLetter,
           ...(parsed.coverLetter ?? {}),
         },
-        sectionOrder,
+        sectionOrder: normalizeResumeSectionOrder(
+          parsed.sectionOrder,
+          customSections.map((section) => section.id),
+        ),
       };
     }
   } catch {

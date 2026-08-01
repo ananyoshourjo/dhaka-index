@@ -1,6 +1,6 @@
 {
   "name": "@dhaka-index/web",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "workspaces": [
     "admin-portal"
@@ -17,6 +17,8 @@
     "cf:migrate:local": "wrangler d1 migrations apply dhaka-index --local",
     "cf:migrate": "wrangler d1 migrations apply dhaka-index --remote",
     "cf:seed-jobs": "tsx scripts/seed-cloudflare-jobs.mjs",
+    "cf:seed-jobs:local": "tsx scripts/seed-cloudflare-jobs.mjs --local",
+    "dev:bootstrap": "npm run cf:migrate:local && npm run cf:seed-jobs:local",
     "health:hosted": "node scripts/check-hosted-routes.mjs",
     "admin:dev": "npm --prefix admin-portal run dev",
     "admin:build": "npm --prefix admin-portal run build",
@@ -69,6 +71,7 @@
     "wrangler": "^4.116.0"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^2.3.7",
     "@radix-ui/react-slot": "^1.2.4",
     "better-auth": "^1.6.22",
     "class-variance-authority": "^0.7.1",
