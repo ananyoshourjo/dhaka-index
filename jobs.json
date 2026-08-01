@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T15:33:45.599Z",
+  "generatedAt": "2026-08-01T16:06:41.656Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -158,6 +158,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Senior Executive / Assistant Manager",
+      "company": "BYD Bangladesh",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/byd-bangladesh/career-bd/senior-executive-assistant-manager/tejgon/dhaka",
+      "functionTag": "other"
+    },
+    {
       "title": "Assistant Manager / Manager – HR",
       "company": "DBL Group",
       "deadline": "2026-08-01",
@@ -247,6 +254,13 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/lankabangla-securities/career-bd/hr-executive/bd/2026",
       "functionTag": "human_resources"
+    },
+    {
+      "title": "Senior Executive / Assistant Manager",
+      "company": "Nagad Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career-bd/senior-executive-assistant-manager/dhaka",
+      "functionTag": "other"
     },
     {
       "title": "Manager, Growth & Analytics (Fintech)",
@@ -345,6 +359,13 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/twelve-clothing-limited/career-bd/executive-sr-executive-branding-pr-media/kawran-bazar/dhaka",
       "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Intern",
+      "company": "United Group",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/united-group/career-bd/intern/madani-avenue-dhaka-1212",
+      "functionTag": "other"
     },
     {
       "title": "Officer/Sr. Officer AML & CFT",
@@ -695,6 +716,13 @@
       "deadline": null,
       "url": "https://brandpractitioners.com/renaissance-hotels-is-hiring-marketing-executive",
       "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Manager / Senior Manager",
+      "company": "Rupayan Group",
+      "deadline": "2026-08-08",
+      "url": "https://brandpractitioners.com/rupayan-group-is-hiring-manager-senior-manager-marketing",
+      "functionTag": "other"
     },
     {
       "title": "Sales Representative",
@@ -1556,6 +1584,13 @@
       "deadline": "2026-08-05",
       "url": "https://thecvguy.net/bank-jobs/citizens-bank-plc-trainee-cash-officer-2026",
       "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Intern",
+      "company": "City Bank PLC",
+      "deadline": "2026-08-01",
+      "url": "https://thecvguy.net/bank-jobs/internship-bank-jobs/city-bank-intern-2026",
+      "functionTag": "other"
     },
     {
       "title": "Universal Banker",
