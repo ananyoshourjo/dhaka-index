@@ -1,7 +1,18 @@
 import { NextResponse } from "next/server";
 
-import type { ResumeContent, ResumeSectionKey } from "@/lib/resume";
-import { defaultResumeSectionOrder } from "@/lib/resume";
+import type {
+  ResumeContent,
+  ResumePublicationStatus,
+  ResumeSectionId,
+  ResumeSectionKey,
+} from "@/lib/resume";
+import {
+  hasResumeContent,
+  isResumeSectionKey,
+  normalizeResumeCustomSections,
+  normalizeResumeSectionOrder,
+  normalizeResumeSectionTitles,
+} from "@/lib/resume-schema";
 import { getCloudflareEnv } from "@/lib/cloudflare";
 import { getProfilePhotoDataUrl } from "@/lib/profile-photo";
 import { getSession } from "@/lib/session";
@@ -18,11 +29,17 @@ function escapeHtml(value: string) {
 
 function contactLink(text: string, href: string) {
   let safeHref = "";
+  const normalized = href.trim();
+  const candidate = normalized.startsWith("//")
+    ? `https:${normalized}`
+    : /^[a-z][a-z\d+.-]*:/i.test(normalized)
+      ? normalized
+      : `https://${normalized}`;
 
   try {
-    const url = new URL(href);
+    const url = new URL(candidate);
 
-    if (["https:", "mailto:", "tel:"].includes(url.protocol)) {
+    if (["http:", "https:", "mailto:", "tel:"].includes(url.protocol)) {
       safeHref = url.toString();
     }
   } catch {
@@ -34,6 +51,18 @@ function contactLink(text: string, href: string) {
     : escapeHtml(text);
 }
 
+function publicationStatusLabel(status: ResumePublicationStatus) {
+  if (status === "inPress") {
+    return "In press";
+  }
+
+  if (status === "underReview") {
+    return "Under review";
+  }
+
+  return "";
+}
+
 function linkedinHref(value: string) {
   return `https://linkedin.com/${value.replace(/^\/+/, "")}`;
 }
@@ -42,50 +71,21 @@ function sanitizeResumeForPdf(
   resume: ResumeContent,
   photoUrl: string,
 ): ResumeContent {
+  const customSections = normalizeResumeCustomSections(resume.customSections);
+
   return {
     ...resume,
+    sectionTitles: normalizeResumeSectionTitles(resume.sectionTitles),
+    customSections,
+    sectionOrder: normalizeResumeSectionOrder(
+      resume.sectionOrder,
+      customSections.map((section) => section.id),
+    ),
     contact: {
       ...resume.contact,
       photoUrl,
     },
   };
-}
-
-function normalizeSectionOrder(order: unknown): ResumeSectionKey[] {
-  const current = Array.isArray(order) ? order : [];
-  const next = current.filter((section): section is ResumeSectionKey =>
-    defaultResumeSectionOrder.includes(section as ResumeSectionKey),
-  );
-
-  if (next.length === 0) {
-    return [...defaultResumeSectionOrder];
-  }
-
-  defaultResumeSectionOrder.forEach((section, index) => {
-    if (next.includes(section)) {
-      return;
-    }
-
-    let previousSection: ResumeSectionKey | undefined;
-
-    for (
-      let previousIndex = index - 1;
-      previousIndex >= 0;
-      previousIndex -= 1
-    ) {
-      const candidate = defaultResumeSectionOrder[previousIndex];
-
-      if (next.includes(candidate)) {
-        previousSection = candidate;
-        break;
-      }
-    }
-
-    const previousIndex = previousSection ? next.indexOf(previousSection) : -1;
-    next.splice(previousIndex + 1, 0, section);
-  });
-
-  return next;
 }
 
 function section(title: string, body: string) {
@@ -95,7 +95,7 @@ function section(title: string, body: string) {
 
   return `
     <section>
-      <h3>${escapeHtml(title)}</h3>
+      ${title.trim() ? `<h3>${escapeHtml(title)}</h3>` : ""}
       ${body}
     </section>
   `;
@@ -124,7 +124,7 @@ function renderPlaceAndDates(place: string | undefined, dates: string) {
 
 function buildResumeHtml(
   resume: ResumeContent,
-  sectionOrder: ResumeSectionKey[],
+  sectionOrder: ResumeSectionId[],
 ) {
   const work = resume.workExperience
     .filter((item) => item.included)
@@ -146,37 +146,23 @@ function buildResumeHtml(
     )
     .join("");
 
-  const projects = (resume.projects ?? [])
-    .filter((item) => item.included)
-    .map(
-      (item, index) => `
-        <div class="block">
-          <div class="row strong">
-            <p>${index + 1}. ${escapeHtml(item.title)}</p>
-            <p>${escapeHtml(item.dates)}</p>
-          </div>
-          <ul>
-            ${item.bullets
-              .filter((bullet) => bullet.included && bullet.text)
-              .map((bullet) => `<li>${escapeHtml(bullet.text)}</li>`)
-              .join("")}
-          </ul>
-        </div>
-      `,
-    )
-    .join("");
-
   const education = resume.education.filter((item) => item.included);
+  const publications = (resume.publications ?? []).filter(
+    (item) => item.included,
+  );
+  const certifications = (resume.certifications ?? []).filter(
+    (item) => item.included,
+  );
   const achievements = resume.achievements.filter((item) => item.included);
   const activities = resume.activities.filter((item) => item.included);
   const skills = resume.skills.filter((item) => item.included);
   const references = resume.references.filter((item) => item.included);
+  const customSections = normalizeResumeCustomSections(resume.customSections);
 
   const bodies: Record<ResumeSectionKey, string> = {
-    workExperience: section("Work Experience", work),
-    projects: section("Projects", projects),
+    workExperience: section(resume.sectionTitles.workExperience, work),
     education: section(
-      "Education",
+      resume.sectionTitles.education,
       education.length
         ? `
           <table>
@@ -200,8 +186,73 @@ function buildResumeHtml(
         `
         : "",
     ),
+    publications: section(
+      resume.sectionTitles.publications,
+      publications
+        .map((item) => {
+          const statusLabel = publicationStatusLabel(item.status);
+          const title = item.title
+            ? item.url
+              ? contactLink(item.title, item.url)
+              : escapeHtml(item.title)
+            : "";
+          const titleSuffix = statusLabel
+            ? ` <span class="normal">(${escapeHtml(statusLabel)})</span>`
+            : "";
+          const venue = [
+            item.venue ? `<em>${escapeHtml(item.venue)}</em>` : "",
+            item.details ? escapeHtml(item.details) : "",
+          ]
+            .filter(Boolean)
+            .join(", ");
+
+          return `
+            <div class="block">
+              <div class="row strong">
+                <p>${title}${titleSuffix}</p>
+                <p>${escapeHtml(item.date)}</p>
+              </div>
+              ${item.authors ? `<p>${escapeHtml(item.authors)}</p>` : ""}
+              ${venue ? `<p>${venue}</p>` : ""}
+            </div>
+          `;
+        })
+        .join(""),
+    ),
+    certifications: section(
+      resume.sectionTitles.certifications,
+      certifications
+        .map((item) => {
+          const dateLabel = item.status === "inProgress" ? "Expected" : "Issued";
+          const metadata = [
+            item.expirationDate
+              ? `Expires: ${escapeHtml(item.expirationDate)}`
+              : "",
+            item.credentialId
+              ? `Credential ID: ${escapeHtml(item.credentialId)}`
+              : "",
+            item.credentialUrl
+              ? `Credential: ${contactLink(item.credentialUrl, item.credentialUrl)}`
+              : "",
+          ]
+            .filter(Boolean)
+            .join(" · ");
+
+          return `
+            <div class="block">
+              <div class="row strong">
+                <p>${escapeHtml(item.name)}${item.status === "inProgress" ? " (in progress)" : ""}</p>
+                <p>${item.issueDate ? `${dateLabel}: ${escapeHtml(item.issueDate)}` : ""}</p>
+              </div>
+              <p><em>${escapeHtml(item.issuer)}</em></p>
+              ${metadata ? `<p class="certification-meta">${metadata}</p>` : ""}
+            </div>
+          `;
+        })
+        .join(""),
+    ),
     achievements: section(
-      "Achievements",
+      resume.sectionTitles.achievements,
       achievements.length
         ? `
           <table>
@@ -225,7 +276,7 @@ function buildResumeHtml(
         : "",
     ),
     activities: section(
-      "Extracurricular Activities",
+      resume.sectionTitles.activities,
       activities
         .map(
           (item, index) => `
@@ -246,7 +297,7 @@ function buildResumeHtml(
         .join(""),
     ),
     skills: section(
-      "Skills",
+      resume.sectionTitles.skills,
       skills
         .map(
           (item) => `
@@ -259,7 +310,7 @@ function buildResumeHtml(
         .join(""),
     ),
     references: section(
-      "References",
+      resume.sectionTitles.references,
       references.length
         ? `
           <div class="references">
@@ -280,10 +331,67 @@ function buildResumeHtml(
     ),
   };
 
+  const customBodies: Record<string, string> = Object.fromEntries(
+    customSections.map((customSection) => {
+      const body = customSection.entries
+        .filter((item) => item.included)
+        .map((item) => {
+          const heading = [
+            item.heading ? escapeHtml(item.heading) : "",
+            item.subheading ? `<em>${escapeHtml(item.subheading)}</em>` : "",
+          ]
+            .filter(Boolean)
+            .join(" - ");
+          const visibleBullets = item.bullets.filter(
+            (bullet) => bullet.included && bullet.text,
+          );
+          const content = item.useBullets
+            ? visibleBullets.length
+              ? `<ul>${visibleBullets
+                  .map((bullet) => `<li>${escapeHtml(bullet.text)}</li>`)
+                  .join("")}</ul>`
+              : ""
+            : item.description
+              ? `<p>${escapeHtml(item.description).replaceAll("\n", "<br />")}</p>`
+              : "";
+
+          return `
+            <div class="block">
+              <div class="row strong">
+                <p>${heading}</p>
+                <p>${renderPlaceAndDates(item.place, item.dates)}</p>
+              </div>
+              ${content}
+            </div>
+          `;
+        })
+        .join("");
+
+      return [customSection.id, section(customSection.title, body)];
+    }),
+  );
+
   const contact = resume.contact;
-  const website = contact.website
-    ? ` | Website: ${contactLink(contact.website, contact.website)}`
-    : "";
+  const hasContent = hasResumeContent(resume);
+  const contactLine = [
+    contact.phone
+      ? `Phone: ${contactLink(contact.phone, `tel:${contact.phone}`)}`
+      : "",
+    contact.email
+      ? `Email: ${contactLink(contact.email, `mailto:${contact.email}`)}`
+      : "",
+    contact.linkedin
+      ? `LinkedIn: ${contactLink(
+          contact.linkedin,
+          linkedinHref(contact.linkedin),
+        )}`
+      : "",
+    contact.website
+      ? `Website: ${contactLink(contact.website, contact.website)}`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" | ");
 
   return `
     <!doctype html>
@@ -298,6 +406,7 @@ function buildResumeHtml(
             width: 100%;
           }
           header { display: grid; grid-template-columns: 1fr 1.28in; gap: .25in; }
+          .header-no-photo { display: block; }
           h2 { margin: 0; font-size: 18px; line-height: 1.2; text-transform: uppercase; }
           h3 { margin: 0 0 7px; border-bottom: 2px solid #000; padding-bottom: 2px; font-size: 13px; line-height: 1; text-transform: uppercase; }
           p { margin: 0; }
@@ -319,6 +428,7 @@ function buildResumeHtml(
           .references { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #000; font-size: 11px; line-height: 1.2; }
           .references > div { padding: 7px; border-right: 1px solid #000; }
           .references > div:last-child { border-right: 0; }
+          .certification-meta { font-size: 10.5px; }
           .link { color: #1447e6; text-decoration: underline; }
           h3 { break-after: avoid; }
           .block, tr, .references > div { break-inside: avoid; }
@@ -326,29 +436,37 @@ function buildResumeHtml(
       </head>
       <body>
         <main>
-          <header>
-            <div>
-              <h2>${escapeHtml(contact.name)}</h2>
-              <p class="contact">
-                Phone: ${contactLink(contact.phone, `tel:${contact.phone}`)}
-                | Email: ${contactLink(contact.email, `mailto:${contact.email}`)}
-                | LinkedIn: ${contactLink(contact.linkedin, linkedinHref(contact.linkedin))}${website}
-              </p>
-              ${
-                resume.summary.included
-                  ? `<p class="summary">${escapeHtml(resume.summary.value)}</p>`
-                  : ""
-              }
-            </div>
-            ${
-              contact.photoUrl
-                ? `<img class="photo" src="${escapeHtml(contact.photoUrl)}" alt="" />`
-                : `<div class="photo"></div>`
-            }
-          </header>
-          <div class="sections">
-            ${sectionOrder.map((key) => bodies[key]).join("")}
-          </div>
+          ${
+            hasContent
+              ? `
+                <header class="${contact.photoUrl ? "" : "header-no-photo"}">
+                  <div>
+                    ${contact.name ? `<h2>${escapeHtml(contact.name)}</h2>` : ""}
+                    ${contactLine ? `<p class="contact">${contactLine}</p>` : ""}
+                    ${
+                      resume.summary.included && resume.summary.value.trim()
+                        ? `<p class="summary">${escapeHtml(resume.summary.value)}</p>`
+                        : ""
+                    }
+                  </div>
+                  ${
+                    contact.photoUrl
+                      ? `<img class="photo" src="${escapeHtml(contact.photoUrl)}" alt="" />`
+                      : ""
+                  }
+                </header>
+                <div class="sections">
+                  ${sectionOrder
+                    .map((key) =>
+                      isResumeSectionKey(key)
+                        ? bodies[key]
+                        : customBodies[key] ?? "",
+                    )
+                    .join("")}
+                </div>
+              `
+              : ""
+          }
         </main>
       </body>
     </html>
@@ -357,15 +475,6 @@ function buildResumeHtml(
 
 function buildCoverLetterHtml(resume: ResumeContent) {
   const coverLetter = resume.coverLetter;
-  const recipientLines = [
-    coverLetter?.recipientName,
-    coverLetter?.recipientTitle,
-    coverLetter?.company,
-    ...(coverLetter?.address ?? "").split("\n"),
-  ]
-    .filter((line): line is string => Boolean(line?.trim()))
-    .map((line) => `<p>${escapeHtml(line)}</p>`)
-    .join("");
   const body = (coverLetter?.body ?? "")
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
@@ -398,12 +507,7 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; }
           p { margin: 0; }
           .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
-          .letter { margin-top: .42in; }
-          .recipient { margin-top: .28in; }
-          .salutation { margin-top: .28in; }
-          .body { display: grid; gap: .18in; margin-top: .22in; }
-          .closing { margin-top: .32in; }
-          .signature { margin-top: .34in; font-weight: 700; }
+          .body { display: grid; gap: .18in; margin-top: .42in; }
         </style>
       </head>
       <body>
@@ -412,16 +516,7 @@ function buildCoverLetterHtml(resume: ResumeContent) {
             <h1>${escapeHtml(resume.contact.name)}</h1>
             ${contactLine ? `<p class="contact">${contactLine}</p>` : ""}
           </header>
-          <div class="letter">
-            ${coverLetter?.date ? `<p>${escapeHtml(coverLetter.date)}</p>` : ""}
-            ${recipientLines ? `<div class="recipient">${recipientLines}</div>` : ""}
-            <p class="salutation">${escapeHtml(coverLetter?.salutation || "Dear Hiring Manager,")}</p>
-            <div class="body">${body}</div>
-            <div class="closing">
-              <p>${escapeHtml(coverLetter?.closing || "Sincerely,")}</p>
-              <p class="signature">${escapeHtml(resume.contact.name)}</p>
-            </div>
-          </div>
+          <div class="body">${body}</div>
         </main>
       </body>
     </html>
@@ -447,7 +542,7 @@ export async function POST(request: Request) {
   let payload: {
     document?: "resume" | "coverLetter";
     resume?: ResumeContent;
-    sectionOrder?: ResumeSectionKey[];
+    sectionOrder?: ResumeSectionId[];
   };
 
   try {
@@ -463,7 +558,7 @@ export async function POST(request: Request) {
     payload = JSON.parse(rawBody) as {
       document?: "resume" | "coverLetter";
       resume?: ResumeContent;
-      sectionOrder?: ResumeSectionKey[];
+      sectionOrder?: ResumeSectionId[];
     };
   } catch {
     return NextResponse.json(
@@ -487,7 +582,10 @@ export async function POST(request: Request) {
         ? buildCoverLetterHtml(resume)
         : buildResumeHtml(
             resume,
-            normalizeSectionOrder(payload.sectionOrder),
+            normalizeResumeSectionOrder(
+              payload.sectionOrder ?? resume.sectionOrder,
+              resume.customSections.map((section) => section.id),
+            ),
           );
     const pdf = await getCloudflareEnv().BROWSER.quickAction("pdf", {
       html,

@@ -11,12 +11,11 @@ import {
   unbookmarkJobById,
 } from "@/lib/cloud-db";
 import {
-  createJobsHref,
   hasActiveJobFilters,
   parseActiveJobFilters,
   type JobSearchParams,
 } from "@/lib/job-search";
-import { getActiveJobCompanies, getActiveJobs } from "@/lib/jobs";
+import { getActiveJobs } from "@/lib/jobs";
 import { requireUser } from "@/lib/session";
 
 async function archiveJobAction(formData: FormData) {
@@ -60,10 +59,7 @@ type HomePageProps = {
 export default async function HomePage({ searchParams }: HomePageProps) {
   const user = await requireUser();
   const filters = parseActiveJobFilters(await searchParams);
-  const [page, companies] = await Promise.all([
-    getActiveJobs(user.id, filters),
-    getActiveJobCompanies(user.id),
-  ]);
+  const page = await getActiveJobs(user.id, filters);
 
   return (
     <>
@@ -77,17 +73,11 @@ export default async function HomePage({ searchParams }: HomePageProps) {
             ? "No jobs match these filters."
             : "No active jobs are listed right now."
         }
-        header={<JobFilterBar companies={companies} filters={filters} />}
+        currentPage={page.currentPage}
+        filters={filters}
+        header={<JobFilterBar filters={filters} />}
         jobs={page.jobs}
-        nextHref={
-          page.nextCursor ? createJobsHref(filters, page.nextCursor) : null
-        }
-        previousHref={
-          page.previousCursor
-            ? createJobsHref(filters, page.previousCursor)
-            : null
-        }
-        title="Jobs"
+        totalPages={page.totalPages}
       />
     </>
   );

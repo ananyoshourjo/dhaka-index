@@ -1,12 +1,7 @@
 import "server-only";
 
 import { getCloudflareDb } from "@/lib/cloudflare";
-import {
-  encodeJobCursor,
-  JOBS_PAGE_SIZE,
-  type ActiveJobFilters,
-  type CursorDirection,
-} from "@/lib/job-search";
+import { JOBS_PAGE_SIZE, type ActiveJobFilters } from "@/lib/job-search";
 import { parseJobFunctions, type JobFunction } from "@/lib/job-functions";
 import { nowDhakaIso } from "@/lib/time";
 
@@ -20,19 +15,14 @@ export type ActiveJob = {
   jobFunctions: JobFunction[];
 };
 
-type ActiveJobRow = Omit<ActiveJob, "jobFunctions"> & {
-  firstListedAt: string;
-  jobFunctionsSerialized: string;
-};
-
 type ActiveJobDbRow = Omit<ActiveJob, "jobFunctions"> & {
   jobFunctionsSerialized: string;
 };
 
 export type ActiveJobPage = {
+  currentPage: number;
   jobs: ActiveJob[];
-  nextCursor: string | null;
-  previousCursor: string | null;
+  totalPages: number;
 };
 
 export type OfficialFeedJob = {
@@ -254,13 +244,6 @@ async function getJobs(userId: string, mode: "active" | "archived" | "bookmarked
   }));
 }
 
-const effectiveDeadlineSql = `
-  CASE
-    WHEN jobs.admin_deadline_override = 1 THEN jobs.admin_deadline_at
-    ELSE jobs.deadline_at
-  END
-`;
-
 function escapeLike(value: string) {
   return value.replace(/[\\%_]/g, "\\$&");
 }
@@ -288,63 +271,25 @@ export async function getActiveJobsPageFromDb(
     values.push(pattern, pattern, pattern);
   }
 
-  if (filters.company) {
-    conditions.push(
-      `COALESCE(jobs.admin_company, jobs.company) = ? COLLATE NOCASE`,
-    );
-    values.push(filters.company);
-  }
-
   if (filters.jobFunction) {
     conditions.push(`instr(jobs.job_functions, ?) > 0`);
     values.push(`|${filters.jobFunction}|`);
   }
 
-  if (filters.deadlineAvailable || filters.sort === "closing") {
-    conditions.push(`${effectiveDeadlineSql} IS NOT NULL`);
-  }
-
-  if (filters.bookmarkedOnly) {
-    conditions.push(`state.bookmarked_at IS NOT NULL`);
-  }
-
-  if (filters.sort === "closing") {
-    conditions.push(`${effectiveDeadlineSql} >= date('now', '+6 hours')`);
-  }
-
-  const cursor = filters.cursor;
-  if (cursor) {
-    const operator =
-      filters.sort === "newest"
-        ? cursor.direction === "after"
-          ? "<"
-          : ">"
-        : cursor.direction === "after"
-          ? ">"
-          : "<";
-    const cursorColumn =
-      filters.sort === "newest" ? "jobs.first_listed_at" : effectiveDeadlineSql;
-
-    conditions.push(`
-      (
-        ${cursorColumn} ${operator} ?
-        OR (${cursorColumn} = ? AND jobs.id ${operator} ?)
-      )
-    `);
-    values.push(cursor.value, cursor.value, cursor.id);
-  }
-
-  const canonicalDirection = filters.sort === "newest" ? "DESC" : "ASC";
-  const queryDirection =
-    cursor?.direction === "before"
-      ? canonicalDirection === "DESC"
-        ? "ASC"
-        : "DESC"
-      : canonicalDirection;
-  const orderColumn =
-    filters.sort === "newest" ? "jobs.first_listed_at" : effectiveDeadlineSql;
-
-  values.push(JOBS_PAGE_SIZE + 1);
+  const fromAndWhereSql = `
+    FROM jobs
+    LEFT JOIN job_user_state AS state
+      ON state.job_id = jobs.id
+      AND state.user_id = ?
+    WHERE ${conditions.join("\nAND ")}
+  `;
+  const count = await statement(
+    `SELECT COUNT(*) AS total ${fromAndWhereSql}`,
+    values,
+  ).first<{ total: number }>();
+  const totalPages = Math.ceil((count?.total ?? 0) / JOBS_PAGE_SIZE);
+  const currentPage = Math.min(filters.page, Math.max(totalPages, 1));
+  const offset = (currentPage - 1) * JOBS_PAGE_SIZE;
 
   const result = await statement(
     `
@@ -352,86 +297,33 @@ export async function getActiveJobsPageFromDb(
         jobs.id,
         COALESCE(jobs.admin_title, jobs.title) AS title,
         COALESCE(jobs.admin_company, jobs.company) AS company,
-        ${effectiveDeadlineSql} AS deadlineAt,
+        CASE
+          WHEN jobs.admin_deadline_override = 1 THEN jobs.admin_deadline_at
+          ELSE jobs.deadline_at
+        END AS deadlineAt,
         jobs.detail_url AS detailUrl,
         jobs.job_functions AS jobFunctionsSerialized,
-        jobs.first_listed_at AS firstListedAt,
         state.bookmarked_at AS bookmarkedAt
-      FROM jobs
-      LEFT JOIN job_user_state AS state
-        ON state.job_id = jobs.id
-        AND state.user_id = ?
-      WHERE ${conditions.join("\nAND ")}
-      ORDER BY ${orderColumn} ${queryDirection}, jobs.id ${queryDirection}
+      ${fromAndWhereSql}
+      ORDER BY jobs.first_listed_at DESC, jobs.id DESC
       LIMIT ?
+      OFFSET ?
     `,
-    values,
-  ).all<ActiveJobRow>();
+    [...values, JOBS_PAGE_SIZE, offset],
+  ).all<ActiveJobDbRow>();
 
-  const hasExtra = result.results.length > JOBS_PAGE_SIZE;
-  let rows = result.results.slice(0, JOBS_PAGE_SIZE);
-
-  if (cursor?.direction === "before") {
-    rows = rows.reverse();
-  }
-
-  const hasPrevious = cursor
-    ? cursor.direction === "after" || hasExtra
-    : false;
-  const hasNext = cursor
-    ? cursor.direction === "before" || hasExtra
-    : hasExtra;
-
-  function cursorFor(row: ActiveJobRow, direction: CursorDirection) {
-    const value =
-      filters.sort === "newest" ? row.firstListedAt : row.deadlineAt;
-
-    if (!value) {
-      return null;
-    }
-
-    return encodeJobCursor({
-      direction,
-      id: row.id,
-      sort: filters.sort,
-      value,
-    });
-  }
-
-  const first = rows[0];
-  const last = rows.at(-1);
-  const jobs = rows.map(
-    ({ firstListedAt: _firstListedAt, jobFunctionsSerialized, ...job }) => ({
+  const jobs = result.results.map(
+    ({ jobFunctionsSerialized, ...job }) => ({
       ...job,
       jobFunctions: parseJobFunctions(jobFunctionsSerialized),
     }),
   );
 
   return {
+    currentPage,
     jobs,
-    nextCursor: hasNext && last ? cursorFor(last, "after") : null,
-    previousCursor:
-      hasPrevious && first ? cursorFor(first, "before") : null,
+    totalPages,
   };
-}
-
-export async function getActiveJobCompaniesFromDb(userId: string) {
-  const result = await statement(
-    `
-      SELECT DISTINCT COALESCE(jobs.admin_company, jobs.company) AS company
-      FROM jobs
-      LEFT JOIN job_user_state AS state
-        ON state.job_id = jobs.id
-        AND state.user_id = ?
-      WHERE state.archived_at IS NULL
-        AND jobs.expired_at IS NULL
-        AND jobs.deleted_at IS NULL
-      ORDER BY company COLLATE NOCASE
-    `,
-    [userId],
-  ).all<{ company: string }>();
-
-  return result.results.map((row) => row.company);
 }
 
 export function getArchivedJobsFromDb(userId: string) {

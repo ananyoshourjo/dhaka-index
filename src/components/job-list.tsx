@@ -1,7 +1,5 @@
 import {
   Archive,
-  ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   Bookmark,
   CalendarDays,
@@ -9,21 +7,26 @@ import {
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ActiveJob } from "@/lib/cloud-db";
+import {
+  createJobsHref,
+  getPaginationItems,
+  type ActiveJobFilters,
+} from "@/lib/job-search";
+import { cn } from "@/lib/utils";
 
 type JobListProps = {
   action: (formData: FormData) => void | Promise<void>;
   actionLabel: string;
   bookmarkAction?: (formData: FormData) => void | Promise<void>;
   emptyLabel: string;
+  filters?: ActiveJobFilters;
   header?: ReactNode;
   jobs: ActiveJob[];
-  nextHref?: string | null;
-  previousHref?: string | null;
-  title: string;
+  currentPage?: number;
+  totalPages?: number;
 };
 
 function formatDeadline(deadlineAt: string | null) {
@@ -43,25 +46,15 @@ export function JobList({
   action,
   actionLabel,
   bookmarkAction,
+  currentPage,
   emptyLabel,
+  filters,
   header,
   jobs,
-  nextHref,
-  previousHref,
-  title,
+  totalPages,
 }: JobListProps) {
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-4 sm:gap-4 sm:px-6 sm:py-8">
-      <div className="space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          {title}
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {jobs.length === 1
-            ? "Showing 1 job"
-            : `Showing ${jobs.length} jobs`}
-        </p>
-      </div>
       {header}
       {jobs.length === 0 ? (
         <Card className="border-dashed">
@@ -78,13 +71,6 @@ export function JobList({
                 <h2 className="text-xl font-semibold leading-[1.2]">
                   {job.title}
                 </h2>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {job.jobFunctions.map((jobFunction) => (
-                    <Badge key={jobFunction} variant="secondary">
-                      {jobFunction}
-                    </Badge>
-                  ))}
-                </div>
                 <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
                   <CalendarDays className="size-4" aria-hidden="true" />
                   <span>{formatDeadline(job.deadlineAt)}</span>
@@ -144,30 +130,43 @@ export function JobList({
         ))
       )}
 
-      {previousHref || nextHref ? (
-        <nav
-          aria-label={`${title} pagination`}
-          className="flex items-center justify-between gap-3 pt-1"
-        >
-          {previousHref ? (
-            <Button asChild variant="outline" size="sm">
-              <Link href={previousHref}>
-                <ArrowLeft aria-hidden="true" className="size-4" />
-                Previous
-              </Link>
-            </Button>
-          ) : (
-            <span />
+      {filters && currentPage && totalPages && totalPages > 1 ? (
+        <nav aria-label="Job pages" className="flex justify-center gap-1 pt-1">
+          {getPaginationItems(currentPage, totalPages).map((item, index) =>
+            item === "ellipsis" ? (
+              <span
+                key={`ellipsis-${index}`}
+                aria-hidden="true"
+                className="flex size-9 items-center justify-center text-sm text-muted-foreground"
+              >
+                …
+              </span>
+            ) : item === currentPage ? (
+              <span
+                key={item}
+                aria-current="page"
+                aria-label={`Page ${item}, current page`}
+                className={cn(
+                  buttonVariants({ size: "sm" }),
+                  "size-9 p-0",
+                )}
+              >
+                {item}
+              </span>
+            ) : (
+              <Button
+                key={item}
+                asChild
+                variant="ghost"
+                size="sm"
+                className="size-9 p-0"
+              >
+                <Link href={createJobsHref(filters, item)} aria-label={`Page ${item}`}>
+                  {item}
+                </Link>
+              </Button>
+            ),
           )}
-
-          {nextHref ? (
-            <Button asChild variant="outline" size="sm">
-              <Link href={nextHref}>
-                Next
-                <ArrowRight aria-hidden="true" className="size-4" />
-              </Link>
-            </Button>
-          ) : null}
         </nav>
       ) : null}
     </main>

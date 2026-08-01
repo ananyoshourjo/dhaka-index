@@ -6,7 +6,13 @@ import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { NativeSelect } from "@/components/ui/native-select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
 import { JOB_FUNCTIONS, type JobFunction } from "@/lib/job-functions";
 
@@ -80,24 +86,28 @@ export function AuthForm({ mode }: AuthFormProps) {
       {isSignup ? (
         <label className="grid gap-1.5 text-sm font-medium">
           Job interest
-          <NativeSelect
-            aria-describedby="job-interest-description"
+          <Select
             name="preferredJobFunction"
-            onChange={(event) =>
-              setPreferredJobFunction(event.target.value as JobFunction | "")
+            onValueChange={(value) =>
+              setPreferredJobFunction(value as JobFunction | "")
             }
             required
             value={preferredJobFunction}
           >
-            <option value="" disabled>
-              Select a job function
-            </option>
-            {JOB_FUNCTIONS.map((jobFunction) => (
-              <option key={jobFunction} value={jobFunction}>
-                {jobFunction}
-              </option>
-            ))}
-          </NativeSelect>
+            <SelectTrigger
+              aria-describedby="job-interest-description"
+              className="w-full"
+            >
+              <SelectValue placeholder="Select a job function" />
+            </SelectTrigger>
+            <SelectContent>
+              {JOB_FUNCTIONS.map((jobFunction) => (
+                <SelectItem key={jobFunction} value={jobFunction}>
+                  {jobFunction}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <span
             id="job-interest-description"
             className="font-normal leading-5 text-muted-foreground"

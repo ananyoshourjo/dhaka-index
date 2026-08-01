@@ -1,5 +1,4 @@
 import {
-  getActiveJobCompaniesFromDb,
   getActiveJobsPageFromDb,
   getArchivedJobsFromDb,
   getBookmarkedJobsFromDb,
@@ -9,10 +8,6 @@ import type { ActiveJobFilters } from "@/lib/job-search";
 
 export function getActiveJobs(userId: string, filters: ActiveJobFilters) {
   return getActiveJobsPageFromDb(userId, filters);
-}
-
-export function getActiveJobCompanies(userId: string) {
-  return getActiveJobCompaniesFromDb(userId);
 }
 
 export function getArchivedJobs(userId: string): Promise<ActiveJob[]> {

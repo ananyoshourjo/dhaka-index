@@ -4,7 +4,13 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
-import { NativeSelect } from "@/components/ui/native-select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
 import { JOB_FUNCTIONS, type JobFunction } from "@/lib/job-functions";
 
@@ -68,21 +74,26 @@ export function JobInterestForm({
       >
         <label className="grid gap-1.5 text-sm font-medium">
           Preferred job function
-          <NativeSelect
+          <Select
             disabled={isPending}
-            onChange={(event) => {
-              setJobFunction(event.target.value as JobFunction);
+            onValueChange={(value) => {
+              setJobFunction(value as JobFunction);
               setError(null);
               setSuccess(null);
             }}
             value={jobFunction}
           >
-            {JOB_FUNCTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </NativeSelect>
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {JOB_FUNCTIONS.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </label>
 
         <div aria-live="polite">
