@@ -12,6 +12,7 @@ import {
   PencilLine,
   Plus,
   Trash2,
+  TriangleAlert,
 } from "lucide-react";
 import {
   useCallback,
@@ -19,11 +20,11 @@ import {
   useLayoutEffect,
   useRef,
   useState,
-  useTransition,
 } from "react";
 
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
+import { createPhotoThumbnail } from "@/lib/photo-client";
 import type {
   ResumeAchievement,
   ResumeActivity,
@@ -45,7 +46,7 @@ type ResumeBuilderProps = {
   showPreview?: boolean;
 };
 
-type SaveState = "saved" | "saving" | "unsaved";
+type SaveState = "failed" | "saved" | "saving" | "unsaved";
 type DragTarget = {
   group: string;
   id: string;
@@ -73,6 +74,38 @@ const resumeSectionOrder: ResumeSectionKey[] = [
   "skills",
   "references",
 ];
+
+const EMERGENCY_DRAFT_KEY = "dhaka-index:resume-emergency-draft:v1";
+
+function wait(milliseconds: number) {
+  return new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+}
+
+function readEmergencyDraft() {
+  try {
+    const stored = window.localStorage.getItem(EMERGENCY_DRAFT_KEY);
+
+    if (!stored) {
+      return null;
+    }
+
+    const value = JSON.parse(stored) as { resume?: ResumeContent };
+    const resume = value.resume;
+
+    if (
+      resume?.contact &&
+      resume.summary &&
+      Array.isArray(resume.workExperience) &&
+      Array.isArray(resume.education)
+    ) {
+      return resume;
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
 
 function newId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
@@ -427,6 +460,7 @@ export function ResumeBuilder({
     contact: {
       ...initialResume.contact,
       website: initialResume.contact.website ?? "",
+      photoUrl: "",
     },
     projects: initialResume.projects ?? [],
     coverLetter: initialResume.coverLetter ?? {
@@ -442,10 +476,12 @@ export function ResumeBuilder({
     },
     sectionOrder: normalizeSectionOrder(initialResume.sectionOrder),
   });
+  const [photoUrl, setPhotoUrl] = useState(initialResume.contact.photoUrl);
   const [saveState, setSaveState] = useState<SaveState>("saved");
   const [downloadState, setDownloadState] = useState<SaveState>("saved");
   const [downloadError, setDownloadError] = useState("");
   const [photoError, setPhotoError] = useState("");
+  const [photoSaving, setPhotoSaving] = useState(false);
   const [dragTarget, setDragTarget] = useState<DragTarget | null>(null);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator | null>(null);
   const [previewZoom, setPreviewZoom] = useState(0.78);
@@ -453,8 +489,15 @@ export function ResumeBuilder({
   const [mobilePane, setMobilePane] = useState<"edit" | "preview">("edit");
   const [resumePageCount, setResumePageCount] = useState(1);
   const [isPanning, setIsPanning] = useState(false);
-  const [isPending, startTransition] = useTransition();
   const didMount = useRef(false);
+  const dirtyRef = useRef(false);
+  const lastQueuedRevisionRef = useRef(0);
+  const latestSavePromiseRef = useRef<Promise<boolean> | null>(null);
+  const navigationInProgressRef = useRef(false);
+  const resumeRef = useRef(resume);
+  const revisionRef = useRef(0);
+  const saveQueueRef = useRef<Promise<boolean>>(Promise.resolve(true));
+  const saveTimeoutRef = useRef<number | null>(null);
   const editorScrollRef = useRef<HTMLDivElement>(null);
   const photoInputRef = useRef<HTMLInputElement>(null);
   const previewViewportRef = useRef<HTMLDivElement>(null);
@@ -470,6 +513,73 @@ export function ResumeBuilder({
     x: 0,
     y: 0,
   });
+
+  const queueResumeSave = useCallback(
+    (snapshot: ResumeContent, revision: number) => {
+      if (
+        revision <= lastQueuedRevisionRef.current &&
+        latestSavePromiseRef.current
+      ) {
+        return latestSavePromiseRef.current;
+      }
+
+      lastQueuedRevisionRef.current = revision;
+      const task = saveQueueRef.current.then(async () => {
+        setSaveState("saving");
+
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          try {
+            const result = await saveResumeAction(snapshot);
+
+            if (result.ok) {
+              if (revision === revisionRef.current) {
+                dirtyRef.current = false;
+                window.localStorage.removeItem(EMERGENCY_DRAFT_KEY);
+                setSaveState("saved");
+              }
+
+              return true;
+            }
+
+            if (!result.retryable) {
+              break;
+            }
+          } catch {
+            // Network and interrupted server-action failures are retried below.
+          }
+
+          if (attempt < 2) {
+            await wait(500 * 2 ** attempt);
+          }
+        }
+
+        if (revision === revisionRef.current) {
+          dirtyRef.current = true;
+          setSaveState("failed");
+        }
+
+        return false;
+      });
+
+      saveQueueRef.current = task.catch(() => false);
+      latestSavePromiseRef.current = task;
+      return task;
+    },
+    [],
+  );
+
+  const flushLatestResume = useCallback(() => {
+    if (!dirtyRef.current) {
+      return Promise.resolve(true);
+    }
+
+    if (saveTimeoutRef.current !== null) {
+      window.clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = null;
+    }
+
+    return queueResumeSave(resumeRef.current, revisionRef.current);
+  }, [queueResumeSave]);
 
   useEffect(() => {
     previewZoomRef.current = previewZoom;
@@ -586,22 +696,120 @@ export function ResumeBuilder({
   }, [mobilePane]);
 
   useEffect(() => {
+    const emergencyDraft = readEmergencyDraft();
+
+    if (!emergencyDraft) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setResume({
+        ...emergencyDraft,
+        contact: { ...emergencyDraft.contact, photoUrl: "" },
+        projects: emergencyDraft.projects ?? [],
+        sectionOrder: normalizeSectionOrder(emergencyDraft.sectionOrder),
+      });
+      setSaveState("unsaved");
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    resumeRef.current = resume;
+
     if (!didMount.current) {
       didMount.current = true;
       return;
     }
 
+    revisionRef.current += 1;
+    const revision = revisionRef.current;
+    dirtyRef.current = true;
     setSaveState("unsaved");
-    const timeout = window.setTimeout(() => {
-      setSaveState("saving");
-      startTransition(async () => {
-        await saveResumeAction(resume);
-        setSaveState("saved");
-      });
+    window.localStorage.setItem(
+      EMERGENCY_DRAFT_KEY,
+      JSON.stringify({ resume, updatedAt: new Date().toISOString() }),
+    );
+
+    if (saveTimeoutRef.current !== null) {
+      window.clearTimeout(saveTimeoutRef.current);
+    }
+
+    saveTimeoutRef.current = window.setTimeout(() => {
+      saveTimeoutRef.current = null;
+      void queueResumeSave(resume, revision);
     }, 650);
 
-    return () => window.clearTimeout(timeout);
-  }, [resume]);
+    return () => {
+      if (saveTimeoutRef.current !== null) {
+        window.clearTimeout(saveTimeoutRef.current);
+        saveTimeoutRef.current = null;
+      }
+    };
+  }, [queueResumeSave, resume]);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (!dirtyRef.current) {
+        return;
+      }
+
+      event.preventDefault();
+      event.returnValue = "";
+    };
+    const handleNavigation = (event: MouseEvent) => {
+      if (!dirtyRef.current || navigationInProgressRef.current) {
+        return;
+      }
+
+      const anchor = (event.target as Element | null)?.closest("a[href]");
+
+      if (
+        !anchor ||
+        anchor.getAttribute("target") === "_blank" ||
+        anchor.hasAttribute("download")
+      ) {
+        return;
+      }
+
+      const destination = new URL(anchor.getAttribute("href") || "", window.location.href);
+
+      if (
+        !["http:", "https:"].includes(destination.protocol) ||
+        destination.href === window.location.href
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      navigationInProgressRef.current = true;
+
+      void flushLatestResume().then((saved) => {
+        if (
+          saved ||
+          window.confirm(
+            "Your latest resume changes could not be saved. Leave this page anyway?",
+          )
+        ) {
+          dirtyRef.current = false;
+          window.location.assign(destination.href);
+          return;
+        }
+
+        navigationInProgressRef.current = false;
+      });
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("click", handleNavigation, true);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("click", handleNavigation, true);
+    };
+  }, [flushLatestResume]);
 
   useLayoutEffect(() => {
     const preview = resumePreviewRef.current;
@@ -641,11 +849,6 @@ export function ResumeBuilder({
       contact: { ...current.contact, [key]: value },
     }));
 
-    if (key === "photoUrl") {
-      window.dispatchEvent(
-        new CustomEvent("profile-photo-change", { detail: { photoUrl: value } }),
-      );
-    }
   };
 
   const updateCoverLetter = (
@@ -661,35 +864,73 @@ export function ResumeBuilder({
     }));
   };
 
-  const uploadContactPhoto = (file: File | undefined) => {
+  const uploadContactPhoto = async (file: File | undefined) => {
     if (!file) {
       return;
     }
 
-    if (
-      !["image/jpeg", "image/png", "image/webp"].includes(file.type) ||
-      file.size > 1_000_000
-    ) {
-      setPhotoError("Choose a JPEG, PNG, or WebP image no larger than 1 MB.");
+    setPhotoError("");
+    setPhotoSaving(true);
+
+    try {
+      const thumbnail = await createPhotoThumbnail(file);
+      const response = await fetch("/api/profile/photo", {
+        method: "PUT",
+        body: thumbnail,
+        headers: { "Content-Type": "image/webp" },
+      });
+      const result = (await response.json()) as {
+        error?: string;
+        photoUrl?: string;
+      };
+
+      if (!response.ok || !result.photoUrl) {
+        throw new Error(result.error || "The photo could not be saved.");
+      }
+
+      setPhotoUrl(result.photoUrl);
+      window.dispatchEvent(
+        new CustomEvent("profile-photo-change", {
+          detail: { photoUrl: result.photoUrl },
+        }),
+      );
+    } catch (error) {
+      setPhotoError(
+        error instanceof Error ? error.message : "The photo could not be saved.",
+      );
+    } finally {
+      setPhotoSaving(false);
+
       if (photoInputRef.current) {
         photoInputRef.current.value = "";
       }
-      return;
     }
-
-    setPhotoError("");
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") {
-        updateContact("photoUrl", reader.result);
-      }
-    };
-    reader.readAsDataURL(file);
   };
 
-  const removeContactPhoto = () => {
+  const removeContactPhoto = async () => {
     setPhotoError("");
-    updateContact("photoUrl", "");
+    setPhotoSaving(true);
+
+    try {
+      const response = await fetch("/api/profile/photo", { method: "DELETE" });
+
+      if (!response.ok) {
+        throw new Error("The photo could not be removed.");
+      }
+
+      setPhotoUrl("");
+      window.dispatchEvent(
+        new CustomEvent("profile-photo-change", { detail: { photoUrl: "" } }),
+      );
+    } catch (error) {
+      setPhotoError(
+        error instanceof Error
+          ? error.message
+          : "The photo could not be removed.",
+      );
+    } finally {
+      setPhotoSaving(false);
+    }
 
     if (photoInputRef.current) {
       photoInputRef.current.value = "";
@@ -1195,8 +1436,10 @@ export function ResumeBuilder({
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                {saveState === "saving" || isPending ? (
+                {saveState === "saving" ? (
                   <Loader2 className="size-3.5 animate-spin" />
+                ) : saveState === "failed" ? (
+                  <TriangleAlert className="size-3.5 text-destructive" />
                 ) : (
                   <Check className="size-3.5 text-primary" />
                 )}
@@ -1205,7 +1448,9 @@ export function ResumeBuilder({
                     ? "Saved"
                     : saveState === "saving"
                       ? "Saving"
-                      : "Unsaved"}
+                      : saveState === "failed"
+                        ? "Save failed"
+                        : "Unsaved"}
                 </span>
               </div>
               <Button
@@ -1239,11 +1484,11 @@ export function ResumeBuilder({
                       className="h-[1.55in] w-[1.28in] justify-self-center overflow-hidden border bg-muted sm:justify-self-auto"
                       aria-hidden="true"
                     >
-                      {resume.contact.photoUrl ? (
+                      {photoUrl ? (
                         <div
                           className="size-full bg-cover bg-center"
                           style={{
-                            backgroundImage: `url("${resume.contact.photoUrl}")`,
+                            backgroundImage: `url("${photoUrl}")`,
                           }}
                         />
                       ) : null}
@@ -1263,15 +1508,17 @@ export function ResumeBuilder({
                           type="button"
                           variant="outline"
                           size="sm"
+                          disabled={photoSaving}
                           onClick={() => photoInputRef.current?.click()}
                         >
-                          Choose photo
+                          {photoSaving ? "Saving photo" : "Choose photo"}
                         </Button>
-                        {resume.contact.photoUrl ? (
+                        {photoUrl ? (
                           <Button
                             type="button"
                             variant="ghost"
                             size="sm"
+                            disabled={photoSaving}
                             onClick={removeContactPhoto}
                             aria-label="Remove photo"
                           >
@@ -1280,8 +1527,8 @@ export function ResumeBuilder({
                         ) : null}
                       </div>
                       <p className="text-xs text-muted-foreground">
-                        Upload a portrait image. It is saved into this resume and
-                        used in the preview and PDF.
+                        Upload a portrait image. It is compressed to a small WebP
+                        and stored separately for the preview, navigation, and PDF.
                       </p>
                       {photoError ? (
                         <p className="text-xs text-destructive">{photoError}</p>
@@ -2649,10 +2896,10 @@ export function ResumeBuilder({
                 ) : null}
               </div>
               <div className="h-[1.55in] w-[1.28in] border border-black">
-                {resume.contact.photoUrl ? (
+                {photoUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
-                    src={resume.contact.photoUrl}
+                    src={photoUrl}
                     alt=""
                     className="size-full object-cover"
                   />

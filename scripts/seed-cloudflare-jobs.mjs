@@ -3,6 +3,11 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 
+import {
+  classifyJobFunctions,
+  serializeJobFunctions,
+} from "../src/lib/job-functions.ts";
+
 const DEFAULT_FEED_URL =
   "https://raw.githubusercontent.com/ananyoshourjo/dhaka-index/jobs-data/jobs.json";
 const feedUrl = process.env.DHAKA_INDEX_JOB_FEED_URL?.trim() || DEFAULT_FEED_URL;
@@ -51,6 +56,7 @@ const jobs = feed.jobs.map((job, index) => {
     title: job.title.trim(),
     company: job.company.trim(),
     deadline: job.deadline,
+    jobFunctions: serializeJobFunctions(classifyJobFunctions(job.title.trim())),
     url: url.toString(),
   };
 });
@@ -69,7 +75,7 @@ for (let index = 0; index < jobs.length; index += chunkSize) {
     .map(
       (job) =>
         `(${sqlValue(job.title)}, ${sqlValue(job.company)}, ${sqlValue(job.url)}, ` +
-        `${sqlValue(job.url)}, ${sqlValue(job.deadline)}, ${sqlValue(checkedAt)}, ` +
+        `${sqlValue(job.url)}, ${sqlValue(job.deadline)}, ${sqlValue(job.jobFunctions)}, ${sqlValue(checkedAt)}, ` +
         `${sqlValue(checkedAt)}, ${sqlValue(checkedAt)})`,
     )
     .join(",\n");
@@ -81,6 +87,7 @@ INSERT INTO jobs (
   detail_url,
   canonical_url,
   deadline_at,
+  job_functions,
   first_seen_at,
   last_seen_at,
   first_listed_at
@@ -92,6 +99,10 @@ ON CONFLICT(canonical_url) DO UPDATE SET
   company = excluded.company,
   detail_url = excluded.detail_url,
   deadline_at = excluded.deadline_at,
+  job_functions = CASE
+    WHEN jobs.admin_title IS NULL THEN excluded.job_functions
+    ELSE jobs.job_functions
+  END,
   last_seen_at = excluded.last_seen_at,
   first_listed_at = CASE
     WHEN jobs.expired_at IS NOT NULL THEN excluded.first_listed_at

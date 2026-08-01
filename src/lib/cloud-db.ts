@@ -1,6 +1,13 @@
 import "server-only";
 
 import { getCloudflareDb } from "@/lib/cloudflare";
+import {
+  encodeJobCursor,
+  JOBS_PAGE_SIZE,
+  type ActiveJobFilters,
+  type CursorDirection,
+} from "@/lib/job-search";
+import { parseJobFunctions, type JobFunction } from "@/lib/job-functions";
 import { nowDhakaIso } from "@/lib/time";
 
 export type ActiveJob = {
@@ -10,6 +17,22 @@ export type ActiveJob = {
   deadlineAt: string | null;
   detailUrl: string;
   bookmarkedAt: string | null;
+  jobFunctions: JobFunction[];
+};
+
+type ActiveJobRow = Omit<ActiveJob, "jobFunctions"> & {
+  firstListedAt: string;
+  jobFunctionsSerialized: string;
+};
+
+type ActiveJobDbRow = Omit<ActiveJob, "jobFunctions"> & {
+  jobFunctionsSerialized: string;
+};
+
+export type ActiveJobPage = {
+  jobs: ActiveJob[];
+  nextCursor: string | null;
+  previousCursor: string | null;
 };
 
 export type OfficialFeedJob = {
@@ -17,6 +40,7 @@ export type OfficialFeedJob = {
   company: string;
   deadlineAt: string | null;
   canonicalUrl: string;
+  jobFunctions: JobFunction[];
 };
 
 export type JobFeedStateRow = {
@@ -60,16 +84,19 @@ export async function cleanupUserData(userId: string) {
       .prepare(`DELETE FROM resume_profiles WHERE id = ?`)
       .bind(`profile:${userId}`),
     db
+      .prepare(`DELETE FROM profile_photos WHERE user_id = ?`)
+      .bind(userId),
+    db
       .prepare(`DELETE FROM app_admins WHERE user_id = ?`)
       .bind(userId),
   ]);
 }
 
 export async function getUserDataExport(userId: string) {
-  const [user, resume, jobState] = await Promise.all([
+  const [user, resume, profilePhoto, jobState] = await Promise.all([
     statement(
       `
-        SELECT id, name, email, "emailVerified", image, "createdAt", "updatedAt"
+        SELECT id, name, email, "emailVerified", image, "preferredJobFunction", "createdAt", "updatedAt"
         FROM "user"
         WHERE id = ?
       `,
@@ -79,6 +106,15 @@ export async function getUserDataExport(userId: string) {
       `SELECT content_json, updated_at FROM resume_profiles WHERE id = ?`,
       [`profile:${userId}`],
     ).first<{ content_json: string; updated_at: string }>(),
+    statement(
+      `SELECT image_blob, content_type, legacy_data_url, updated_at FROM profile_photos WHERE user_id = ?`,
+      [userId],
+    ).first<{
+      image_blob: ArrayBuffer | null;
+      content_type: string | null;
+      legacy_data_url: string | null;
+      updated_at: string;
+    }>(),
     statement(
       `
         SELECT
@@ -101,6 +137,15 @@ export async function getUserDataExport(userId: string) {
       ? {
           content: JSON.parse(resume.content_json) as unknown,
           updatedAt: resume.updated_at,
+        }
+      : null,
+    profilePhoto: profilePhoto
+      ? {
+          contentType: profilePhoto.content_type,
+          dataUrl:
+            profilePhoto.legacy_data_url ??
+            `data:${profilePhoto.content_type};base64,${Buffer.from(profilePhoto.image_blob!).toString("base64")}`,
+          updatedAt: profilePhoto.updated_at,
         }
       : null,
     jobState: jobState.results,
@@ -192,6 +237,7 @@ async function getJobs(userId: string, mode: "active" | "archived" | "bookmarked
           ELSE jobs.deadline_at
         END AS deadlineAt,
         jobs.detail_url AS detailUrl,
+        jobs.job_functions AS jobFunctionsSerialized,
         state.bookmarked_at AS bookmarkedAt
       ${fromClause}
       WHERE ${modeFilter}
@@ -200,13 +246,192 @@ async function getJobs(userId: string, mode: "active" | "archived" | "bookmarked
       ORDER BY ${orderBy}
     `,
     [userId],
-  ).all<ActiveJob>();
+  ).all<ActiveJobDbRow>();
 
-  return result.results;
+  return result.results.map(({ jobFunctionsSerialized, ...job }) => ({
+    ...job,
+    jobFunctions: parseJobFunctions(jobFunctionsSerialized),
+  }));
 }
 
-export function getActiveJobsFromDb(userId: string) {
-  return getJobs(userId, "active");
+const effectiveDeadlineSql = `
+  CASE
+    WHEN jobs.admin_deadline_override = 1 THEN jobs.admin_deadline_at
+    ELSE jobs.deadline_at
+  END
+`;
+
+function escapeLike(value: string) {
+  return value.replace(/[\\%_]/g, "\\$&");
+}
+
+export async function getActiveJobsPageFromDb(
+  userId: string,
+  filters: ActiveJobFilters,
+): Promise<ActiveJobPage> {
+  const conditions = [
+    `state.archived_at IS NULL`,
+    `jobs.expired_at IS NULL`,
+    `jobs.deleted_at IS NULL`,
+  ];
+  const values: unknown[] = [userId];
+
+  if (filters.query) {
+    const pattern = `%${escapeLike(filters.query.toLowerCase())}%`;
+    conditions.push(`
+      (
+        LOWER(COALESCE(jobs.admin_title, jobs.title)) LIKE ? ESCAPE '\\'
+        OR LOWER(COALESCE(jobs.admin_company, jobs.company)) LIKE ? ESCAPE '\\'
+        OR LOWER(jobs.job_functions) LIKE ? ESCAPE '\\'
+      )
+    `);
+    values.push(pattern, pattern, pattern);
+  }
+
+  if (filters.company) {
+    conditions.push(
+      `COALESCE(jobs.admin_company, jobs.company) = ? COLLATE NOCASE`,
+    );
+    values.push(filters.company);
+  }
+
+  if (filters.jobFunction) {
+    conditions.push(`instr(jobs.job_functions, ?) > 0`);
+    values.push(`|${filters.jobFunction}|`);
+  }
+
+  if (filters.deadlineAvailable || filters.sort === "closing") {
+    conditions.push(`${effectiveDeadlineSql} IS NOT NULL`);
+  }
+
+  if (filters.bookmarkedOnly) {
+    conditions.push(`state.bookmarked_at IS NOT NULL`);
+  }
+
+  if (filters.sort === "closing") {
+    conditions.push(`${effectiveDeadlineSql} >= date('now', '+6 hours')`);
+  }
+
+  const cursor = filters.cursor;
+  if (cursor) {
+    const operator =
+      filters.sort === "newest"
+        ? cursor.direction === "after"
+          ? "<"
+          : ">"
+        : cursor.direction === "after"
+          ? ">"
+          : "<";
+    const cursorColumn =
+      filters.sort === "newest" ? "jobs.first_listed_at" : effectiveDeadlineSql;
+
+    conditions.push(`
+      (
+        ${cursorColumn} ${operator} ?
+        OR (${cursorColumn} = ? AND jobs.id ${operator} ?)
+      )
+    `);
+    values.push(cursor.value, cursor.value, cursor.id);
+  }
+
+  const canonicalDirection = filters.sort === "newest" ? "DESC" : "ASC";
+  const queryDirection =
+    cursor?.direction === "before"
+      ? canonicalDirection === "DESC"
+        ? "ASC"
+        : "DESC"
+      : canonicalDirection;
+  const orderColumn =
+    filters.sort === "newest" ? "jobs.first_listed_at" : effectiveDeadlineSql;
+
+  values.push(JOBS_PAGE_SIZE + 1);
+
+  const result = await statement(
+    `
+      SELECT
+        jobs.id,
+        COALESCE(jobs.admin_title, jobs.title) AS title,
+        COALESCE(jobs.admin_company, jobs.company) AS company,
+        ${effectiveDeadlineSql} AS deadlineAt,
+        jobs.detail_url AS detailUrl,
+        jobs.job_functions AS jobFunctionsSerialized,
+        jobs.first_listed_at AS firstListedAt,
+        state.bookmarked_at AS bookmarkedAt
+      FROM jobs
+      LEFT JOIN job_user_state AS state
+        ON state.job_id = jobs.id
+        AND state.user_id = ?
+      WHERE ${conditions.join("\nAND ")}
+      ORDER BY ${orderColumn} ${queryDirection}, jobs.id ${queryDirection}
+      LIMIT ?
+    `,
+    values,
+  ).all<ActiveJobRow>();
+
+  const hasExtra = result.results.length > JOBS_PAGE_SIZE;
+  let rows = result.results.slice(0, JOBS_PAGE_SIZE);
+
+  if (cursor?.direction === "before") {
+    rows = rows.reverse();
+  }
+
+  const hasPrevious = cursor
+    ? cursor.direction === "after" || hasExtra
+    : false;
+  const hasNext = cursor
+    ? cursor.direction === "before" || hasExtra
+    : hasExtra;
+
+  function cursorFor(row: ActiveJobRow, direction: CursorDirection) {
+    const value =
+      filters.sort === "newest" ? row.firstListedAt : row.deadlineAt;
+
+    if (!value) {
+      return null;
+    }
+
+    return encodeJobCursor({
+      direction,
+      id: row.id,
+      sort: filters.sort,
+      value,
+    });
+  }
+
+  const first = rows[0];
+  const last = rows.at(-1);
+  const jobs = rows.map(
+    ({ firstListedAt: _firstListedAt, jobFunctionsSerialized, ...job }) => ({
+      ...job,
+      jobFunctions: parseJobFunctions(jobFunctionsSerialized),
+    }),
+  );
+
+  return {
+    jobs,
+    nextCursor: hasNext && last ? cursorFor(last, "after") : null,
+    previousCursor:
+      hasPrevious && first ? cursorFor(first, "before") : null,
+  };
+}
+
+export async function getActiveJobCompaniesFromDb(userId: string) {
+  const result = await statement(
+    `
+      SELECT DISTINCT COALESCE(jobs.admin_company, jobs.company) AS company
+      FROM jobs
+      LEFT JOIN job_user_state AS state
+        ON state.job_id = jobs.id
+        AND state.user_id = ?
+      WHERE state.archived_at IS NULL
+        AND jobs.expired_at IS NULL
+        AND jobs.deleted_at IS NULL
+      ORDER BY company COLLATE NOCASE
+    `,
+    [userId],
+  ).all<{ company: string }>();
+
+  return result.results.map((row) => row.company);
 }
 
 export function getArchivedJobsFromDb(userId: string) {
@@ -303,8 +528,8 @@ export async function applyOfficialFeed(
 ) {
   const db = getCloudflareDb();
   const statements: D1PreparedStatement[] = [];
-  // Keep each statement below D1's 100-bound-parameter limit (14 × 7 = 98).
-  const chunkSize = 14;
+  // Keep each statement below D1's 100-bound-parameter limit (12 x 8 = 96).
+  const chunkSize = 12;
 
   for (let index = 0; index < jobs.length; index += chunkSize) {
     const chunk = jobs.slice(index, index + chunkSize);
@@ -317,24 +542,13 @@ export async function applyOfficialFeed(
           job.canonicalUrl,
           job.canonicalUrl,
           job.deadlineAt,
+          `|${job.jobFunctions.join("|")}|`,
+          input.checkedAt,
           input.checkedAt,
         );
-        return `(?, ?, ?, ?, ?, ?, ?)`;
+        return `(?, ?, ?, ?, ?, ?, ?, ?)`;
       })
       .join(", ");
-
-    const expandedValues: unknown[] = [];
-    for (let offset = 0; offset < values.length; offset += 6) {
-      expandedValues.push(
-        values[offset],
-        values[offset + 1],
-        values[offset + 2],
-        values[offset + 3],
-        values[offset + 4],
-        values[offset + 5],
-        values[offset + 5],
-      );
-    }
 
     statements.push(
       db
@@ -346,6 +560,7 @@ export async function applyOfficialFeed(
               detail_url,
               canonical_url,
               deadline_at,
+              job_functions,
               first_seen_at,
               last_seen_at
             )
@@ -355,6 +570,10 @@ export async function applyOfficialFeed(
               company = excluded.company,
               detail_url = excluded.detail_url,
               deadline_at = excluded.deadline_at,
+              job_functions = CASE
+                WHEN jobs.admin_title IS NULL THEN excluded.job_functions
+                ELSE jobs.job_functions
+              END,
               last_seen_at = excluded.last_seen_at,
               first_listed_at = CASE
                 WHEN jobs.expired_at IS NOT NULL THEN excluded.last_seen_at
@@ -370,7 +589,7 @@ export async function applyOfficialFeed(
               END
           `,
         )
-        .bind(...expandedValues),
+        .bind(...values),
     );
   }
 

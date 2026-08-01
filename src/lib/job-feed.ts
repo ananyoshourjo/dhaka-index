@@ -10,6 +10,7 @@ import {
 } from "@/lib/cloud-db";
 import { getCloudflareEnv } from "@/lib/cloudflare";
 import { validateJobFeed } from "@/lib/job-feed-schema";
+import { classifyJobFunctions } from "@/lib/job-functions";
 import { nowDhakaIso } from "@/lib/time";
 
 const CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
@@ -157,6 +158,7 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
         company: job.company,
         deadlineAt: job.deadline,
         canonicalUrl: job.url,
+        jobFunctions: classifyJobFunctions(job.title),
       })),
       {
         checkedAt,

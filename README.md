@@ -73,7 +73,7 @@ Cloudflare Browser Rendering provides authenticated PDF export. See
 [docs/self-hosting.md](docs/self-hosting.md) for the complete deployment and
 security checklist.
 
-The member Worker checks the sanitized feed every 30 minutes through a
+The member Worker checks the sanitized feed every six hours through a
 Cloudflare Cron Trigger. An expiring D1 lease prevents scheduled and
 visitor-triggered checks from running at the same time.
 

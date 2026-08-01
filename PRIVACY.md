@@ -6,12 +6,12 @@ after launch is stored in the deployment's Cloudflare D1 database.
 
 ## Data stored by the hosted application
 
-- Account name, email, password hash, and session records
+- Account name, email, preferred job function, password hash, and session records
 - Session IP address and user agent when recorded by the authentication library
 - Resume, cover letter, references, and embedded profile photo
 - Bookmarked and archived job identifiers
 - Administrator assignments and job corrections
-- The last valid public job snapshot and synchronization status
+- The last valid public job snapshot, derived job functions, and synchronization status
 
 Cloudflare processes and stores this information as the hosting and database
 provider. Operators with access to the Cloudflare account can administer the

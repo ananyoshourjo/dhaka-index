@@ -7,7 +7,31 @@ type ScheduledEnv = CloudflareEnv & {
 };
 
 export default {
-  fetch: handler.fetch,
+  async fetch(request, env, context) {
+    const startedAt = Date.now();
+    let status = 500;
+
+    try {
+      const response = await handler.fetch(request, env, context);
+      status = response.status;
+      return response;
+    } finally {
+      const durationMs = Date.now() - startedAt;
+      const traced = request.headers.get("x-dhaka-index-health-check") === "1";
+
+      if (traced || status >= 500 || durationMs >= 500) {
+        console.log(
+          JSON.stringify({
+            type: "dhaka-index-request",
+            method: request.method,
+            path: new URL(request.url).pathname,
+            status,
+            durationMs,
+          }),
+        );
+      }
+    }
+  },
 
   async scheduled(
     _controller: ScheduledController,

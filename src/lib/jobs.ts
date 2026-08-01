@@ -1,12 +1,18 @@
 import {
-  getActiveJobsFromDb,
+  getActiveJobCompaniesFromDb,
+  getActiveJobsPageFromDb,
   getArchivedJobsFromDb,
   getBookmarkedJobsFromDb,
   type ActiveJob,
 } from "@/lib/cloud-db";
+import type { ActiveJobFilters } from "@/lib/job-search";
 
-export function getActiveJobs(userId: string): Promise<ActiveJob[]> {
-  return getActiveJobsFromDb(userId);
+export function getActiveJobs(userId: string, filters: ActiveJobFilters) {
+  return getActiveJobsPageFromDb(userId, filters);
+}
+
+export function getActiveJobCompanies(userId: string) {
+  return getActiveJobCompaniesFromDb(userId);
 }
 
 export function getArchivedJobs(userId: string): Promise<ActiveJob[]> {

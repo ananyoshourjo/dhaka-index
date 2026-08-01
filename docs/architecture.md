@@ -47,15 +47,22 @@ An ETag avoids unnecessary downloads. Sync errors update status but never
 expire cached jobs. Only a fully parsed and validated snapshot is applied to
 D1.
 
-The member Worker owns a 30-minute Cron Trigger. It dispatches an authenticated
+The member Worker owns a six-hour Cron Trigger. It dispatches an authenticated
 request through the generated OpenNext handler and forces an ETag-aware feed
-check even when nobody is signed in. Visitor-triggered checks remain as a
-fallback. Both paths acquire the same expiring singleton D1 lease before
-fetching or applying the feed.
+check even when nobody is signed in. Long-lived signed-in tabs retain a
+six-hour fallback, but mounting the Jobs route does not trigger another Worker
+request. Both paths acquire the same expiring singleton D1 lease before fetching
+or applying the feed.
 
 Feed writes update base fields. `admin_title`, `admin_company`,
 `admin_deadline_at`, `admin_deadline_override`, and `deleted_at` are
 administrator overrides or tombstones and are preserved.
+
+The member application derives one or more controlled job functions from each
+listing title during synchronization. These taxonomies stay inside D1 rather
+than changing the public feed contract. They power job search and filtering,
+and the primary job interest collected at sign-up uses the same vocabulary so
+future notifications can be matched consistently.
 
 ## Resume data and PDF generation
 

@@ -78,6 +78,40 @@ test("Cloudflare Worker schedules an authenticated forced feed refresh", () => {
   assert.match(worker, /async scheduled/);
   assert.match(worker, /X-Dhaka-Index-Sync-Key/);
   assert.match(worker, /X-Dhaka-Index-Sync-Source/);
-  assert.match(config, /"\*\/30 \* \* \* \*"/);
+  assert.match(config, /"0 \*\/6 \* \* \*"/);
   assert.match(route, /syncJobFeed\(\{ force: scheduled \}\)/);
+});
+
+test("job index migrations support newest and deadline keyset pagination", () => {
+  const migration = fs.readFileSync(
+    path.join(
+      process.cwd(),
+      "migrations",
+      "0004_job_index_pagination.sql",
+    ),
+    "utf8",
+  );
+
+  assert.match(migration, /jobs_active_newest_page_idx/);
+  assert.match(migration, /first_listed_at DESC, id DESC/);
+  assert.match(migration, /jobs_active_deadline_page_idx/);
+  assert.match(migration, /admin_deadline_override/);
+});
+
+test("job function migration adds user interests and listing taxonomies", () => {
+  const migration = fs.readFileSync(
+    path.join(
+      process.cwd(),
+      "migrations",
+      "0006_job_functions_and_user_interest.sql",
+    ),
+    "utf8",
+  );
+
+  assert.match(migration, /ADD COLUMN "preferredJobFunction" TEXT NOT NULL/);
+  assert.match(migration, /ADD COLUMN job_functions TEXT NOT NULL/);
+  assert.match(migration, /Finance & Accounting/);
+  assert.match(migration, /Marketing & Communications/);
+  assert.match(migration, /Sales & Business Development/);
+  assert.match(migration, /UPDATE jobs/);
 });

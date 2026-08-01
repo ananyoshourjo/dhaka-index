@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import type { ResumeContent, ResumeSectionKey } from "@/lib/resume";
 import { defaultResumeSectionOrder } from "@/lib/resume";
 import { getCloudflareEnv } from "@/lib/cloudflare";
-import { sanitizeLocalPhoto } from "@/lib/photo";
+import { getProfilePhotoDataUrl } from "@/lib/profile-photo";
 import { getSession } from "@/lib/session";
 
 const MAX_REQUEST_BYTES = 1024 * 1024;
@@ -38,12 +38,15 @@ function linkedinHref(value: string) {
   return `https://linkedin.com/${value.replace(/^\/+/, "")}`;
 }
 
-function sanitizeResumeForPdf(resume: ResumeContent): ResumeContent {
+function sanitizeResumeForPdf(
+  resume: ResumeContent,
+  photoUrl: string,
+): ResumeContent {
   return {
     ...resume,
     contact: {
       ...resume.contact,
-      photoUrl: sanitizeLocalPhoto(resume.contact.photoUrl),
+      photoUrl,
     },
   };
 }
@@ -474,7 +477,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Missing resume." }, { status: 400 });
     }
 
-    const resume = sanitizeResumeForPdf(payload.resume);
+    const resume = sanitizeResumeForPdf(
+      payload.resume,
+      await getProfilePhotoDataUrl(session.user.id),
+    );
     const requestedDocument = payload.document ?? "resume";
     const html =
       requestedDocument === "coverLetter"

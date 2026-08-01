@@ -3,7 +3,7 @@ import { nextCookies } from "better-auth/next-js";
 
 import { getCloudflareEnv } from "@/app/lib/cloudflare";
 
-export function getAuth() {
+function createAuth() {
   const env = getCloudflareEnv();
   const configuredOrigins =
     env.DHAKA_INDEX_TRUSTED_ORIGINS?.split(",")
@@ -19,10 +19,23 @@ export function getAuth() {
     plugins: [nextCookies()],
     secret: env.BETTER_AUTH_SECRET,
     baseURL: env.ADMIN_AUTH_URL,
-    trustedOrigins: [env.ADMIN_AUTH_URL, ...configuredOrigins].filter(Boolean),
+    trustedOrigins: [
+      env.ADMIN_AUTH_URL,
+      ...(process.env.NODE_ENV === "development"
+        ? ["http://127.0.0.1:3001", "http://localhost:3001"]
+        : []),
+      ...configuredOrigins,
+    ].filter(Boolean),
   });
 }
 
-type Auth = ReturnType<typeof getAuth>;
+type Auth = ReturnType<typeof createAuth>;
+
+let cachedAuth: Auth | undefined;
+
+export function getAuth(): Auth {
+  cachedAuth ??= createAuth();
+  return cachedAuth;
+}
 
 export type AuthSession = Auth["$Infer"]["Session"];
