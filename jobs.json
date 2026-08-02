@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-01T16:06:41.656Z",
+  "generatedAt": "2026-08-02T10:02:41.935Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -109,13 +109,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Assistant Manager - Talent Acquisition",
-      "company": "Apple Gadgets",
-      "deadline": "2026-08-01",
-      "url": "https://bdrecruit.net/jobs-in-bd/apple-gadgets/career-bd/assistant-manager-talent-acquisition/dhaka",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Senior Front-end Developer",
       "company": "As-Sunnah Foundation",
       "deadline": null,
@@ -163,13 +156,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/byd-bangladesh/career-bd/senior-executive-assistant-manager/tejgon/dhaka",
       "functionTag": "other"
-    },
-    {
-      "title": "Assistant Manager / Manager – HR",
-      "company": "DBL Group",
-      "deadline": "2026-08-01",
-      "url": "https://bdrecruit.net/jobs-in-bd/dbl-group/career-bd/assistant-manager-manager/uttara/dhaka",
-      "functionTag": "human_resources"
     },
     {
       "title": "Manager – HR",
@@ -233,13 +219,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/healthcare-pharmaceuticals-limited/career-bd/executive-ibd/corporate/head-office/dhaka",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Manager/Manager – HR",
-      "company": "Ismartu Technology BD Limited",
-      "deadline": "2026-08-01",
-      "url": "https://bdrecruit.net/jobs-in-bd/ismartu-technology-bd-limited/career-bd/senior-manager-manager/bangladesh",
-      "functionTag": "human_resources"
     },
     {
       "title": "Executive – HR, Admin & Compliance",
@@ -676,13 +655,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Brand Executive – Marketing",
-      "company": "Miniso Bangladesh Ltd.",
-      "deadline": "2026-08-01",
-      "url": "https://brandpractitioners.com/miniso-bangladesh-ltd-is-hiring-brand-executive-marketing",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Regional Sales Manager, Feed Business",
       "company": "Nabil Group",
       "deadline": "2026-08-10",
@@ -788,18 +760,18 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Executive Creative Director",
-      "company": "Walton",
-      "deadline": "2026-08-01",
-      "url": "https://brandpractitioners.com/walton-is-hiring-executive-creative-director",
-      "functionTag": "design_creative"
-    },
-    {
       "title": "Expression of Interest: Team Leader",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
       "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-team-leader/1045/34502635712",
       "functionTag": "general_management"
+    },
+    {
+      "title": "Manufacturing HRBP- Savar",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-08-15",
+      "url": "https://careers.bat.com/en/job/dhaka/manufacturing-hrbp-savar/1045/41918606144",
+      "functionTag": "human_resources"
     },
     {
       "title": "Area Sales Manager (Aarong Dairy)",
@@ -1194,60 +1166,25 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Android Developer (Native)",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/android-developer-native",
-      "functionTag": "software_engineering"
+      "title": "SME Director",
+      "company": "Banglalink",
+      "deadline": "2026-08-09",
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11807",
+      "functionTag": "other"
     },
     {
-      "title": "iOS Developer (Native)",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/ios-developer-native",
-      "functionTag": "software_engineering"
+      "title": "Strategic Assistant",
+      "company": "Banglalink",
+      "deadline": "2026-08-11",
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11808",
+      "functionTag": "other"
     },
     {
-      "title": "Lead React Native Engineer",
-      "company": "Inument Solution Limited",
+      "title": "Ad Operations Manager/Specialist, Toffee",
+      "company": "Banglalink",
       "deadline": null,
-      "url": "https://inument.com/job/lead-react-native-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Senior Drupal Developer",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/senior-drupal-developer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Senior Flutter Engineer",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/senior-flutter-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Senior Frontend Engineer",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/senior-frontend-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Senior Java Engineer",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/senior-java-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "SQA Engineer",
-      "company": "Inument Solution Limited",
-      "deadline": null,
-      "url": "https://inument.com/job/sqa-engineer",
-      "functionTag": "software_engineering"
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11814",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Customer Success Manager",
@@ -1271,32 +1208,18 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Data Operations Analyst (Bangladesh)",
+      "title": "Operations Specialist (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/4f984c29-f4f8-465b-a20e-b9c9e81a8e1c",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Client QA Specialist",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/87e472cd-0e45-4065-91f7-9893c784355f",
+      "deadline": "2026-08-31",
+      "url": "https://jobs.ashbyhq.com/Commure/0a36e4a9-1c34-409d-9726-1f1f5d7093d3",
       "functionTag": "operations"
     },
     {
-      "title": "Product Support Specialist (Bangladesh)",
+      "title": "People Generalist (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/9df780d0-f9b1-41ee-8632-32489558797f",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Assistant Manager, RCM Operations (Bangladesh)",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60",
-      "functionTag": "operations"
+      "deadline": "2026-08-15",
+      "url": "https://jobs.ashbyhq.com/Commure/cc0085f7-c305-41b4-9aee-5f17eb453bbe",
+      "functionTag": "human_resources"
     },
     {
       "title": "PEOPLE EXPERIENCE ASSOCIATE",
@@ -1425,55 +1348,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Artist/Designer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/artist-designer",
-      "functionTag": "design_creative"
-    },
-    {
-      "title": "Full-stack Developer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/full-stack-developer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Performance Marketing & Growth Specialist",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/performance-marketing-growth-specialist",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Senior Motion Designer (UI & Marketing)",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/senior-motion-designer-ui-marketing",
-      "functionTag": "design_creative"
-    },
-    {
-      "title": "Software QA Engineer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/software-qa-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Technical Content Developer/Writer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/technical-content-developer-writer",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "UI/UX Designer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/ui-ux-designer",
-      "functionTag": "design_creative"
-    },
-    {
       "title": "Manager, Structured Finance",
       "company": "HSBC Bangladesh",
       "deadline": null,
@@ -1523,48 +1397,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Jr. Executive, Customer Experience",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/31iBR0RnZ79e/jr-executive-customer-experience",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Senior Animator",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/kuZxiblg6Ozr/senior-animator",
-      "functionTag": "design_creative"
-    },
-    {
-      "title": "Executive, Paid Performance & Measurement",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/lG-0sxgywDWX/executive-paid-performance-measurement",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Academic Counsellor (Jashore Tele-sales)",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/nJvOk0czhX0Y/academic-counsellor-jashore-tele-sales",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Android Developer (Sr. Software Engineer)",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/pV54kjEWqJ_z/android-developer-sr-software-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Executive, Martech & Lifecycle",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/pmzvn8oulT_X/executive-martech-lifecycle",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Subject Program Executive",
       "company": "Shikho",
       "deadline": null,
@@ -1586,32 +1418,11 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Intern",
-      "company": "City Bank PLC",
-      "deadline": "2026-08-01",
-      "url": "https://thecvguy.net/bank-jobs/internship-bank-jobs/city-bank-intern-2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Universal Banker",
       "company": "Standard Chartered Bank",
       "deadline": "2026-08-03",
       "url": "https://thecvguy.net/bank-jobs/standard-chartered-universal-banker-2026",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Strategic Assistant",
-      "company": "Banglalink",
-      "deadline": "2026-08-11",
-      "url": "https://thecvguy.net/jobs-in-bd/banglalink-hiring-strategic-assistant-2026",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "SME Director",
-      "company": "Banglalink",
-      "deadline": "2026-08-09",
-      "url": "https://thecvguy.net/jobs-in-bd/banglalink-is-hiring-sme-director-2026",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Assistant Manager – VAT",
@@ -1628,13 +1439,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Lead, IT Operations",
-      "company": "IPDC Finance",
-      "deadline": "2026-08-01",
-      "url": "https://thecvguy.net/jobs-in-bd/ipdc-finance-plc-career-lead-it-operations-vacancy-in-bangladesh",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Sr. Executive – Technical Services",
       "company": "Square Food & Beverage Ltd.",
       "deadline": "2026-08-15",
@@ -1642,39 +1446,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Manufacturing HRBP - Savar",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": "2026-08-15",
-      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-hiring-manufacturing-hrbp",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Transaction Management II C10",
       "company": "Citi Careers",
       "deadline": "2026-08-15",
       "url": "https://thecvguy.net/mnc-jobs/citi-transaction-management-ii-c10-2026",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Operations Specialist",
-      "company": "Commure",
-      "deadline": "2026-08-31",
-      "url": "https://thecvguy.net/mnc-jobs/commure-is-hiring-operations-specialist",
-      "functionTag": "operations"
-    },
-    {
-      "title": "People Generalist",
-      "company": "Commure",
-      "deadline": "2026-08-15",
-      "url": "https://thecvguy.net/mnc-jobs/commure-is-hiring-people-generalist-2026",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Head, Retail Media and Partnership",
-      "company": "Foodpanda",
-      "deadline": "2026-08-01",
-      "url": "https://thecvguy.net/mnc-jobs/foodpanda-bangladesh-head-retail-media-2026",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Territory Officer",
