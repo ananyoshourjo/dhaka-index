@@ -1,4 +1,4 @@
-import { isJobFunction, type JobFunction } from "@/lib/job-functions";
+import { isJobFunction, type JobFunction } from "./job-functions";
 
 export const JOBS_PAGE_SIZE = 40;
 

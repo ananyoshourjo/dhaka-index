@@ -3,6 +3,7 @@ import {
   classifyJobFunctions,
   serializeJobFunctions,
 } from "../../../src/lib/job-functions";
+import type { ActiveJobFilters } from "../../../src/lib/job-search";
 
 export type AdminJob = {
   id: number;
@@ -34,7 +35,31 @@ function isValidDateOnly(value: string) {
   );
 }
 
-export async function getAdminJobs() {
+function escapeLike(value: string) {
+  return value.replace(/[\\%_]/g, "\\$&");
+}
+
+export async function getAdminJobs(filters: ActiveJobFilters) {
+  const conditions = ["expired_at IS NULL", "deleted_at IS NULL"];
+  const values: unknown[] = [];
+
+  if (filters.query) {
+    const pattern = `%${escapeLike(filters.query.toLowerCase())}%`;
+    conditions.push(`
+      (
+        LOWER(COALESCE(admin_title, title)) LIKE ? ESCAPE '\\'
+        OR LOWER(COALESCE(admin_company, company)) LIKE ? ESCAPE '\\'
+        OR LOWER(job_functions) LIKE ? ESCAPE '\\'
+      )
+    `);
+    values.push(pattern, pattern, pattern);
+  }
+
+  if (filters.jobFunction) {
+    conditions.push("instr(job_functions, ?) > 0");
+    values.push(`|${filters.jobFunction}|`);
+  }
+
   const result = await statement(
     `
         SELECT
@@ -48,10 +73,10 @@ export async function getAdminJobs() {
           detail_url AS detailUrl,
           canonical_url AS canonicalUrl
         FROM jobs
-        WHERE expired_at IS NULL
-          AND deleted_at IS NULL
+        WHERE ${conditions.join("\n          AND ")}
         ORDER BY first_listed_at DESC, id DESC
     `,
+    values,
   ).all<AdminJob>();
 
   return result.results;

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getWebpDimensions } from "@/lib/photo";
+import { getWebpDimensions, toPhotoBuffer } from "@/lib/photo";
 import {
   deleteProfilePhoto,
   getProfilePhoto,
@@ -24,9 +24,15 @@ export async function GET(request: Request) {
     return new Response(null, { status: 404 });
   }
 
+  const image = toPhotoBuffer(photo.image_blob);
+
+  if (!image || image.byteLength === 0) {
+    return new Response(null, { status: 404 });
+  }
+
   const versioned = new URL(request.url).searchParams.has("v");
 
-  return new Response(photo.image_blob!, {
+  return new Response(image, {
     headers: {
       "Cache-Control": versioned
         ? "private, max-age=31536000, immutable"

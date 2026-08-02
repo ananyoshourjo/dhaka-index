@@ -1,6 +1,7 @@
 import { BriefcaseBusiness } from "lucide-react";
 import { revalidatePath } from "next/cache";
 
+import { JobFilterBar } from "@/app/jobs/job-filter-bar";
 import { EditableJobCard } from "@/app/jobs/editable-job-card";
 import {
   deleteAdminJob,
@@ -9,6 +10,11 @@ import {
   type EditableJobField,
 } from "@/app/lib/jobs";
 import { requireAdmin } from "@/app/lib/session";
+import {
+  hasActiveJobFilters,
+  parseActiveJobFilters,
+  type JobSearchParams,
+} from "../../../src/lib/job-search";
 
 export const dynamic = "force-dynamic";
 
@@ -51,16 +57,21 @@ async function deleteJobAction(formData: FormData) {
   revalidatePath("/jobs");
 }
 
-export default async function AdminJobsPage() {
+type AdminJobsPageProps = {
+  searchParams: Promise<JobSearchParams>;
+};
+
+export default async function AdminJobsPage({
+  searchParams,
+}: AdminJobsPageProps) {
   await requireAdmin();
 
-  const jobs = await getAdminJobs();
+  const filters = parseActiveJobFilters(await searchParams);
+  const jobs = await getAdminJobs(filters);
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-5 sm:gap-4 sm:px-6 sm:py-8">
-      <h1 className="mb-1 text-xl font-semibold">
-        {jobs.length} active {jobs.length === 1 ? "job" : "jobs"}
-      </h1>
+      <JobFilterBar filters={filters} />
 
       {jobs.length === 0 ? (
         <section className="rounded-xl border border-dashed bg-card px-6 py-10 text-center text-card-foreground">
@@ -68,9 +79,15 @@ export default async function AdminJobsPage() {
             className="mx-auto mb-4 size-8 text-muted-foreground"
             aria-hidden="true"
           />
-          <h2 className="text-lg font-semibold">No active jobs</h2>
+          <h2 className="text-lg font-semibold">
+            {hasActiveJobFilters(filters)
+              ? "No jobs match these filters."
+              : "No active jobs"}
+          </h2>
           <p className="mx-auto mt-2 max-w-lg text-sm text-muted-foreground">
-            New official feed entries will appear here after the shared database syncs.
+            {hasActiveJobFilters(filters)
+              ? "Try a different search or job function."
+              : "New official feed entries will appear here after the shared database syncs."}
           </p>
         </section>
       ) : (
