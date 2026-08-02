@@ -2,7 +2,7 @@
 
 Dhaka Index is an experimental project exploring a focused jobs and
 application toolkit for Dhaka. Try the live experiment at
-[dhaka-index.ananyosshourjo.workers.dev](https://dhaka-index.ananyosshourjo.workers.dev).
+[dhakaindex.com](https://dhakaindex.com).
 
 The project combines a curated job index with resume and cover-letter tools.
 Its public app and private administration service run on Cloudflare Workers and
