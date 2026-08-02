@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 0.7.0 - 2026-08-02
+
+- Add admin job search and job-function filtering with shared controls.
+- Make local admin development reuse D1 state and apply shared migrations automatically.
+- Harden profile-photo binary responses and refine resume selects and auto-growing bullet editors.
+
 ## 0.6.0 - 2026-08-01
 
 - Expand the resume builder with publications, certifications, custom sections, editable titles, and flexible section ordering.

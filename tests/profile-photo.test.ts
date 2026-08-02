@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import test from "node:test";
 
-import { getWebpDimensions } from "../src/lib/photo";
+import { getWebpDimensions, toPhotoBuffer } from "../src/lib/photo";
 
 test("profile photo migration moves embedded images out of resume and auth rows", () => {
   const migration = fs.readFileSync(
@@ -48,6 +48,17 @@ test("WebP validation reads a bounded VP8X thumbnail", () => {
 
   assert.deepEqual(getWebpDimensions(bytes), { width: 400, height: 356 });
   assert.equal(getWebpDimensions(new Uint8Array(30)), null);
+});
+
+test("photo responses normalize D1 blob runtime shapes to binary bytes", () => {
+  const bytes = [82, 73, 70, 70, 87, 69, 66, 80];
+  const readBytes = (value: unknown) =>
+    Array.from(new Uint8Array(toPhotoBuffer(value) ?? new ArrayBuffer(0)));
+
+  assert.deepEqual(readBytes(bytes), bytes);
+  assert.deepEqual(readBytes(Uint8Array.from(bytes)), bytes);
+  assert.deepEqual(readBytes(Uint8Array.from(bytes).buffer), bytes);
+  assert.equal(toPhotoBuffer("82,73,70,70"), null);
 });
 
 test("resume builder keeps a recoverable draft and reports terminal save failures", () => {

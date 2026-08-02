@@ -2,6 +2,24 @@ const MAX_PHOTO_DATA_URL_LENGTH = 1_500_000;
 const LOCAL_PHOTO_PATTERN =
   /^data:image\/(?:png|jpe?g|webp);base64,[a-z0-9+/=\r\n]+$/i;
 
+export function toPhotoBuffer(value: unknown): ArrayBuffer | null {
+  let bytes: Uint8Array;
+
+  if (value instanceof ArrayBuffer) {
+    bytes = new Uint8Array(value);
+  } else if (ArrayBuffer.isView(value)) {
+    bytes = new Uint8Array(value.buffer, value.byteOffset, value.byteLength);
+  } else if (Array.isArray(value)) {
+    bytes = Uint8Array.from(value);
+  } else {
+    return null;
+  }
+
+  const buffer = new ArrayBuffer(bytes.byteLength);
+  new Uint8Array(buffer).set(bytes);
+  return buffer;
+}
+
 export function sanitizeLocalPhoto(value: string) {
   if (
     value.length <= MAX_PHOTO_DATA_URL_LENGTH &&

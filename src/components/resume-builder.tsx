@@ -23,6 +23,13 @@ import {
 
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { createPhotoThumbnail } from "@/lib/photo-client";
 import {
   hasResumeContent,
@@ -278,17 +285,24 @@ function SelectField<T extends string>({
   return (
     <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
       {label}
-      <select
+      <Select
         value={value}
-        onChange={(event) => onChange(event.target.value as T)}
-        className="h-9 rounded-md border bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        onValueChange={(nextValue) => onChange(nextValue as T)}
       >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+        <SelectTrigger
+          aria-label={label}
+          className="h-9 text-foreground focus:border-ring focus:ring-2 focus:ring-ring/20"
+        >
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option.value} value={option.value}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </label>
   );
 }
@@ -307,14 +321,7 @@ function TextArea({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useLayoutEffect(() => {
-    const textarea = textareaRef.current;
-
-    if (!textarea) {
-      return;
-    }
-
-    textarea.style.height = "auto";
-    textarea.style.height = `${textarea.scrollHeight}px`;
+    autoResizeTextarea(textareaRef.current);
   }, [value]);
 
   return (
@@ -329,6 +336,15 @@ function TextArea({
       />
     </label>
   );
+}
+
+function autoResizeTextarea(textarea: HTMLTextAreaElement | null) {
+  if (!textarea) {
+    return;
+  }
+
+  textarea.style.height = "auto";
+  textarea.style.height = `${textarea.scrollHeight}px`;
 }
 
 function EditorSection({
@@ -3892,10 +3908,15 @@ function BulletEditor({
   onDrop: (group: string, id: string) => void;
   dropIndicator: DropIndicator | null;
 }) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const indicator =
     dropIndicator?.group === dragGroup && dropIndicator.id === bullet.id
       ? dropIndicator.position
       : null;
+
+  useLayoutEffect(() => {
+    autoResizeTextarea(textareaRef.current);
+  }, [bullet.text]);
 
   return (
     <div
@@ -3929,10 +3950,14 @@ function BulletEditor({
         />
       </div>
       <textarea
+        ref={textareaRef}
         value={bullet.text}
         rows={2}
-        onChange={(event) => onChange(event.target.value)}
-        className="resize-none rounded-md border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        onChange={(event) => {
+          autoResizeTextarea(event.currentTarget);
+          onChange(event.target.value);
+        }}
+        className="resize-none overflow-hidden rounded-md border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
       />
       <Button
         type="button"

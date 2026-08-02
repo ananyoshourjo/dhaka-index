@@ -4,6 +4,7 @@ import { getCloudflareDb } from "@/lib/cloudflare";
 import { decodeLocalPhoto, sanitizeLocalPhoto } from "@/lib/photo";
 
 const PROFILE_PHOTO_PATH = "/api/profile/photo";
+const PROFILE_PHOTO_CACHE_VERSION = "2";
 
 type ProfilePhotoRow = {
   image_blob: ArrayBuffer | null;
@@ -13,7 +14,7 @@ type ProfilePhotoRow = {
 };
 
 function versionedPhotoUrl(updatedAt: string) {
-  return `${PROFILE_PHOTO_PATH}?v=${encodeURIComponent(updatedAt)}`;
+  return `${PROFILE_PHOTO_PATH}?v=${PROFILE_PHOTO_CACHE_VERSION}-${encodeURIComponent(updatedAt)}`;
 }
 
 export async function getProfilePhoto(userId: string) {
