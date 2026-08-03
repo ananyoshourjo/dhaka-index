@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.1.0 - 2026-08-03
+
+- Add optional links to custom resume entries in the editor, preview, and PDF export.
+- Make resume email and phone references clickable in PDF exports.
+
 ## 1.0.0 - 2026-08-03
 
 - Launch Dhaka Index 1.0.0 on its official domain with a clear mission centered on high-quality jobs, thoughtful UX, and simplicity

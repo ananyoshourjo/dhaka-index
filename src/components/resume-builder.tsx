@@ -23,6 +23,7 @@ import {
 
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -56,6 +57,7 @@ import type {
   ResumeSkillGroup,
   ResumeWorkExperience,
 } from "@/lib/resume";
+import { normalizeResumeLink } from "@/lib/resume-links";
 import { cn } from "@/lib/utils";
 
 type ResumeBuilderProps = {
@@ -153,6 +155,7 @@ function newCustomEntry(): ResumeCustomEntry {
     included: true,
     heading: "",
     subheading: "",
+    link: "",
     place: "",
     dates: "",
     useBullets: false,
@@ -220,18 +223,24 @@ function Field({
   label,
   value,
   onChange,
+  type = "text",
+  placeholder,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  type?: "text" | "url";
+  placeholder?: string;
 }) {
   return (
     <label className="grid gap-1.5 text-xs font-medium text-muted-foreground">
       {label}
-      <input
+      <Input
+        type={type}
         value={value}
+        placeholder={placeholder}
         onChange={(event) => onChange(event.target.value)}
-        className="h-9 rounded-md border bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        className="bg-background text-foreground"
       />
     </label>
   );
@@ -495,27 +504,6 @@ function splitParagraphs(value: string) {
     .filter(Boolean);
 }
 
-function safeExternalUrl(value: string) {
-  const normalized = value.trim();
-
-  if (!normalized) {
-    return "";
-  }
-
-  const candidate = normalized.startsWith("//")
-    ? `https:${normalized}`
-    : /^[a-z][a-z\d+.-]*:/i.test(normalized)
-      ? normalized
-      : `https://${normalized}`;
-
-  try {
-    const url = new URL(candidate);
-    return ["http:", "https:"].includes(url.protocol) ? url.toString() : "";
-  } catch {
-    return "";
-  }
-}
-
 const previewLinkClassName = "text-blue-700 underline";
 
 function contactUrl(protocol: "mailto" | "tel", value: string) {
@@ -536,7 +524,7 @@ function safeLinkedInUrl(value: string) {
       ? `https://${normalized}`
       : `https://linkedin.com/${normalized.replace(/^\/+/, "")}`;
 
-  return safeExternalUrl(candidate);
+  return normalizeResumeLink(candidate);
 }
 
 function ResumePreviewLink({
@@ -1747,7 +1735,7 @@ export function ResumeBuilder({
     {
       label: "Website",
       value: resume.contact.website,
-      href: safeExternalUrl(resume.contact.website),
+      href: normalizeResumeLink(resume.contact.website),
     },
   ].filter((item) => item.value.trim());
 
@@ -3198,6 +3186,18 @@ export function ResumeBuilder({
                       }
                     />
                     <Field
+                      label="Link"
+                      type="url"
+                      placeholder="https://example.com"
+                      value={item.link}
+                      onChange={(value) =>
+                        updateCustomEntry(section.id, item.id, (entry) => ({
+                          ...entry,
+                          link: value,
+                        }))
+                      }
+                    />
+                    <Field
                       label="Place"
                       value={item.place}
                       onChange={(value) =>
@@ -3603,7 +3603,7 @@ export function ResumeBuilder({
                 >
                   <div className="grid gap-[7px]">
                     {visiblePublications.map((item) => {
-                      const publicationUrl = safeExternalUrl(item.url);
+                      const publicationUrl = normalizeResumeLink(item.url);
                       const statusLabel =
                         item.status === "published"
                           ? ""
@@ -3652,7 +3652,7 @@ export function ResumeBuilder({
                 >
                   <div className="grid gap-[7px]">
                     {visibleCertifications.map((item) => {
-                      const verificationUrl = safeExternalUrl(item.credentialUrl);
+                      const verificationUrl = normalizeResumeLink(item.credentialUrl);
                       const dateLabel =
                         item.status === "inProgress" ? "Expected" : "Issued";
                       const metadata = [
@@ -3823,6 +3823,8 @@ export function ResumeBuilder({
                         const visibleBullets = item.bullets.filter(
                           (bullet) => bullet.included && bullet.text,
                         );
+                        const linkLabel = item.link.trim();
+                        const linkHref = normalizeResumeLink(linkLabel);
 
                         return (
                           <div key={item.id}>
@@ -3833,6 +3835,17 @@ export function ResumeBuilder({
                                 {item.subheading ? (
                                   <span className="font-normal italic">
                                     {item.subheading}
+                                  </span>
+                                ) : null}
+                                {item.heading && !item.subheading && linkLabel
+                                  ? " - "
+                                  : ""}
+                                {item.subheading && linkLabel ? " - " : ""}
+                                {linkLabel ? (
+                                  <span className="font-normal italic">
+                                    <ResumePreviewLink href={linkHref}>
+                                      {linkLabel}
+                                    </ResumePreviewLink>
                                   </span>
                                 ) : null}
                               </p>
