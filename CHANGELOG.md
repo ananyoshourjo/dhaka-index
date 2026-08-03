@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.2 - 2026-08-03
+
+- Remove the placeholder URL from the resume builder link field for a cleaner, consistent form.
+
 ## 1.1.1 - 2026-08-03
 
 - Remove unintended drop shadows from shared input fields across the member and admin apps.
