@@ -3188,7 +3188,6 @@ export function ResumeBuilder({
                     <Field
                       label="Link"
                       type="url"
-                      placeholder="https://example.com"
                       value={item.link}
                       onChange={(value) =>
                         updateCustomEntry(section.id, item.id, (entry) => ({
