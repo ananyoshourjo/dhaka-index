@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.1 - 2026-08-03
+
+- Remove unintended drop shadows from shared input fields across the member and admin apps.
+
 ## 1.1.0 - 2026-08-03
 
 - Add optional links to custom resume entries in the editor, preview, and PDF export.
