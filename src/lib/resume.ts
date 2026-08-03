@@ -113,6 +113,7 @@ export type ResumeCustomEntry = {
   included: boolean;
   heading: string;
   subheading: string;
+  link: string;
   place: string;
   dates: string;
   useBullets: boolean;

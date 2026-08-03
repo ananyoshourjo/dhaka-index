@@ -113,6 +113,7 @@ export function normalizeResumeCustomSections(
                   typeof current.subheading === "string"
                     ? current.subheading
                     : "",
+                link: typeof current.link === "string" ? current.link : "",
                 place: typeof current.place === "string" ? current.place : "",
                 dates: typeof current.dates === "string" ? current.dates : "",
                 useBullets: current.useBullets === true,
@@ -282,9 +283,14 @@ export function hasResumeContent(
     section.entries.some(
       (item) =>
         item.included &&
-        ([item.heading, item.subheading, item.place, item.dates, item.description].some(
-          hasText,
-        ) ||
+        ([
+          item.heading,
+          item.subheading,
+          item.link,
+          item.place,
+          item.dates,
+          item.description,
+        ].some(hasText) ||
           hasBullets(item.bullets)),
     ),
   );

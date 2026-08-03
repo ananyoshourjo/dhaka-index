@@ -15,6 +15,7 @@ import {
 } from "@/lib/resume-schema";
 import { getCloudflareEnv } from "@/lib/cloudflare";
 import { getProfilePhotoDataUrl } from "@/lib/profile-photo";
+import { normalizeResumeLink } from "@/lib/resume-links";
 import { getSession } from "@/lib/session";
 
 const MAX_REQUEST_BYTES = 1024 * 1024;
@@ -45,6 +46,14 @@ function contactLink(text: string, href: string) {
   } catch {
     safeHref = "";
   }
+
+  return safeHref
+    ? `<a class="link" href="${escapeHtml(safeHref)}">${escapeHtml(text)}</a>`
+    : escapeHtml(text);
+}
+
+function externalLink(text: string, href: string) {
+  const safeHref = normalizeResumeLink(href);
 
   return safeHref
     ? `<a class="link" href="${escapeHtml(safeHref)}">${escapeHtml(text)}</a>`
@@ -320,7 +329,15 @@ function buildResumeHtml(
                   <div>
                     <p class="strong">${escapeHtml(item.name)}</p>
                     <p class="strong">${escapeHtml(item.title)}, ${escapeHtml(item.organization)}</p>
-                    <p><span class="link">${escapeHtml(item.email)}</span> | <span class="link">${escapeHtml(item.phone)}</span></p>
+                    <p>${
+                      item.email
+                        ? contactLink(item.email, `mailto:${item.email}`)
+                        : ""
+                    }${item.email && item.phone ? " | " : ""}${
+                      item.phone
+                        ? contactLink(item.phone, `tel:${item.phone}`)
+                        : ""
+                    }</p>
                   </div>
                 `,
               )
@@ -336,9 +353,13 @@ function buildResumeHtml(
       const body = customSection.entries
         .filter((item) => item.included)
         .map((item) => {
+          const link = item.link.trim();
           const heading = [
             item.heading ? escapeHtml(item.heading) : "",
             item.subheading ? `<em>${escapeHtml(item.subheading)}</em>` : "",
+            link
+              ? `<em>${externalLink(link, link)}</em>`
+              : "",
           ]
             .filter(Boolean)
             .join(" - ");
