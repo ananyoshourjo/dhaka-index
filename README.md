@@ -1,13 +1,21 @@
 # Dhaka Index
 
-Dhaka Index is an experimental project exploring a focused jobs and
-application toolkit for Dhaka. Try the live experiment at
-[dhakaindex.com](https://dhakaindex.com).
+Dhaka Index is a clean, simple home for finding high-quality jobs and building
+a professional resume. Explore it at [dhakaindex.com](https://dhakaindex.com).
 
-The project combines a curated job index with resume and cover-letter tools.
-Its public app and private administration service run on Cloudflare Workers and
-share a Cloudflare D1 database. It is an early experiment, not a production
-employment service, and its direction will be shaped by user feedback.
+Job hunting already asks enough of people. Dhaka Index brings worthwhile
+opportunities together in one focused place, removes the usual noise, and
+helps each person move from discovery to a polished application without
+juggling a collection of disconnected tools.
+
+Quality, thoughtful user experience, and simplicity guide every decision. The
+project is open source because a useful public service should earn trust in the
+open: people should be able to understand how it works, see how it evolves,
+and help make it better.
+
+The product combines a curated job index with built-in resume and cover-letter
+tools. Its public app and private administration service run on Cloudflare
+Workers and share a Cloudflare D1 database.
 
 The public repository does **not** contain the crawler or any user data. A
 private maintainer workflow publishes a sanitized CC0 snapshot containing only

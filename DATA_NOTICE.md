@@ -1,5 +1,9 @@
 # Job data notice
 
+High-quality job discovery depends on trustworthy source information. In the
+interest of openness and transparency, this notice explains exactly what the
+public job feed contains, what it leaves out, and where its limits are.
+
 The `jobs-data` branch contains a machine-readable snapshot with only:
 
 - job title;

@@ -2,6 +2,13 @@
 
 All notable changes are documented here.
 
+## 1.0.0 - 2026-08-03
+
+- Launch Dhaka Index 1.0.0 on its official domain with a clear mission centered on high-quality jobs, thoughtful UX, and simplicity
+- Present the built-in resume builder as a direct path from finding an opportunity to creating a professional application
+- Make openness and transparency explicit across the product, privacy, contribution, and job-data story
+- Serve current profile photos reliably in the admin portal and route production builds to the official admin domain
+
 ## 0.7.0 - 2026-08-02
 
 - Add admin job search and job-function filtering with shared controls.

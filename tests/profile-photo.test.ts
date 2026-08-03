@@ -61,6 +61,36 @@ test("photo responses normalize D1 blob runtime shapes to binary bytes", () => {
   assert.equal(toPhotoBuffer("82,73,70,70"), null);
 });
 
+test("admin profile photos use a protected binary response instead of embedded data", () => {
+  const users = fs.readFileSync(
+    path.join(process.cwd(), "admin-portal", "app", "lib", "users.ts"),
+    "utf8",
+  );
+  const photo = fs.readFileSync(
+    path.join(process.cwd(), "admin-portal", "app", "lib", "profile-photo.ts"),
+    "utf8",
+  );
+  const route = fs.readFileSync(
+    path.join(
+      process.cwd(),
+      "admin-portal",
+      "app",
+      "api",
+      "users",
+      "[userId]",
+      "photo",
+      "route.ts",
+    ),
+    "utf8",
+  );
+
+  assert.match(users, /getAdminProfilePhotoUrl/);
+  assert.match(users, /LEFT JOIN profile_photos/);
+  assert.match(photo, /ArrayBuffer\.isView/);
+  assert.match(route, /await requireAdmin\(\)/);
+  assert.match(route, /private, max-age=31536000, immutable/);
+});
+
 test("resume builder keeps a recoverable draft and reports terminal save failures", () => {
   const builder = fs.readFileSync(
     path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
