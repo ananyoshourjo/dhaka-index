@@ -1,6 +1,17 @@
 # Contributing
 
-Thank you for helping improve Dhaka Index.
+Thank you for helping improve Dhaka Index. The project is open source so the
+people who use it can understand it, trust it, and help shape it.
+
+## Product principles
+
+- **Quality:** favor trustworthy job information, reliable tools, and polished
+  professional output.
+- **User experience:** make every step feel calm, clear, accessible, and
+  respectful of people's time.
+- **Simplicity:** remove friction and noise before adding more choices.
+- **Openness:** explain how the product works and evolves while protecting user
+  data and the private crawler boundary.
 
 ## Before opening a pull request
 

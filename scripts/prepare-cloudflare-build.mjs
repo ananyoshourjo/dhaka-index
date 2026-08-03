@@ -29,6 +29,22 @@ function requiredHttpsUrl(name) {
   return url.origin;
 }
 
+function configureAdminOrigin(config, origin) {
+  const hostname = new URL(origin).hostname;
+  const isWorkersDev =
+    hostname === "workers.dev" || hostname.endsWith(".workers.dev");
+
+  if (!isWorkersDev) {
+    config.workers_dev = false;
+    config.routes = [
+      {
+        pattern: hostname,
+        custom_domain: true,
+      },
+    ];
+  }
+}
+
 function readTemplate(relativePath) {
   return JSON.parse(
     fs.readFileSync(path.join(repositoryRoot, relativePath), "utf8"),
@@ -44,7 +60,13 @@ function writeConfig(relativePath, config) {
 
 const databaseId = requiredEnvironmentValue("DHAKA_INDEX_D1_DATABASE_ID");
 const publicUrl = requiredHttpsUrl("DHAKA_INDEX_PUBLIC_URL");
-const adminUrl = requiredHttpsUrl("DHAKA_INDEX_ADMIN_URL");
+const configuredAdminUrl = requiredHttpsUrl("DHAKA_INDEX_ADMIN_URL");
+// Keep the hosted project's stable admin hostname even if an older Cloudflare
+// Build variable still points at the bootstrap workers.dev hostname.
+const adminUrl =
+  publicUrl === "https://dhakaindex.com"
+    ? "https://admin.dhakaindex.com"
+    : configuredAdminUrl;
 const trustedOrigins = `${publicUrl},${adminUrl}`;
 
 if (!/^[0-9a-f-]{36}$/i.test(databaseId)) {
@@ -61,6 +83,7 @@ const adminConfig = readTemplate("admin-portal/wrangler.example.jsonc");
 adminConfig.d1_databases[0].database_id = databaseId;
 adminConfig.vars.ADMIN_AUTH_URL = adminUrl;
 adminConfig.vars.DHAKA_INDEX_TRUSTED_ORIGINS = trustedOrigins;
+configureAdminOrigin(adminConfig, adminUrl);
 
 writeConfig("wrangler.jsonc", mainConfig);
 writeConfig("admin-portal/wrangler.jsonc", adminConfig);

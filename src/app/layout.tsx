@@ -15,11 +15,29 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
 });
 
+const siteDescription =
+  "A clean, simple hub for high-quality jobs and professional resumes.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dhakaindex.com"),
   applicationName: "Dhaka Index",
   title: "Dhaka Index",
-  description:
-    "An experimental Dhaka job index and resume-building project.",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "Dhaka Index",
+    title: "Dhaka Index",
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary",
+    title: "Dhaka Index",
+    description: siteDescription,
+  },
   icons: {
     icon: [
       {

@@ -1,5 +1,9 @@
 import { getCloudflareDb } from "@/app/lib/cloudflare";
 import { statement } from "@/app/lib/cloud-db";
+import {
+  getAdminProfilePhoto,
+  getAdminProfilePhotoUrl,
+} from "@/app/lib/profile-photo";
 
 export type RegisteredUser = {
   id: string;
@@ -17,6 +21,7 @@ export type RegisteredUser = {
 
 type RegisteredUserRow = Omit<RegisteredUser, "avatarUrl"> & {
   profileContentJson: string | null;
+  profilePhotoUpdatedAt: string | null;
 };
 
 function readProfilePhotoUrl(contentJson: string | null) {
@@ -41,14 +46,21 @@ export async function getUserAvatarUrl(
   userId: string,
   fallback: string | null,
 ) {
-  const profile = await statement(
-    `
-        SELECT content_json AS contentJson
-        FROM resume_profiles
-        WHERE id = ?
-    `,
-    [`profile:${userId}`],
-  ).first<{ contentJson: string }>();
+  const [profile, profilePhoto] = await Promise.all([
+    statement(
+      `
+          SELECT content_json AS contentJson
+          FROM resume_profiles
+          WHERE id = ?
+      `,
+      [`profile:${userId}`],
+    ).first<{ contentJson: string | null }>(),
+    getAdminProfilePhoto(userId),
+  ]);
+
+  if (profilePhoto?.updatedAt) {
+    return getAdminProfilePhotoUrl(userId, profilePhoto.updatedAt);
+  }
 
   return readProfilePhotoUrl(profile?.contentJson ?? null) || fallback;
 }
@@ -63,6 +75,7 @@ export async function getRegisteredUsers() {
           "user"."emailVerified",
           "user"."image",
           profile.content_json AS profileContentJson,
+          MAX(profile_photo.updated_at) AS profilePhotoUpdatedAt,
           "user"."createdAt",
           "user"."updatedAt",
           COUNT(DISTINCT "session"."id") AS sessionCount,
@@ -73,6 +86,8 @@ export async function getRegisteredUsers() {
           ON "session"."userId" = "user"."id"
         LEFT JOIN resume_profiles AS profile
           ON profile.id = 'profile:' || "user"."id"
+        LEFT JOIN profile_photos AS profile_photo
+          ON profile_photo.user_id = "user"."id"
         LEFT JOIN job_user_state AS bookmarked
           ON bookmarked.user_id = "user"."id"
           AND bookmarked.bookmarked_at IS NOT NULL
@@ -90,14 +105,18 @@ export async function getRegisteredUsers() {
     `,
   ).all<RegisteredUserRow>();
 
-  return result.results.map(({ profileContentJson, ...user }) => {
-    const profilePhotoUrl = readProfilePhotoUrl(profileContentJson);
+  return result.results.map(
+    ({ profileContentJson, profilePhotoUpdatedAt, ...user }) => {
+      const profilePhotoUrl = profilePhotoUpdatedAt
+        ? getAdminProfilePhotoUrl(user.id, profilePhotoUpdatedAt)
+        : readProfilePhotoUrl(profileContentJson);
 
-    return {
-      ...user,
-      avatarUrl: profilePhotoUrl || user.image,
-    };
-  });
+      return {
+        ...user,
+        avatarUrl: profilePhotoUrl || user.image,
+      };
+    },
+  );
 }
 
 export async function deleteRegisteredUser(userId: string) {

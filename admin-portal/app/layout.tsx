@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   applicationName: "Dhaka Index Admin Portal",
   title: "Dhaka Index Admin Portal",
-  description: "Admin portal for Dhaka Index registered users.",
+  description: "Private administration for the Dhaka Index jobs platform.",
   icons: {
     icon: [
       {

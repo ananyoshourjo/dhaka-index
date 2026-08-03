@@ -19,7 +19,7 @@ export default async function LoginPage() {
         <div className="grid gap-2 text-center">
           <h1 className="text-2xl font-semibold">Sign in</h1>
           <p className="text-sm text-muted-foreground">
-            Use your email and password to access Dhaka Index.
+            Find high-quality jobs and build a professional resume.
           </p>
         </div>
         <Suspense>

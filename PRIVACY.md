@@ -1,8 +1,9 @@
 # Privacy
 
-Dhaka Index is an experimental hosted project operated in a Cloudflare account.
-No existing user database is imported during deployment. Data entered by users
-after launch is stored in the deployment's Cloudflare D1 database.
+Openness starts with being clear about personal data. Dhaka Index is a hosted
+jobs and resume-building service operated in a Cloudflare account. No existing
+user database is imported during deployment. Data entered by users after
+launch is stored in the deployment's Cloudflare D1 database.
 
 ## Data stored by the hosted application
 
