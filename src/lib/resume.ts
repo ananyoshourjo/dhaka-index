@@ -153,6 +153,7 @@ export type ResumeCoverLetter = {
   address: string;
   salutation: string;
   body: string;
+  justifyBody: boolean;
   closing: string;
 };
 
@@ -219,6 +220,7 @@ export const defaultResumeContent: ResumeContent = {
     address: "",
     salutation: "Dear Hiring Manager,",
     body: "",
+    justifyBody: false,
     closing: "Sincerely,",
   },
   sectionOrder: defaultResumeSectionOrder,
@@ -331,6 +333,7 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
         coverLetter: {
           ...defaultResumeContent.coverLetter,
           ...(parsed.coverLetter ?? {}),
+          justifyBody: parsed.coverLetter?.justifyBody === true,
         },
         sectionOrder: normalizeResumeSectionOrder(
           parsed.sectionOrder,

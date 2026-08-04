@@ -597,11 +597,17 @@ function CoverLetterPreview({
       </header>
 
       <div className="mt-[0.42in] grid gap-[0.18in]">
-          {splitParagraphs(coverLetter.body).map((paragraph, index) => (
-            <p key={index} className="whitespace-pre-line">
-              {paragraph}
-            </p>
-          ))}
+        {splitParagraphs(coverLetter.body).map((paragraph, index) => (
+          <p
+            key={index}
+            className={cn(
+              "whitespace-pre-line",
+              coverLetter.justifyBody && "text-justify",
+            )}
+          >
+            {paragraph}
+          </p>
+        ))}
       </div>
     </article>
   );
@@ -628,17 +634,23 @@ export function ResumeBuilder({
     certifications: initialResume.certifications ?? [],
     sectionTitles: normalizeResumeSectionTitles(initialResume.sectionTitles),
     customSections: initialCustomSections,
-    coverLetter: initialResume.coverLetter ?? {
-      included: false,
-      date: "",
-      recipientName: "",
-      recipientTitle: "",
-      company: "",
-      address: "",
-      salutation: "Dear Hiring Manager,",
-      body: "",
-      closing: "Sincerely,",
-    },
+    coverLetter: initialResume.coverLetter
+      ? {
+          ...initialResume.coverLetter,
+          justifyBody: initialResume.coverLetter.justifyBody === true,
+        }
+      : {
+          included: false,
+          date: "",
+          recipientName: "",
+          recipientTitle: "",
+          company: "",
+          address: "",
+          salutation: "Dear Hiring Manager,",
+          body: "",
+          justifyBody: false,
+          closing: "Sincerely,",
+        },
     sectionOrder: normalizeResumeSectionOrder(
       initialResume.sectionOrder,
       initialCustomSections.map((section) => section.id),
@@ -3334,26 +3346,41 @@ export function ResumeBuilder({
             title="Cover Letter"
             order={sectionOrder.length + 1}
           >
-            <div className="grid grid-cols-[auto_1fr] gap-3">
-              <Toggle
-                checked={resume.coverLetter.included}
-                label={
-                  resume.coverLetter.included
-                    ? "Hide cover letter"
-                    : "Show cover letter"
-                }
-                onClick={() => {
-                  const included = !resume.coverLetter.included;
-                  updateCoverLetter("included", included);
-                  setPreviewPan({ x: 0, y: 0 });
-                }}
-              />
-              <TextArea
-                label="Cover letter"
-                rows={8}
-                value={resume.coverLetter.body}
-                onChange={(value) => updateCoverLetter("body", value)}
-              />
+            <div className="grid gap-3">
+              <div className="grid grid-cols-[auto_1fr] gap-3">
+                <Toggle
+                  checked={resume.coverLetter.included}
+                  label={
+                    resume.coverLetter.included
+                      ? "Hide cover letter"
+                      : "Show cover letter"
+                  }
+                  onClick={() => {
+                    const included = !resume.coverLetter.included;
+                    updateCoverLetter("included", included);
+                    setPreviewPan({ x: 0, y: 0 });
+                  }}
+                />
+                <TextArea
+                  label="Cover letter"
+                  rows={8}
+                  value={resume.coverLetter.body}
+                  onChange={(value) => updateCoverLetter("body", value)}
+                />
+              </div>
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <Switch
+                  checked={resume.coverLetter.justifyBody}
+                  label="Justify body text"
+                  onClick={() =>
+                    updateCoverLetter(
+                      "justifyBody",
+                      !resume.coverLetter.justifyBody,
+                    )
+                  }
+                />
+                <span>Justify body text</span>
+              </div>
             </div>
           </EditorSection>
         </div>
