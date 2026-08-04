@@ -560,6 +560,20 @@ function CoverLetterPreview({
   resume: ResumeContent;
 }) {
   const coverLetter = resume.coverLetter;
+  const contactItems = [
+    {
+      value: resume.contact.phone,
+      href: contactUrl("tel", resume.contact.phone),
+    },
+    {
+      value: resume.contact.email,
+      href: contactUrl("mailto", resume.contact.email),
+    },
+    {
+      value: resume.contact.linkedin,
+      href: safeLinkedInUrl(resume.contact.linkedin),
+    },
+  ].filter((item) => item.value.trim());
 
   return (
     <article
@@ -571,9 +585,14 @@ function CoverLetterPreview({
           {resume.contact.name}
         </h2>
         <p className="mt-[0.06in] text-[9.5pt] text-neutral-700">
-          {[resume.contact.phone, resume.contact.email, resume.contact.linkedin]
-            .filter(Boolean)
-            .join(" | ")}
+          {contactItems.map((item, index) => (
+            <span key={`${item.value}-${index}`}>
+              {index > 0 ? " | " : null}
+              <ResumePreviewLink href={item.href}>
+                {item.value}
+              </ResumePreviewLink>
+            </span>
+          ))}
         </p>
       </header>
 

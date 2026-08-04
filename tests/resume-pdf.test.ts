@@ -16,3 +16,27 @@ test("resume PDF references emit clickable email and phone links", () => {
     /<span class="link">\$\{escapeHtml\(item\.(?:email|phone)\)\}<\/span>/,
   );
 });
+
+test("cover letter PDF references emit clickable contact links", () => {
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+
+  assert.match(
+    route,
+    /contactLink\(resume\.contact\.phone, `tel:\$\{resume\.contact\.phone\}`\)/,
+  );
+  assert.match(
+    route,
+    /contactLink\(resume\.contact\.email, `mailto:\$\{resume\.contact\.email\}`\)/,
+  );
+  assert.match(
+    route,
+    /contactLink\(\s*resume\.contact\.linkedin,\s*linkedinHref\(resume\.contact\.linkedin\),\s*\)/,
+  );
+  assert.match(
+    route,
+    /\.link \{ color: #1447e6; text-decoration: underline; \}/,
+  );
+});
