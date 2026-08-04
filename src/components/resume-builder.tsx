@@ -3414,19 +3414,19 @@ export function ResumeBuilder({
           mobilePane === "edit" ? "hidden lg:flex" : "flex",
         )}
       >
-        <div className="flex min-h-16 shrink-0 items-center justify-between gap-2 border-b bg-background px-3 py-2 sm:gap-3 sm:px-5">
-          <div className="flex min-w-0 items-center gap-2">
+        <div className="flex min-h-16 shrink-0 flex-nowrap items-center justify-between gap-1 border-b bg-background px-3 py-2 sm:gap-3 sm:px-5">
+          <div className="flex min-w-0 items-center gap-1 sm:gap-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
-              className="shrink-0 lg:hidden"
+              className="h-8 shrink-0 gap-1 px-2 sm:h-9 sm:gap-2 sm:px-3 lg:hidden"
               onClick={() => setMobilePane("edit")}
             >
               <PencilLine className="size-4" />
               Edit
             </Button>
-            <div className="grid min-w-0 gap-0.5 text-xs text-muted-foreground">
+            <div className="hidden min-w-0 gap-0.5 text-xs text-muted-foreground sm:grid">
               <span className="font-medium text-foreground">Preview</span>
               <span className="truncate">
                 {resume.coverLetter.included
@@ -3437,12 +3437,12 @@ export function ResumeBuilder({
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:ml-0 sm:gap-2">
             <Button
               type="button"
               variant="outline"
               size="sm"
-              className="size-9 p-0 lg:hidden"
+              className="size-8 shrink-0 p-0 sm:size-9 lg:hidden"
               aria-label="Fit page to screen"
               onClick={fitPreviewToViewport}
             >
@@ -3452,7 +3452,7 @@ export function ResumeBuilder({
               type="button"
               variant="outline"
               size="sm"
-              className="size-9 p-0"
+              className="size-8 shrink-0 p-0 sm:size-9"
               aria-label="Zoom out"
               onClick={() =>
                 setPreviewZoom((current) => Math.max(0.32, current - 0.08))
@@ -3475,7 +3475,7 @@ export function ResumeBuilder({
               type="button"
               variant="outline"
               size="sm"
-              className="size-9 p-0"
+              className="size-8 shrink-0 p-0 sm:size-9"
               aria-label="Zoom in"
               onClick={() =>
                 setPreviewZoom((current) => Math.min(2, current + 0.08))
@@ -3492,6 +3492,7 @@ export function ResumeBuilder({
                   <Button
                     type="button"
                     size="sm"
+                    className="h-8 shrink-0 gap-1 px-2 sm:h-9 sm:gap-2 sm:px-3"
                     disabled={downloadState === "saving"}
                     aria-label="Download"
                   >
@@ -3518,6 +3519,7 @@ export function ResumeBuilder({
               <Button
                 type="button"
                 size="sm"
+                className="h-8 shrink-0 gap-1 px-2 sm:h-9 sm:gap-2 sm:px-3"
                 onClick={() => downloadPdf("resume")}
                 disabled={downloadState === "saving"}
               >

@@ -118,3 +118,22 @@ test("resume builder uses a download menu when a cover letter is available", () 
     /const coverLetterPdf = await requestPdf\("coverLetter"\)/,
   );
 });
+
+test("resume builder keeps the preview toolbar usable on narrow screens", () => {
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+
+  assert.match(builder, /flex-nowrap items-center justify-between/);
+  assert.match(
+    builder,
+    /hidden min-w-0 gap-0\.5 text-xs text-muted-foreground sm:grid/,
+  );
+  assert.match(
+    builder,
+    /ml-auto flex shrink-0 items-center gap-1 sm:ml-0 sm:gap-2/,
+  );
+  assert.match(builder, /size-8 shrink-0 p-0 sm:size-9/);
+  assert.match(builder, /h-8 shrink-0 gap-1 px-2 sm:h-9 sm:gap-2 sm:px-3/);
+});
