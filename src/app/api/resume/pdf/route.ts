@@ -496,6 +496,7 @@ function buildResumeHtml(
 
 function buildCoverLetterHtml(resume: ResumeContent) {
   const coverLetter = resume.coverLetter;
+  const bodyTextAlign = coverLetter?.justifyBody === true ? "justify" : "left";
   const body = (coverLetter?.body ?? "")
     .split(/\n\s*\n/)
     .map((paragraph) => paragraph.trim())
@@ -537,7 +538,7 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           p { margin: 0; }
           .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
           .link { color: #1447e6; text-decoration: underline; }
-          .body { display: grid; gap: .18in; margin-top: .42in; }
+          .body { display: grid; gap: .18in; margin-top: .42in; text-align: ${bodyTextAlign}; }
         </style>
       </head>
       <body>
