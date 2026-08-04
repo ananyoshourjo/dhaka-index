@@ -17,6 +17,19 @@ test("resume PDF references emit clickable email and phone links", () => {
   );
 });
 
+test("cover letter body alignment follows the saved preference", () => {
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+
+  assert.match(
+    route,
+    /const bodyTextAlign = coverLetter\?\.justifyBody === true \? "justify" : "left";/,
+  );
+  assert.match(route, /text-align: \$\{bodyTextAlign\};/);
+});
+
 test("cover letter PDF references emit clickable contact links", () => {
   const route = fs.readFileSync(
     path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
