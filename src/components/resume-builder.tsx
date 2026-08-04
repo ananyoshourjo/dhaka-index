@@ -2,6 +2,7 @@
 
 import {
   Check,
+  ChevronDown,
   Download,
   Eye,
   GripVertical,
@@ -23,6 +24,12 @@ import {
 
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -1730,6 +1737,17 @@ export function ResumeBuilder({
       );
     }
   };
+
+  const downloadButtonContent = (
+    <>
+      {downloadState === "saving" ? (
+        <Loader2 className="size-4 animate-spin" />
+      ) : (
+        <Download className="size-4" />
+      )}
+      <span>Download</span>
+    </>
+  );
 
   const visibleWork = resume.workExperience.filter((item) => item.included);
   const visibleEducation = resume.education.filter((item) => item.included);
@@ -3468,39 +3486,44 @@ export function ResumeBuilder({
             <span className="hidden w-10 text-right text-xs text-muted-foreground sm:block">
               {Math.round(previewZoom * 100)}%
             </span>
-            <Button
-              type="button"
-              size="sm"
-              onClick={() => downloadPdf("resume")}
-              disabled={downloadState === "saving"}
-            >
-              {downloadState === "saving" ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <Download className="size-4" />
-              )}
-              <span className="hidden sm:inline">
-                Download
-              </span>
-              <span className="sr-only sm:hidden">Download</span>
-            </Button>
             {resume.coverLetter.included ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled={downloadState === "saving"}
+                    aria-label="Download"
+                  >
+                    {downloadButtonContent}
+                    <ChevronDown className="size-4" aria-hidden="true" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem
+                    disabled={downloadState === "saving"}
+                    onSelect={() => downloadPdf("resume")}
+                  >
+                    Resume
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    disabled={downloadState === "saving"}
+                    onSelect={() => downloadPdf("coverLetter")}
+                  >
+                    Cover Letter
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
               <Button
                 type="button"
-                variant="outline"
                 size="sm"
-                onClick={() => downloadPdf("coverLetter")}
+                onClick={() => downloadPdf("resume")}
                 disabled={downloadState === "saving"}
               >
-                {downloadState === "saving" ? (
-                  <Loader2 className="size-4 animate-spin" />
-                ) : (
-                  <Download className="size-4" />
-                )}
-                <span className="hidden sm:inline">Letter PDF</span>
-                <span className="sr-only sm:hidden">Download cover letter</span>
+                {downloadButtonContent}
               </Button>
-            ) : null}
+            )}
           </div>
         </div>
         {downloadError ? (
