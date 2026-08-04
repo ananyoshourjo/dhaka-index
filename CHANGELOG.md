@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.3 - 2026-08-04
+
+- Make cover-letter phone, email, and LinkedIn contact details clickable
+
 ## 1.1.2 - 2026-08-03
 
 - Remove the placeholder URL from the resume builder link field for a cleaner, consistent form.

@@ -506,12 +506,20 @@ function buildCoverLetterHtml(resume: ResumeContent) {
     )
     .join("");
   const contactLine = [
-    resume.contact.phone,
-    resume.contact.email,
-    resume.contact.linkedin,
+    resume.contact.phone
+      ? contactLink(resume.contact.phone, `tel:${resume.contact.phone}`)
+      : "",
+    resume.contact.email
+      ? contactLink(resume.contact.email, `mailto:${resume.contact.email}`)
+      : "",
+    resume.contact.linkedin
+      ? contactLink(
+          resume.contact.linkedin,
+          linkedinHref(resume.contact.linkedin),
+        )
+      : "",
   ]
     .filter(Boolean)
-    .map(escapeHtml)
     .join(" | ");
 
   return `
@@ -528,6 +536,7 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; }
           p { margin: 0; }
           .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
+          .link { color: #1447e6; text-decoration: underline; }
           .body { display: grid; gap: .18in; margin-top: .42in; }
         </style>
       </head>
