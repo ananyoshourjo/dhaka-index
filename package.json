@@ -1,6 +1,6 @@
 {
   "name": "@dhaka-index/web",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "private": true,
   "workspaces": [
     "admin-portal"

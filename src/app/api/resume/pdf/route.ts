@@ -508,16 +508,16 @@ function buildCoverLetterHtml(resume: ResumeContent) {
     .join("");
   const contactLine = [
     resume.contact.phone
-      ? contactLink(resume.contact.phone, `tel:${resume.contact.phone}`)
+      ? `Phone: ${contactLink(resume.contact.phone, `tel:${resume.contact.phone}`)}`
       : "",
     resume.contact.email
-      ? contactLink(resume.contact.email, `mailto:${resume.contact.email}`)
+      ? `Email: ${contactLink(resume.contact.email, `mailto:${resume.contact.email}`)}`
       : "",
     resume.contact.linkedin
-      ? contactLink(
+      ? `LinkedIn: ${contactLink(
           resume.contact.linkedin,
           linkedinHref(resume.contact.linkedin),
-        )
+        )}`
       : "",
   ]
     .filter(Boolean)
