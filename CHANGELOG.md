@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.7 - 2026-08-04
+
+- Fix cover-letter PDF downloads with a dedicated download action
+
 ## 1.1.6 - 2026-08-04
 
 - Render cover-letter names in uppercase to match resume headers.
@@ -9,7 +13,6 @@ All notable changes are documented here.
 ## 1.1.5 - 2026-08-04
 
 - Add descriptive labels to cover-letter contact details
-
 ## 1.1.4 - 2026-08-04
 
 - Add an option to justify cover-letter body text in the preview and PDF export.

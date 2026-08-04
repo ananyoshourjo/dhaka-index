@@ -1707,7 +1707,7 @@ export function ResumeBuilder({
     window.setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
-  const downloadPdf = async () => {
+  const downloadPdf = async (document: "resume" | "coverLetter") => {
     setDownloadState("saving");
     setDownloadError("");
 
@@ -1715,13 +1715,12 @@ export function ResumeBuilder({
       const safeName = (resume.contact.name || "resume")
         .trim()
         .replace(/[<>:"/\\|?*]+/g, "-");
-      const resumePdf = await requestPdf("resume");
-      saveDownloadedBlob(resumePdf, `${safeName}-resume.pdf`);
-
-      if (resume.coverLetter.included) {
-        const coverLetterPdf = await requestPdf("coverLetter");
-        saveDownloadedBlob(coverLetterPdf, `${safeName}-cover-letter.pdf`);
-      }
+      const pdf = await requestPdf(document);
+      const filename =
+        document === "coverLetter"
+          ? `${safeName}-cover-letter.pdf`
+          : `${safeName}-resume.pdf`;
+      saveDownloadedBlob(pdf, filename);
 
       setDownloadState("saved");
     } catch (error) {
@@ -3472,7 +3471,7 @@ export function ResumeBuilder({
             <Button
               type="button"
               size="sm"
-              onClick={downloadPdf}
+              onClick={() => downloadPdf("resume")}
               disabled={downloadState === "saving"}
             >
               {downloadState === "saving" ? (
@@ -3485,6 +3484,23 @@ export function ResumeBuilder({
               </span>
               <span className="sr-only sm:hidden">Download</span>
             </Button>
+            {resume.coverLetter.included ? (
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={() => downloadPdf("coverLetter")}
+                disabled={downloadState === "saving"}
+              >
+                {downloadState === "saving" ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <Download className="size-4" />
+                )}
+                <span className="hidden sm:inline">Letter PDF</span>
+                <span className="sr-only sm:hidden">Download cover letter</span>
+              </Button>
+            ) : null}
           </div>
         </div>
         {downloadError ? (
