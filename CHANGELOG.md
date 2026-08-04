@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.5 - 2026-08-04
+
+- Add descriptive labels to cover-letter contact details
+
 ## 1.1.4 - 2026-08-04
 
 - Add an option to justify cover-letter body text in the preview and PDF export.
