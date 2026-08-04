@@ -92,3 +92,17 @@ test("cover letter contact details include descriptive labels", () => {
   assert.match(builder, /label: "LinkedIn"/);
   assert.match(builder, /\{item\.label\}: \{" "\}/);
 });
+
+test("resume builder gives the cover letter its own download gesture", () => {
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+
+  assert.match(builder, /onClick=\{\(\) => downloadPdf\("resume"\)\}/);
+  assert.match(builder, /onClick=\{\(\) => downloadPdf\("coverLetter"\)\}/);
+  assert.doesNotMatch(
+    builder,
+    /const coverLetterPdf = await requestPdf\("coverLetter"\)/,
+  );
+});
