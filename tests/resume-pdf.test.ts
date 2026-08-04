@@ -73,3 +73,22 @@ test("cover letter PDF references emit clickable contact links", () => {
     /\.link \{ color: #1447e6; text-decoration: underline; \}/,
   );
 });
+
+test("cover letter contact details include descriptive labels", () => {
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+
+  assert.match(route, /`Phone: \$\{contactLink\(resume\.contact\.phone/);
+  assert.match(route, /`Email: \$\{contactLink\(resume\.contact\.email/);
+  assert.match(route, /`LinkedIn: \$\{contactLink\(/);
+  assert.match(builder, /label: "Phone"/);
+  assert.match(builder, /label: "Email"/);
+  assert.match(builder, /label: "LinkedIn"/);
+  assert.match(builder, /\{item\.label\}: \{" "\}/);
+});

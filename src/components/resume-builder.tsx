@@ -562,14 +562,17 @@ function CoverLetterPreview({
   const coverLetter = resume.coverLetter;
   const contactItems = [
     {
+      label: "Phone",
       value: resume.contact.phone,
       href: contactUrl("tel", resume.contact.phone),
     },
     {
+      label: "Email",
       value: resume.contact.email,
       href: contactUrl("mailto", resume.contact.email),
     },
     {
+      label: "LinkedIn",
       value: resume.contact.linkedin,
       href: safeLinkedInUrl(resume.contact.linkedin),
     },
@@ -588,6 +591,7 @@ function CoverLetterPreview({
           {contactItems.map((item, index) => (
             <span key={`${item.value}-${index}`}>
               {index > 0 ? " | " : null}
+              {item.label}: {" "}
               <ResumePreviewLink href={item.href}>
                 {item.value}
               </ResumePreviewLink>
