@@ -93,14 +93,26 @@ test("cover letter contact details include descriptive labels", () => {
   assert.match(builder, /\{item\.label\}: \{" "\}/);
 });
 
-test("resume builder gives the cover letter its own download gesture", () => {
+test("resume builder uses a download menu when a cover letter is available", () => {
   const builder = fs.readFileSync(
     path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
     "utf8",
   );
 
+  assert.match(builder, /<DropdownMenu>/);
+  assert.match(builder, /<DropdownMenuTrigger asChild>/);
+  assert.match(builder, /<ChevronDown className="size-4" aria-hidden="true" \/>/);
+  assert.match(
+    builder,
+    /<DropdownMenuItem[\s\S]*onSelect=\{\(\) => downloadPdf\("resume"\)\}[\s\S]*>\s*Resume\s*<\/DropdownMenuItem>/,
+  );
+  assert.match(
+    builder,
+    /<DropdownMenuItem[\s\S]*onSelect=\{\(\) => downloadPdf\("coverLetter"\)\}[\s\S]*>\s*Cover Letter\s*<\/DropdownMenuItem>/,
+  );
+  assert.match(builder, /<span>Download<\/span>/);
+  assert.doesNotMatch(builder, /Letter PDF/);
   assert.match(builder, /onClick=\{\(\) => downloadPdf\("resume"\)\}/);
-  assert.match(builder, /onClick=\{\(\) => downloadPdf\("coverLetter"\)\}/);
   assert.doesNotMatch(
     builder,
     /const coverLetterPdf = await requestPdf\("coverLetter"\)/,

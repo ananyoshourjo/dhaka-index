@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.8 - 2026-08-04
+
+- Replace separate resume and cover-letter download buttons with one conditional Download menu
+
 ## 1.1.7 - 2026-08-04
 
 - Fix cover-letter PDF downloads with a dedicated download action
