@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.9 - 2026-08-04
+
+- Keep the resume preview toolbar on one row on mobile
+
 ## 1.1.8 - 2026-08-04
 
 - Replace separate resume and cover-letter download buttons with one conditional Download menu
