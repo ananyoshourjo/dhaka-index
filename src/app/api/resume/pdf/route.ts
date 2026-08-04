@@ -534,7 +534,7 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           body { margin: 0; color: #111; font-family: Arial, Helvetica, sans-serif; }
           main { width: 8.5in; height: 11in; overflow: hidden; padding: 1in; font-size: 11pt; line-height: 1.45; }
           header { border-bottom: 1px solid #d4d4d4; padding-bottom: .18in; }
-          h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; }
+          h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; text-transform: uppercase; }
           p { margin: 0; }
           .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
           .link { color: #1447e6; text-decoration: underline; }

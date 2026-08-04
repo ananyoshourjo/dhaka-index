@@ -584,7 +584,7 @@ function CoverLetterPreview({
       style={{ fontFamily: "Arial, Helvetica, sans-serif", left }}
     >
       <header className="border-b border-neutral-300 pb-[0.18in]">
-        <h2 className="text-[17pt] font-bold tracking-[0.01em]">
+        <h2 className="text-[17pt] font-bold uppercase tracking-[0.01em]">
           {resume.contact.name}
         </h2>
         <p className="mt-[0.06in] text-[9.5pt] text-neutral-700">

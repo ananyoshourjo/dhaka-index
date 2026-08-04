@@ -30,6 +30,26 @@ test("cover letter body alignment follows the saved preference", () => {
   assert.match(route, /text-align: \$\{bodyTextAlign\};/);
 });
 
+test("cover letter names use the same uppercase presentation as resumes", () => {
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+
+  assert.match(
+    route,
+    /h1 \{[^}]*text-transform: uppercase;/,
+  );
+  assert.match(
+    builder,
+    /<h2 className="text-\[17pt\] font-bold uppercase tracking-\[0\.01em\]">\s*\{resume\.contact\.name\}/,
+  );
+});
+
 test("cover letter PDF references emit clickable contact links", () => {
   const route = fs.readFileSync(
     path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),

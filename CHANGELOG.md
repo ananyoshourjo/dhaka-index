@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.1.6 - 2026-08-04
+
+- Render cover-letter names in uppercase to match resume headers.
+
 ## 1.1.5 - 2026-08-04
 
 - Add descriptive labels to cover-letter contact details
