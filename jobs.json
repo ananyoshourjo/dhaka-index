@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-04T10:03:00.784Z",
+  "generatedAt": "2026-08-05T10:05:03.855Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -88,6 +88,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Officer / Senior Officer, Accounts",
+      "company": "Agora Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/agora-limited/career-bd/officer-senior-officer-accounts/dhaka",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Manager – Corporate Sales",
       "company": "AKSID PureChem Limited",
       "deadline": null,
@@ -121,6 +128,13 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/banglalink/channel-support-manager/tigers-den/dhaka",
       "functionTag": "operations"
+    },
+    {
+      "title": "Hr Lead Talent Mgmt Org. Dev.",
+      "company": "Bata Shoe Co. Bangladesh Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/bata-shoe-co.-bangladesh-ltd./career-bd/hr-lead-talent-mgmt-org.-dev./dhaka/gulshan-2",
+      "functionTag": "human_resources"
     },
     {
       "title": "Hr Manager",
@@ -207,13 +221,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Management Trainee Officer (MTO) R&D",
-      "company": "Getwell Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/getwell-limited/career-bd/management-trainee-officer-mto/habiganj-industrial-par/habiganj",
-      "functionTag": "research_consulting"
-    },
-    {
       "title": "Executive, IBD",
       "company": "Healthcare Pharmaceuticals Limited",
       "deadline": null,
@@ -228,18 +235,18 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Sr. Manager, Marketing",
+      "company": "Kallol Group of Companies",
+      "deadline": "2026-08-11",
+      "url": "https://bdrecruit.net/jobs-in-bd/kallol-group-of-companies/career-bd/sr-manager-marketing/dhaka/2026",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "HR Executive",
       "company": "LankaBangla Securities",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/lankabangla-securities/career-bd/hr-executive/bd/2026",
       "functionTag": "human_resources"
-    },
-    {
-      "title": "Senior Executive / Assistant Manager",
-      "company": "Nagad Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career-bd/senior-executive-assistant-manager/dhaka",
-      "functionTag": "other"
     },
     {
       "title": "Manager, Growth & Analytics (Fintech)",
@@ -253,13 +260,6 @@
       "company": "Pickaboo",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/pickaboo/career-bd/manager-corporate-sales/tejgaon/dhaka",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Sr. Executive - Tender Sales",
-      "company": "PRAN-RFL Group",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/pran-rfl-group/sr-executive-tender-sales/dhaka",
       "functionTag": "sales_business_development"
     },
     {
@@ -305,11 +305,25 @@
       "functionTag": "operations"
     },
     {
+      "title": "Regional Manager Sales",
+      "company": "Rspl Health Bd Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/rspl-health-bd-ltd./career-bd/regional-manager-sales/anywhere",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Zonal Sales In-Charge",
       "company": "Sajeeb Group",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/sajeeb-group/career-bd/zonal-sales-in-charge/anywhere",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Head of Debt Capital Markets (DCM)",
+      "company": "Shanta Equity Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/shanta-equity-limited/career-bd/head-of-debt-capital-markets-dcm/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Executive – Front Desk Job Circular 2026",
@@ -326,25 +340,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Executive, Sales Training & Development",
-      "company": "Synovia Pharma PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/synovia-pharma-plc/career-bd/executive-sales-training-development/dhaka",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Senior Officer Merchandising And Ops Admin",
       "company": "Transcom Electronics Ltd.",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/transcom-electronics-ltd./career-bd/senior-officer-merchandising-and-ops-admin/banani-dhaka/2026",
       "functionTag": "operations"
-    },
-    {
-      "title": "Executive Sr Executive Branding Pr Media",
-      "company": "Twelve Clothing Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/twelve-clothing-limited/career-bd/executive-sr-executive-branding-pr-media/kawran-bazar/dhaka",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Intern",
@@ -410,13 +410,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Assistant Manager, Trade Marketing (Electrical)",
-      "company": "Advanced Chemical Industries PLC (ACI)",
-      "deadline": "2026-08-25",
-      "url": "https://brandpractitioners.com/aci-is-hiring-assistant-manager-trade-marketing",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Brand Executive, Electrical",
       "company": "Advanced Chemical Industries PLC (ACI)",
       "deadline": "2026-08-25",
@@ -457,13 +450,6 @@
       "deadline": null,
       "url": "https://brandpractitioners.com/akijbashir-group-is-hiring-executive-brand-marketing",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Regional Manager Sales",
-      "company": "AKIJBASHIR Group",
-      "deadline": "2026-08-04",
-      "url": "https://brandpractitioners.com/akijbashir-group-is-hiring-regional-manager-sales-2",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Marketing Executive/Senior Executive – Lab & Doctor Consultancy",
@@ -858,6 +844,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Manager, Communications, Pooled Fund",
+      "company": "BRAC",
+      "deadline": "2026-08-14",
+      "url": "https://careers.brac.net/jobs/manager-communications-pooled-fund-2926?bulk=false",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Manager, Employee Onboarding and Early Careers",
       "company": "BRAC",
       "deadline": "2026-08-07",
@@ -870,6 +863,13 @@
       "deadline": null,
       "url": "https://careers.brac.net/jobs/mechanic-agri-machineries-brac-seed-and-agro-enterprise-2888?bulk=false",
       "functionTag": "operations"
+    },
+    {
+      "title": "Officer, Campaign & Outreach, Skills Development Programme",
+      "company": "BRAC",
+      "deadline": "2026-08-14",
+      "url": "https://careers.brac.net/jobs/officer-campaign-outreach-skills-development-programme-2925?bulk=false",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Officer, Operations Support, BRAC Learning Center (BLC)",
@@ -1103,6 +1103,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Intern, Accounting",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Intern%2C-Accounting-1212-BD/1362912755",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Marketing Operations Associate (Six-Month Contract)",
       "company": "Optimizely",
       "deadline": null,
@@ -1150,6 +1157,13 @@
       "deadline": "2026-08-09",
       "url": "https://careers.pathao.com/jobs/associate-courier-agent-management",
       "functionTag": "operations"
+    },
+    {
+      "title": "Customer Experience Officer",
+      "company": "Pathao",
+      "deadline": "2026-08-20",
+      "url": "https://careers.pathao.com/jobs/customer-experience-officer",
+      "functionTag": "customer_service"
     },
     {
       "title": "Executive, Rides",
@@ -1220,13 +1234,6 @@
       "deadline": null,
       "url": "https://ding.bamboohr.com/careers/333",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Head of Employee Relations, Engagement, and Internal Communications",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11795",
-      "functionTag": "human_resources"
     },
     {
       "title": "Credit & Collections Analytics Manager",
@@ -1348,6 +1355,13 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Product Support Specialist (Bangladesh)",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/9df780d0-f9b1-41ee-8632-32489558797f",
+      "functionTag": "customer_service"
+    },
+    {
       "title": "Assistant Manager, RCM Operations (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1444,6 +1458,13 @@
       "deadline": "2026-08-06",
       "url": "https://jobs.standardchartered.com/job/Chief-Compliance-Officer%2C-Bangladesh/58078-en_GB",
       "functionTag": "legal_compliance"
+    },
+    {
+      "title": "Manager, CIB Business Finance",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-08-18",
+      "url": "https://jobs.standardchartered.com/job/Manager%2C-CIB-Business-Finance/59695-en_GB",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Officer, Trade Operations",
