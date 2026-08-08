@@ -1,15 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-06T10:02:57.846Z",
+  "generatedAt": "2026-08-08T08:28:01.385Z",
   "license": "CC0-1.0",
   "jobs": [
-    {
-      "title": "Cyber Security Engineer",
-      "company": "Dynamic Solution Innovators",
-      "deadline": "2026-08-07",
-      "url": "https://app.hrythmic.com/recruit/openings/437fc8f5-0768-4ab9-8358-814d3e65264d",
-      "functionTag": "software_engineering"
-    },
     {
       "title": "Mobile App Developer",
       "company": "Dynamic Solution Innovators",
@@ -515,13 +508,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Business Development Manager",
-      "company": "Betopia Group",
-      "deadline": "2026-08-06",
-      "url": "https://brandpractitioners.com/betopia-group-is-hiring-business-development-manager",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Brands Executive",
       "company": "Bombay Sweets & Co. Ltd.",
       "deadline": null,
@@ -809,13 +795,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Associate Officer, Operations, BRAC Academy, BRAC Education Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-06",
-      "url": "https://careers.brac.net/jobs/associate-officer-operations-brac-academy-brac-education-programme-2918?bulk=false",
-      "functionTag": "operations"
-    },
-    {
       "title": "Data Entry Assistant, BRAC Dairy and Food Project",
       "company": "BRAC",
       "deadline": null,
@@ -851,13 +830,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Divisional Manager, Medhabikash and Cultural & Sports Olympiad, BRAC Education Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-06",
-      "url": "https://careers.brac.net/jobs/divisional-manager-medhabikash-and-cultural-sports-olympiad-brac-education-programme-2908?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Driver ( Aarong Dairy )",
       "company": "BRAC",
       "deadline": "2026-08-13",
@@ -891,13 +863,6 @@
       "deadline": "2026-08-14",
       "url": "https://careers.brac.net/jobs/manager-communications-pooled-fund-2926?bulk=false",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Manager, Employee Onboarding and Early Careers",
-      "company": "BRAC",
-      "deadline": "2026-08-07",
-      "url": "https://careers.brac.net/jobs/manager-employee-onboarding-and-early-careers-2905?bulk=false",
-      "functionTag": "human_resources"
     },
     {
       "title": "Mechanic, Agri Machineries (BRAC Seed and Agro Enterprise)",
@@ -1194,13 +1159,6 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "Executive, Rides",
-      "company": "Pathao",
-      "deadline": "2026-08-06",
-      "url": "https://careers.pathao.com/jobs/executive-rides",
-      "functionTag": "operations"
-    },
-    {
       "title": "Intern, Performance Marketing",
       "company": "Pathao",
       "deadline": "2026-08-15",
@@ -1495,31 +1453,10 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Chief Compliance Officer, Bangladesh",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-06",
-      "url": "https://jobs.standardchartered.com/job/Chief-Compliance-Officer%2C-Bangladesh/58078-en_GB",
-      "functionTag": "legal_compliance"
-    },
-    {
       "title": "Manager, CIB Business Finance",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-08-18",
       "url": "https://jobs.standardchartered.com/job/Manager%2C-CIB-Business-Finance/59695-en_GB",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Officer, Trade Operations",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-06",
-      "url": "https://jobs.standardchartered.com/job/Officer%2C-Trade-Operations/59215-en_GB",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Relationship Manager, Supply Chain Finance",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-06",
-      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-Supply-Chain-Finance/58743-en_GB",
       "functionTag": "finance_accounting"
     },
     {
@@ -1593,27 +1530,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Area Manager/ Senior Area Manager, Market Operation (Ref July 29, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-08-06",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6913",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Associate or Associcate Manager, Visibility & Outdoor, Market Operation (Ref. July, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-08-06",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6918",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Senior Associate or Associate Manager, AI & Data Science, ACE, Corporate Strategy (Ref. July 29, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-08-06",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6921",
-      "functionTag": "data_analytics"
-    },
-    {
       "title": "ERP Support (Engineer/Specialist/Lead)",
       "company": "SELISE Digital Platforms",
       "deadline": null,
@@ -1675,13 +1591,6 @@
       "deadline": "2026-08-09",
       "url": "https://thecvguy.net/bank-jobs/brac-bank-plc-career-opportunity-2026-ro",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Officer, Inward Remittance",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-08-07",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-bank-hiring-officer-ir",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Strategic Assistant",
@@ -1857,13 +1766,6 @@
       "deadline": null,
       "url": "https://therap.hire.trakstar.com/jobs/fk0zqwd",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Principal Private Sector Development Specialist",
-      "company": "Asian Development Bank",
-      "deadline": "2026-08-07",
-      "url": "https://www.adb.org/careers/260741",
-      "functionTag": "research_consulting"
     },
     {
       "title": "Senior Software Engineer (Full-Stack)",
