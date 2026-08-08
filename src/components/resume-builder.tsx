@@ -1,22 +1,35 @@
 "use client";
 
 import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
+  Bold,
   Check,
   ChevronDown,
   Download,
   Eye,
   GripVertical,
+  Italic,
+  Link2,
   Loader2,
+  List,
+  ListOrdered,
   Maximize2,
   Minus,
   PencilLine,
   Plus,
+  RemoveFormatting,
   Trash2,
   TriangleAlert,
+  Underline,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import {
   useCallback,
   useEffect,
+  useId,
   useLayoutEffect,
   useRef,
   useState,
@@ -31,6 +44,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -65,6 +84,11 @@ import type {
   ResumeWorkExperience,
 } from "@/lib/resume";
 import { normalizeResumeLink } from "@/lib/resume-links";
+import {
+  normalizeRichTextHtml,
+  richTextToPlainText,
+  sanitizeRichTextHtml,
+} from "@/lib/rich-text";
 import { cn } from "@/lib/utils";
 
 type ResumeBuilderProps = {
@@ -363,6 +387,789 @@ function autoResizeTextarea(textarea: HTMLTextAreaElement | null) {
   textarea.style.height = `${textarea.scrollHeight}px`;
 }
 
+type RichTextCommand =
+  | "bold"
+  | "italic"
+  | "underline"
+  | "justifyLeft"
+  | "justifyCenter"
+  | "justifyRight"
+  | "justifyFull"
+  | "insertUnorderedList"
+  | "insertOrderedList";
+
+const richTextToolbarItems: ReadonlyArray<{
+  command: RichTextCommand;
+  icon: LucideIcon;
+  label: string;
+}> = [
+  { command: "bold", icon: Bold, label: "Bold" },
+  { command: "italic", icon: Italic, label: "Italic" },
+  { command: "underline", icon: Underline, label: "Underline" },
+  { command: "insertUnorderedList", icon: List, label: "Bulleted list" },
+  { command: "insertOrderedList", icon: ListOrdered, label: "Numbered list" },
+  { command: "justifyLeft", icon: AlignLeft, label: "Align left" },
+  { command: "justifyCenter", icon: AlignCenter, label: "Align center" },
+  { command: "justifyRight", icon: AlignRight, label: "Align right" },
+  { command: "justifyFull", icon: AlignJustify, label: "Justify" },
+];
+
+type RichTextToolbarButtonProps = {
+  active?: boolean;
+  icon: LucideIcon;
+  label: string;
+  onClick: () => void;
+};
+
+const richTextToolbarButtonClassName =
+  "inline-flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none";
+
+type RichTextSelectionBookmark = {
+  end: number;
+  start: number;
+};
+
+function createRichTextSelectionBookmark(
+  editor: HTMLDivElement,
+  range: Range,
+): RichTextSelectionBookmark {
+  const offsetRange = document.createRange();
+
+  offsetRange.selectNodeContents(editor);
+  offsetRange.setEnd(range.startContainer, range.startOffset);
+  const start = offsetRange.toString().length;
+
+  offsetRange.selectNodeContents(editor);
+  offsetRange.setEnd(range.endContainer, range.endOffset);
+
+  return {
+    start,
+    end: offsetRange.toString().length,
+  };
+}
+
+function restoreRichTextSelection(
+  editor: HTMLDivElement,
+  bookmark: RichTextSelectionBookmark,
+) {
+  const textNodes: Text[] = [];
+  const walker = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT);
+  let node = walker.nextNode();
+
+  while (node) {
+    textNodes.push(node as Text);
+    node = walker.nextNode();
+  }
+
+  if (!textNodes.length) {
+    return false;
+  }
+
+  const positionAt = (offset: number) => {
+    let remaining = Math.max(0, offset);
+
+    for (const textNode of textNodes) {
+      if (remaining <= textNode.data.length) {
+        return { node: textNode, offset: remaining };
+      }
+
+      remaining -= textNode.data.length;
+    }
+
+    const lastNode = textNodes[textNodes.length - 1];
+    return { node: lastNode, offset: lastNode.data.length };
+  };
+
+  const start = positionAt(bookmark.start);
+  const end = positionAt(bookmark.end);
+  const selection = window.getSelection();
+
+  if (!selection) {
+    return false;
+  }
+
+  editor.focus();
+  const range = document.createRange();
+  range.setStart(start.node, start.offset);
+  range.setEnd(end.node, end.offset);
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  return true;
+}
+
+function RichTextToolbarButton({
+  active = false,
+  icon: Icon,
+  label,
+  onClick,
+}: RichTextToolbarButtonProps) {
+  return (
+    <button
+      type="button"
+      title={label}
+      aria-label={label}
+      aria-pressed={active}
+      onMouseDown={(event) => event.preventDefault()}
+      onClick={onClick}
+      className={cn(
+        richTextToolbarButtonClassName,
+        active && "bg-accent text-accent-foreground",
+      )}
+    >
+      <Icon className="size-4" aria-hidden="true" />
+    </button>
+  );
+}
+
+function hasRichTextContent(value: string) {
+  const normalized = normalizeRichTextHtml(value);
+  return Boolean(richTextToPlainText(normalized));
+}
+
+function RichTextInlineEditor({
+  className,
+  label,
+  onChange,
+  showLabel = true,
+  value,
+}: {
+  className?: string;
+  label: string;
+  onChange: (value: string) => void;
+  showLabel?: boolean;
+  value: string;
+}) {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const linkInputId = useId();
+  const selectionRef = useRef<RichTextSelectionBookmark | null>(null);
+  const [linkFormOpen, setLinkFormOpen] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [toolbarOpen, setToolbarOpen] = useState(false);
+  const [toolbarPosition, setToolbarPosition] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
+
+  const closeToolbar = useCallback(() => {
+    selectionRef.current = null;
+    setLinkFormOpen(false);
+    setToolbarOpen(false);
+    setToolbarPosition(null);
+  }, []);
+
+  const updateSelectionToolbar = useCallback(() => {
+    const editor = editorRef.current;
+    const selection = window.getSelection();
+
+    if (
+      !editor ||
+      !selection ||
+      selection.rangeCount === 0 ||
+      selection.isCollapsed ||
+      !selection.toString().trim()
+    ) {
+      if (!linkFormOpen) {
+        closeToolbar();
+      }
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    if (!editor.contains(range.commonAncestorContainer)) {
+      if (!linkFormOpen) {
+        closeToolbar();
+      }
+      return;
+    }
+
+    const rect = range.getClientRects()[0] ?? range.getBoundingClientRect();
+
+    if (!rect || (!rect.width && !rect.height)) {
+      return;
+    }
+
+    selectionRef.current = createRichTextSelectionBookmark(editor, range);
+    setToolbarPosition({
+      left: rect.left + rect.width / 2,
+      top: Math.max(8, rect.top),
+    });
+    setToolbarOpen(true);
+  }, [closeToolbar, linkFormOpen]);
+
+  const syncEditorValue = useCallback(() => {
+    const editor = editorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    const sanitized = sanitizeRichTextHtml(editor.innerHTML);
+    onChange(richTextToPlainText(sanitized) ? sanitized : "");
+  }, [onChange]);
+
+  const restoreSelection = () => {
+    const editor = editorRef.current;
+    const bookmark = selectionRef.current;
+
+    return Boolean(editor && bookmark && restoreRichTextSelection(editor, bookmark));
+  };
+
+  const executeCommand = (command: "bold" | "italic" | "underline") => {
+    if (!restoreSelection()) {
+      return;
+    }
+
+    document.execCommand(command, false);
+    syncEditorValue();
+    updateSelectionToolbar();
+  };
+
+  const openLinkForm = () => {
+    const editor = editorRef.current;
+    const selection = window.getSelection();
+
+    if (!editor || !selection || selection.rangeCount === 0) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    if (!editor.contains(range.commonAncestorContainer)) {
+      return;
+    }
+
+    selectionRef.current = createRichTextSelectionBookmark(editor, range);
+
+    const anchorElement =
+      selection.anchorNode instanceof Element
+        ? selection.anchorNode
+        : selection.anchorNode?.parentElement;
+    const linkElement = anchorElement?.closest("a");
+    let currentHref = "";
+
+    if (linkElement && editor.contains(linkElement)) {
+      currentHref = linkElement.getAttribute("href") ?? "";
+    } else {
+      try {
+        currentHref = document.queryCommandValue("createLink");
+      } catch {
+        currentHref = "";
+      }
+    }
+
+    setLinkUrl(currentHref);
+    setLinkFormOpen(true);
+  };
+
+  const applyLink = (href = linkUrl) => {
+    if (!restoreSelection()) {
+      return;
+    }
+
+    if (href.trim()) {
+      document.execCommand("createLink", false, href.trim());
+    } else {
+      document.execCommand("unlink", false);
+    }
+
+    syncEditorValue();
+    setLinkFormOpen(false);
+    updateSelectionToolbar();
+  };
+
+  const clearFormatting = () => {
+    if (!restoreSelection()) {
+      return;
+    }
+
+    document.execCommand("removeFormat", false);
+    document.execCommand("unlink", false);
+    syncEditorValue();
+    updateSelectionToolbar();
+  };
+
+  useLayoutEffect(() => {
+    const editor = editorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    const nextValue = normalizeRichTextHtml(value);
+
+    if (document.activeElement !== editor && editor.innerHTML !== nextValue) {
+      editor.innerHTML = nextValue;
+    }
+  }, [value]);
+
+  useEffect(() => {
+    document.addEventListener("selectionchange", updateSelectionToolbar);
+    return () =>
+      document.removeEventListener("selectionchange", updateSelectionToolbar);
+  }, [updateSelectionToolbar]);
+
+  return (
+    <div
+      className={cn(
+        showLabel ? "grid gap-1.5" : "min-w-0",
+        className,
+      )}
+    >
+      {showLabel ? (
+        <span className="text-xs font-medium text-muted-foreground">{label}</span>
+      ) : null}
+      <div className="relative min-w-0">
+        <div
+          ref={editorRef}
+          contentEditable
+          suppressContentEditableWarning
+          role="textbox"
+          aria-label={label}
+          aria-multiline="true"
+          onInput={() => {
+            syncEditorValue();
+            updateSelectionToolbar();
+          }}
+          onKeyUp={updateSelectionToolbar}
+          onMouseUp={updateSelectionToolbar}
+          onFocus={updateSelectionToolbar}
+          onBlur={syncEditorValue}
+          onPaste={(event) => {
+            const html = event.clipboardData.getData("text/html");
+
+            if (!html) {
+              return;
+            }
+
+            event.preventDefault();
+            document.execCommand("insertHTML", false, sanitizeRichTextHtml(html));
+            syncEditorValue();
+            updateSelectionToolbar();
+          }}
+          className="rich-text-inline-editor min-h-[3.5rem] overflow-y-auto rounded-md border bg-background px-3 py-2 text-sm leading-6 text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        />
+        {toolbarPosition ? (
+          <Popover
+            open={toolbarOpen}
+            onOpenChange={(open) => {
+              if (open) {
+                setToolbarOpen(true);
+              } else {
+                closeToolbar();
+              }
+            }}
+          >
+            <PopoverAnchor asChild>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none fixed size-px"
+                style={{
+                  left: toolbarPosition.left,
+                  top: toolbarPosition.top,
+                }}
+              />
+            </PopoverAnchor>
+            <PopoverContent
+              side="top"
+              align="center"
+              sideOffset={8}
+              onOpenAutoFocus={(event) => event.preventDefault()}
+              onCloseAutoFocus={(event) => event.preventDefault()}
+              className="w-auto max-w-[calc(100vw-1rem)] p-1"
+            >
+              {linkFormOpen ? (
+                <form
+                  className="grid w-80 max-w-[calc(100vw-2rem)] gap-3 p-2"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    applyLink();
+                  }}
+                >
+                  <div className="grid gap-1.5">
+                    <label
+                      htmlFor={linkInputId}
+                      className="text-sm font-medium text-foreground"
+                    >
+                      Link URL
+                    </label>
+                    <Input
+                      id={linkInputId}
+                      type="url"
+                      autoFocus
+                      placeholder="https://example.com"
+                      value={linkUrl}
+                      onChange={(event) => setLinkUrl(event.target.value)}
+                    />
+                  </div>
+                  <div className="flex justify-end gap-2">
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => applyLink("")}
+                    >
+                      Remove link
+                    </Button>
+                    <Button type="submit" size="sm">
+                      Apply link
+                    </Button>
+                  </div>
+                </form>
+              ) : (
+                <div
+                  role="toolbar"
+                  aria-label={`${label} formatting`}
+                  className="flex items-center gap-0.5"
+                >
+                  <RichTextToolbarButton
+                    icon={Bold}
+                    label="Bold"
+                    onClick={() => executeCommand("bold")}
+                  />
+                  <RichTextToolbarButton
+                    icon={Italic}
+                    label="Italic"
+                    onClick={() => executeCommand("italic")}
+                  />
+                  <RichTextToolbarButton
+                    icon={Underline}
+                    label="Underline"
+                    onClick={() => executeCommand("underline")}
+                  />
+                  <RichTextToolbarButton
+                    icon={Link2}
+                    label="Add link"
+                    onClick={openLinkForm}
+                  />
+                  <RichTextToolbarButton
+                    icon={RemoveFormatting}
+                    label="Clear formatting"
+                    onClick={clearFormatting}
+                  />
+                </div>
+              )}
+            </PopoverContent>
+          </Popover>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
+function RichTextPreview({
+  className,
+  value,
+}: {
+  className?: string;
+  value: string;
+}) {
+  const html = normalizeRichTextHtml(value);
+
+  if (!richTextToPlainText(html)) {
+    return null;
+  }
+
+  return (
+    <div
+      className={cn("rich-text-inline-preview", className)}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
+
+function RichTextEditor({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const editorRef = useRef<HTMLDivElement>(null);
+  const linkInputId = useId();
+  const linkSelectionRef = useRef<RichTextSelectionBookmark | null>(null);
+  const [activeCommands, setActiveCommands] = useState<
+    Partial<Record<RichTextCommand, boolean>>
+  >({});
+  const [linkPopoverOpen, setLinkPopoverOpen] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+
+  const refreshToolbarState = useCallback(() => {
+    if (!editorRef.current || typeof document === "undefined") {
+      return;
+    }
+
+    const nextState: Partial<Record<RichTextCommand, boolean>> = {};
+
+    richTextToolbarItems.forEach(({ command }) => {
+      try {
+        nextState[command] = document.queryCommandState(command);
+      } catch {
+        nextState[command] = false;
+      }
+    });
+
+    setActiveCommands(nextState);
+  }, []);
+
+  const syncEditorValue = useCallback(() => {
+    const editor = editorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    const sanitized = sanitizeRichTextHtml(editor.innerHTML);
+    const nextValue = richTextToPlainText(sanitized) ? sanitized : "";
+
+    onChange(nextValue);
+    refreshToolbarState();
+  }, [onChange, refreshToolbarState]);
+
+  useLayoutEffect(() => {
+    const editor = editorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    const nextValue = normalizeRichTextHtml(value);
+
+    if (document.activeElement !== editor && editor.innerHTML !== nextValue) {
+      editor.innerHTML = nextValue;
+    }
+
+  }, [value]);
+
+  useEffect(() => {
+    const handleSelectionChange = () => {
+      const editor = editorRef.current;
+
+      if (editor && (document.activeElement === editor || editor.contains(document.activeElement))) {
+        refreshToolbarState();
+      }
+    };
+
+    document.addEventListener("selectionchange", handleSelectionChange);
+    return () => document.removeEventListener("selectionchange", handleSelectionChange);
+  }, [refreshToolbarState]);
+
+  const executeCommand = (command: RichTextCommand) => {
+    editorRef.current?.focus();
+    document.execCommand(command, false);
+    syncEditorValue();
+  };
+
+  const openLinkPopover = () => {
+    const editor = editorRef.current;
+    const selection = window.getSelection();
+
+    if (!editor || !selection || selection.rangeCount === 0) {
+      return;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    if (!editor.contains(range.commonAncestorContainer)) {
+      return;
+    }
+
+    linkSelectionRef.current = createRichTextSelectionBookmark(editor, range);
+
+    let currentHref = "";
+    const anchorElement =
+      selection.anchorNode instanceof Element
+        ? selection.anchorNode
+        : selection.anchorNode?.parentElement;
+    const linkElement = anchorElement?.closest("a");
+
+    if (linkElement && editor.contains(linkElement)) {
+      currentHref = linkElement.getAttribute("href") ?? "";
+    } else {
+      try {
+        currentHref = document.queryCommandValue("createLink");
+      } catch {
+        currentHref = "";
+      }
+    }
+
+    setLinkUrl(currentHref);
+  };
+
+  const applyLink = (href = linkUrl) => {
+    const editor = editorRef.current;
+
+    if (!editor) {
+      return;
+    }
+
+    const savedSelection = linkSelectionRef.current;
+
+    if (!savedSelection || !restoreRichTextSelection(editor, savedSelection)) {
+      editor.focus();
+    }
+
+    if (href.trim()) {
+      document.execCommand("createLink", false, href.trim());
+    } else {
+      document.execCommand("unlink", false);
+    }
+
+    syncEditorValue();
+    linkSelectionRef.current = null;
+    setLinkPopoverOpen(false);
+  };
+
+  const clearFormatting = () => {
+    editorRef.current?.focus();
+    document.execCommand("removeFormat", false);
+    document.execCommand("unlink", false);
+    syncEditorValue();
+  };
+
+  return (
+    <div className="min-w-0">
+      <div className="overflow-hidden rounded-md border bg-background focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/20">
+        <div
+          role="toolbar"
+          aria-label={`${label} formatting`}
+          className="flex flex-wrap items-center gap-0.5 border-b bg-muted/30 p-1"
+        >
+          {richTextToolbarItems.slice(0, 3).map(({ command, icon, label: itemLabel }) => (
+            <RichTextToolbarButton
+              key={command}
+              active={activeCommands[command]}
+              icon={icon}
+              label={itemLabel}
+              onClick={() => executeCommand(command)}
+            />
+          ))}
+          <span className="mx-1 h-5 w-px bg-border" role="separator" />
+          {richTextToolbarItems.slice(3, 5).map(({ command, icon, label: itemLabel }) => (
+            <RichTextToolbarButton
+              key={command}
+              active={activeCommands[command]}
+              icon={icon}
+              label={itemLabel}
+              onClick={() => executeCommand(command)}
+            />
+          ))}
+          <span className="mx-1 h-5 w-px bg-border" role="separator" />
+          {richTextToolbarItems.slice(5).map(({ command, icon, label: itemLabel }) => (
+            <RichTextToolbarButton
+              key={command}
+              active={activeCommands[command]}
+              icon={icon}
+              label={itemLabel}
+              onClick={() => executeCommand(command)}
+            />
+          ))}
+          <Popover
+            open={linkPopoverOpen}
+            onOpenChange={(open) => {
+              setLinkPopoverOpen(open);
+
+              if (!open) {
+                linkSelectionRef.current = null;
+              }
+            }}
+          >
+            <PopoverTrigger
+              type="button"
+              title="Add link"
+              aria-label="Add link"
+              onMouseDown={(event) => {
+                event.preventDefault();
+                openLinkPopover();
+              }}
+              className={richTextToolbarButtonClassName}
+            >
+              <Link2 className="size-4" aria-hidden="true" />
+            </PopoverTrigger>
+            <PopoverContent
+              align="end"
+              className="w-80 max-w-[calc(100vw-2rem)] p-3"
+            >
+              <form
+                className="grid gap-3"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  applyLink();
+                }}
+              >
+                <div className="grid gap-1.5">
+                  <label
+                    htmlFor={linkInputId}
+                    className="text-sm font-medium text-foreground"
+                  >
+                    Link URL
+                  </label>
+                  <Input
+                    id={linkInputId}
+                    type="url"
+                    autoFocus
+                    placeholder="https://example.com"
+                    value={linkUrl}
+                    onChange={(event) => setLinkUrl(event.target.value)}
+                  />
+                </div>
+                <div className="flex justify-end gap-2">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => applyLink("")}
+                  >
+                    Remove link
+                  </Button>
+                  <Button type="submit" size="sm">
+                    Apply link
+                  </Button>
+                </div>
+              </form>
+            </PopoverContent>
+          </Popover>
+          <RichTextToolbarButton
+            icon={RemoveFormatting}
+            label="Clear formatting"
+            onClick={clearFormatting}
+          />
+        </div>
+        <div className="relative">
+          <div
+            ref={editorRef}
+            contentEditable
+            suppressContentEditableWarning
+            role="textbox"
+            aria-label={label}
+            aria-multiline="true"
+            onInput={syncEditorValue}
+            onKeyUp={refreshToolbarState}
+            onMouseUp={refreshToolbarState}
+            onFocus={refreshToolbarState}
+            onBlur={syncEditorValue}
+            onPaste={(event) => {
+              const html = event.clipboardData.getData("text/html");
+
+              if (!html) {
+                return;
+              }
+
+              event.preventDefault();
+              document.execCommand("insertHTML", false, sanitizeRichTextHtml(html));
+              syncEditorValue();
+            }}
+            className="rich-text-editor-content min-h-[220px] max-h-[420px] overflow-y-auto px-3 py-3 text-sm leading-6 text-foreground outline-none"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function EditorSection({
   title,
   onTitleChange,
@@ -504,13 +1311,6 @@ function pairRows<T>(items: T[]) {
   return rows;
 }
 
-function splitParagraphs(value: string) {
-  return value
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean);
-}
-
 const previewLinkClassName = "text-blue-700 underline";
 
 function contactUrl(protocol: "mailto" | "tel", value: string) {
@@ -607,19 +1407,12 @@ function CoverLetterPreview({
         </p>
       </header>
 
-      <div className="mt-[0.42in] grid gap-[0.18in]">
-        {splitParagraphs(coverLetter.body).map((paragraph, index) => (
-          <p
-            key={index}
-            className={cn(
-              "whitespace-pre-line",
-              coverLetter.justifyBody && "text-justify",
-            )}
-          >
-            {paragraph}
-          </p>
-        ))}
-      </div>
+      <div
+        className="cover-letter-rich-text mt-[0.42in]"
+        dangerouslySetInnerHTML={{
+          __html: normalizeRichTextHtml(coverLetter.body),
+        }}
+      />
     </article>
   );
 }
@@ -633,6 +1426,26 @@ export function ResumeBuilder({
   const initialCustomSections = normalizeResumeCustomSections(
     initialResume.customSections,
   );
+  const initialCoverLetter = initialResume.coverLetter
+    ? (() => {
+        const {
+          justifyBody: _legacyJustifyBody,
+          ...storedCoverLetter
+        } = initialResume.coverLetter;
+
+        return storedCoverLetter;
+      })()
+    : {
+        included: false,
+        date: "",
+        recipientName: "",
+        recipientTitle: "",
+        company: "",
+        address: "",
+        salutation: "Dear Hiring Manager,",
+        body: "",
+        closing: "Sincerely,",
+      };
   const [resume, setResume] = useState<ResumeContent>({
     ...initialResume,
     contact: {
@@ -645,23 +1458,7 @@ export function ResumeBuilder({
     certifications: initialResume.certifications ?? [],
     sectionTitles: normalizeResumeSectionTitles(initialResume.sectionTitles),
     customSections: initialCustomSections,
-    coverLetter: initialResume.coverLetter
-      ? {
-          ...initialResume.coverLetter,
-          justifyBody: initialResume.coverLetter.justifyBody === true,
-        }
-      : {
-          included: false,
-          date: "",
-          recipientName: "",
-          recipientTitle: "",
-          company: "",
-          address: "",
-          salutation: "Dear Hiring Manager,",
-          body: "",
-          justifyBody: false,
-          closing: "Sincerely,",
-        },
+    coverLetter: initialCoverLetter,
     sectionOrder: normalizeResumeSectionOrder(
       initialResume.sectionOrder,
       initialCustomSections.map((section) => section.id),
@@ -1944,33 +2741,41 @@ export function ResumeBuilder({
             </div>
           </EditorSection>
 
-          <EditorSection title="Summary">
-            <div className="grid grid-cols-[auto_1fr] gap-3">
-              <Toggle
-                checked={resume.summary.included}
-                label={resume.summary.included ? "Hide summary" : "Show summary"}
-                onClick={() =>
-                  setResume((current) => ({
-                    ...current,
-                    summary: {
-                      ...current.summary,
-                      included: !current.summary.included,
-                    },
-                  }))
-                }
-              />
-              <TextArea
-                label="Profile paragraph"
-                rows={4}
-                value={resume.summary.value}
-                onChange={(value) =>
-                  setResume((current) => ({
-                    ...current,
-                    summary: { ...current.summary, value },
-                  }))
-                }
-              />
-            </div>
+          <EditorSection
+            title="Summary"
+            action={
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <Toggle
+                  checked={resume.summary.included}
+                  label={
+                    resume.summary.included
+                      ? "Remove summary from document"
+                      : "Include summary in document"
+                  }
+                  onClick={() =>
+                    setResume((current) => ({
+                      ...current,
+                      summary: {
+                        ...current.summary,
+                        included: !current.summary.included,
+                      },
+                    }))
+                  }
+                />
+                <span>Include in document</span>
+              </div>
+            }
+          >
+            <RichTextEditor
+              label="Profile paragraph"
+              value={resume.summary.value}
+              onChange={(value) =>
+                setResume((current) => ({
+                  ...current,
+                  summary: { ...current.summary, value },
+                }))
+              }
+            />
           </EditorSection>
 
           <div className="flex justify-end">
@@ -3346,9 +4151,8 @@ export function ResumeBuilder({
                       </Button>
                     </div>
                   ) : (
-                    <TextArea
+                    <RichTextInlineEditor
                       label="Description"
-                      rows={4}
                       value={item.description}
                       onChange={(value) =>
                         updateCustomEntry(section.id, item.id, (entry) => ({
@@ -3365,16 +4169,14 @@ export function ResumeBuilder({
 
           <EditorSection
             title="Cover Letter"
-            order={sectionOrder.length + 1}
-          >
-            <div className="grid gap-3">
-              <div className="grid grid-cols-[auto_1fr] gap-3">
+            action={
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
                 <Toggle
                   checked={resume.coverLetter.included}
                   label={
                     resume.coverLetter.included
-                      ? "Hide cover letter"
-                      : "Show cover letter"
+                      ? "Remove cover letter from document"
+                      : "Include cover letter in document"
                   }
                   onClick={() => {
                     const included = !resume.coverLetter.included;
@@ -3382,27 +4184,16 @@ export function ResumeBuilder({
                     setPreviewPan({ x: 0, y: 0 });
                   }}
                 />
-                <TextArea
-                  label="Cover letter"
-                  rows={8}
-                  value={resume.coverLetter.body}
-                  onChange={(value) => updateCoverLetter("body", value)}
-                />
+                <span>Include in document</span>
               </div>
-              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                <Switch
-                  checked={resume.coverLetter.justifyBody}
-                  label="Justify body text"
-                  onClick={() =>
-                    updateCoverLetter(
-                      "justifyBody",
-                      !resume.coverLetter.justifyBody,
-                    )
-                  }
-                />
-                <span>Justify body text</span>
-              </div>
-            </div>
+            }
+            order={sectionOrder.length + 1}
+          >
+            <RichTextEditor
+              label="Cover letter body"
+              value={resume.coverLetter.body}
+              onChange={(value) => updateCoverLetter("body", value)}
+            />
           </EditorSection>
         </div>
       </section>
@@ -3599,10 +4390,12 @@ export function ResumeBuilder({
                         ))}
                       </p>
                     ) : null}
-                    {resume.summary.included && resume.summary.value ? (
-                      <p className="mt-[15px] max-w-[6.35in] text-[11.5px] leading-[1.18]">
-                        {resume.summary.value}
-                      </p>
+                    {resume.summary.included &&
+                    hasRichTextContent(resume.summary.value) ? (
+                      <RichTextPreview
+                        className="mt-[15px] max-w-[6.35in] text-[11.5px] leading-[1.18]"
+                        value={resume.summary.value}
+                      />
                     ) : null}
                   </div>
                   {photoUrl ? (
@@ -3643,10 +4436,13 @@ export function ResumeBuilder({
                         </div>
                         <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
                           {item.bullets
-                            .filter((bullet) => bullet.included && bullet.text)
+                            .filter(
+                              (bullet) =>
+                                bullet.included && hasRichTextContent(bullet.text),
+                            )
                             .map((bullet) => (
                               <li key={bullet.id} className="pl-[0.02in]">
-                                {bullet.text}
+                                <RichTextPreview value={bullet.text} />
                               </li>
                             ))}
                         </ul>
@@ -3835,10 +4631,13 @@ export function ResumeBuilder({
                         </div>
                         <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
                           {item.bullets
-                            .filter((bullet) => bullet.included && bullet.text)
+                            .filter(
+                              (bullet) =>
+                                bullet.included && hasRichTextContent(bullet.text),
+                            )
                             .map((bullet) => (
                               <li key={bullet.id} className="pl-[0.02in]">
-                                {bullet.text}
+                                <RichTextPreview value={bullet.text} />
                               </li>
                             ))}
                         </ul>
@@ -3911,7 +4710,8 @@ export function ResumeBuilder({
                     <div className="grid gap-[7px]">
                       {visibleEntries.map((item) => {
                         const visibleBullets = item.bullets.filter(
-                          (bullet) => bullet.included && bullet.text,
+                          (bullet) =>
+                            bullet.included && hasRichTextContent(bullet.text),
                         );
                         const linkLabel = item.link.trim();
                         const linkHref = normalizeResumeLink(linkLabel);
@@ -3954,15 +4754,16 @@ export function ResumeBuilder({
                                 <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
                                   {visibleBullets.map((bullet) => (
                                     <li key={bullet.id} className="pl-[0.02in]">
-                                      {bullet.text}
+                                      <RichTextPreview value={bullet.text} />
                                     </li>
                                   ))}
                                 </ul>
                               ) : null
-                            ) : item.description ? (
-                              <p className="mt-[4px] whitespace-pre-line">
-                                {item.description}
-                              </p>
+                            ) : hasRichTextContent(item.description) ? (
+                              <RichTextPreview
+                                className="mt-[4px]"
+                                value={item.description}
+                              />
                             ) : null}
                           </div>
                         );
@@ -4011,15 +4812,10 @@ function BulletEditor({
   onDrop: (group: string, id: string) => void;
   dropIndicator: DropIndicator | null;
 }) {
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const indicator =
     dropIndicator?.group === dragGroup && dropIndicator.id === bullet.id
       ? dropIndicator.position
       : null;
-
-  useLayoutEffect(() => {
-    autoResizeTextarea(textareaRef.current);
-  }, [bullet.text]);
 
   return (
     <div
@@ -4033,6 +4829,12 @@ function BulletEditor({
       draggable
       onDragStart={(event) => {
         event.stopPropagation();
+
+        if ((event.target as Element | null)?.closest("[contenteditable]")) {
+          event.preventDefault();
+          return;
+        }
+
         onDragStart(dragGroup, bullet.id);
       }}
       onDragOver={(event) => onDragOverTarget(event, dragGroup, bullet.id)}
@@ -4052,15 +4854,11 @@ function BulletEditor({
           onClick={onToggle}
         />
       </div>
-      <textarea
-        ref={textareaRef}
+      <RichTextInlineEditor
+        label="Bullet point"
+        showLabel={false}
         value={bullet.text}
-        rows={2}
-        onChange={(event) => {
-          autoResizeTextarea(event.currentTarget);
-          onChange(event.target.value);
-        }}
-        className="resize-none overflow-hidden rounded-md border bg-background px-3 py-2 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        onChange={onChange}
       />
       <Button
         type="button"

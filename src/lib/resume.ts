@@ -153,7 +153,8 @@ export type ResumeCoverLetter = {
   address: string;
   salutation: string;
   body: string;
-  justifyBody: boolean;
+  /** Kept optional so older saved profiles can be read while the editor migrates them. */
+  justifyBody?: boolean;
   closing: string;
 };
 
@@ -220,7 +221,6 @@ export const defaultResumeContent: ResumeContent = {
     address: "",
     salutation: "Dear Hiring Manager,",
     body: "",
-    justifyBody: false,
     closing: "Sincerely,",
   },
   sectionOrder: defaultResumeSectionOrder,
@@ -330,11 +330,21 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
           ...item,
           bullets: item.bullets ?? [],
         })),
-        coverLetter: {
-          ...defaultResumeContent.coverLetter,
-          ...(parsed.coverLetter ?? {}),
-          justifyBody: parsed.coverLetter?.justifyBody === true,
-        },
+        coverLetter: (() => {
+          const {
+            justifyBody: _legacyJustifyBody,
+            ...storedCoverLetter
+          } = (parsed.coverLetter ?? {}) as ResumeCoverLetter;
+
+          return {
+            ...defaultResumeContent.coverLetter,
+            ...storedCoverLetter,
+            body:
+              typeof storedCoverLetter.body === "string"
+                ? storedCoverLetter.body
+                : "",
+          };
+        })(),
         sectionOrder: normalizeResumeSectionOrder(
           parsed.sectionOrder,
           customSections.map((section) => section.id),
