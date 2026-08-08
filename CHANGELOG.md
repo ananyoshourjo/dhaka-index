@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 1.2.0 - 2026-08-08
+
+- Add rich-text editing to the summary, cover letter, bullet points, and descriptions
+- Render formatted resume content safely in previews and PDF exports
+- Remove redundant editor placeholders and helper labels
+
 ## 1.1.9 - 2026-08-04
 
 - Keep the resume preview toolbar on one row on mobile

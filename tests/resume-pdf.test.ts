@@ -17,17 +17,79 @@ test("resume PDF references emit clickable email and phone links", () => {
   );
 });
 
-test("cover letter body alignment follows the saved preference", () => {
+test("cover letter PDF renders the saved rich-text body", () => {
   const route = fs.readFileSync(
     path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
     "utf8",
   );
 
-  assert.match(
-    route,
-    /const bodyTextAlign = coverLetter\?\.justifyBody === true \? "justify" : "left";/,
+  assert.match(route, /const body = normalizeRichTextHtml\(coverLetter\?\.body \?\? ""\);/);
+  assert.match(route, /\.body > \* \{ margin: 0; \}/);
+  assert.match(route, /\.body ul, \.body ol \{ margin: 0; padding-left: \.3in; \}/);
+  assert.doesNotMatch(route, /justifyBody/);
+});
+
+test("resume builder exposes a rich-text cover letter editor", () => {
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
   );
-  assert.match(route, /text-align: \$\{bodyTextAlign\};/);
+
+  assert.match(builder, /function RichTextEditor\(/);
+  assert.match(builder, /role="toolbar"/);
+  assert.match(builder, /label: "Bold"/);
+  assert.match(builder, /<Popover\s/);
+  assert.match(builder, /<PopoverContent/);
+  assert.match(builder, /label="Add link"/);
+  assert.doesNotMatch(builder, /window\.prompt/);
+  assert.match(builder, /label: "Bulleted list"/);
+  assert.match(builder, /label: "Numbered list"/);
+  assert.match(builder, /label: "Align center"/);
+  assert.match(builder, /action=\{/);
+  assert.doesNotMatch(builder, /label="Justify body text"/);
+  assert.doesNotMatch(
+    builder,
+    /Select text to format it, add a link, change alignment, or create a list\./,
+  );
+});
+
+test("resume summary uses the full rich-text editor and PDF renderer", () => {
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+
+  assert.match(builder, /<EditorSection[\s\S]*title="Summary"/);
+  assert.match(builder, /label="Profile paragraph"/);
+  assert.match(builder, /<RichTextEditor[\s\S]*label="Profile paragraph"/);
+  assert.doesNotMatch(builder, /Write your (?:summary|cover letter) here/);
+  assert.match(route, /const summary = renderRichTextHtml\(resume\.summary\.value\);/);
+  assert.match(route, /class="summary rich-text-inline"/);
+});
+
+test("resume bullets and descriptions use selection-only rich-text formatting", () => {
+  const builder = fs.readFileSync(
+    path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
+    "utf8",
+  );
+  const route = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "api", "resume", "pdf", "route.ts"),
+    "utf8",
+  );
+
+  assert.match(builder, /function RichTextInlineEditor\(/);
+  assert.match(builder, /document\.addEventListener\("selectionchange"/);
+  assert.match(builder, /label="Bullet point"/);
+  assert.match(builder, /label="Description"/);
+  assert.match(builder, /label="Clear formatting"/);
+  assert.match(builder, /function RichTextPreview\(/);
+  assert.match(route, /function renderRichTextHtml\(/);
+  assert.match(route, /class=\"rich-text-inline\"/);
+  assert.match(route, /renderRichTextHtml\(item\.description\)/);
 });
 
 test("cover letter names use the same uppercase presentation as resumes", () => {

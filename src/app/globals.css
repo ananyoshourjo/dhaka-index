@@ -101,6 +101,84 @@ select {
   opacity: 0.6;
 }
 
+.rich-text-editor-content > :first-child,
+.cover-letter-rich-text > :first-child,
+.rich-text-inline-editor > :first-child,
+.rich-text-inline-preview > :first-child {
+  margin-top: 0;
+}
+
+.rich-text-editor-content p,
+.rich-text-editor-content div,
+.cover-letter-rich-text p,
+.cover-letter-rich-text div,
+.rich-text-inline-editor p,
+.rich-text-inline-editor div,
+.rich-text-inline-preview p,
+.rich-text-inline-preview div {
+  margin: 0 0 0.75rem;
+}
+
+.rich-text-editor-content > :last-child,
+.cover-letter-rich-text > :last-child,
+.rich-text-inline-editor > :last-child,
+.rich-text-inline-preview > :last-child {
+  margin-bottom: 0;
+}
+
+.rich-text-editor-content ul,
+.rich-text-editor-content ol,
+.cover-letter-rich-text ul,
+.cover-letter-rich-text ol,
+.rich-text-inline-editor ul,
+.rich-text-inline-editor ol,
+.rich-text-inline-preview ul,
+.rich-text-inline-preview ol {
+  margin: 0 0 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.rich-text-editor-content ul,
+.cover-letter-rich-text ul,
+.rich-text-inline-editor ul,
+.rich-text-inline-preview ul {
+  list-style: disc;
+}
+
+.rich-text-editor-content ol,
+.cover-letter-rich-text ol,
+.rich-text-inline-editor ol,
+.rich-text-inline-preview ol {
+  list-style: decimal;
+}
+
+.rich-text-editor-content li,
+.cover-letter-rich-text li,
+.rich-text-inline-editor li,
+.rich-text-inline-preview li {
+  padding-left: 0.15rem;
+}
+
+.rich-text-editor-content a,
+.cover-letter-rich-text a,
+.rich-text-inline-editor a,
+.rich-text-inline-preview a {
+  color: #1447e6;
+  text-decoration: underline;
+}
+
+.cover-letter-rich-text {
+  display: grid;
+  gap: 0.18in;
+}
+
+.cover-letter-rich-text > p,
+.cover-letter-rich-text > div,
+.cover-letter-rich-text > ul,
+.cover-letter-rich-text > ol {
+  margin: 0;
+}
+
 @media (max-width: 639px) {
   input,
   textarea,

@@ -15,6 +15,10 @@ import {
 } from "@/lib/resume-schema";
 import { getCloudflareEnv } from "@/lib/cloudflare";
 import { getProfilePhotoDataUrl } from "@/lib/profile-photo";
+import {
+  normalizeRichTextHtml,
+  richTextToPlainText,
+} from "@/lib/rich-text";
 import { normalizeResumeLink } from "@/lib/resume-links";
 import { getSession } from "@/lib/session";
 
@@ -26,6 +30,11 @@ function escapeHtml(value: string) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;");
+}
+
+function renderRichTextHtml(value: string) {
+  const normalized = normalizeRichTextHtml(value);
+  return richTextToPlainText(normalized) ? normalized : "";
 }
 
 function contactLink(text: string, href: string) {
@@ -135,6 +144,7 @@ function buildResumeHtml(
   resume: ResumeContent,
   sectionOrder: ResumeSectionId[],
 ) {
+  const summary = renderRichTextHtml(resume.summary.value);
   const work = resume.workExperience
     .filter((item) => item.included)
     .map(
@@ -146,8 +156,15 @@ function buildResumeHtml(
           </div>
           <ul>
             ${item.bullets
-              .filter((bullet) => bullet.included && bullet.text)
-              .map((bullet) => `<li>${escapeHtml(bullet.text)}</li>`)
+              .filter(
+                (bullet) => bullet.included && renderRichTextHtml(bullet.text),
+              )
+              .map(
+                (bullet) =>
+                  `<li><div class="rich-text-inline">${renderRichTextHtml(
+                    bullet.text,
+                  )}</div></li>`,
+              )
               .join("")}
           </ul>
         </div>
@@ -296,8 +313,15 @@ function buildResumeHtml(
               </div>
               <ul>
                 ${(item.bullets ?? [])
-                  .filter((bullet) => bullet.included && bullet.text)
-                  .map((bullet) => `<li>${escapeHtml(bullet.text)}</li>`)
+                  .filter(
+                    (bullet) => bullet.included && renderRichTextHtml(bullet.text),
+                  )
+                  .map(
+                    (bullet) =>
+                      `<li><div class="rich-text-inline">${renderRichTextHtml(
+                        bullet.text,
+                      )}</div></li>`,
+                  )
                   .join("")}
               </ul>
             </div>
@@ -364,16 +388,23 @@ function buildResumeHtml(
             .filter(Boolean)
             .join(" - ");
           const visibleBullets = item.bullets.filter(
-            (bullet) => bullet.included && bullet.text,
+            (bullet) => bullet.included && renderRichTextHtml(bullet.text),
           );
           const content = item.useBullets
             ? visibleBullets.length
               ? `<ul>${visibleBullets
-                  .map((bullet) => `<li>${escapeHtml(bullet.text)}</li>`)
+                  .map(
+                    (bullet) =>
+                      `<li><div class="rich-text-inline">${renderRichTextHtml(
+                        bullet.text,
+                      )}</div></li>`,
+                  )
                   .join("")}</ul>`
               : ""
-            : item.description
-              ? `<p>${escapeHtml(item.description).replaceAll("\n", "<br />")}</p>`
+            : renderRichTextHtml(item.description)
+              ? `<div class="rich-text-inline">${renderRichTextHtml(
+                  item.description,
+                )}</div>`
               : "";
 
           return `
@@ -451,6 +482,14 @@ function buildResumeHtml(
           .references > div:last-child { border-right: 0; }
           .certification-meta { font-size: 10.5px; }
           .link { color: #1447e6; text-decoration: underline; }
+          .rich-text-inline > :first-child { margin-top: 0; }
+          .rich-text-inline p, .rich-text-inline div { margin: 0 0 .06in; }
+          .rich-text-inline > :last-child { margin-bottom: 0; }
+          .rich-text-inline ul, .rich-text-inline ol { margin: 0 0 .06in; padding-left: .16in; }
+          .rich-text-inline ul { list-style: disc; }
+          .rich-text-inline ol { list-style: decimal; }
+          .rich-text-inline li { padding-left: .02in; }
+          .rich-text-inline a { color: #1447e6; text-decoration: underline; }
           h3 { break-after: avoid; }
           .block, tr, .references > div { break-inside: avoid; }
         </style>
@@ -465,8 +504,8 @@ function buildResumeHtml(
                     ${contact.name ? `<h2>${escapeHtml(contact.name)}</h2>` : ""}
                     ${contactLine ? `<p class="contact">${contactLine}</p>` : ""}
                     ${
-                      resume.summary.included && resume.summary.value.trim()
-                        ? `<p class="summary">${escapeHtml(resume.summary.value)}</p>`
+                      resume.summary.included && summary
+                        ? `<div class="summary rich-text-inline">${summary}</div>`
                         : ""
                     }
                   </div>
@@ -496,16 +535,7 @@ function buildResumeHtml(
 
 function buildCoverLetterHtml(resume: ResumeContent) {
   const coverLetter = resume.coverLetter;
-  const bodyTextAlign = coverLetter?.justifyBody === true ? "justify" : "left";
-  const body = (coverLetter?.body ?? "")
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter(Boolean)
-    .map(
-      (paragraph) =>
-        `<p>${escapeHtml(paragraph).replaceAll("\n", "<br />")}</p>`,
-    )
-    .join("");
+  const body = normalizeRichTextHtml(coverLetter?.body ?? "");
   const contactLine = [
     resume.contact.phone
       ? `Phone: ${contactLink(resume.contact.phone, `tel:${resume.contact.phone}`)}`
@@ -536,10 +566,15 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           header { border-bottom: 1px solid #d4d4d4; padding-bottom: .18in; }
           h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; text-transform: uppercase; }
           p { margin: 0; }
-          .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
-          .link { color: #1447e6; text-decoration: underline; }
-          .body { display: grid; gap: .18in; margin-top: .42in; text-align: ${bodyTextAlign}; }
-        </style>
+           .contact { margin-top: .06in; color: #404040; font-size: 9.5pt; }
+           .link { color: #1447e6; text-decoration: underline; }
+           .body { display: grid; gap: .18in; margin-top: .42in; }
+           .body > * { margin: 0; }
+           .body ul, .body ol { margin: 0; padding-left: .3in; }
+           .body ul { list-style: disc; }
+           .body ol { list-style: decimal; }
+           .body li { padding-left: .02in; }
+         </style>
       </head>
       <body>
         <main>
