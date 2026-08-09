@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T09:40:11.035Z",
+  "generatedAt": "2026-08-09T16:07:09.984Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1376,6 +1376,13 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Senior Executive/Executive- Merchant Acquisition",
+      "company": "Pathao",
+      "deadline": "2026-08-22",
+      "url": "https://careers.pathao.com/jobs/387",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Associate, Courier Agent Management",
       "company": "Pathao",
       "deadline": "2026-08-09",
@@ -1600,6 +1607,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Sales Development Representative",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/20f73638-b92f-4d47-bab0-6431db54f0c9",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Business Intelligence Engineer",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1815,6 +1829,27 @@
       "deadline": "2026-08-31",
       "url": "https://recruitment.welldev.io/public/jobs/bb8544ff-1407-451a-877c-44cd6e71135a",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Brand & Acquisition Lead, r ventures PLC, a fully owned subsidiary of Robi Axiata PLC.(Ref. August 09, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-13",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6922",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Business Development Expert, r ventures PLC, a fully owned subsidiary of Robi Axiata PLC. (Ref. August 09, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-13",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6924",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Head of Technology & Information, r ventures PLC, a fully owned subsidiary of Robi Axiata PLC. (Ref. August 09, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-13",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6927",
+      "functionTag": "general_management"
     },
     {
       "title": "ERP Support (Engineer/Specialist/Lead)",
