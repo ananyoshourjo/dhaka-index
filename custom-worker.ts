@@ -38,26 +38,44 @@ export default {
     env: ScheduledEnv,
     context: ExecutionContext,
   ) {
-    if (!env.JOB_SYNC_SECRET) {
-      throw new Error("JOB_SYNC_SECRET is not configured.");
-    }
+    const startedAt = Date.now();
+    let status = 500;
 
-    const request = new Request(new URL("/api/jobs/sync", env.BETTER_AUTH_URL), {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "X-Dhaka-Index-Sync-Key": env.JOB_SYNC_SECRET,
-        "X-Dhaka-Index-Sync-Source": "cloudflare-cron",
-      },
-    });
-    const response = await handler.fetch(request, env, context);
+    try {
+      if (!env.JOB_SYNC_SECRET) {
+        throw new Error("JOB_SYNC_SECRET is not configured.");
+      }
 
-    if (!response.ok) {
-      throw new Error(
-        `Scheduled job synchronization returned HTTP ${response.status}.`,
+      const request = new Request(
+        new URL("/api/jobs/sync", env.BETTER_AUTH_URL),
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "X-Dhaka-Index-Sync-Key": env.JOB_SYNC_SECRET,
+            "X-Dhaka-Index-Sync-Source": "cloudflare-cron",
+          },
+        },
+      );
+      const response = await handler.fetch(request, env, context);
+      status = response.status;
+
+      if (!response.ok) {
+        throw new Error(
+          `Scheduled job synchronization returned HTTP ${response.status}.`,
+        );
+      }
+
+      await response.arrayBuffer();
+    } finally {
+      console.log(
+        JSON.stringify({
+          type: "dhaka-index-job-sync",
+          trigger: "cloudflare-cron",
+          status,
+          durationMs: Date.now() - startedAt,
+        }),
       );
     }
-
-    await response.arrayBuffer();
   },
 } satisfies ExportedHandler<ScheduledEnv>;
