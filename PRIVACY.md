@@ -24,8 +24,17 @@ The server retrieves the configured public job-feed URL. When a user opens a
 job, their browser navigates directly to that external site. Authenticated PDF
 generation is processed by Cloudflare Browser Rendering.
 
-There is no application analytics, advertising, tracking pixel, or product
-telemetry.
+When enabled, the public member app uses Cloudflare Web Analytics for baseline
+page-view and real-user performance measurement. The application does not send
+account credentials, resumes, cover letters, profile photos, bookmarks, or D1
+records to the analytics beacon. The private admin portal does not include the
+beacon. Cloudflare Web Analytics is configured either through Cloudflare's
+automatic setup or the repository's public site-token build variable, not both.
+
+Cloudflare Worker Observability separately receives structured technical health
+data such as request failures, slow requests, health-check traces, and
+scheduled job-sync results for operator diagnosis. This data is not exposed as
+visitor analytics.
 
 ## Controls
 

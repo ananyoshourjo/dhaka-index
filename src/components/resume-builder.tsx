@@ -250,6 +250,40 @@ function Toggle({
   );
 }
 
+function CollapseButton({
+  collapsed,
+  label,
+  onClick,
+  className,
+}: {
+  collapsed: boolean;
+  label: string;
+  onClick: () => void;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      draggable={false}
+      onClick={onClick}
+      aria-expanded={!collapsed}
+      aria-label={`${collapsed ? "Expand" : "Collapse"} ${label}`}
+      className={cn(
+        "inline-flex size-6 shrink-0 items-center justify-center rounded text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/30",
+        className,
+      )}
+    >
+      <ChevronDown
+        className={cn(
+          "size-4 transition-transform duration-150",
+          collapsed && "-rotate-90",
+        )}
+        aria-hidden="true"
+      />
+    </button>
+  );
+}
+
 function Field({
   label,
   value,
@@ -372,7 +406,7 @@ function TextArea({
         value={value}
         rows={rows}
         onChange={(event) => onChange(event.target.value)}
-        className="resize-y overflow-hidden rounded-md border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
+        className="w-full min-w-0 resize-y overflow-hidden rounded-md border bg-background px-3 py-2 text-sm text-foreground outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/20"
       />
     </label>
   );
@@ -385,6 +419,15 @@ function autoResizeTextarea(textarea: HTMLTextAreaElement | null) {
 
   textarea.style.height = "auto";
   textarea.style.height = `${textarea.scrollHeight}px`;
+}
+
+function autoResizeContentEditable(editor: HTMLElement | null) {
+  if (!editor) {
+    return;
+  }
+
+  editor.style.height = "auto";
+  editor.style.height = `${editor.scrollHeight}px`;
 }
 
 type RichTextCommand =
@@ -942,6 +985,8 @@ function RichTextEditor({
       editor.innerHTML = nextValue;
     }
 
+    autoResizeContentEditable(editor);
+
   }, [value]);
 
   useEffect(() => {
@@ -1146,7 +1191,10 @@ function RichTextEditor({
             role="textbox"
             aria-label={label}
             aria-multiline="true"
-            onInput={syncEditorValue}
+            onInput={() => {
+              autoResizeContentEditable(editorRef.current);
+              syncEditorValue();
+            }}
             onKeyUp={refreshToolbarState}
             onMouseUp={refreshToolbarState}
             onFocus={refreshToolbarState}
@@ -1162,7 +1210,7 @@ function RichTextEditor({
               document.execCommand("insertHTML", false, sanitizeRichTextHtml(html));
               syncEditorValue();
             }}
-            className="rich-text-editor-content min-h-[220px] max-h-[420px] overflow-y-auto px-3 py-3 text-sm leading-6 text-foreground outline-none"
+            className="rich-text-editor-content min-h-[220px] overflow-y-hidden px-3 py-3 text-sm leading-6 text-foreground outline-none"
           />
         </div>
       </div>
@@ -1207,6 +1255,7 @@ function EditorSection({
   order?: number;
   dropIndicator?: DropIndicator | null;
 }) {
+  const [collapsed, setCollapsed] = useState(false);
   const draggable = Boolean(dragId && dragGroup && onDragStart && onDrop);
   const isDragging =
     Boolean(dragGroup && dragId) &&
@@ -1220,7 +1269,7 @@ function EditorSection({
   return (
     <section
       className={cn(
-        "relative grid gap-4 rounded-md transition-opacity duration-150",
+        "relative grid min-w-0 gap-4 rounded-md transition-opacity duration-150",
         isDragging && "opacity-55",
         indicator === "before" &&
           "before:absolute before:-top-3 before:left-0 before:right-0 before:h-1 before:rounded-full before:bg-primary",
@@ -1250,13 +1299,20 @@ function EditorSection({
       }}
       style={order === undefined ? undefined : { order }}
     >
-      <div className="flex items-center justify-between border-b pb-2">
-        <div className="inline-flex items-center gap-2">
+      <div className="flex min-w-0 items-center justify-between border-b pb-2">
+        <div className="inline-flex min-w-0 items-center gap-2">
           {draggable ? (
-            <GripVertical
-              className="size-4 cursor-grab text-muted-foreground transition-colors hover:text-foreground active:cursor-grabbing"
-              aria-hidden="true"
-            />
+            <>
+              <GripVertical
+                className="size-4 cursor-grab text-muted-foreground transition-colors hover:text-foreground active:cursor-grabbing"
+                aria-hidden="true"
+              />
+              <CollapseButton
+                collapsed={collapsed}
+                label={`${title || "section"} section`}
+                onClick={() => setCollapsed((current) => !current)}
+              />
+            </>
           ) : null}
           {onTitleChange ? (
             <input
@@ -1272,7 +1328,13 @@ function EditorSection({
         </div>
         {action}
       </div>
-      {children}
+      {draggable ? (
+        <div className="grid min-w-0 gap-4" hidden={collapsed}>
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </section>
   );
 }
@@ -1472,6 +1534,9 @@ export function ResumeBuilder({
   const [photoSaving, setPhotoSaving] = useState(false);
   const [dragTarget, setDragTarget] = useState<DragTarget | null>(null);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator | null>(null);
+  const [collapsedEntryIds, setCollapsedEntryIds] = useState<Set<string>>(
+    () => new Set(),
+  );
   const [previewZoom, setPreviewZoom] = useState(0.78);
   const [previewPan, setPreviewPan] = useState({ x: 0, y: 0 });
   const [mobilePane, setMobilePane] = useState<"edit" | "preview">("edit");
@@ -2041,6 +2106,20 @@ export function ResumeBuilder({
         [key]: value,
       },
     }));
+  };
+
+  const toggleEntryCollapsed = (id: string) => {
+    setCollapsedEntryIds((current) => {
+      const next = new Set(current);
+
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+
+      return next;
+    });
   };
 
   const updateCustomSection = (
@@ -2869,6 +2948,11 @@ export function ResumeBuilder({
                       className="size-4 cursor-grab text-muted-foreground"
                       aria-hidden="true"
                     />
+                    <CollapseButton
+                      collapsed={collapsedEntryIds.has(`work:${item.id}`)}
+                      label={`${item.role || "work experience"} entry`}
+                      onClick={() => toggleEntryCollapsed(`work:${item.id}`)}
+                    />
                     <Toggle
                       checked={item.included}
                       label={item.included ? "Hide work" : "Show work"}
@@ -2898,100 +2982,105 @@ export function ResumeBuilder({
                     <Trash2 className="size-4" />
                   </Button>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Field
-                    label="Role"
-                    value={item.role}
-                    onChange={(value) =>
-                      updateWork(item.id, (work) => ({ ...work, role: value }))
-                    }
-                  />
-                  <Field
-                    label="Company"
-                    value={item.company}
-                    onChange={(value) =>
-                      updateWork(item.id, (work) => ({ ...work, company: value }))
-                    }
-                  />
-                  <Field
-                    label="Place"
-                    value={item.place}
-                    onChange={(value) =>
-                      updateWork(item.id, (work) => ({ ...work, place: value }))
-                    }
-                  />
-                  <Field
-                    label="Dates"
-                    value={item.dates}
-                    onChange={(value) =>
-                      updateWork(item.id, (work) => ({ ...work, dates: value }))
-                    }
-                  />
-                </div>
-                <div className="grid gap-2">
-                  {item.bullets.map((bullet) => (
-                    <BulletEditor
-                      key={bullet.id}
-                      bullet={bullet}
-                      onToggle={() =>
-                        updateWork(item.id, (work) => ({
-                          ...work,
-                          bullets: work.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? {
-                                  ...currentBullet,
-                                  included: !currentBullet.included,
-                                }
-                              : currentBullet,
-                          ),
-                        }))
-                      }
+                <div
+                  className="grid gap-3"
+                  hidden={collapsedEntryIds.has(`work:${item.id}`)}
+                >
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <Field
+                      label="Role"
+                      value={item.role}
                       onChange={(value) =>
-                        updateWork(item.id, (work) => ({
-                          ...work,
-                          bullets: work.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? { ...currentBullet, text: value }
-                              : currentBullet,
-                          ),
-                        }))
+                        updateWork(item.id, (work) => ({ ...work, role: value }))
                       }
-                      onRemove={() =>
-                        updateWork(item.id, (work) => ({
-                          ...work,
-                          bullets: work.bullets.filter(
-                            (currentBullet) => currentBullet.id !== bullet.id,
-                          ),
-                        }))
-                      }
-                      dragGroup={`bullets:${item.id}`}
-                      onDragStart={handleDragStart}
-                      onDragOverTarget={handleDragOverTarget}
-                      onDrop={handleDrop}
-                      dropIndicator={dropIndicator}
                     />
-                  ))}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      updateWork(item.id, (work) => ({
-                        ...work,
-                        bullets: [
-                          ...work.bullets,
-                          {
-                            id: newId("bullet"),
-                            included: true,
-                            text: "",
-                          },
-                        ],
-                      }))
-                    }
-                  >
-                    <Plus className="size-4" />
-                    Add bullet
-                  </Button>
+                    <Field
+                      label="Company"
+                      value={item.company}
+                      onChange={(value) =>
+                        updateWork(item.id, (work) => ({ ...work, company: value }))
+                      }
+                    />
+                    <Field
+                      label="Place"
+                      value={item.place}
+                      onChange={(value) =>
+                        updateWork(item.id, (work) => ({ ...work, place: value }))
+                      }
+                    />
+                    <Field
+                      label="Dates"
+                      value={item.dates}
+                      onChange={(value) =>
+                        updateWork(item.id, (work) => ({ ...work, dates: value }))
+                      }
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    {item.bullets.map((bullet) => (
+                      <BulletEditor
+                        key={bullet.id}
+                        bullet={bullet}
+                        onToggle={() =>
+                          updateWork(item.id, (work) => ({
+                            ...work,
+                            bullets: work.bullets.map((currentBullet) =>
+                              currentBullet.id === bullet.id
+                                ? {
+                                    ...currentBullet,
+                                    included: !currentBullet.included,
+                                  }
+                                : currentBullet,
+                            ),
+                          }))
+                        }
+                        onChange={(value) =>
+                          updateWork(item.id, (work) => ({
+                            ...work,
+                            bullets: work.bullets.map((currentBullet) =>
+                              currentBullet.id === bullet.id
+                                ? { ...currentBullet, text: value }
+                                : currentBullet,
+                            ),
+                          }))
+                        }
+                        onRemove={() =>
+                          updateWork(item.id, (work) => ({
+                            ...work,
+                            bullets: work.bullets.filter(
+                              (currentBullet) => currentBullet.id !== bullet.id,
+                            ),
+                          }))
+                        }
+                        dragGroup={`bullets:${item.id}`}
+                        onDragStart={handleDragStart}
+                        onDragOverTarget={handleDragOverTarget}
+                        onDrop={handleDrop}
+                        dropIndicator={dropIndicator}
+                      />
+                    ))}
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
+                        updateWork(item.id, (work) => ({
+                          ...work,
+                          bullets: [
+                            ...work.bullets,
+                            {
+                              id: newId("bullet"),
+                              included: true,
+                              text: "",
+                            },
+                          ],
+                        }))
+                      }
+                    >
+                      <Plus className="size-4" />
+                      Add bullet
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -3576,6 +3665,11 @@ export function ResumeBuilder({
                       className="size-4 cursor-grab text-muted-foreground"
                       aria-hidden="true"
                     />
+                    <CollapseButton
+                      collapsed={collapsedEntryIds.has(`activity:${item.id}`)}
+                      label={`${item.role || "activity"} entry`}
+                      onClick={() => toggleEntryCollapsed(`activity:${item.id}`)}
+                    />
                     <Toggle
                       checked={item.included}
                       label={item.included ? "Hide activity" : "Show activity"}
@@ -3605,104 +3699,109 @@ export function ResumeBuilder({
                     <Trash2 className="size-4" />
                   </Button>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <Field
-                    label="Role"
-                    value={item.role}
-                    onChange={(value) =>
-                      updateActivity(item.id, (activity) => ({
-                        ...activity,
-                        role: value,
-                      }))
-                    }
-                  />
-                  <Field
-                    label="Organization"
-                    value={item.organization}
-                    onChange={(value) =>
-                      updateActivity(item.id, (activity) => ({
-                        ...activity,
-                        organization: value,
-                      }))
-                    }
-                  />
-                  <div className="sm:col-span-2">
+                <div
+                  className="grid gap-3"
+                  hidden={collapsedEntryIds.has(`activity:${item.id}`)}
+                >
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <Field
-                      label="Dates"
-                      value={item.dates}
+                      label="Role"
+                      value={item.role}
                       onChange={(value) =>
                         updateActivity(item.id, (activity) => ({
                           ...activity,
-                          dates: value,
+                          role: value,
                         }))
                       }
                     />
+                    <Field
+                      label="Organization"
+                      value={item.organization}
+                      onChange={(value) =>
+                        updateActivity(item.id, (activity) => ({
+                          ...activity,
+                          organization: value,
+                        }))
+                      }
+                    />
+                    <div className="sm:col-span-2">
+                      <Field
+                        label="Dates"
+                        value={item.dates}
+                        onChange={(value) =>
+                          updateActivity(item.id, (activity) => ({
+                            ...activity,
+                            dates: value,
+                          }))
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="grid gap-2">
-                  {item.bullets.map((bullet) => (
-                    <BulletEditor
-                      key={bullet.id}
-                      bullet={bullet}
-                      onToggle={() =>
+                  <div className="grid gap-2">
+                    {item.bullets.map((bullet) => (
+                      <BulletEditor
+                        key={bullet.id}
+                        bullet={bullet}
+                        onToggle={() =>
+                          updateActivity(item.id, (activity) => ({
+                            ...activity,
+                            bullets: activity.bullets.map((currentBullet) =>
+                              currentBullet.id === bullet.id
+                                ? {
+                                    ...currentBullet,
+                                    included: !currentBullet.included,
+                                  }
+                                : currentBullet,
+                            ),
+                          }))
+                        }
+                        onChange={(value) =>
+                          updateActivity(item.id, (activity) => ({
+                            ...activity,
+                            bullets: activity.bullets.map((currentBullet) =>
+                              currentBullet.id === bullet.id
+                                ? { ...currentBullet, text: value }
+                                : currentBullet,
+                            ),
+                          }))
+                        }
+                        onRemove={() =>
+                          updateActivity(item.id, (activity) => ({
+                            ...activity,
+                            bullets: activity.bullets.filter(
+                              (currentBullet) => currentBullet.id !== bullet.id,
+                            ),
+                          }))
+                        }
+                        dragGroup={`activityBullets:${item.id}`}
+                        onDragStart={handleDragStart}
+                        onDragOverTarget={handleDragOverTarget}
+                        onDrop={handleDrop}
+                        dropIndicator={dropIndicator}
+                      />
+                    ))}
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() =>
                         updateActivity(item.id, (activity) => ({
                           ...activity,
-                          bullets: activity.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? {
-                                  ...currentBullet,
-                                  included: !currentBullet.included,
-                                }
-                              : currentBullet,
-                          ),
+                          bullets: [
+                            ...activity.bullets,
+                            {
+                              id: newId("bullet"),
+                              included: true,
+                              text: "",
+                            },
+                          ],
                         }))
                       }
-                      onChange={(value) =>
-                        updateActivity(item.id, (activity) => ({
-                          ...activity,
-                          bullets: activity.bullets.map((currentBullet) =>
-                            currentBullet.id === bullet.id
-                              ? { ...currentBullet, text: value }
-                              : currentBullet,
-                          ),
-                        }))
-                      }
-                      onRemove={() =>
-                        updateActivity(item.id, (activity) => ({
-                          ...activity,
-                          bullets: activity.bullets.filter(
-                            (currentBullet) => currentBullet.id !== bullet.id,
-                          ),
-                        }))
-                      }
-                      dragGroup={`activityBullets:${item.id}`}
-                      onDragStart={handleDragStart}
-                      onDragOverTarget={handleDragOverTarget}
-                      onDrop={handleDrop}
-                      dropIndicator={dropIndicator}
-                    />
-                  ))}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      updateActivity(item.id, (activity) => ({
-                        ...activity,
-                        bullets: [
-                          ...activity.bullets,
-                          {
-                            id: newId("bullet"),
-                            included: true,
-                            text: "",
-                          },
-                        ],
-                      }))
-                    }
-                  >
-                    <Plus className="size-4" />
-                    Add bullet
-                  </Button>
+                    >
+                      <Plus className="size-4" />
+                      Add bullet
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
@@ -3988,6 +4087,11 @@ export function ResumeBuilder({
                         className="size-4 cursor-grab text-muted-foreground"
                         aria-hidden="true"
                       />
+                      <CollapseButton
+                        collapsed={collapsedEntryIds.has(`custom:${item.id}`)}
+                        label={`${item.heading || "custom"} entry`}
+                        onClick={() => toggleEntryCollapsed(`custom:${item.id}`)}
+                      />
                       <Toggle
                         checked={item.included}
                         label={
@@ -4021,147 +4125,152 @@ export function ResumeBuilder({
                       <Trash2 className="size-4" />
                     </Button>
                   </div>
-                  <div className="grid gap-3 sm:grid-cols-2">
-                    <Field
-                      label="Heading"
-                      value={item.heading}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          heading: value,
-                        }))
-                      }
-                    />
-                    <Field
-                      label="Subheading"
-                      value={item.subheading}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          subheading: value,
-                        }))
-                      }
-                    />
-                    <Field
-                      label="Link"
-                      type="url"
-                      value={item.link}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          link: value,
-                        }))
-                      }
-                    />
-                    <Field
-                      label="Place"
-                      value={item.place}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          place: value,
-                        }))
-                      }
-                    />
-                    <Field
-                      label="Dates"
-                      value={item.dates}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          dates: value,
-                        }))
-                      }
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <Switch
-                      checked={item.useBullets}
-                      label="Use bullet points"
-                      onClick={() =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          useBullets: !entry.useBullets,
-                          bullets:
-                            !entry.useBullets && entry.bullets.length === 0
-                              ? [newResumeBullet()]
-                              : entry.bullets,
-                        }))
-                      }
-                    />
-                    <span>Use bullet points</span>
-                  </div>
-                  {item.useBullets ? (
-                    <div className="grid gap-2">
-                      {item.bullets.map((bullet) => (
-                        <BulletEditor
-                          key={bullet.id}
-                          bullet={bullet}
-                          onToggle={() =>
-                            updateCustomEntry(section.id, item.id, (entry) => ({
-                              ...entry,
-                              bullets: entry.bullets.map((currentBullet) =>
-                                currentBullet.id === bullet.id
-                                  ? {
-                                      ...currentBullet,
-                                      included: !currentBullet.included,
-                                    }
-                                  : currentBullet,
-                              ),
-                            }))
-                          }
-                          onChange={(value) =>
-                            updateCustomEntry(section.id, item.id, (entry) => ({
-                              ...entry,
-                              bullets: entry.bullets.map((currentBullet) =>
-                                currentBullet.id === bullet.id
-                                  ? { ...currentBullet, text: value }
-                                  : currentBullet,
-                              ),
-                            }))
-                          }
-                          onRemove={() =>
-                            updateCustomEntry(section.id, item.id, (entry) => ({
-                              ...entry,
-                              bullets: entry.bullets.filter(
-                                (currentBullet) => currentBullet.id !== bullet.id,
-                              ),
-                            }))
-                          }
-                          dragGroup={`customBullets|${section.id}|${item.id}`}
-                          onDragStart={handleDragStart}
-                          onDragOverTarget={handleDragOverTarget}
-                          onDrop={handleDrop}
-                          dropIndicator={dropIndicator}
-                        />
-                      ))}
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
+                  <div
+                    className="grid gap-3"
+                    hidden={collapsedEntryIds.has(`custom:${item.id}`)}
+                  >
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <Field
+                        label="Heading"
+                        value={item.heading}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            heading: value,
+                          }))
+                        }
+                      />
+                      <Field
+                        label="Subheading"
+                        value={item.subheading}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            subheading: value,
+                          }))
+                        }
+                      />
+                      <Field
+                        label="Link"
+                        type="url"
+                        value={item.link}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            link: value,
+                          }))
+                        }
+                      />
+                      <Field
+                        label="Place"
+                        value={item.place}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            place: value,
+                          }))
+                        }
+                      />
+                      <Field
+                        label="Dates"
+                        value={item.dates}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            dates: value,
+                          }))
+                        }
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                      <Switch
+                        checked={item.useBullets}
+                        label="Use bullet points"
                         onClick={() =>
                           updateCustomEntry(section.id, item.id, (entry) => ({
                             ...entry,
-                            bullets: [...entry.bullets, newResumeBullet()],
+                            useBullets: !entry.useBullets,
+                            bullets:
+                              !entry.useBullets && entry.bullets.length === 0
+                                ? [newResumeBullet()]
+                                : entry.bullets,
                           }))
                         }
-                      >
-                        <Plus className="size-4" />
-                        Add bullet
-                      </Button>
+                      />
+                      <span>Use bullet points</span>
                     </div>
-                  ) : (
-                    <RichTextInlineEditor
-                      label="Description"
-                      value={item.description}
-                      onChange={(value) =>
-                        updateCustomEntry(section.id, item.id, (entry) => ({
-                          ...entry,
-                          description: value,
-                        }))
-                      }
-                    />
-                  )}
+                    {item.useBullets ? (
+                      <div className="grid gap-2">
+                        {item.bullets.map((bullet) => (
+                          <BulletEditor
+                            key={bullet.id}
+                            bullet={bullet}
+                            onToggle={() =>
+                              updateCustomEntry(section.id, item.id, (entry) => ({
+                                ...entry,
+                                bullets: entry.bullets.map((currentBullet) =>
+                                  currentBullet.id === bullet.id
+                                    ? {
+                                        ...currentBullet,
+                                        included: !currentBullet.included,
+                                      }
+                                    : currentBullet,
+                                ),
+                              }))
+                            }
+                            onChange={(value) =>
+                              updateCustomEntry(section.id, item.id, (entry) => ({
+                                ...entry,
+                                bullets: entry.bullets.map((currentBullet) =>
+                                  currentBullet.id === bullet.id
+                                    ? { ...currentBullet, text: value }
+                                    : currentBullet,
+                                ),
+                              }))
+                            }
+                            onRemove={() =>
+                              updateCustomEntry(section.id, item.id, (entry) => ({
+                                ...entry,
+                                bullets: entry.bullets.filter(
+                                  (currentBullet) => currentBullet.id !== bullet.id,
+                                ),
+                              }))
+                            }
+                            dragGroup={`customBullets|${section.id}|${item.id}`}
+                            onDragStart={handleDragStart}
+                            onDragOverTarget={handleDragOverTarget}
+                            onDrop={handleDrop}
+                            dropIndicator={dropIndicator}
+                          />
+                        ))}
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() =>
+                            updateCustomEntry(section.id, item.id, (entry) => ({
+                              ...entry,
+                              bullets: [...entry.bullets, newResumeBullet()],
+                            }))
+                          }
+                        >
+                          <Plus className="size-4" />
+                          Add bullet
+                        </Button>
+                      </div>
+                    ) : (
+                      <RichTextInlineEditor
+                        label="Description"
+                        value={item.description}
+                        onChange={(value) =>
+                          updateCustomEntry(section.id, item.id, (entry) => ({
+                            ...entry,
+                            description: value,
+                          }))
+                        }
+                      />
+                    )}
+                  </div>
                 </div>
               ))}
             </EditorSection>
@@ -4820,7 +4929,7 @@ function BulletEditor({
   return (
     <div
       className={cn(
-        "relative grid grid-cols-[auto_auto_1fr_auto] gap-2 rounded-md",
+        "relative grid grid-cols-[auto_auto_minmax(0,1fr)_auto] gap-2 rounded-md",
         indicator === "before" &&
           "before:absolute before:-top-1.5 before:left-0 before:right-0 before:h-0.5 before:bg-foreground",
         indicator === "after" &&
@@ -4902,6 +5011,7 @@ function GridRowEditor({
   onDrop: (group: string, id: string) => void;
   dropIndicator: DropIndicator | null;
 }) {
+  const [collapsed, setCollapsed] = useState(false);
   const indicator =
     dropIndicator?.group === dragGroup && dropIndicator.id === dragId
       ? dropIndicator.position
@@ -4910,7 +5020,7 @@ function GridRowEditor({
   return (
     <div
       className={cn(
-        "relative grid gap-3 rounded-md border p-3",
+        "relative grid min-w-0 gap-3 rounded-md border p-3",
         indicator === "before" &&
           "before:absolute before:-top-2 before:left-0 before:right-0 before:h-0.5 before:bg-foreground",
         indicator === "after" &&
@@ -4933,6 +5043,11 @@ function GridRowEditor({
             className="size-4 cursor-grab text-muted-foreground"
             aria-hidden="true"
           />
+          <CollapseButton
+            collapsed={collapsed}
+            label={`${title || "item"} entry`}
+            onClick={() => setCollapsed((current) => !current)}
+          />
           <Toggle
             checked={included}
             label={included ? "Hide item" : "Show item"}
@@ -4950,7 +5065,9 @@ function GridRowEditor({
           <Trash2 className="size-4" />
         </Button>
       </div>
-      <div className="grid gap-3 sm:grid-cols-2">{children}</div>
+      <div className="grid gap-3 sm:grid-cols-2" hidden={collapsed}>
+        {children}
+      </div>
     </div>
   );
 }

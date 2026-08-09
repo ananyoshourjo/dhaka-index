@@ -77,6 +77,20 @@ npm run cf:deploy
 npm run admin:cf:deploy
 ```
 
+## Cloudflare analytics
+
+Both Workers keep Cloudflare Observability enabled. The member Worker records
+structured request health data for failures, slow requests, health checks, and
+scheduled job-feed syncs. Review these metrics and logs in the Cloudflare
+Workers Observability dashboard.
+
+For baseline page-view and real-user performance data, add `dhakaindex.com` to
+Cloudflare Web Analytics. If the hostname is proxied through Cloudflare, use
+Cloudflare's automatic setup. Otherwise, configure the public build variable
+`NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN` with the site token from the Web
+Analytics dashboard and redeploy the member app. The repository's beacon is
+disabled when that variable is absent. Use one setup method, not both.
+
 Cloudflare Browser Rendering provides authenticated PDF export. See
 [docs/self-hosting.md](docs/self-hosting.md) for the complete deployment and
 security checklist.
@@ -147,8 +161,10 @@ the last successful D1 snapshot and records the error.
 
 ## Privacy
 
-No analytics or advertising telemetry is included. The deployment does not
-import pre-existing user data. Information that users enter into the hosted
+Cloudflare Web Analytics can be enabled for the member app for baseline
+page-view and real-user performance measurement. No advertising telemetry or
+product-event tracking is included. The deployment does not import
+pre-existing user data. Information that users enter into the hosted
 app—including account credentials, resumes, bookmarks, and profile data—is
 stored in Cloudflare D1 so it is available across devices.
 

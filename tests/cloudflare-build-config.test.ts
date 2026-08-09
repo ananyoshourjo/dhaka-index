@@ -63,7 +63,9 @@ test("official builds use the stable admin custom domain", () => {
 
   assert.equal(main.vars.BETTER_AUTH_URL, "https://dhakaindex.com");
   assert.equal(main.vars.ADMIN_PORTAL_URL, "https://admin.dhakaindex.com");
+  assert.equal(main.observability.enabled, true);
   assert.equal(admin.vars.ADMIN_AUTH_URL, "https://admin.dhakaindex.com");
+  assert.equal(admin.observability.enabled, true);
   assert.equal(
     admin.vars.DHAKA_INDEX_TRUSTED_ORIGINS,
     "https://dhakaindex.com,https://admin.dhakaindex.com",
@@ -84,6 +86,8 @@ test("non-production builds preserve configured workers.dev origins", () => {
     main.vars.ADMIN_PORTAL_URL,
     "https://admin-preview.example.workers.dev",
   );
+  assert.equal(main.observability.enabled, true);
   assert.equal(admin.workers_dev, true);
+  assert.equal(admin.observability.enabled, true);
   assert.equal(admin.routes, undefined);
 });

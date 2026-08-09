@@ -24,3 +24,10 @@ notice. The canonical employer page is authoritative.
 
 Publishers may report a correction or request removal through the repository's
 data-correction issue form.
+
+## Privacy
+
+Cloudflare Web Analytics may be enabled for the public member app for baseline
+page-view and real-user performance measurement. No advertising telemetry or
+product-event tracking is included. User accounts, resumes, bookmarks, and
+profile data remain stored in the deployment's Cloudflare D1 database.

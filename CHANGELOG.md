@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 1.3.0 - 2026-08-09
+
+- Add collapsible resume editor sections and entries for compact profile editing
+- Add optional Cloudflare Web Analytics with documented privacy and configuration boundaries
+- Expose structured scheduled job-sync status and timing logs for Cloudflare Worker observability
+
 ## 1.2.0 - 2026-08-08
 
 - Add rich-text editing to the summary, cover letter, bullet points, and descriptions
