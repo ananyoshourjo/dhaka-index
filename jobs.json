@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-09T16:07:09.984Z",
+  "generatedAt": "2026-08-09T16:10:52.979Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -44,6 +44,20 @@
       "deadline": "2026-08-16",
       "url": "https://bdrecruit.net/jobs-in-bangladesh/anwar-group-of-industries/career-bd/executive-crm/dhaka",
       "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Intern – Supply Chain Management",
+      "company": "Anwar Group of Industries",
+      "deadline": "2026-08-16",
+      "url": "https://bdrecruit.net/jobs-in-bangladesh/anwar-group-of-industries/career-bd/intern-supply-chain-management/2026",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
+      "title": "Executive / Senior Executive, Merchant Acquisition",
+      "company": "Pathao Limited",
+      "deadline": "2026-08-23",
+      "url": "https://bdrecruit.net/jobs-in-bangladesh/pathao-limited/career-bd/executive-senior-executive-merchant-acquisition/2026",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Growth Analytics & CRO Specialist",
@@ -564,6 +578,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Executive – Procurement",
+      "company": "Transcom Foods Ltd.",
+      "deadline": "2026-09-03",
+      "url": "https://bdrecruit.net/jobs-in-bd/transcom-foods-ltd./career-bd/executive-procurement/dhaka",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
       "title": "Executive / Sr. Executive – Branding & PR Media",
       "company": "Twelve Clothing Limited",
       "deadline": "2026-08-15",
@@ -583,6 +604,13 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/united-group/career-bd/intern/madani-avenue-dhaka-1212",
       "functionTag": "other"
+    },
+    {
+      "title": "Key Account Manager, Card Business",
+      "company": "Upay/ উপায়",
+      "deadline": "2026-08-17",
+      "url": "https://bdrecruit.net/jobs-in-bd/upay/career-bd/key-account-manager-card-business/dhaka",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Officer/Sr. Officer AML & CFT",
@@ -1019,20 +1047,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Deputy Director/Director- Centre of Excellence (COE)",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-18",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IjZRRjN1Q2NyVFNjYmV4ZHduWnRaQlE9PSIsInZhbHVlIjoidzc1QmI1d2xnbGJ6LzRvWGVjTXIvQT09IiwibWFjIjoiODIzZTYyNWU3NmFhMTJjY2Q1OWFhMzNiMTExN2JiNmY0MDMyZGRmZjRjODVmOGY5MTg5YzFkNzgwN2Q4MGU1ZiJ9",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Head of Content Growth",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-10",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IlFTK2VRU3kvZ2Y2Zk8rT3drY0xUZnc9PSIsInZhbHVlIjoiYmlXZUllQkNxNHRuUUF5Y0p2TDZyZz09IiwibWFjIjoiYjdhOWI1NmU3NTdlMmQ4MDZhYmIxYzhiZDUwOWVkMWIxYjFkZTZmYmZhOTFlMTZhMmQ5MDhjMTY1NWIyNDg1OCJ9",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Expression of Interest: Team Leader",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -1045,20 +1059,6 @@
       "deadline": "2026-08-12",
       "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-territory-officer/1045/35563812800",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "External Engagement Manager- General",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": "2026-08-21",
-      "url": "https://careers.bat.com/en/job/dhaka/external-engagement-manager-general/1045/42281076544",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Litigation & Corporate Counsel",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": "2026-08-21",
-      "url": "https://careers.bat.com/en/job/dhaka/litigation-and-corporate-counsel/1045/42257164928",
-      "functionTag": "legal_compliance"
     },
     {
       "title": "Manufacturing HRBP- Savar",
@@ -1418,32 +1418,11 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Senior Executive, Performance Marketing",
-      "company": "Pathao",
-      "deadline": "2026-08-22",
-      "url": "https://careers.pathao.com/jobs/senior-executive-performance-marketing",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "GMS CEC & Performance Delivery Lead – Pakistan & Bangladesh",
-      "company": "Unilever Bangladesh",
-      "deadline": "2026-08-21",
-      "url": "https://careers.unilever.com/en/job/dhaka/gms-cec-and-performance-delivery-lead-pakistan-and-bangladesh/34155/98826227440",
-      "functionTag": "operations"
-    },
-    {
       "title": "Head of Corporate Affairs & Communication – Bangladesh",
       "company": "Unilever Bangladesh",
       "deadline": null,
       "url": "https://careers.unilever.com/en/job/dhaka/head-of-corporate-affairs-and-communication-bangladesh/34155/98701046976",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Legal Consultant – Bangladesh (Contractual Role)",
-      "company": "Unilever Bangladesh",
-      "deadline": null,
-      "url": "https://careers.unilever.com/en/job/dhaka/legal-consultant-bangladesh-contractual-role/34155/98831602784",
-      "functionTag": "legal_compliance"
     },
     {
       "title": "Junior Network Engineer",
@@ -1493,13 +1472,6 @@
       "deadline": "2026-08-09",
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11807",
       "functionTag": "other"
-    },
-    {
-      "title": "Strategic Assistant",
-      "company": "Banglalink",
-      "deadline": "2026-08-11",
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11808",
-      "functionTag": "administration"
     },
     {
       "title": "Ad Operations Manager/Specialist, Toffee",
@@ -1635,13 +1607,6 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "People Generalist (Bangladesh)",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": "2026-08-15",
-      "url": "https://jobs.ashbyhq.com/Commure/cc0085f7-c305-41b4-9aee-5f17eb453bbe",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Assistant Manager, RCM Operations (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1742,7 +1707,7 @@
     {
       "title": "Business Development Officer, Employee Banking",
       "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-12",
+      "deadline": "2026-08-13",
       "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/59260-en_GB",
       "functionTag": "sales_business_development"
     },
@@ -1915,6 +1880,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Strategic Assistant",
+      "company": "Banglalink",
+      "deadline": "2026-08-11",
+      "url": "https://thecvguy.net/jobs-in-bd/banglalink-hiring-strategic-assistant-2026-2",
+      "functionTag": "general_management"
+    },
+    {
       "title": "Assistant Manager – VAT",
       "company": "Bengal Airlift Limited",
       "deadline": "2026-08-20",
@@ -1943,11 +1915,46 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "External Engagement Manager",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-08-21",
+      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-external-engagement-manager",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Litigation & Corporate Counsel",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-08-21",
+      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-hiring-litigation-corporate",
+      "functionTag": "legal_compliance"
+    },
+    {
       "title": "Transaction Management II C10",
       "company": "Citi Careers",
       "deadline": "2026-08-15",
       "url": "https://thecvguy.net/mnc-jobs/citi-transaction-management-ii-c10-2026",
       "functionTag": "finance_accounting"
+    },
+    {
+      "title": "People Generalist",
+      "company": "Commure",
+      "deadline": "2026-08-15",
+      "url": "https://thecvguy.net/mnc-jobs/commure-is-hiring-people-generalist-2026",
+      "functionTag": "human_resources"
+    },
+    {
+      "title": "Deputy Director / Director – Centre of Excellence (COE)",
+      "company": "Grameenphone Ltd",
+      "deadline": "2026-08-19",
+      "url": "https://thecvguy.net/mnc-jobs/grameenphone-ltd-deputy-director-director",
+      "functionTag": "human_resources"
+    },
+    {
+      "title": "Head of Content Growth",
+      "company": "Grameenphone Ltd",
+      "deadline": "2026-08-11",
+      "url": "https://thecvguy.net/mnc-jobs/grameenphone-ltd-is-hiring-head-of-content",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Maintenance Manager",
@@ -1969,6 +1976,20 @@
       "deadline": "2026-08-20",
       "url": "https://thecvguy.net/mnc-jobs/remark-hb-limited-is-hiring-tmm-2026",
       "functionTag": "marketing_communications"
+    },
+    {
+      "title": "GMS CEC & Performance Delivery Lead",
+      "company": "Unilever Bangladesh",
+      "deadline": "2026-08-21",
+      "url": "https://thecvguy.net/mnc-jobs/unilever-bangladesh-gms-cec-performance",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Legal Consultant – Bangladesh (Contractual Role)",
+      "company": "Unilever Bangladesh",
+      "deadline": "2026-08-11",
+      "url": "https://thecvguy.net/mnc-jobs/unilever-bangladesh-legal-consultant-bd-2026",
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Human Resources Officer",
@@ -2050,7 +2071,7 @@
     {
       "title": "MANAGEMENT TRAINEE OFFICER",
       "company": "Bangladesh Infrastructure Finance Fund Limited (BIFFL)",
-      "deadline": "2026-08-20",
+      "deadline": "2026-08-21",
       "url": "https://www.biffl.org.bd/uploads/files/20260727182200-1ef0f3b2a0672a53.pdf",
       "functionTag": "general_management"
     },
