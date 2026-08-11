@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-10T08:59:52.166Z",
+  "generatedAt": "2026-08-11T18:57:04.080Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -102,20 +102,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Executive, Medico Marketing",
-      "company": "ACI PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/executive-medico-marketing-pharmaceutical-business/gulshan/dhaka",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Marketing Intern",
-      "company": "ACI PLC",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/marketing-intern/dhaka",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Intern Market Research Sales Analytics",
       "company": "ACI Premio Plastics Ltd.",
       "deadline": null,
@@ -123,32 +109,11 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Executive – Trade Marketing",
-      "company": "ACI",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/aci/career-bangladesh/executive-trade-marketing/dhaka",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Executive – Production / QO / R&D / Validation / PPIC",
-      "company": "ACME Laboratories Ltd.",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/jobs-in-bd/acme-laboratories-ltd./career-bd/executive-production-qo-rd-validation-ppic/dhamrai-plant/dhaka",
-      "functionTag": "operations"
-    },
-    {
       "title": "Officer – SHEA and Safeguarding",
       "company": "ActionAid Bangladesh (AAB)",
       "deadline": "2026-08-12",
       "url": "https://bdrecruit.net/jobs-in-bd/actionaid-bangladesh-aab/career-bd/officer-shea-and-safeguarding/coxs-bazar/2026",
       "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Officer / Senior Officer, Accounts",
-      "company": "Agora Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/agora-limited/career-bd/officer-senior-officer-accounts/dhaka",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Cabin Crew",
@@ -256,20 +221,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Assistant Executive Digital Marketing",
-      "company": "BSRM",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/bsrm/career-bd/assistant-executive-digital-marketing/bsrm-corporate-office/chattogram",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Intern",
-      "company": "CarryBee Express",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/carrybee/career-bd/intern/carrybee-hq/baridhara-diplomatic-zone",
-      "functionTag": "other"
-    },
-    {
       "title": "Branch Manager",
       "company": "Citizens Bank PLC",
       "deadline": null,
@@ -312,32 +263,11 @@
       "functionTag": "general_management"
     },
     {
-      "title": "Executive – Medical Affairs",
-      "company": "Eskayef Pharmaceuticals Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/eskayef-pharmaceuticals-ltd./career-bd/executive-medical-affairs/2026",
-      "functionTag": "healthcare"
-    },
-    {
       "title": "Financial Consultant",
       "company": "First4Freelancers",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/first4freelancers/career-bd/financial-consultant/gulshan-1/dhaka",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "PA (Personal Assistant)",
-      "company": "First4freelancers",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/first4freelancers/career-bd/pa-personal-assistant/gulshan1/dhaka",
-      "functionTag": "administration"
-    },
-    {
-      "title": "Management Trainee Officer (MTO)",
-      "company": "Getwell Limited",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/getwell-limited/career-bd/management-trainee-officer-mto/habiganj-industrial-par/habiganj",
-      "functionTag": "general_management"
     },
     {
       "title": "Management Trainee",
@@ -361,25 +291,11 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "IFAD Group Is Hiring For Multiple Positions",
-      "company": "IFAD Auto Services Ltd./IFAD Group",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/ifad-group-is-hiring-for-multiple-positions/chittagong/2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Area Sales Manager (ASM)",
       "company": "Kallol Group of Companies",
       "deadline": "2026-08-16",
       "url": "https://bdrecruit.net/jobs-in-bd/kallol-group-of-companies/career-bd/area-sales-manager-asm/anywhere",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Sr. Manager, Marketing",
-      "company": "Kallol Group of Companies",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/kallol-group-of-companies/career-bd/sr-manager-marketing/dhaka/2026",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Key Account Executive – Modern Trade & HORECA",
@@ -401,20 +317,6 @@
       "deadline": "2026-08-17",
       "url": "https://bdrecruit.net/jobs-in-bd/mjl-bangladesh-plc/career-bd/senior-executive-tax-vat/chattogram",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Head of Service Planning & Delivery",
-      "company": "Nagad Limited",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad/career-bd/head-of-service-planning-delivery/dhaka",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Manager, Growth & Analytics",
-      "company": "Pathao Limited",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/jobs-in-bd/pathao/career-bd/manager-growth-analytics/2026",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Manager, Corporate Sales",
@@ -487,13 +389,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Executive / Sr. Executive",
-      "company": "Sailor",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/sailor-epyllion-group/executive-sr-executive/dhaka/tejgaon",
-      "functionTag": "other"
-    },
-    {
       "title": "Zonal Sales In-Charge",
       "company": "Sajeeb Group",
       "deadline": null,
@@ -520,20 +415,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/snowtex-group/career-bd/assistant-manager/dhamrai/dhaka",
       "functionTag": "operations"
-    },
-    {
-      "title": "Management Trainee Officer",
-      "company": "Snowtex Group/Snowtex Outerwear Ltd.",
-      "deadline": "2026-08-28",
-      "url": "https://bdrecruit.net/jobs-in-bd/snowtex-group/career-bd/management-trainee-officer/dhaka/dhamrai",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Deputy Manager – IT & ERP",
-      "company": "RANCON Motor Bikes Limited (Suzuki Bangladesh)",
-      "deadline": "2026-08-11",
-      "url": "https://bdrecruit.net/jobs-in-bd/suzuki/rancone-motobike-ltd/deputy-manager-it-erp/head-office/dhaka",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Assistant Branch Manager",
@@ -592,13 +473,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Officer / Senior Officer / Executive, Service Operation",
-      "company": "Upay",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/upay/officer-senior-officer-executive-service-operation/head-office/dhaka",
-      "functionTag": "operations"
-    },
-    {
       "title": "Head of Talent Acquisition",
       "company": "Youngone Bangladesh",
       "deadline": null,
@@ -655,39 +529,11 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Jr. Gender Expert",
-      "company": "Plan International Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/mnc/jobs/career-bd/jr-gender-expert-plan-international-bangladesh/dhaka",
-      "functionTag": "research_consulting"
-    },
-    {
-      "title": "Jr. Social Norms Expert",
-      "company": "Plan International Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/mnc/jobs/career-bd/jr-social-norms-expert-plan-international-bangladesh/dhaka",
-      "functionTag": "research_consulting"
-    },
-    {
       "title": "Merchandiser",
       "company": "Calvin Klein",
       "deadline": null,
       "url": "https://bdrecruit.net/mnc/jobs/career-bd/merchandiser/dhaka",
       "functionTag": "supply_chain_procurement"
-    },
-    {
-      "title": "Research Assistant",
-      "company": "Plan International Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/mnc/jobs/career-bd/research-assistant-plan-international-bangladesh/dhaka",
-      "functionTag": "research_consulting"
-    },
-    {
-      "title": "Research Associate",
-      "company": "Plan International Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/mnc/jobs/career-bd/research-associate-plan-international-bangladesh/dhaka",
-      "functionTag": "research_consulting"
     },
     {
       "title": "Marketing Executive",
@@ -716,13 +562,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/mnc/jobs/standard-chartered/career-bd/relationship-manager-supply-chain-finance/dhaka",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Training Specialist",
-      "company": "Plan International Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://bdrecruit.net/mnc/jobs/training-specialist/plan-international-bangladesh/dhaka",
-      "functionTag": "education"
     },
     {
       "title": "TSM (Territory Sales Manager)",
@@ -914,13 +753,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Senior Executive / Assistant Manager, Digital Marketing & Business Development",
-      "company": "Labaid Cancer Hospital & Super Speciality Centre Ltd.",
-      "deadline": "2026-08-10",
-      "url": "https://brandpractitioners.com/labaid-cancer-hospital-is-hiring-senior-executive-assistant-manager-digital-marketing-business-development",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Brand Executive – Marketing",
       "company": "LafargeHolcim Bangladesh",
       "deadline": null,
@@ -933,13 +765,6 @@
       "deadline": null,
       "url": "https://brandpractitioners.com/lakeshore-hotel-hospitality-group-is-hiring-marketing-executive",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Regional Sales Manager, Feed Business",
-      "company": "Nabil Group",
-      "deadline": "2026-08-10",
-      "url": "https://brandpractitioners.com/nabil-group-is-hiring-regional-sales-manager-feed-business",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Executive / Senior Executive, Sales & Marketing",
@@ -1012,20 +837,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Asst. Manager/Manager, Strategic Communications & PR",
-      "company": "upay",
-      "deadline": "2026-08-10",
-      "url": "https://brandpractitioners.com/upay-is-hiring-asst-manager-manager-strategic-communications-pr-marketing",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Head of Content Growth",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-10",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IkZqWDVZSmp1dW90cmVpZWpIb1RSQVE9PSIsInZhbHVlIjoiZTFnaEVyN0UxSEs5eVJKR3RLT3NTdz09IiwibWFjIjoiMDVhM2U4MDZkZjg3NGE3NjJlMjMzYjdlNTY4YjI4N2Q5MDkzZDY4YjRiOTMyYzNmMTU4NzllMTNlOTdiYTdlZCJ9",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Deputy Director/Director- Centre of Excellence (COE)",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-08-18",
@@ -1075,13 +886,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Deputy Manager, Hard to Reach; BRAC Health Programme (BHP)",
-      "company": "BRAC",
-      "deadline": "2026-08-10",
-      "url": "https://careers.brac.net/jobs/deputy-manager-hard-to-reach-brac-health-programme-bhp-2928?bulk=false",
-      "functionTag": "healthcare"
-    },
-    {
       "title": "Distribution Incharge, BRAC Artificial Insemination Enterprise",
       "company": "BRAC",
       "deadline": "2026-08-15",
@@ -1110,18 +914,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Executive, Campaign & Outreach, Skills Development Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-14",
-      "url": "https://careers.brac.net/jobs/executive-campaign-outreach-skills-development-programme-2925?bulk=false",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Forklift Operator, BRAC Dairy and Food Project",
       "company": "BRAC",
       "deadline": "2026-08-16",
       "url": "https://careers.brac.net/jobs/forklift-operator-brac-dairy-and-food-project-2915?bulk=false",
-      "functionTag": "operations"
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Manager, Communications, Pooled Fund",
@@ -1719,13 +1516,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Associate Director, Risk & Control",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://jobs.standardchartered.com/job/Associate-Director%2C-Risk-&amp;-Control/59571-en_GB",
-      "functionTag": "legal_compliance"
-    },
-    {
       "title": "Business Development Officer, Employee Banking",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-08-12",
@@ -1737,13 +1527,6 @@
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-08-18",
       "url": "https://jobs.standardchartered.com/job/Manager%2C-CIB-Business-Finance/59695-en_GB",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Universal Banker",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://jobs.standardchartered.com/job/Universal-Banker/58461-en_GB",
       "functionTag": "finance_accounting"
     },
     {
@@ -1901,13 +1684,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Key Account Manager – Electronics, Commercial",
-      "company": "Daraz Bangladesh",
-      "deadline": "2026-08-10",
-      "url": "https://thecvguy.net/jobs-in-bd/daraz-bangladesh-key-account-manager-2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Sr. Executive – Technical Services",
       "company": "Square Food & Beverage Ltd.",
       "deadline": "2026-08-15",
@@ -1941,20 +1717,6 @@
       "deadline": "2026-08-21",
       "url": "https://thecvguy.net/mnc-jobs/new-zealand-dairy-products-bd-ltd-am-dm",
       "functionTag": "other"
-    },
-    {
-      "title": "Legal Consultant – Bangladesh (Contractual Role)",
-      "company": "Unilever Bangladesh",
-      "deadline": "2026-08-11",
-      "url": "https://thecvguy.net/mnc-jobs/unilever-bangladesh-legal-consultant-bd-2026",
-      "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Human Resources Officer",
-      "company": "UNOPS",
-      "deadline": "2026-08-10",
-      "url": "https://thecvguy.net/ngo/unops-project-management-support-senior-officer",
-      "functionTag": "human_resources"
     },
     {
       "title": "Business Support Assistant (Risk & Compliance)",
