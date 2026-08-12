@@ -13,14 +13,15 @@ import { JOB_FUNCTIONS } from "../../../src/lib/job-functions";
 import type { ActiveJobFilters } from "../../../src/lib/job-search";
 
 type JobFilterBarProps = {
+  actionPath?: string;
   filters: ActiveJobFilters;
 };
 
-export function JobFilterBar({ filters }: JobFilterBarProps) {
+export function JobFilterBar({ actionPath = "/jobs", filters }: JobFilterBarProps) {
   return (
     <div className="bg-background py-2" role="search">
       <form
-        action="/jobs"
+        action={actionPath}
         method="get"
         className="grid grid-cols-[minmax(0,1fr)_auto] gap-2 sm:grid-cols-[minmax(0,1fr)_14rem_auto]"
       >

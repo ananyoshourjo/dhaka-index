@@ -1,6 +1,7 @@
 "use client";
 
-import { LogOut } from "lucide-react";
+import { LogOut, Trash2 } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -60,6 +61,14 @@ export function AdminAccountMenu({ image, name }: AdminAccountMenuProps) {
 
       {menuOpen ? (
         <div className="absolute right-0 mt-2 grid w-40 gap-1 rounded-md border bg-popover p-1 text-popover-foreground shadow-sm">
+          <Link
+            href="/trash"
+            className="inline-flex h-9 items-center justify-start gap-2 whitespace-nowrap rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            onClick={() => setMenuOpen(false)}
+          >
+            <Trash2 className="size-4" />
+            Trash
+          </Link>
           <button
             type="button"
             className="inline-flex h-9 items-center justify-start gap-2 whitespace-nowrap rounded-md px-3 text-sm font-medium text-destructive transition-colors hover:bg-accent hover:text-destructive disabled:pointer-events-none disabled:opacity-50"

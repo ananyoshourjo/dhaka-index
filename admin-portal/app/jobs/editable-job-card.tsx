@@ -1,7 +1,13 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
-import { ArrowUpRight, CalendarDays, Pencil, Trash2 } from "lucide-react";
+import {
+  ArrowUpRight,
+  CalendarDays,
+  Pencil,
+  RotateCcw,
+  Trash2,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
 
@@ -208,29 +214,35 @@ function EditableField({ field, jobId, updateAction, value }: EditableFieldProps
 }
 
 type EditableJobCardProps = {
-  deleteAction: JobAction;
+  deleteAction?: JobAction;
   job: AdminJob;
+  recoverAction?: JobAction;
   updateAction: JobAction;
 };
 
 export function EditableJobCard({
   deleteAction,
   job,
+  recoverAction,
   updateAction,
 }: EditableJobCardProps) {
   const router = useRouter();
-  const [isDeleting, startDeleteTransition] = useTransition();
+  const [isActionPending, startActionTransition] = useTransition();
+  const isRecovering = Boolean(recoverAction);
+  const actionLabel = isRecovering ? "Recover" : "Delete";
 
-  function deleteJob() {
-    if (!window.confirm(`Delete ${job.title} from Dhaka Index?`)) {
+  function runJobAction() {
+    const action = recoverAction ?? deleteAction;
+
+    if (!action || !window.confirm(`${actionLabel} ${job.title} ${isRecovering ? "to" : "from"} Dhaka Index?`)) {
       return;
     }
 
     const formData = new FormData();
     formData.set("jobId", String(job.id));
 
-    startDeleteTransition(async () => {
-      await deleteAction(formData);
+    startActionTransition(async () => {
+      await action(formData);
       router.refresh();
     });
   }
@@ -267,12 +279,16 @@ export function EditableJobCard({
             type="button"
             variant="outline"
             size="icon"
-            aria-label={`Delete ${job.title}`}
-            className="size-11 text-destructive hover:bg-destructive hover:text-white sm:size-10"
-            disabled={isDeleting}
-            onClick={deleteJob}
+            aria-label={`${actionLabel} ${job.title}`}
+            className={`size-11 sm:size-10 ${isRecovering ? "text-primary hover:bg-primary hover:text-primary-foreground" : "text-destructive hover:bg-destructive hover:text-white"}`}
+            disabled={isActionPending}
+            onClick={runJobAction}
           >
-            <Trash2 className="size-4" aria-hidden="true" />
+            {isRecovering ? (
+              <RotateCcw className="size-4" aria-hidden="true" />
+            ) : (
+              <Trash2 className="size-4" aria-hidden="true" />
+            )}
           </Button>
 
           <Button

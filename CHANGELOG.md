@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.3.1 - 2026-08-12
+
+- Add an admin Trash page with recoverable soft-deleted jobs
+
 ## 1.3.0 - 2026-08-09
 
 - Add collapsible resume editor sections and entries for compact profile editing
