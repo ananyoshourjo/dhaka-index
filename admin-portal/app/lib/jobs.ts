@@ -39,8 +39,16 @@ function escapeLike(value: string) {
   return value.replace(/[\\%_]/g, "\\$&");
 }
 
-export async function getAdminJobs(filters: ActiveJobFilters) {
-  const conditions = ["expired_at IS NULL", "deleted_at IS NULL"];
+type AdminJobListMode = "active" | "deleted";
+
+async function getAdminJobsByMode(
+  filters: ActiveJobFilters,
+  mode: AdminJobListMode,
+) {
+  const conditions =
+    mode === "active"
+      ? ["expired_at IS NULL", "deleted_at IS NULL"]
+      : ["deleted_at IS NOT NULL"];
   const values: unknown[] = [];
 
   if (filters.query) {
@@ -74,7 +82,7 @@ export async function getAdminJobs(filters: ActiveJobFilters) {
           canonical_url AS canonicalUrl
         FROM jobs
         WHERE ${conditions.join("\n          AND ")}
-        ORDER BY first_listed_at DESC, id DESC
+        ORDER BY ${mode === "deleted" ? "deleted_at DESC, id DESC" : "first_listed_at DESC, id DESC"}
     `,
     values,
   ).all<AdminJob>();
@@ -82,12 +90,22 @@ export async function getAdminJobs(filters: ActiveJobFilters) {
   return result.results;
 }
 
+export function getAdminJobs(filters: ActiveJobFilters) {
+  return getAdminJobsByMode(filters, "active");
+}
+
+export function getDeletedAdminJobs(filters: ActiveJobFilters) {
+  return getAdminJobsByMode(filters, "deleted");
+}
+
 export async function updateAdminJobField(
   jobId: number,
   field: EditableJobField,
   rawValue: string,
+  allowDeleted = false,
 ) {
   const editedAt = new Date().toISOString();
+  const activeOnlyCondition = allowDeleted ? "" : "\n          AND deleted_at IS NULL";
 
   if (field === "deadline") {
     const value = rawValue.trim();
@@ -104,7 +122,7 @@ export async function updateAdminJobField(
           admin_deadline_override = 1,
           admin_edited_at = ?
         WHERE id = ?
-          AND deleted_at IS NULL
+          ${activeOnlyCondition}
       `,
       [value || null, editedAt, jobId],
     ).run();
@@ -132,7 +150,7 @@ export async function updateAdminJobField(
           job_functions = ?,
           admin_edited_at = ?
         WHERE id = ?
-          AND deleted_at IS NULL
+          ${activeOnlyCondition}
       `,
       [
         value,
@@ -151,7 +169,7 @@ export async function updateAdminJobField(
         ${overrideColumn} = CASE WHEN ? = ${scrapedColumn} THEN NULL ELSE ? END,
         admin_edited_at = ?
       WHERE id = ?
-        AND deleted_at IS NULL
+        ${activeOnlyCondition}
     `,
     [value, value, editedAt, jobId],
   ).run();
@@ -170,5 +188,21 @@ export async function deleteAdminJob(jobId: number) {
         AND deleted_at IS NULL
     `,
     [deletedAt, deletedAt, jobId],
+  ).run();
+}
+
+export async function recoverAdminJob(jobId: number) {
+  const editedAt = new Date().toISOString();
+
+  return statement(
+    `
+      UPDATE jobs
+      SET
+        deleted_at = NULL,
+        admin_edited_at = ?
+      WHERE id = ?
+        AND deleted_at IS NOT NULL
+    `,
+    [editedAt, jobId],
   ).run();
 }
