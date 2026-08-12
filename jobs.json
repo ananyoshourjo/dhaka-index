@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T10:01:15.327Z",
+  "generatedAt": "2026-08-12T10:36:11.297Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -22,7 +22,7 @@
       "company": "Dynamic Solution Innovators",
       "deadline": "2026-08-27",
       "url": "https://app.hrythmic.com/recruit/openings/d0f2f8c4-53db-4d63-8359-d89226d2de17",
-      "functionTag": "software_engineering"
+      "functionTag": "other"
     },
     {
       "title": "Territory Sales Executive (TSE)",
@@ -81,20 +81,6 @@
       "functionTag": "general_management"
     },
     {
-      "title": "HR Intern",
-      "company": "10 Minute School",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/10-minute-school/career-bd/hr-intern/mohakhali-dohs/dhaka",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Senior Officer, Learning & Development, HR",
-      "company": "Aarong (BRAC Enterprises)",
-      "deadline": "2026-08-12",
-      "url": "https://bdrecruit.net/jobs-in-bd/aarong-brac/career-bd/senior-officer-learning-development-hr/dhaka",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Senior Executive / Assistant Manager",
       "company": "Abdul Monem Limited (AML) | Abdul Monem Ltd.",
       "deadline": null,
@@ -102,25 +88,11 @@
       "functionTag": "other"
     },
     {
-      "title": "Senior Executive Brand Marketing",
-      "company": "ACI Advanced Chemical Industries PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-advanced-chemical-industries-plc/career-bd/senior-executive-brand-marketing/dhaka/2026",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Business Development Lead",
       "company": "ACI PLC",
       "deadline": "2026-08-21",
       "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/business-development-lead/dhaka",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Intern Market Research Sales Analytics",
-      "company": "ACI Premio Plastics Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-premio-plastics-ltd./career-bd/intern-market-research-sales-analytics/police-plaza/dhaka",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Officer – SHEA and Safeguarding",
@@ -165,13 +137,6 @@
       "functionTag": "other"
     },
     {
-      "title": "Manager / Senior Manager",
-      "company": "Arogga",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career-bd/manager-senior-manager/dhaka",
-      "functionTag": "other"
-    },
-    {
       "title": "Management Trainee Officer (MTO)",
       "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
       "deadline": null,
@@ -179,31 +144,10 @@
       "functionTag": "general_management"
     },
     {
-      "title": "Senior Front-end Developer",
-      "company": "As-Sunnah Foundation",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career-bd/senior-front-end-developer/aftabnagar/dhaka",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Driving Instructor Driver",
-      "company": "As Sunnah Skill Development Institute",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-skill-development-institute/career-bd/driving-instructor-driver/2026",
-      "functionTag": "education"
-    },
-    {
       "title": "Hr Lead Talent Mgmt Org. Dev.",
       "company": "Bata Shoe Co. Bangladesh Ltd.",
       "deadline": "2026-08-21",
       "url": "https://bdrecruit.net/jobs-in-bd/bata-shoe-co.-bangladesh-ltd./career-bd/hr-lead-talent-mgmt-org.-dev./dhaka/gulshan-2",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Hr Manager",
-      "company": "Best Electronics Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/best-electronics-ltd./career-bd/hr-manager/2026",
       "functionTag": "human_resources"
     },
     {
@@ -242,13 +186,6 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Branch Manager",
-      "company": "Citizens Bank PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/citizens-bank-plc/career-banking/branch-manager/anywhere/2026",
-      "functionTag": "general_management"
-    },
-    {
       "title": "Group CFO",
       "company": "City Group",
       "deadline": "2026-08-23",
@@ -261,27 +198,6 @@
       "deadline": "2026-08-14",
       "url": "https://bdrecruit.net/jobs-in-bd/confidence-power-energy-plc./career-bd/engineer-electrical-maintenance/chattogram/2026",
       "functionTag": "operations"
-    },
-    {
-      "title": "Treasury Analyst – Finance",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/daraz-bangladesh/career-bd/treasury-analyst-finance/dhaka",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Manager – HR",
-      "company": "Deshbandhu Group",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/deshbandhu-group/career-bangladesh/manager-hr/dhaka-banani/2026",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Management Trainee (MT)",
-      "company": "Epyllion Group",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/epyllion-group/career-bd/management-trainee-mt/gazipur",
-      "functionTag": "general_management"
     },
     {
       "title": "Executive / Sr. Executive",
@@ -310,20 +226,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/grey-bangladesh/management-trainee/dhaka/2026",
       "functionTag": "general_management"
-    },
-    {
-      "title": "Senior Executive – CSV",
-      "company": "Healthcare Pharmaceuticals Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/healthcare-pharmaceuticals-limited/career-bd/senior-executive-csv-it/head-office",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Assistant Manager – Sales",
-      "company": "Hyatt Place Dhaka Uttara",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/hyatt-place/career-bd/assistant-manager-sales/uttara-dhaka/2026",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Area Sales Manager (ASM)",
@@ -361,13 +263,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Manager / Senior Manager - Performance Marketing",
-      "company": "Pickaboo",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/pickaboo/career-bd/manager-senior-manager-performance-marketing/tejgaon-i/a-dhaka/2026",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Executive – Research & Development (R&D)",
       "company": "Popular Pharmaceuticals PLC",
       "deadline": "2026-08-16",
@@ -379,27 +274,6 @@
       "company": "PRAN-RFL Group",
       "deadline": "2026-08-19",
       "url": "https://bdrecruit.net/jobs-in-bd/pran-rfl-group/sr-executive-tender-sales/dhaka",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Intern Project Team",
-      "company": "Quantigo Ai",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/quantigo-ai/career-bd/intern-project-team/dhaka",
-      "functionTag": "program_project_management"
-    },
-    {
-      "title": "Sales Data Analyst",
-      "company": "Quazi Enterprises Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/quazi-enterprises-ltd./sales-data-analyst/banani/dhaka",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Territory Sales Manager",
-      "company": "Radiant Care Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/radiant-care-limited/career-bd/territory-sales-manager/anywhere",
       "functionTag": "sales_business_development"
     },
     {
@@ -417,24 +291,10 @@
       "functionTag": "program_project_management"
     },
     {
-      "title": "Hub Manager",
-      "company": "REDX Logistics Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/redx-logistics-limited/career-bd/hub-manager/sonargaon",
-      "functionTag": "operations"
-    },
-    {
       "title": "Regional Manager Sales",
       "company": "RSPL Health BD Ltd.",
       "deadline": "2026-08-16",
       "url": "https://bdrecruit.net/jobs-in-bd/rspl-health-bd-ltd./career-bd/regional-manager-sales/anywhere",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Zonal Sales In-Charge",
-      "company": "Sajeeb Group",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/sajeeb-group/career-bd/zonal-sales-in-charge/anywhere",
       "functionTag": "sales_business_development"
     },
     {
@@ -443,34 +303,6 @@
       "deadline": "2026-09-01",
       "url": "https://bdrecruit.net/jobs-in-bd/shanta-equity-limited/career-bd/head-of-debt-capital-markets-dcm/2026",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Executive – Front Desk",
-      "company": "ShareTrip Limited/ShareTrip Ltd.",
-      "deadline": "2026-08-17",
-      "url": "https://bdrecruit.net/jobs-in-bd/sharetrip-ltd/career-bd/executive-front-desk/bashundhara-r/a/corporate-office",
-      "functionTag": "administration"
-    },
-    {
-      "title": "Assistant Manager (Industrial Engineering)",
-      "company": "SNOWTEX Group",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/snowtex-group/career-bd/assistant-manager/dhamrai/dhaka",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Assistant Branch Manager",
-      "company": "Transcom Electronics Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/transcom-electronics-ltd./career-bd/assistant-branch-manager/chittagong",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Senior Officer Merchandising And Ops Admin",
-      "company": "Transcom Electronics Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/transcom-electronics-ltd./career-bd/senior-officer-merchandising-and-ops-admin/banani-dhaka/2026",
-      "functionTag": "operations"
     },
     {
       "title": "Executive – Procurement",
@@ -501,27 +333,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Officer/Sr. Officer AML & CFT",
-      "company": "Upay",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/upay/career-bd/officer/sr.-officer-aml-cft/hq/dhaka",
-      "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Head of Talent Acquisition",
-      "company": "Youngone Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/youngone-bangladesh/career-bd/head-of-talent-acquisition/bangladesh",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Executive, Production",
-      "company": "Syngenta",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc-job/syngenta/career-bd/executive-production/chattogram",
-      "functionTag": "operations"
-    },
-    {
       "title": "Trade Marketing Manager",
       "company": "Remark HB Limited",
       "deadline": "2026-08-20",
@@ -536,32 +347,11 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Head, Retail Media and Partnership",
-      "company": "Foodpanda Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/job/foodpanda-bangladesh/career-bd/head-retail-media-and-partnership/dhaka",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Process Control Associate",
-      "company": "JTI | Engineering Jobs",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/job/jti/career-bd/process-control-associate/kushtia-sadar-kushtia/2026",
-      "functionTag": "operations"
-    },
-    {
       "title": "Development / Production Merchandiser",
       "company": "Next Sourcing Ltd.",
       "deadline": null,
       "url": "https://bdrecruit.net/mnc/job/next-sourcing-limited/development-production-merchandiser/uttara/dhaka",
       "functionTag": "supply_chain_procurement"
-    },
-    {
-      "title": "Manager, AML Trade and Business Advisory",
-      "company": "BRAC Bank PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/jobs/brac-bank-plc/career-bd/manager-aml-trade-and-business-advisory/dhaka",
-      "functionTag": "legal_compliance"
     },
     {
       "title": "Merchandiser",
@@ -571,32 +361,11 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Marketing Executive",
-      "company": "LafargeHolcim Bangladesh PLC.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/jobs/lafargeholcim-bangladesh-plc./marketing-executive/dhaka",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Executive – Treasury",
-      "company": "Marico Bangladesh Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/jobs/marico-bangladesh-ltd./career-bd/executive-treasury/dhaka",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "Operations Manager",
       "company": "First4Freelancers",
       "deadline": "2026-08-13",
       "url": "https://bdrecruit.net/mnc/jobs/renowned-mnc/career-bd/operations-manager/gulshan/dhaka",
       "functionTag": "operations"
-    },
-    {
-      "title": "Relationship Manager Supply Chain Finance",
-      "company": "Standard Chartered",
-      "deadline": null,
-      "url": "https://bdrecruit.net/mnc/jobs/standard-chartered/career-bd/relationship-manager-supply-chain-finance/dhaka",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "TSM (Territory Sales Manager)",
@@ -1026,174 +795,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Agent, Incubation & Experience",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-2729",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Agent, Incubation & Experience",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/agent-incubation-and-experience-in-dhaka-bangladesh-jid-3071",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Assistant Manager, Partner Operations (CX)",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/assistant-manager-partner-operations-cx-in-dhaka-bangladesh-jid-3003",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-2730",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Associate, Incubation & Experience",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-incubation-and-experience-in-dhaka-bangladesh-jid-3070",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Customer Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/customer-service-agent-in-dhaka-bangladesh-jid-2897",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Director, Commercial",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/director-commercial-in-dhaka-bangladesh-jid-2717",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Kitchen Runner",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-2968",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Lead, Corporate Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/lead-corporate-sales-in-dhaka-bangladesh-jid-2539",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Lead, Telesales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-2242",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager, Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/manager-sales-in-dhaka-bangladesh-jid-2688",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Partner Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3004",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Partner Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3075",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Senior Manager, Growth Analytics & Partnership Acquisitions",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-manager-growth-analytics-and-partnership-acquisitions-in-dhaka-bangladesh-jid-2972",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Manager, Performance Analytics",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-manager-performance-analytics-in-dhaka-bangladesh-jid-2912",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Shift Lead - Customer Service",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/shift-lead-customer-service-in-dhaka-bangladesh-jid-3074",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Shift Lead, Partner Service",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/shift-lead-partner-service-in-dhaka-bangladesh-jid-3043",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Specialist, Account Management",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-account-management-in-dhaka-bangladesh-jid-2681",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-2807",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Operations (Shops)",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-operations-shops-in-dhaka-bangladesh-jid-3010",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Specialist, Strategic Account Management",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-strategic-account-management-in-dhaka-bangladesh-jid-2423",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Telesales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-telesales-in-dhaka-bangladesh-jid-2673",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Team Lead - Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/team-lead-content-and-onboarding-in-dhaka-bangladesh-jid-3013",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Warehouse Supervisor",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/warehouse-supervisor-in-dhaka-bangladesh-jid-2979",
-      "functionTag": "supply_chain_procurement"
-    },
-    {
       "title": "Developer",
       "company": "Optimizely",
       "deadline": null,
@@ -1304,13 +905,6 @@
       "deadline": null,
       "url": "https://careers.unilever.com/en/job/dhaka/gms-cec-and-performance-delivery-lead-pakistan-and-bangladesh/34155/98826227440",
       "functionTag": "operations"
-    },
-    {
-      "title": "Head of Corporate Affairs & Communication – Bangladesh",
-      "company": "Unilever Bangladesh",
-      "deadline": null,
-      "url": "https://careers.unilever.com/en/job/dhaka/head-of-corporate-affairs-and-communication-bangladesh/34155/98701046976",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "UN Women: Gender in Humanitarian Action Programme and Coordination Analyst, Cox’s Bazar, Bangladesh, Cox’s Bazar, NOB, Fixed Term Agreement",
@@ -1719,14 +1313,14 @@
       "functionTag": "education"
     },
     {
-      "title": "Sales Associate",
+      "title": "Sales Associate (Inside Dhaka)",
       "company": "Aarong (BRAC)",
       "deadline": "2026-09-01",
       "url": "https://thecvguy.net/jobs-in-bd/aarong-is-hiring-sales-associate-part-time",
       "functionTag": "sales_business_development"
     },
     {
-      "title": "High Flyer Internship Program Fall 2026",
+      "title": "High-Flyer Internship Program – Fall 2026",
       "company": "Akash Digital TV",
       "deadline": "2026-08-23",
       "url": "https://thecvguy.net/jobs-in-bd/akash-digital-tv-high-flyer-internship",
@@ -1775,11 +1369,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Assistant Manager / Deputy Manager",
-      "company": "New Zealand Dairy",
+      "title": "Assistant Manager / Deputy Manager – Modern Trade",
+      "company": "New Zealand Dairy Products (BD) Ltd.",
       "deadline": "2026-08-21",
       "url": "https://thecvguy.net/mnc-jobs/new-zealand-dairy-products-bd-ltd-am-dm",
-      "functionTag": "other"
+      "functionTag": "sales_business_development"
     },
     {
       "title": "National Public Financial Management Consultant",
