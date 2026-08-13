@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T10:36:11.297Z",
+  "generatedAt": "2026-08-13T08:10:43.608Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -57,7 +57,7 @@
       "company": "Anwar Group of Industries",
       "deadline": "2026-08-16",
       "url": "https://bdrecruit.net/jobs-in-bangladesh/anwar-group-of-industries/career-bd/executive-crm/dhaka",
-      "functionTag": "marketing_communications"
+      "functionTag": "customer_service"
     },
     {
       "title": "Intern – Supply Chain Management",
@@ -71,14 +71,14 @@
       "company": "Rokomari.com",
       "deadline": "2026-08-21",
       "url": "https://bdrecruit.net/jobs-in-bangladesh/rokomari.com/career-bd/growth-analytics-cro-specialist/motijheel/dhaka",
-      "functionTag": "marketing_communications"
+      "functionTag": "data_analytics"
     },
     {
       "title": "Management Trainee Officer (MTO)",
       "company": "Snowtex Group/Snowtex Outerwear Ltd.",
       "deadline": "2026-08-29",
       "url": "https://bdrecruit.net/jobs-in-bangladesh/snowtex-group/career-bd/management-trainee-officer-mto/freshers/dhamrai/dhaka",
-      "functionTag": "general_management"
+      "functionTag": "other"
     },
     {
       "title": "Senior Executive / Assistant Manager",
@@ -93,13 +93,6 @@
       "deadline": "2026-08-21",
       "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/business-development-lead/dhaka",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Officer – SHEA and Safeguarding",
-      "company": "ActionAid Bangladesh (AAB)",
-      "deadline": "2026-08-12",
-      "url": "https://bdrecruit.net/jobs-in-bd/actionaid-bangladesh-aab/career-bd/officer-shea-and-safeguarding/coxs-bazar/2026",
-      "functionTag": "legal_compliance"
     },
     {
       "title": "Cabin Crew",
@@ -141,7 +134,7 @@
       "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career-bd/management-trainee-officer-mto/2026",
-      "functionTag": "general_management"
+      "functionTag": "other"
     },
     {
       "title": "Hr Lead Talent Mgmt Org. Dev.",
@@ -162,7 +155,7 @@
       "company": "Bitopi Group",
       "deadline": "2026-08-13",
       "url": "https://bdrecruit.net/jobs-in-bd/bitopi-group/career-bd/assistant-manager-deputy-manager-fire-safety/manikganj",
-      "functionTag": "operations"
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Senior Executive – HR Operations",
@@ -225,7 +218,7 @@
       "company": "GREY Bangladesh",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/grey-bangladesh/management-trainee/dhaka/2026",
-      "functionTag": "general_management"
+      "functionTag": "other"
     },
     {
       "title": "Area Sales Manager (ASM)",
@@ -288,7 +281,7 @@
       "company": "RANCON Engineering & Consultants",
       "deadline": "2026-08-23",
       "url": "https://bdrecruit.net/jobs-in-bd/rancon-engineering-consultants/manager-senior-manager-construction/mirsarai-economic-zone/chittagong",
-      "functionTag": "program_project_management"
+      "functionTag": "operations"
     },
     {
       "title": "Regional Manager Sales",
@@ -505,7 +498,7 @@
       "company": "Foodi",
       "deadline": null,
       "url": "https://brandpractitioners.com/foodi-is-hiring-senior-executive-executive-shop",
-      "functionTag": "operations"
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Marketing Executive",
@@ -644,22 +637,15 @@
       "title": "Deputy Director/Director- Centre of Excellence (COE)",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-08-18",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6Ik5EWEJ3TS8xL1pMOHIvQWNtanNtZUE9PSIsInZhbHVlIjoiSzVKWnpJZ0JmcjZpUElmaWVlamJtUT09IiwibWFjIjoiM2E1YTA0ODgwYzMwMzhiYzFhMzEwNTdlOTRlZTU5NTk1NmU1YWQ0NDY4MWJiYTFjNjlkZmE0ZjhhY2MzNTViNiJ9",
+      "functionTag": "general_management"
+    },
+    {
+      "title": "Deputy Director/Director- Centre of Excellence (COE)",
+      "company": "Grameenphone Ltd.",
+      "deadline": "2026-08-18",
       "url": "https://career.grameenphone.com/job/eyJpdiI6IndWQ2F5RGppUTRia21UUWVrVHRqb1E9PSIsInZhbHVlIjoiWVpnZHFGRng3Uk5RMU4yRmRuZTBwUT09IiwibWFjIjoiOTg0Y2RjZTc3MmJmYTMzYjNhOGE3ZDk2MDkwN2YwMzVmOTAyYTY5YWU4NjhhNzg2MDE5YjU0N2Q5ZjhkZjk5MSJ9",
       "functionTag": "general_management"
-    },
-    {
-      "title": "Expression of Interest: Team Leader",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-team-leader/1045/34502635712",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Expression of Interest: Territory Officer",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": "2026-08-12",
-      "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-territory-officer/1045/35563812800",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Quality Compliance Executive",
@@ -697,11 +683,25 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Expression of Interest: Leaf Officer",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/kushtia/expression-of-interest-leaf-officer/1045/42780083008",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
       "title": "Associate Officer, Distribution (BRAC Seed and Agro Enterprise)",
       "company": "BRAC",
       "deadline": "2026-08-15",
       "url": "https://careers.brac.net/jobs/associate-officer-distribution-brac-seed-and-agro-enterprise-2914?bulk=false",
       "functionTag": "supply_chain_procurement"
+    },
+    {
+      "title": "Deputy Manager, Digital Marketing and Consumer Engagement (Aarong Dairy)",
+      "company": "BRAC",
+      "deadline": "2026-08-25",
+      "url": "https://careers.brac.net/jobs/deputy-manager-digital-marketing-and-consumer-engagement-aarong-dairy-2936?bulk=false",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Distribution Incharge, BRAC Artificial Insemination Enterprise",
@@ -827,13 +827,6 @@
       "company": "Optimizely",
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Marketing-Operations-Associate-%28Six-Month-Contract%29-1212-BD/1356437255",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Marketing Operations Specialist",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Marketing-Operations-Specialist-1212-BD/1362499855",
       "functionTag": "marketing_communications"
     },
     {
@@ -1054,6 +1047,13 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Accountant (Bangladesh)",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/786c7ffb-fd84-4575-af8e-dfb8a40ad637",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Product Support Specialist (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1080,13 +1080,6 @@
       "deadline": "2026-08-20",
       "url": "https://jobs.jti.com/job/DHAKA-Planning-&-Budgeting-Manager-1212/1420819233",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "CELL LEAD, FMD",
-      "company": "JTI Bangladesh",
-      "deadline": null,
-      "url": "https://jobs.jti.com/job/TONGI-CELL-LEAD%2C-FMD-1710/1401800733",
-      "functionTag": "operations"
     },
     {
       "title": "Staff Platform Engineer, Infrastructure",
@@ -1145,13 +1138,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Business Development Officer, Employee Banking",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-12",
-      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/59260-en_GB",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Manager, CIB Business Finance",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-08-18",
@@ -1208,11 +1194,11 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Manager, Structured Finance",
+      "title": "Chief Operating Officer,DAK",
       "company": "HSBC Bangladesh",
       "deadline": null,
-      "url": "https://portal.careers.hsbc.com/careers/job/563774611967603",
-      "functionTag": "finance_accounting"
+      "url": "https://portal.careers.hsbc.com/careers/job/563774611863421",
+      "functionTag": "general_management"
     },
     {
       "title": "Client Relationship Support Associate",
@@ -1257,20 +1243,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "ERP Support (Engineer/Specialist/Lead)",
-      "company": "SELISE Digital Platforms",
-      "deadline": null,
-      "url": "https://selisegroup.com/job/erp-support-engineer-specialist-lead",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Microsoft Dynamics 365 Developer",
-      "company": "SELISE Digital Platforms",
-      "deadline": null,
-      "url": "https://selisegroup.com/job/microsoft-dynamics-365-developer",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Jr. Executive, Customer Experience",
       "company": "Shikho",
       "deadline": null,
@@ -1306,11 +1278,11 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Subject Program Executive",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/vHx3HMpPTEH3/subject-program-executive-mathematics",
-      "functionTag": "education"
+      "title": "BRIDGE X Youth Exposure Programme",
+      "company": "BRAC",
+      "deadline": "2026-08-27",
+      "url": "https://thecvguy.net/internships/brac-bridge-x-youth-exposure-programme-26",
+      "functionTag": "other"
     },
     {
       "title": "Sales Associate (Inside Dhaka)",
@@ -1362,6 +1334,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Executive, Production",
+      "company": "New Zealand Dairy",
+      "deadline": "2026-08-21",
+      "url": "https://thecvguy.net/mnc-jobs/new-zealand-dairy-hiring-ex-production-2026",
+      "functionTag": "operations"
+    },
+    {
       "title": "Maintenance Manager",
       "company": "New Zealand Dairy Products Bangladesh Ltd",
       "deadline": "2026-08-31",
@@ -1394,7 +1373,7 @@
       "company": "World Food Programme",
       "deadline": "2026-08-16",
       "url": "https://thecvguy.net/ngo/world-food-programme-wfp-is-hiring-security",
-      "functionTag": "operations"
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Associate System Administrator",
