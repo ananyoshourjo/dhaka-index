@@ -64,6 +64,7 @@ test("official builds use the stable admin custom domain", () => {
   assert.equal(main.vars.BETTER_AUTH_URL, "https://dhakaindex.com");
   assert.equal(main.vars.ADMIN_PORTAL_URL, "https://admin.dhakaindex.com");
   assert.equal(main.observability.enabled, true);
+  assert.deepEqual(main.triggers.crons, ["*/15 * * * *"]);
   assert.equal(admin.vars.ADMIN_AUTH_URL, "https://admin.dhakaindex.com");
   assert.equal(admin.observability.enabled, true);
   assert.equal(

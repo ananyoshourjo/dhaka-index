@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.4.0 - 2026-08-15
+
+- Refresh the production job feed every 15 minutes so newly published jobs reach D1 without waiting for signed-in traffic.
+- Align the signed-in fallback sync and Cloudflare deployment template with the faster autonomous refresh cadence.
+
 ## 1.3.1 - 2026-08-12
 
 - Add an admin Trash page with recoverable soft-deleted jobs

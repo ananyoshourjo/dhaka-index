@@ -5,7 +5,7 @@ import { useCallback, useEffect } from "react";
 
 import type { JobFeedStatus } from "@/lib/job-feed";
 
-const SIX_HOURS_MS = 6 * 60 * 60 * 1000;
+const FIFTEEN_MINUTES_MS = 15 * 60 * 1000;
 
 export function JobFeedSync() {
   const router = useRouter();
@@ -48,7 +48,10 @@ export function JobFeedSync() {
       void synchronize();
     }
 
-    const interval = window.setInterval(() => void synchronize(), SIX_HOURS_MS);
+    const interval = window.setInterval(
+      () => void synchronize(),
+      FIFTEEN_MINUTES_MS,
+    );
     return () => window.clearInterval(interval);
   }, [synchronize]);
 

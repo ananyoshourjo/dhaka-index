@@ -78,7 +78,7 @@ test("Cloudflare Worker schedules an authenticated forced feed refresh", () => {
   assert.match(worker, /async scheduled/);
   assert.match(worker, /X-Dhaka-Index-Sync-Key/);
   assert.match(worker, /X-Dhaka-Index-Sync-Source/);
-  assert.match(config, /"0 \*\/6 \* \* \*"/);
+  assert.match(config, /"\*\/15 \* \* \* \*"/);
   assert.match(route, /syncJobFeed\(\{ force: scheduled \}\)/);
 });
 
