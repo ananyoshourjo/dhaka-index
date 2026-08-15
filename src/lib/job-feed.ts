@@ -13,7 +13,7 @@ import { validateJobFeed } from "@/lib/job-feed-schema";
 import { classifyJobFunctions } from "@/lib/job-functions";
 import { nowDhakaIso } from "@/lib/time";
 
-const CHECK_INTERVAL_MS = 6 * 60 * 60 * 1000;
+const CHECK_INTERVAL_MS = 15 * 60 * 1000;
 const SYNC_LEASE_MS = 2 * 60 * 1000;
 const MAX_FEED_BYTES = 5 * 1024 * 1024;
 

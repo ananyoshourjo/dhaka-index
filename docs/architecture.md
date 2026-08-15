@@ -47,10 +47,10 @@ An ETag avoids unnecessary downloads. Sync errors update status but never
 expire cached jobs. Only a fully parsed and validated snapshot is applied to
 D1.
 
-The member Worker owns a six-hour Cron Trigger. It dispatches an authenticated
+The member Worker owns a 15-minute Cron Trigger. It dispatches an authenticated
 request through the generated OpenNext handler and forces an ETag-aware feed
 check even when nobody is signed in. Long-lived signed-in tabs retain a
-six-hour fallback, but mounting the Jobs route does not trigger another Worker
+15-minute fallback, but mounting the Jobs route does not trigger another Worker
 request. Both paths acquire the same expiring singleton D1 lease before fetching
 or applying the feed.
 
