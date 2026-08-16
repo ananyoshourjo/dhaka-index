@@ -1,9 +1,14 @@
 import { BriefcaseBusiness } from "lucide-react";
 import { revalidatePath } from "next/cache";
 
+import {
+  AddJobForm,
+  type AddManualJobState,
+} from "@/app/jobs/add-job-form";
 import { JobFilterBar } from "@/app/jobs/job-filter-bar";
 import { EditableJobCard } from "@/app/jobs/editable-job-card";
 import {
+  addManualJob,
   deleteAdminJob,
   getAdminJobs,
   updateAdminJobField,
@@ -23,6 +28,37 @@ const editableFields = new Set<EditableJobField>([
   "title",
   "deadline",
 ]);
+
+async function addManualJobAction(
+  _previousState: AddManualJobState,
+  formData: FormData,
+): Promise<AddManualJobState> {
+  "use server";
+
+  await requireAdmin();
+
+  try {
+    await addManualJob({
+      company: String(formData.get("company") ?? ""),
+      title: String(formData.get("title") ?? ""),
+      detailUrl: String(formData.get("detailUrl") ?? ""),
+      deadlineAt: String(formData.get("deadlineAt") ?? ""),
+    });
+
+    revalidatePath("/");
+    revalidatePath("/jobs");
+
+    return {
+      error: null,
+      successId: crypto.randomUUID(),
+    };
+  } catch (error) {
+    return {
+      error: error instanceof Error ? error.message : "Unable to add this job.",
+      successId: null,
+    };
+  }
+}
 
 async function updateJobAction(formData: FormData) {
   "use server";
@@ -72,6 +108,9 @@ export default async function AdminJobsPage({
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-5 sm:gap-4 sm:px-6 sm:py-8">
       <JobFilterBar filters={filters} />
+      <div className="flex justify-start">
+        <AddJobForm action={addManualJobAction} />
+      </div>
 
       {jobs.length === 0 ? (
         <section className="rounded-xl border border-dashed bg-card px-6 py-10 text-center text-card-foreground">

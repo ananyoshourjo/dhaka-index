@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.5.0 - 2026-08-16
+
+- Add manual job creation to the admin portal.
+- Publish manually added jobs immediately while keeping them protected from feed refreshes.
+
 ## 1.4.0 - 2026-08-15
 
 - Refresh the production job feed every 15 minutes so newly published jobs reach D1 without waiting for signed-in traffic.

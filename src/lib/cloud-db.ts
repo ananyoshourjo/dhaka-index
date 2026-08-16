@@ -479,6 +479,7 @@ export async function applyOfficialFeed(
                 WHEN jobs.deleted_at IS NULL THEN NULL
                 ELSE jobs.expiry_reason
               END
+              WHERE jobs.source_key = 'dhaka-index-feed'
           `,
         )
         .bind(...values),
