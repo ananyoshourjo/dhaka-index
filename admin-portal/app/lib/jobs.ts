@@ -3,7 +3,13 @@ import {
   classifyJobFunctions,
   serializeJobFunctions,
 } from "../../../src/lib/job-functions";
+import {
+  isValidDateOnly,
+  normalizeManualJobInput,
+  type ManualJobInput,
+} from "../../../src/lib/manual-job";
 import type { ActiveJobFilters } from "../../../src/lib/job-search";
+import { nowDhakaIso } from "../../../src/lib/time";
 
 export type AdminJob = {
   id: number;
@@ -15,25 +21,6 @@ export type AdminJob = {
 };
 
 export type EditableJobField = "company" | "title" | "deadline";
-
-function isValidDateOnly(value: string) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
-
-  if (!match) {
-    return false;
-  }
-
-  const year = Number(match[1]);
-  const month = Number(match[2]);
-  const day = Number(match[3]);
-  const date = new Date(Date.UTC(year, month - 1, day));
-
-  return (
-    date.getUTCFullYear() === year &&
-    date.getUTCMonth() === month - 1 &&
-    date.getUTCDate() === day
-  );
-}
 
 function escapeLike(value: string) {
   return value.replace(/[\\%_]/g, "\\$&");
@@ -96,6 +83,53 @@ export function getAdminJobs(filters: ActiveJobFilters) {
 
 export function getDeletedAdminJobs(filters: ActiveJobFilters) {
   return getAdminJobsByMode(filters, "deleted");
+}
+
+export async function addManualJob(input: ManualJobInput) {
+  const job = normalizeManualJobInput(input);
+  const listedAt = nowDhakaIso();
+
+  try {
+    return await statement(
+      `
+        INSERT INTO jobs (
+          title,
+          company,
+          detail_url,
+          canonical_url,
+          source_key,
+          source_name,
+          source_kind,
+          source_priority,
+          deadline_at,
+          job_functions,
+          first_seen_at,
+          last_seen_at,
+          first_listed_at
+        )
+        VALUES (?, ?, ?, ?, 'admin-manual', 'Dhaka Index Admin', 'manual', 0, ?, ?, ?, ?, ?)
+      `,
+      [
+        job.title,
+        job.company,
+        job.detailUrl,
+        job.detailUrl,
+        job.deadlineAt,
+        serializeJobFunctions(classifyJobFunctions(job.title)),
+        listedAt,
+        listedAt,
+        listedAt,
+      ],
+    ).run();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    if (/unique constraint failed:\s*jobs\.canonical_url/i.test(message)) {
+      throw new Error("A job with that URL already exists.");
+    }
+
+    throw error;
+  }
 }
 
 export async function updateAdminJobField(
