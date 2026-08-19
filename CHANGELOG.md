@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.5.1 - 2026-08-19
+
+- Make bookmarking, archiving, and restoring jobs respond immediately with optimistic UI and clear rollback errors.
+- Speed up signed-in navigation with short-lived session caching, route prefetching, parallel page work, and responsive loading feedback.
+
 ## 1.5.0 - 2026-08-16
 
 - Add manual job creation to the admin portal.

@@ -1,14 +1,9 @@
-import {
-  Archive,
-  ArrowUpRight,
-  Bookmark,
-  CalendarDays,
-} from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { JobCard } from "@/components/job-card";
 import type { ActiveJob } from "@/lib/cloud-db";
 import {
   createJobsHref,
@@ -64,69 +59,14 @@ export function JobList({
         </Card>
       ) : (
         jobs.map((job) => (
-          <Card key={job.id} className="overflow-hidden">
-            <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
-              <div className="min-w-0 space-y-1">
-                <p className="text-sm text-muted-foreground">{job.company}</p>
-                <h2 className="text-xl font-semibold leading-[1.2]">
-                  {job.title}
-                </h2>
-                <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                  <CalendarDays className="size-4" aria-hidden="true" />
-                  <span>{formatDeadline(job.deadlineAt)}</span>
-                </p>
-              </div>
-
-              <form className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
-                <input type="hidden" name="jobId" value={job.id} />
-                <input
-                  type="hidden"
-                  name="bookmarkedAt"
-                  value={job.bookmarkedAt ?? ""}
-                />
-                {bookmarkAction ? (
-                  <Button
-                    type="submit"
-                    formAction={bookmarkAction}
-                    variant={job.bookmarkedAt ? "default" : "outline"}
-                    className="size-11 p-0 sm:size-10"
-                    aria-label={
-                      job.bookmarkedAt
-                        ? `Remove bookmark for ${job.title}`
-                        : `Bookmark ${job.title}`
-                    }
-                  >
-                    <Bookmark
-                      className={job.bookmarkedAt ? "size-4 fill-current" : "size-4"}
-                      aria-hidden="true"
-                    />
-                  </Button>
-                ) : null}
-
-                <Button
-                  type="submit"
-                  formAction={action}
-                  variant="outline"
-                  className="size-11 p-0 sm:size-10"
-                  aria-label={`${actionLabel} ${job.title}`}
-                >
-                  <Archive className="size-4" aria-hidden="true" />
-                </Button>
-
-                <Button asChild className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none">
-                  <a
-                    href={job.detailUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Open ${job.title}`}
-                  >
-                    Open
-                    <ArrowUpRight className="size-4" />
-                  </a>
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+          <JobCard
+            key={job.id}
+            action={action}
+            actionLabel={actionLabel}
+            bookmarkAction={bookmarkAction}
+            formattedDeadline={formatDeadline(job.deadlineAt)}
+            job={job}
+          />
         ))
       )}
 

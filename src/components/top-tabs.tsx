@@ -19,9 +19,9 @@ import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
 const tabs = [
-  { href: "/", icon: BriefcaseBusiness, label: "Jobs" },
-  { href: "/bookmarks", icon: Bookmark, label: "Bookmarks" },
-  { href: "/profile", icon: UserRound, label: "Profile" },
+  { href: "/", icon: BriefcaseBusiness, label: "Jobs", prefetch: true },
+  { href: "/bookmarks", icon: Bookmark, label: "Bookmarks", prefetch: true },
+  { href: "/profile", icon: UserRound, label: "Profile", prefetch: null },
 ];
 
 export function TopTabs() {
@@ -132,6 +132,7 @@ export function TopTabs() {
               <Link
                 key={tab.href}
                 href={tab.href}
+                prefetch={tab.prefetch}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
                   "flex h-full items-center border-b-2 border-transparent px-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
@@ -234,6 +235,7 @@ export function TopTabs() {
             <Link
               key={tab.href}
               href={tab.href}
+              prefetch={tab.prefetch}
               aria-current={isActive ? "page" : undefined}
               className={cn(
                 "relative flex h-16 flex-col items-center justify-center gap-1 text-[11px] font-medium text-muted-foreground transition-colors",
