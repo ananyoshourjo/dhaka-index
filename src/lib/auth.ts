@@ -20,6 +20,13 @@ function createAuth() {
     },
     plugins: [nextCookies()],
     secret: env.BETTER_AUTH_SECRET,
+    session: {
+      cookieCache: {
+        enabled: true,
+        maxAge: 60,
+        strategy: "compact",
+      },
+    },
     user: {
       additionalFields: {
         preferredJobFunction: {

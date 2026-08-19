@@ -57,8 +57,10 @@ type HomePageProps = {
 };
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  const user = await requireUser();
-  const filters = parseActiveJobFilters(await searchParams);
+  const [user, filters] = await Promise.all([
+    requireUser(),
+    searchParams.then(parseActiveJobFilters),
+  ]);
   const page = await getActiveJobs(user.id, filters);
 
   return (
