@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-20T07:43:00.257Z",
+  "generatedAt": "2026-08-20T07:55:31.025Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1390,13 +1390,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Trainee Assistant Cash Officer (TACO)",
-      "company": "Trust Bank PLC",
-      "deadline": "2026-08-20",
-      "url": "https://thecvguy.net/bank-jobs/trust-bank-plc-job-circular-2026-taco-fresh",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "BRIDGE X Youth Exposure Programme",
       "company": "BRAC",
       "deadline": "2026-08-27",
@@ -1422,6 +1415,13 @@
       "company": "Savoy Ice Cream Factory Limited",
       "deadline": "2026-08-21",
       "url": "https://thecvguy.net/jobs-in-bd/savoy-ice-cream-factory-limited-tsm-2026",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Territory Officer",
+      "company": "Nestlé Bangladesh",
+      "deadline": "2026-09-05",
+      "url": "https://thecvguy.net/mnc-jobs/nestle-bangladesh-hiring-territory-officer",
       "functionTag": "sales_business_development"
     },
     {
