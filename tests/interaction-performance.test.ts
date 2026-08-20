@@ -15,6 +15,20 @@ test("pending bookmarks keep their selected or unselected appearance", () => {
   assert.match(jobCard, /disabled=\{pending\}/);
 });
 
+test("optimistic job actions dispatch persistence before changing the card", () => {
+  const jobCard = readWorkspaceFile("src", "components", "job-card.tsx");
+
+  assert.match(
+    jobCard,
+    /const request = action\(new FormData\(form\)\);\s*removeOptimistically\(true\)/,
+  );
+  assert.match(
+    jobCard,
+    /const request = bookmarkAction\(new FormData\(form\)\);\s*setPending\(true\);\s*setOptimisticBookmarkedAt/,
+  );
+  assert.doesNotMatch(jobCard, /formAction=/);
+});
+
 test("authenticated navigation avoids repeated session database reads", () => {
   const auth = readWorkspaceFile("src", "lib", "auth.ts");
 

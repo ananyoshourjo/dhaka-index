@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.5.2 - 2026-08-20
+
+- Fix optimistic bookmark, archive, and restore actions so changes persist after refresh.
+
 ## 1.5.1 - 2026-08-19
 
 - Make bookmarking, archiving, and restoring jobs respond immediately with optimistic UI and clear rollback errors.
