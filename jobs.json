@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-19T07:20:30.198Z",
+  "generatedAt": "2026-08-20T07:43:00.257Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -9,6 +9,13 @@
       "deadline": "2026-08-28",
       "url": "https://app.hrythmic.com/recruit/openings/50d95373-f356-45a9-88aa-bfc059120972",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Linux System Administrator",
+      "company": "Dynamic Solution Innovators",
+      "deadline": "2026-09-29",
+      "url": "https://app.hrythmic.com/recruit/openings/c7ca8c3c-5313-46de-bd50-3106ceda012f",
+      "functionTag": "operations"
     },
     {
       "title": "Documentation & Compliance Analyst/ Jr. Documentation & Compliance Analyst",
@@ -51,6 +58,20 @@
       "deadline": "2026-08-31",
       "url": "https://apps.idlc.com/career/jobsDetails/1183",
       "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Head of Digital Trade & Customer Service IDLC Securities Limited",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-08-31",
+      "url": "https://apps.idlc.com/career/jobsDetails/2183",
+      "functionTag": "general_management"
+    },
+    {
+      "title": "Customer Service Officer IDLC Securities Limited",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-08-31",
+      "url": "https://apps.idlc.com/career/jobsDetails/2184",
+      "functionTag": "customer_service"
     },
     {
       "title": "Paid Internship",
@@ -102,6 +123,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Agora Limited is Hiring for Multiple Positions",
+      "company": "Agora Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/agora-limited-is-hiring-for-multiple-positions/career/2026",
+      "functionTag": "other"
+    },
+    {
       "title": "Cabin Crew",
       "company": "Air Astra",
       "deadline": "2026-08-31",
@@ -123,6 +151,13 @@
       "functionTag": "product"
     },
     {
+      "title": "Executive / Senior Executive",
+      "company": "Arogga Ltd./Arogga Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/executive-senior-executive/2026",
+      "functionTag": "other"
+    },
+    {
       "title": "Management Trainee Officer (MTO)",
       "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
       "deadline": null,
@@ -130,11 +165,11 @@
       "functionTag": "other"
     },
     {
-      "title": "Payroll Support and Service Executive",
-      "company": "Bank Asia PLC",
+      "title": "Da’ee",
+      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/bank-asia-plc/career/payroll-support-and-service-executive/2026",
-      "functionTag": "finance_accounting"
+      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career/daee/2026",
+      "functionTag": "education"
     },
     {
       "title": "Hr Lead Talent Mgmt Org. Dev.",
@@ -221,6 +256,13 @@
       "functionTag": "other"
     },
     {
+      "title": "Territory In-Charge – Aqua",
+      "company": "ACI Godrej Agrovet Private Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/godrej-agrovet-private-limited/career/territory-in-charge-aqua/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Management Trainee",
       "company": "GREY Bangladesh",
       "deadline": null,
@@ -254,13 +296,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/novoair-ltd./career/executive-reservation-ticketing/2026",
       "functionTag": "operations"
-    },
-    {
-      "title": "Manager, Corporate Sales",
-      "company": "Pickaboo",
-      "deadline": "2026-08-20",
-      "url": "https://bdrecruit.net/jobs-in-bd/pickaboo/career-bd/manager-corporate-sales/tejgaon/dhaka",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Brand Executive / Brand Manager",
@@ -298,11 +333,11 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Jr. Executive – Supply Chain",
-      "company": "Square Food & Beverage Ltd.",
+      "title": "HR Intern (Paid Internship)",
+      "company": "Top Ten Group",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/square-food-beverage-ltd/career/jr-executive-scd/2026",
-      "functionTag": "supply_chain_procurement"
+      "url": "https://bdrecruit.net/jobs-in-bd/top-ten-group/career/hr-intern-paid-internship/2026",
+      "functionTag": "human_resources"
     },
     {
       "title": "Executive – Procurement",
@@ -324,13 +359,6 @@
       "deadline": "2026-08-27",
       "url": "https://bdrecruit.net/jobs-in-bd/united-commercial-bank-plc-ucb/career-banking/business-intelligence-analytics-officer/anywhere/2026",
       "functionTag": "data_analytics"
-    },
-    {
-      "title": "Trade Marketing Manager",
-      "company": "Remark HB Limited",
-      "deadline": "2026-08-20",
-      "url": "https://bdrecruit.net/mnc-jobs/remark-hb-limited/trade-marketing-manager/gulshan/dhaka",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "TSM (Territory Sales Manager)",
@@ -366,13 +394,6 @@
       "deadline": null,
       "url": "https://brandpractitioners.com/arogga-is-hiring-marketing-executive",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Manager / Deputy Manager, Sales",
-      "company": "Asian Duplex Town Ltd.",
-      "deadline": "2026-08-19",
-      "url": "https://brandpractitioners.com/asian-duplex-town-ltd-is-hiring-manager-deputy-manager-sales",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Senior Manager – Brand Communications, RYZE",
@@ -655,6 +676,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "শাখা হিসাব কর্মকর্তা, অর্থ ও হিসাব বিভাগ",
+      "company": "BRAC",
+      "deadline": "2026-08-29",
+      "url": "https://careers.brac.net/jobs/%E0%A6%B6%E0%A6%96-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%95%E0%A6%B0%E0%A6%AE%E0%A6%95%E0%A6%B0%E0%A6%A4-%E0%A6%85%E0%A6%B0%E0%A6%A5-%E0%A6%93-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%AC%E0%A6%AD%E0%A6%97-2952?bulk=false",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "BRAC District Coordinator",
       "company": "BRAC",
       "deadline": "2026-08-23",
@@ -753,6 +781,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Sales Officer, Modern Trade (BRAC Dairy and Food Project)",
+      "company": "BRAC",
+      "deadline": "2026-09-02",
+      "url": "https://careers.brac.net/jobs/sales-officer-modern-trade-brac-dairy-and-food-project-2959?bulk=false",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Senior Manager, Qualitative Research; Microfinance Programme",
       "company": "BRAC",
       "deadline": "2026-08-29",
@@ -765,6 +800,20 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/associate-customer-support-in-dhaka-bangladesh-jid-3086",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Lead, Telesales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Senior Executive, Finance (R2R)",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Specialist, Field Sales",
@@ -886,11 +935,11 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "GMS CEC & Performance Delivery Lead – Pakistan & Bangladesh",
+      "title": "Territory Manager- M. Bazar",
       "company": "Unilever Bangladesh",
       "deadline": null,
-      "url": "https://careers.unilever.com/en/job/dhaka/gms-cec-and-performance-delivery-lead-pakistan-and-bangladesh/34155/98826227440",
-      "functionTag": "operations"
+      "url": "https://careers.unilever.com/en/job/sylhet/territory-manager-m-bazar/34155/99477387472",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Project Associate (Finance & Accounts)- Short Term (NPSA-7)",
@@ -911,6 +960,13 @@
       "company": "UNDP Bangladesh",
       "deadline": "2026-08-26",
       "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36229",
+      "functionTag": "program_project_management"
+    },
+    {
+      "title": "Project Manager",
+      "company": "UNDP Bangladesh",
+      "deadline": "2026-09-02",
+      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36357",
       "functionTag": "program_project_management"
     },
     {
@@ -1002,6 +1058,13 @@
       "company": "Inument Solution Limited",
       "deadline": null,
       "url": "https://inument.com/job/sqa-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Mgr, Software Devl",
+      "company": "IQVIA",
+      "deadline": null,
+      "url": "https://iqvia.wd1.myworkdayjobs.com/en-US/IQVIA/job/Dhaka-Bangladesh/Mgr--Software-Devl_R1556617",
       "functionTag": "software_engineering"
     },
     {
@@ -1124,6 +1187,13 @@
       "functionTag": "customer_service"
     },
     {
+      "title": "Senior Content Specialist",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/df9f8a50-44df-4787-b2a6-06f1dc7c444a",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Senior Billing Specialist",
       "company": "Field Nation",
       "deadline": null,
@@ -1229,6 +1299,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Senior Relationship Manager, Global Corporates and International Mid-Markets (SVP)",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774612135646",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Quality Assurance (QA) Engineer",
       "company": "WellDev",
       "deadline": "2026-08-31",
@@ -1276,20 +1353,6 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/WfqEGsHMYiPP/executive-sr-executive-visual-design",
       "functionTag": "design_creative"
-    },
-    {
-      "title": "Senior Animator",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/kuZxiblg6Ozr/senior-animator",
-      "functionTag": "design_creative"
-    },
-    {
-      "title": "Executive, Paid Performance & Measurement",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/lG-0sxgywDWX/executive-paid-performance-measurement",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Academic Counsellor (Jashore Tele-sales)",
