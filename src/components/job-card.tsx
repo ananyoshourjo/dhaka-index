@@ -7,7 +7,6 @@ import {
   CalendarDays,
 } from "lucide-react";
 import { useState } from "react";
-import { useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,32 +23,29 @@ type JobCardProps = {
 };
 
 type JobCardButtonsProps = {
-  action: JobAction;
   actionLabel: string;
-  bookmarkAction?: JobAction;
+  canBookmark: boolean;
   bookmarkedAt: string | null;
   job: ActiveJob;
-  onBookmarkOptimistically: () => void;
-  onPrimaryOptimistically: () => void;
+  onBookmark: (form: HTMLFormElement) => void;
+  onPrimary: (form: HTMLFormElement) => void;
+  pending: boolean;
 };
 
 function JobCardButtons({
-  action,
   actionLabel,
-  bookmarkAction,
+  canBookmark,
   bookmarkedAt,
   job,
-  onBookmarkOptimistically,
-  onPrimaryOptimistically,
+  onBookmark,
+  onPrimary,
+  pending,
 }: JobCardButtonsProps) {
-  const { pending } = useFormStatus();
-
   return (
     <>
-      {bookmarkAction ? (
+      {canBookmark ? (
         <Button
-          type="submit"
-          formAction={bookmarkAction}
+          type="button"
           variant={bookmarkedAt ? "default" : "outline"}
           className="size-11 p-0 transition-none disabled:opacity-100 sm:size-10"
           aria-label={
@@ -59,7 +55,11 @@ function JobCardButtons({
           }
           aria-disabled={pending}
           disabled={pending}
-          onClick={onBookmarkOptimistically}
+          onClick={(event) => {
+            if (event.currentTarget.form) {
+              onBookmark(event.currentTarget.form);
+            }
+          }}
         >
           <Bookmark
             className={bookmarkedAt ? "size-4 fill-current" : "size-4"}
@@ -69,14 +69,17 @@ function JobCardButtons({
       ) : null}
 
       <Button
-        type="submit"
-        formAction={action}
+        type="button"
         variant="outline"
         className="size-11 p-0 sm:size-10"
         aria-label={`${actionLabel} ${job.title}`}
         aria-disabled={pending}
         disabled={pending}
-        onClick={onPrimaryOptimistically}
+        onClick={(event) => {
+          if (event.currentTarget.form) {
+            onPrimary(event.currentTarget.form);
+          }
+        }}
       >
         <Archive className="size-4" aria-hidden="true" />
       </Button>
@@ -107,32 +110,42 @@ export function JobCard({
   const [optimisticBookmarkedAt, setOptimisticBookmarkedAt] = useState(
     job.bookmarkedAt,
   );
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
 
-  async function runPrimaryAction(formData: FormData) {
+  async function runPrimaryAction(form: HTMLFormElement) {
     setError("");
+    const request = action(new FormData(form));
+    removeOptimistically(true);
 
     try {
-      await action(formData);
+      await request;
     } catch {
       removeOptimistically(false);
       setError(`Could not ${actionLabel.toLowerCase()} this job. Please try again.`);
     }
   }
 
-  async function runBookmarkAction(formData: FormData) {
+  async function runBookmarkAction(form: HTMLFormElement) {
     if (!bookmarkAction) {
       return;
     }
 
     setError("");
     const previousBookmarkedAt = optimisticBookmarkedAt;
+    const request = bookmarkAction(new FormData(form));
+    setPending(true);
+    setOptimisticBookmarkedAt(
+      previousBookmarkedAt ? null : new Date().toISOString(),
+    );
 
     try {
-      await bookmarkAction(formData);
+      await request;
     } catch {
       setOptimisticBookmarkedAt(previousBookmarkedAt);
       setError("Could not update this bookmark. Please try again.");
+    } finally {
+      setPending(false);
     }
   }
 
@@ -165,17 +178,13 @@ export function JobCard({
             value={optimisticBookmarkedAt ?? ""}
           />
           <JobCardButtons
-            action={runPrimaryAction}
             actionLabel={actionLabel}
-            bookmarkAction={bookmarkAction ? runBookmarkAction : undefined}
+            canBookmark={Boolean(bookmarkAction)}
             bookmarkedAt={optimisticBookmarkedAt}
             job={job}
-            onBookmarkOptimistically={() =>
-              setOptimisticBookmarkedAt(
-                optimisticBookmarkedAt ? null : new Date().toISOString(),
-              )
-            }
-            onPrimaryOptimistically={() => removeOptimistically(true)}
+            onBookmark={runBookmarkAction}
+            onPrimary={runPrimaryAction}
+            pending={pending}
           />
         </form>
       </CardContent>
