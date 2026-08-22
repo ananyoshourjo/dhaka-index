@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-21T08:00:12.944Z",
+  "generatedAt": "2026-08-22T07:10:18.759Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -107,13 +107,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/abdul-monem-ltd./career-bd/coca-cola/senior-executive-assistant-manager/chittagong/2026",
       "functionTag": "other"
-    },
-    {
-      "title": "Business Development Lead",
-      "company": "ACI PLC",
-      "deadline": "2026-08-21",
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career-bd/business-development-lead/dhaka",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Agora Limited is Hiring for Multiple Positions",
@@ -508,13 +501,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Assistant Manager, Corporate Sales",
-      "company": "Kazi & Kazi Tea Estate Ltd.",
-      "deadline": "2026-08-21",
-      "url": "https://brandpractitioners.com/kazi-kazi-tea-estate-ltd-is-hiring-assistant-manager-corporate-sales",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Brand Manager / Category Head",
       "company": "Khaas Food",
       "deadline": null,
@@ -599,18 +585,18 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Cluster Manager",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-26",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IkpTUEpVWExVVmJxOUlmVlM1MzRReEE9PSIsInZhbHVlIjoiQXA1RVlPemRsclZUMGNka3lrR0JBQT09IiwibWFjIjoiMjIzNzk5Y2IwM2MxOTgyM2ExNWFmZTFkZTI0NDEwZDFkOGQzMWI5ZGIzNGRiNDk5ZDZhNWZkMDZmZjIxMGZlMiJ9",
-      "functionTag": "general_management"
-    },
-    {
       "title": "Coordinator - CCAO Office",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-08-30",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6ImMvbVcxZm5qckZrK3ltQWJKVHJmVFE9PSIsInZhbHVlIjoiWlNjWTlyQXhsTjBYNEtOTnBYanl6dz09IiwibWFjIjoiYzJkOTFjNjMyZTUyZjkyMGE0MTU3NDc2OWIzMmY0NGJlYTcyYWU3ODZiZjVlMmQ2MDEwOTczYjhjMDQ3YjI5OSJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IjlMM1B2OWdRS0QzV0VFYS9Tam9uZnc9PSIsInZhbHVlIjoiV0Roa1JqdVJ6ZTZ5cTFSSzZ2OVdxUT09IiwibWFjIjoiMzI1ZDYwYmIwODA5ODRkYTFjNzQ2NmVjM2ZlOGE3NGIxNzI0MGY2Zjg5ZjJkYTY1ZTUyMTg4OTBkZDhkNWNkNCJ9",
       "functionTag": "administration"
+    },
+    {
+      "title": "Cluster Manager",
+      "company": "Grameenphone Ltd.",
+      "deadline": "2026-08-26",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6Im1sRlFvVUd0TjYyQUs0dVN6alNab1E9PSIsInZhbHVlIjoiVjR3TTJieFhRQUVPTUxMTXJ4NTE2QT09IiwibWFjIjoiODMyMWNlMGNjZjQ5MTk0N2U0OTQ3YTQyMTkyNWE4ZmFhYzk3Nzg2NTQyZjVhYWZiM2I0MDcyZDEzM2IyODc1OSJ9",
+      "functionTag": "general_management"
     },
     {
       "title": "Expression of Interest: Team Leader",
@@ -1019,13 +1005,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Head of Sales & Business Development – Bangladesh Market",
-      "company": "Inument Solution Limited",
-      "deadline": "2026-08-21",
-      "url": "https://inument.com/job/head-of-sales-business-development-bangladesh-market",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "iOS Developer (Native)",
       "company": "Inument Solution Limited",
       "deadline": null,
@@ -1213,13 +1192,6 @@
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/e51a3437-8bfa-462a-bc50-9fe01f8957f0",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Senior Marketing Operations Manager",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/fc54bc9d-428a-42c4-a0bd-dd7cf3d7b7e0",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Business Development Officer, Employee Banking",
