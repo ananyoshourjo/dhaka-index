@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
 import { JOB_FUNCTIONS, type JobFunction } from "@/lib/job-functions";
+import { captureProductEvent } from "@/lib/product-analytics";
 
 type AuthFormProps = {
   mode: "login" | "signup";
@@ -44,6 +45,10 @@ export function AuthForm({ mode }: AuthFormProps) {
 
         if (isSignup && !preferredJobFunction) {
           setError("Choose a job interest.");
+          captureProductEvent("account authentication failed", {
+            mode,
+            stage: "validation",
+          });
           return;
         }
 
@@ -62,7 +67,19 @@ export function AuthForm({ mode }: AuthFormProps) {
 
           if (result.error) {
             setError(result.error.message || "Authentication failed.");
+            captureProductEvent("account authentication failed", {
+              mode,
+              stage: "provider",
+            });
             return;
+          }
+
+          if (isSignup) {
+            captureProductEvent("account signed up", {
+              preferred_job_function: preferredJobFunction as JobFunction,
+            });
+          } else {
+            captureProductEvent("account logged in", {});
           }
 
           router.push(callbackUrl);

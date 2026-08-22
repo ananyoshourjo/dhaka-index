@@ -22,6 +22,7 @@ type JobListProps = {
   jobs: ActiveJob[];
   currentPage?: number;
   totalPages?: number;
+  surface: "archive" | "bookmarks" | "jobs";
 };
 
 function formatDeadline(deadlineAt: string | null) {
@@ -46,6 +47,7 @@ export function JobList({
   filters,
   header,
   jobs,
+  surface,
   totalPages,
 }: JobListProps) {
   return (
@@ -66,6 +68,7 @@ export function JobList({
             bookmarkAction={bookmarkAction}
             formattedDeadline={formatDeadline(job.deadlineAt)}
             job={job}
+            surface={surface}
           />
         ))
       )}

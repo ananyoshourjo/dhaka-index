@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { authClient } from "@/lib/auth-client";
 import { JOB_FUNCTIONS, type JobFunction } from "@/lib/job-functions";
+import { captureProductEvent } from "@/lib/product-analytics";
 
 type JobInterestFormProps = {
   currentJobFunction: JobFunction;
@@ -63,9 +64,19 @@ export function JobInterestForm({
               setError(
                 result.error.message || "Your job interest could not be updated.",
               );
+              captureProductEvent("job interest updated", {
+                current_job_function: jobFunction,
+                outcome: "failed",
+                previous_job_function: savedJobFunction,
+              });
               return;
             }
 
+            captureProductEvent("job interest updated", {
+              current_job_function: jobFunction,
+              outcome: "succeeded",
+              previous_job_function: savedJobFunction,
+            });
             setSavedJobFunction(jobFunction);
             setSuccess("Your job interest has been updated.");
             router.refresh();

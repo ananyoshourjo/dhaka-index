@@ -28,6 +28,9 @@ data-correction issue form.
 ## Privacy
 
 Cloudflare Web Analytics may be enabled for the public member app for baseline
-page-view and real-user performance measurement. No advertising telemetry or
-product-event tracking is included. User accounts, resumes, bookmarks, and
-profile data remain stored in the deployment's Cloudflare D1 database.
+page-view and real-user performance measurement. PostHog may separately be
+enabled for the privacy-safe product-event contract documented in
+`docs/posthog-analytics.md`. It excludes advertising telemetry, raw searches,
+resume and cover-letter content, profile content, and admin-portal activity.
+User accounts, resumes, bookmarks, and profile data remain stored in the
+deployment's Cloudflare D1 database.
