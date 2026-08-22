@@ -5,6 +5,10 @@ import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import {
+  captureProductEvent,
+  resetProductAnalytics,
+} from "@/lib/product-analytics";
 
 export function AccountDangerZone() {
   const router = useRouter();
@@ -37,6 +41,7 @@ export function AccountDangerZone() {
         onSubmit={(event) => {
           event.preventDefault();
           setError(null);
+          captureProductEvent("account deletion started", {});
 
           startTransition(async () => {
             const result = await authClient.deleteUser({
@@ -46,9 +51,12 @@ export function AccountDangerZone() {
 
             if (result.error) {
               setError(result.error.message || "The account could not be deleted.");
+              captureProductEvent("account deletion failed", {});
               return;
             }
 
+            captureProductEvent("account deletion completed", {});
+            await resetProductAnalytics();
             router.push("/signup");
             router.refresh();
           });

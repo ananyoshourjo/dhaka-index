@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ActiveJob } from "@/lib/cloud-db";
+import { captureProductEvent } from "@/lib/product-analytics";
 
 type JobAction = (formData: FormData) => void | Promise<void>;
 
@@ -20,6 +21,7 @@ type JobCardProps = {
   bookmarkAction?: JobAction;
   formattedDeadline: string;
   job: ActiveJob;
+  surface: "archive" | "bookmarks" | "jobs";
 };
 
 type JobCardButtonsProps = {
@@ -29,6 +31,7 @@ type JobCardButtonsProps = {
   job: ActiveJob;
   onBookmark: (form: HTMLFormElement) => void;
   onPrimary: (form: HTMLFormElement) => void;
+  onOpen: () => void;
   pending: boolean;
 };
 
@@ -39,6 +42,7 @@ function JobCardButtons({
   job,
   onBookmark,
   onPrimary,
+  onOpen,
   pending,
 }: JobCardButtonsProps) {
   return (
@@ -90,6 +94,7 @@ function JobCardButtons({
           target="_blank"
           rel="noreferrer"
           aria-label={`Open ${job.title}`}
+          onClick={onOpen}
         >
           Open
           <ArrowUpRight className="size-4" />
@@ -105,6 +110,7 @@ export function JobCard({
   bookmarkAction,
   formattedDeadline,
   job,
+  surface,
 }: JobCardProps) {
   const [optimisticallyRemoved, removeOptimistically] = useState(false);
   const [optimisticBookmarkedAt, setOptimisticBookmarkedAt] = useState(
@@ -112,6 +118,12 @@ export function JobCard({
   );
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const commonJobProperties = {
+    has_deadline: Boolean(job.deadlineAt),
+    job_function_count: job.jobFunctions.length,
+    job_id: job.id,
+    surface,
+  } as const;
 
   async function runPrimaryAction(form: HTMLFormElement) {
     setError("");
@@ -120,9 +132,18 @@ export function JobCard({
 
     try {
       await request;
+      captureProductEvent("job action completed", {
+        ...commonJobProperties,
+        action: actionLabel === "Unarchive" ? "restored" : "archived",
+      });
     } catch {
       removeOptimistically(false);
       setError(`Could not ${actionLabel.toLowerCase()} this job. Please try again.`);
+      captureProductEvent("job action failed", {
+        action: actionLabel === "Unarchive" ? "restored" : "archived",
+        job_id: job.id,
+        surface,
+      });
     }
   }
 
@@ -141,9 +162,18 @@ export function JobCard({
 
     try {
       await request;
+      captureProductEvent("job action completed", {
+        ...commonJobProperties,
+        action: previousBookmarkedAt ? "bookmark_removed" : "bookmarked",
+      });
     } catch {
       setOptimisticBookmarkedAt(previousBookmarkedAt);
       setError("Could not update this bookmark. Please try again.");
+      captureProductEvent("job action failed", {
+        action: previousBookmarkedAt ? "bookmark_removed" : "bookmarked",
+        job_id: job.id,
+        surface,
+      });
     } finally {
       setPending(false);
     }
@@ -184,6 +214,12 @@ export function JobCard({
             job={job}
             onBookmark={runBookmarkAction}
             onPrimary={runPrimaryAction}
+            onOpen={() =>
+              captureProductEvent("job action completed", {
+                ...commonJobProperties,
+                action: "opened",
+              })
+            }
             pending={pending}
           />
         </form>

@@ -31,6 +31,7 @@ export default async function ArchivePage() {
       actionLabel="Unarchive"
       emptyLabel="No archived jobs are listed right now."
       jobs={jobs}
+      surface="archive"
     />
   );
 }

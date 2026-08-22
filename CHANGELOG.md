@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.6.0 - 2026-08-22
+
+- Add privacy-safe PostHog product analytics for member journeys, funnels, errors, and Web Vitals.
+- Disable automatic capture, replay, heatmaps, surveys, raw-content collection, IP storage, and GeoIP enrichment.
+
 ## 1.5.2 - 2026-08-20
 
 - Fix optimistic bookmark, archive, and restore actions so changes persist after refresh.

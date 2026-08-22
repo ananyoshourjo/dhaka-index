@@ -91,6 +91,18 @@ Cloudflare's automatic setup. Otherwise, configure the public build variable
 Analytics dashboard and redeploy the member app. The repository's beacon is
 disabled when that variable is absent. Use one setup method, not both.
 
+The member app also supports privacy-safe PostHog product analytics. Configure
+both `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` and `NEXT_PUBLIC_POSTHOG_HOST` to enable
+the documented page, onboarding, job, resume, settings, sanitized error, and Web
+Vitals events. Signed-in activity uses the opaque Better Auth user ID without
+email, name, or resume properties. The integration uses the lazy-loaded slim SDK;
+DOM autocapture, session replay, heatmaps, surveys, feature flags, automatic
+exception capture, raw URLs, referrers, and raw search queries remain disabled.
+The admin portal does not load PostHog. Before enabling it, configure the PostHog
+project to discard client IP data and choose an appropriate retention period.
+See [docs/posthog-analytics.md](docs/posthog-analytics.md) for the event contract
+and suggested funnels.
+
 Cloudflare Browser Rendering provides authenticated PDF export. See
 [docs/self-hosting.md](docs/self-hosting.md) for the complete deployment and
 security checklist.
