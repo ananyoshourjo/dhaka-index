@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-22T07:10:18.759Z",
+  "generatedAt": "2026-08-23T06:51:56.936Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -46,13 +46,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "IDLC Jumpstart – Fall 2026 (IDLC Internship Program) IDLC Finance PLC.",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-08-22",
-      "url": "https://apps.idlc.com/career/jobsDetails/1182",
-      "functionTag": "other"
-    },
-    {
       "title": "Technical Analyst (Credit Risk Management – Consumer Division) IDLC Finance PLC.",
       "company": "IDLC Finance PLC",
       "deadline": "2026-08-31",
@@ -78,13 +71,6 @@
       "company": "ACI PLC",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bangladesh/aci-plc/career-bd/paid-internship/2026",
-      "functionTag": "other"
-    },
-    {
-      "title": "Officer / Senior Officer",
-      "company": "ACI",
-      "deadline": "2026-08-23",
-      "url": "https://bdrecruit.net/jobs-in-bangladesh/aci/career-bd/officer-senior-officer/narayanganj",
       "functionTag": "other"
     },
     {
@@ -144,13 +130,6 @@
       "functionTag": "other"
     },
     {
-      "title": "Management Trainee Officer (MTO)",
-      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career-bd/management-trainee-officer-mto/2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Da’ee",
       "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
       "deadline": null,
@@ -207,20 +186,6 @@
       "functionTag": "product"
     },
     {
-      "title": "Group CFO",
-      "company": "City Group",
-      "deadline": "2026-08-23",
-      "url": "https://bdrecruit.net/jobs-in-bd/city-group/group-cfo/dhaka/2026",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Intern for HR Department",
-      "company": "DBL Pharmaceuticals Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/dbl-pharma/career/intern-for-hr-department/2026",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Factory Assistant Manager",
       "company": "Domino’s Pizza Bangladesh",
       "deadline": null,
@@ -235,24 +200,17 @@
       "functionTag": "supply_chain_procurement"
     },
     {
+      "title": "Business Development Executive",
+      "company": "First4freelancers",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/first4freelancers/career/business-development-executive/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Senior Executive",
       "company": "Global Brand PLC",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/global-brand-plc/career-bd/senior-executive/dhaka",
-      "functionTag": "other"
-    },
-    {
-      "title": "Territory In-Charge – Aqua",
-      "company": "ACI Godrej Agrovet Private Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/godrej-agrovet-private-limited/career/territory-in-charge-aqua/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Management Trainee",
-      "company": "GREY Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/grey-bangladesh/management-trainee/dhaka/2026",
       "functionTag": "other"
     },
     {
@@ -319,13 +277,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Manager / Senior Manager, Construction",
-      "company": "RANCON Engineering & Consultants",
-      "deadline": "2026-08-23",
-      "url": "https://bdrecruit.net/jobs-in-bd/rancon-engineering-consultants/manager-senior-manager-construction/mirsarai-economic-zone/chittagong",
-      "functionTag": "operations"
-    },
-    {
       "title": "Head of Debt Capital Markets (DCM)",
       "company": "Shanta Equity Limited",
       "deadline": "2026-09-01",
@@ -359,13 +310,6 @@
       "deadline": "2026-08-27",
       "url": "https://bdrecruit.net/jobs-in-bd/united-commercial-bank-plc-ucb/career-banking/business-intelligence-analytics-officer/anywhere/2026",
       "functionTag": "data_analytics"
-    },
-    {
-      "title": "TSM (Territory Sales Manager)",
-      "company": "Abdul Monem Limited",
-      "deadline": "2026-08-22",
-      "url": "https://brandpractitioners.com/abdul-monem-limited-is-hiring-territory-sales-manager",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Brand Executive, Electrical",
@@ -473,13 +417,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Marketing Executive",
-      "company": "FoodiBox (The Food Platter)",
-      "deadline": "2026-08-22",
-      "url": "https://brandpractitioners.com/foodibox-the-food-platter-is-hiring-marketing-executive",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Assistant Manager, Marketing",
       "company": "Golden Harvest Group",
       "deadline": null,
@@ -568,13 +505,6 @@
       "company": "Synesis IT PLC",
       "deadline": null,
       "url": "https://brandpractitioners.com/synesis-it-is-hiring-growth-marketing-manager",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Digital Marketing Executive",
-      "company": "TQIU International (BD) Ltd.",
-      "deadline": "2026-08-22",
-      "url": "https://brandpractitioners.com/tqiu-international-bd-ltd-is-hiring-digital-marketing-executive",
       "functionTag": "marketing_communications"
     },
     {
@@ -697,13 +627,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Distribution Incharge, BRAC Dairy and Food Project",
-      "company": "BRAC",
-      "deadline": "2026-08-22",
-      "url": "https://careers.brac.net/jobs/distribution-incharge-brac-dairy-and-food-project-2930?bulk=false",
-      "functionTag": "supply_chain_procurement"
-    },
-    {
       "title": "Forklift Operator (BRAC Seed and Agro Enterprise)",
       "company": "BRAC",
       "deadline": "2026-08-25",
@@ -732,13 +655,6 @@
       "functionTag": "program_project_management"
     },
     {
-      "title": "Manager, Project Development and Analysis, Road Safety Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-22",
-      "url": "https://careers.brac.net/jobs/manager-project-development-and-analysis-road-safety-programme-2935?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Officer, Accounts (BRAC Dairy and Food Project)",
       "company": "BRAC",
       "deadline": "2026-08-31",
@@ -751,6 +667,13 @@
       "deadline": "2026-09-03",
       "url": "https://careers.brac.net/jobs/officer-accounts-brac-seed-and-agro-enterprise-2955?bulk=false",
       "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Officer, Production (BRAC Fisheries Enterprise)",
+      "company": "BRAC",
+      "deadline": "2026-09-02",
+      "url": "https://careers.brac.net/jobs/officer-production-brac-fisheries-enterprise-2961?bulk=false",
+      "functionTag": "operations"
     },
     {
       "title": "Officer, QMS (BRAC Dairy and Food Project)",
@@ -905,20 +828,6 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Software-Engineer-II-1212-BD/1363501155",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Senior Executive/Executive- Merchant Acquisition",
-      "company": "Pathao",
-      "deadline": "2026-08-22",
-      "url": "https://careers.pathao.com/jobs/387",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Executive, Performance Marketing",
-      "company": "Pathao",
-      "deadline": "2026-08-22",
-      "url": "https://careers.pathao.com/jobs/senior-executive-performance-marketing",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Marketing Intern",
@@ -1194,13 +1103,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Business Development Officer, Employee Banking",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-08-22",
-      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/60396-en_GB",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Business Development Officer, SME Client Acquisition",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-08-24",
@@ -1369,25 +1271,18 @@
       "functionTag": "other"
     },
     {
-      "title": "Marico Maverick – Sales Trainee Program",
-      "company": "Marico Bangladesh Limited",
-      "deadline": "2026-08-22",
-      "url": "https://thecvguy.net/internships/marico-bangladesh-limited-marico-maverick",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "High-Flyer Internship Program – Fall 2026",
-      "company": "Akash Digital TV",
-      "deadline": "2026-08-23",
-      "url": "https://thecvguy.net/jobs-in-bd/akash-digital-tv-high-flyer-internship",
+      "title": "Explore Internship Program",
+      "company": "upay",
+      "deadline": "2026-08-31",
+      "url": "https://thecvguy.net/internships/upay-explore-internship-program-2026",
       "functionTag": "other"
     },
     {
-      "title": "Executive, Marketing (Woven Fabric)",
-      "company": "Square Group",
-      "deadline": "2026-08-22",
-      "url": "https://thecvguy.net/jobs-in-bd/square-group-is-hiring-executive-marketing",
-      "functionTag": "marketing_communications"
+      "title": "Team Leader",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-09-05",
+      "url": "https://thecvguy.net/mnc-jobs/fresher-mnc-jobs/bat-bangladesh-team-leader",
+      "functionTag": "general_management"
     },
     {
       "title": "Territory Officer",
@@ -1397,11 +1292,11 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Maintenance Manager",
-      "company": "New Zealand Dairy Products Bangladesh Ltd",
-      "deadline": "2026-08-31",
-      "url": "https://thecvguy.net/mnc-jobs/new-zealand-dairy-products-bd-limited-2026-2",
-      "functionTag": "operations"
+      "title": "Project Control Lead",
+      "company": "A.P. Moller – Maersk",
+      "deadline": "2026-09-01",
+      "url": "https://thecvguy.net/mnc-jobs/project-control-lead-job-at-ap-moller-maersk",
+      "functionTag": "program_project_management"
     },
     {
       "title": "Territory Officer",
