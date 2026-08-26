@@ -3,7 +3,7 @@ import "server-only";
 import { getCloudflareDb } from "@/lib/cloudflare";
 import { JOBS_PAGE_SIZE, type ActiveJobFilters } from "@/lib/job-search";
 import { parseJobFunctions, type JobFunction } from "@/lib/job-functions";
-import { nowDhakaIso } from "@/lib/time";
+import { nowDhakaIso, todayDhaka } from "@/lib/time";
 
 export type ActiveJob = {
   id: number;
@@ -491,14 +491,47 @@ export async function applyOfficialFeed(
       .prepare(
         `
           UPDATE jobs
+          SET expired_at = NULL, expiry_reason = NULL
+          WHERE source_key = 'dhaka-index-feed'
+            AND expired_at IS NOT NULL
+            AND deleted_at IS NULL
+            AND expiry_reason IN (
+              'missing-from-official-feed',
+              'missing-from-complete-source-crawl'
+            )
+            AND CASE
+              WHEN admin_deadline_override = 1 THEN admin_deadline_at
+              ELSE deadline_at
+            END IS NOT NULL
+            AND CASE
+              WHEN admin_deadline_override = 1 THEN admin_deadline_at
+              ELSE deadline_at
+            END >= ?
+        `,
+      )
+      .bind(todayDhaka()),
+    db
+      .prepare(
+        `
+          UPDATE jobs
           SET expired_at = ?, expiry_reason = 'missing-from-official-feed'
           WHERE source_key = 'dhaka-index-feed'
             AND last_seen_at <> ?
             AND expired_at IS NULL
             AND deleted_at IS NULL
+            AND (
+              CASE
+                WHEN admin_deadline_override = 1 THEN admin_deadline_at
+                ELSE deadline_at
+              END IS NULL
+              OR CASE
+                WHEN admin_deadline_override = 1 THEN admin_deadline_at
+                ELSE deadline_at
+              END < ?
+            )
         `,
       )
-      .bind(input.checkedAt, input.checkedAt),
+      .bind(input.checkedAt, input.checkedAt, todayDhaka()),
     db
       .prepare(
         `

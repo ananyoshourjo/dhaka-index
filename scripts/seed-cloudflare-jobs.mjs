@@ -4,6 +4,7 @@ import os from "node:os";
 import path from "node:path";
 
 import jobFunctions from "../src/lib/job-functions.ts";
+import { todayDhaka } from "../src/lib/time.ts";
 
 const { classifyJobFunctions, serializeJobFunctions } = jobFunctions;
 
@@ -66,6 +67,7 @@ function sqlValue(value) {
 }
 
 const checkedAt = new Date().toISOString();
+const today = todayDhaka();
 const chunks = [];
 const chunkSize = 50;
 
@@ -115,12 +117,41 @@ ON CONFLICT(canonical_url) DO UPDATE SET
 
 chunks.push(`
 UPDATE jobs
+SET expired_at = NULL,
+    expiry_reason = NULL
+WHERE source_key = 'dhaka-index-feed'
+  AND expired_at IS NOT NULL
+  AND deleted_at IS NULL
+  AND expiry_reason IN (
+    'missing-from-official-feed',
+    'missing-from-complete-source-crawl'
+  )
+  AND CASE
+    WHEN admin_deadline_override = 1 THEN admin_deadline_at
+    ELSE deadline_at
+  END IS NOT NULL
+  AND CASE
+    WHEN admin_deadline_override = 1 THEN admin_deadline_at
+    ELSE deadline_at
+  END >= ${sqlValue(today)};
+
+UPDATE jobs
 SET expired_at = ${sqlValue(checkedAt)},
     expiry_reason = 'missing-from-official-feed'
 WHERE source_key = 'dhaka-index-feed'
   AND last_seen_at <> ${sqlValue(checkedAt)}
   AND expired_at IS NULL
-  AND deleted_at IS NULL;
+  AND deleted_at IS NULL
+  AND (
+    CASE
+      WHEN admin_deadline_override = 1 THEN admin_deadline_at
+      ELSE deadline_at
+    END IS NULL
+    OR CASE
+      WHEN admin_deadline_override = 1 THEN admin_deadline_at
+      ELSE deadline_at
+    END < ${sqlValue(today)}
+  );
 
 INSERT INTO job_feed_state (
   id,

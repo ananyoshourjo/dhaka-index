@@ -54,7 +54,9 @@ check even when nobody is signed in. Long-lived signed-in tabs retain a
 request. Both paths acquire the same expiring singleton D1 lease before fetching
 or applying the feed.
 
-Feed writes update base fields. `admin_title`, `admin_company`,
+Feed writes update base fields. A missing feed URL cannot expire a job whose
+effective deadline is today or later; those records remain visible until the
+deadline passes. `admin_title`, `admin_company`,
 `admin_deadline_at`, `admin_deadline_override`, and `deleted_at` are
 administrator overrides or tombstones and are preserved.
 

@@ -165,8 +165,10 @@ The feed document uses this stable shape:
 ```
 
 Successful snapshots update base job records in D1. A canonical URL missing
-from a later successful snapshot is marked expired. Bookmarks, archives,
-deleted-job tombstones, and administrator overrides remain intact.
+from a later successful snapshot is marked expired only when it has no current
+effective deadline or that deadline has passed. Jobs with a deadline today or
+later are retained until the deadline passes. Bookmarks, archives, deleted-job
+tombstones, and administrator overrides remain intact.
 
 The app never treats a failed download as an empty feed. It continues showing
 the last successful D1 snapshot and records the error.

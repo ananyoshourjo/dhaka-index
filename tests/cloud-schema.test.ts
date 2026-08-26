@@ -53,6 +53,29 @@ test("scheduled synchronization uses an expiring singleton lease", () => {
   assert.match(cloudDb, /DELETE FROM job_feed_sync_lock WHERE id = 1 AND owner = \?/);
 });
 
+test("feed synchronization retains and repairs future-deadline jobs", () => {
+  const cloudDb = fs.readFileSync(
+    path.join(process.cwd(), "src", "lib", "cloud-db.ts"),
+    "utf8",
+  );
+  const seedScript = fs.readFileSync(
+    path.join(process.cwd(), "scripts", "seed-cloudflare-jobs.mjs"),
+    "utf8",
+  );
+
+  assert.match(cloudDb, /missing-from-complete-source-crawl/);
+  assert.match(cloudDb, /SET expired_at = NULL, expiry_reason = NULL/);
+  assert.match(
+    cloudDb,
+    /admin_deadline_override = 1 THEN admin_deadline_at[\s\S]*END >= \?/,
+  );
+  assert.match(cloudDb, /expired_at IS NULL[\s\S]*END < \?/);
+  assert.match(cloudDb, /todayDhaka\(\)/);
+  assert.match(seedScript, /missing-from-complete-source-crawl/);
+  assert.match(seedScript, /END >= \$\{sqlValue\(today\)\}/);
+  assert.match(seedScript, /END < \$\{sqlValue\(today\)\}/);
+});
+
 test("Cloudflare Worker schedules an authenticated forced feed refresh", () => {
   const worker = fs.readFileSync(
     path.join(process.cwd(), "custom-worker.ts"),
