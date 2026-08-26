@@ -409,6 +409,37 @@ export async function releaseJobFeedSyncLease(owner: string) {
   ).run();
 }
 
+function restoreMissingFeedJobsStatement(db: D1Database) {
+  return db
+    .prepare(
+      `
+        UPDATE jobs
+        SET expired_at = NULL, expiry_reason = NULL
+        WHERE source_key = 'dhaka-index-feed'
+          AND expired_at IS NOT NULL
+          AND deleted_at IS NULL
+          AND expiry_reason IN (
+            'missing-from-official-feed',
+            'missing-from-complete-source-crawl'
+          )
+          AND CASE
+            WHEN admin_deadline_override = 1 THEN admin_deadline_at
+            ELSE deadline_at
+          END IS NOT NULL
+          AND CASE
+            WHEN admin_deadline_override = 1 THEN admin_deadline_at
+            ELSE deadline_at
+          END >= ?
+      `,
+    )
+    .bind(todayDhaka());
+}
+
+export async function restoreMissingFeedJobsWithFutureDeadline() {
+  const result = await restoreMissingFeedJobsStatement(getCloudflareDb()).run();
+  return result.meta.changes ?? 0;
+}
+
 export async function applyOfficialFeed(
   jobs: OfficialFeedJob[],
   input: {
@@ -487,29 +518,7 @@ export async function applyOfficialFeed(
   }
 
   statements.push(
-    db
-      .prepare(
-        `
-          UPDATE jobs
-          SET expired_at = NULL, expiry_reason = NULL
-          WHERE source_key = 'dhaka-index-feed'
-            AND expired_at IS NOT NULL
-            AND deleted_at IS NULL
-            AND expiry_reason IN (
-              'missing-from-official-feed',
-              'missing-from-complete-source-crawl'
-            )
-            AND CASE
-              WHEN admin_deadline_override = 1 THEN admin_deadline_at
-              ELSE deadline_at
-            END IS NOT NULL
-            AND CASE
-              WHEN admin_deadline_override = 1 THEN admin_deadline_at
-              ELSE deadline_at
-            END >= ?
-        `,
-      )
-      .bind(todayDhaka()),
+    restoreMissingFeedJobsStatement(db),
     db
       .prepare(
         `

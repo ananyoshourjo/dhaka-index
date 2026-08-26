@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.6.2 - 2026-08-26
+
+- Repair retained future-deadline jobs even when the feed returns an unchanged snapshot.
+
 ## 1.6.1 - 2026-08-26
 
 - Keep jobs with current or future deadlines visible and restore them when a feed snapshot temporarily omits them.

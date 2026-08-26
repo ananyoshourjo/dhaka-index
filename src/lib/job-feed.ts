@@ -5,6 +5,7 @@ import {
   applyOfficialFeed,
   getJobFeedState,
   releaseJobFeedSyncLease,
+  restoreMissingFeedJobsWithFutureDeadline,
   saveJobFeedState,
   type JobFeedStateRow,
 } from "@/lib/cloud-db";
@@ -124,6 +125,7 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
     });
 
     if (response.status === 304) {
+      await restoreMissingFeedJobsWithFutureDeadline();
       await saveJobFeedState({
         feedUrl,
         etag: state?.etag ?? null,

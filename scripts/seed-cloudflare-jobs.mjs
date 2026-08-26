@@ -4,7 +4,6 @@ import os from "node:os";
 import path from "node:path";
 
 import jobFunctions from "../src/lib/job-functions.ts";
-import { todayDhaka } from "../src/lib/time.ts";
 
 const { classifyJobFunctions, serializeJobFunctions } = jobFunctions;
 
@@ -64,6 +63,17 @@ const jobs = feed.jobs.map((job, index) => {
 
 function sqlValue(value) {
   return value === null ? "NULL" : `'${String(value).replaceAll("'", "''")}'`;
+}
+
+function todayDhaka() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts();
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
 }
 
 const checkedAt = new Date().toISOString();
