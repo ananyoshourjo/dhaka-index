@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.6.1 - 2026-08-26
+
+- Keep jobs with current or future deadlines visible and restore them when a feed snapshot temporarily omits them.
+
 ## 1.6.0 - 2026-08-22
 
 - Add privacy-safe PostHog product analytics for member journeys, funnels, errors, and Web Vitals.
