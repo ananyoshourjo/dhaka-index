@@ -74,6 +74,15 @@ test("feed synchronization retains and repairs future-deadline jobs", () => {
   assert.match(seedScript, /missing-from-complete-source-crawl/);
   assert.match(seedScript, /END >= \$\{sqlValue\(today\)\}/);
   assert.match(seedScript, /END < \$\{sqlValue\(today\)\}/);
+
+  const jobFeed = fs.readFileSync(
+    path.join(process.cwd(), "src", "lib", "job-feed.ts"),
+    "utf8",
+  );
+  assert.match(
+    jobFeed,
+    /response\.status === 304[\s\S]*restoreMissingFeedJobsWithFutureDeadline/,
+  );
 });
 
 test("Cloudflare Worker schedules an authenticated forced feed refresh", () => {
