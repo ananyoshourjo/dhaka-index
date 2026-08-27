@@ -3,6 +3,7 @@ import { migrateLegacyProfilePhoto } from "@/lib/profile-photo";
 import {
   defaultResumeSectionOrder,
   defaultResumeSectionTitles,
+  normalizeResumeCollapsedSectionIds,
   normalizeResumeCustomSections,
   normalizeResumeSectionOrder,
   normalizeResumeSectionTitles,
@@ -184,6 +185,7 @@ export type ResumeContent = {
   sectionTitles: ResumeSectionTitles;
   customSections: ResumeCustomSection[];
   sectionOrder: ResumeSectionId[];
+  collapsedSectionIds: string[];
 };
 
 export type ResumeSectionTitles = Record<ResumeSectionKey, string>;
@@ -224,6 +226,7 @@ export const defaultResumeContent: ResumeContent = {
     closing: "Sincerely,",
   },
   sectionOrder: defaultResumeSectionOrder,
+  collapsedSectionIds: [],
 };
 
 const DEFAULT_RESUME_ID = "default";
@@ -348,6 +351,9 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
         sectionOrder: normalizeResumeSectionOrder(
           parsed.sectionOrder,
           customSections.map((section) => section.id),
+        ),
+        collapsedSectionIds: normalizeResumeCollapsedSectionIds(
+          parsed.collapsedSectionIds,
         ),
       };
     }

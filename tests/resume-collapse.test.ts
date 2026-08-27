@@ -3,6 +3,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import test from "node:test";
 
+import { normalizeResumeCollapsedSectionIds } from "../src/lib/resume-schema";
+
 const builder = readFileSync(
   path.join(process.cwd(), "src", "components", "resume-builder.tsx"),
   "utf8",
@@ -26,9 +28,26 @@ test("profile editor sections and entries pair drag grips with collapse controls
 
 test("sections, entries, and grid rows support compact states", () => {
   assert.match(builder, /hidden=\{collapsed\}/);
-  assert.match(builder, /collapsedEntryIds\.has\(`work:\$\{item\.id\}`\)/);
-  assert.match(builder, /collapsedEntryIds\.has\(`activity:\$\{item\.id\}`\)/);
-  assert.match(builder, /collapsedEntryIds\.has\(`custom:\$\{item\.id\}`\)/);
+  assert.match(builder, /collapsedSectionIds: \[\.\.\.next\]/);
+  assert.match(builder, /isCollapsed\(entryCollapseId\("work", item\.id\)\)/);
+  assert.match(builder, /isCollapsed\(entryCollapseId\("activity", item\.id\)\)/);
+  assert.match(builder, /isCollapsed\(entryCollapseId\("custom", item\.id\)\)/);
+});
+
+test("collapse state normalizes safely for older saved profiles", () => {
+  assert.deepEqual(
+    normalizeResumeCollapsedSectionIds([
+      "section:education",
+      "section:education",
+      "",
+      "  ",
+      null,
+      42,
+      "entry:work:work-1",
+    ]),
+    ["section:education", "entry:work:work-1"],
+  );
+  assert.deepEqual(normalizeResumeCollapsedSectionIds(undefined), []);
 });
 
 test("multiline editor fields can shrink on narrow screens", () => {

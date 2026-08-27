@@ -51,6 +51,20 @@ export function normalizeResumeSectionTitles(value: unknown): ResumeSectionTitle
   return titles;
 }
 
+export function normalizeResumeCollapsedSectionIds(value: unknown): string[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+
+  return [
+    ...new Set(
+      value.filter(
+        (id): id is string => typeof id === "string" && id.trim().length > 0,
+      ),
+    ),
+  ];
+}
+
 function normalizeResumeBullet(value: unknown): ResumeBullet | null {
   if (!value || typeof value !== "object") {
     return null;

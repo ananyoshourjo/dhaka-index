@@ -61,6 +61,7 @@ import { createPhotoThumbnail } from "@/lib/photo-client";
 import { captureProductEvent } from "@/lib/product-analytics";
 import {
   hasResumeContent,
+  normalizeResumeCollapsedSectionIds,
   normalizeResumeCustomSections,
   normalizeResumeSectionOrder,
   normalizeResumeSectionTitles,
@@ -175,6 +176,14 @@ function readEmergencyDraft() {
 
 function newId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+function sectionCollapseId(sectionId: string) {
+  return `section:${sectionId}`;
+}
+
+function entryCollapseId(group: string, entryId: string) {
+  return `entry:${group}:${entryId}`;
 }
 
 function newCustomSectionId() {
@@ -1233,6 +1242,8 @@ function EditorSection({
   onDrop,
   order,
   dropIndicator,
+  collapsed = false,
+  onToggleCollapsed,
 }: {
   title: string;
   onTitleChange?: (value: string) => void;
@@ -1255,9 +1266,11 @@ function EditorSection({
   onDrop?: (group: string, id: string) => void;
   order?: number;
   dropIndicator?: DropIndicator | null;
+  collapsed?: boolean;
+  onToggleCollapsed?: () => void;
 }) {
-  const [collapsed, setCollapsed] = useState(false);
   const draggable = Boolean(dragId && dragGroup && onDragStart && onDrop);
+  const isCollapsible = draggable && Boolean(onToggleCollapsed);
   const isDragging =
     Boolean(dragGroup && dragId) &&
     dragTarget?.group === dragGroup &&
@@ -1302,7 +1315,7 @@ function EditorSection({
     >
       <div className="flex min-w-0 items-center justify-between border-b pb-2">
         <div className="inline-flex min-w-0 items-center gap-2">
-          {draggable ? (
+          {isCollapsible ? (
             <>
               <GripVertical
                 className="size-4 cursor-grab text-muted-foreground transition-colors hover:text-foreground active:cursor-grabbing"
@@ -1311,7 +1324,7 @@ function EditorSection({
               <CollapseButton
                 collapsed={collapsed}
                 label={`${title || "section"} section`}
-                onClick={() => setCollapsed((current) => !current)}
+                onClick={() => onToggleCollapsed?.()}
               />
             </>
           ) : null}
@@ -1329,7 +1342,7 @@ function EditorSection({
         </div>
         {action}
       </div>
-      {draggable ? (
+      {isCollapsible ? (
         <div className="grid min-w-0 gap-4" hidden={collapsed}>
           {children}
         </div>
@@ -1526,6 +1539,9 @@ export function ResumeBuilder({
       initialResume.sectionOrder,
       initialCustomSections.map((section) => section.id),
     ),
+    collapsedSectionIds: normalizeResumeCollapsedSectionIds(
+      initialResume.collapsedSectionIds,
+    ),
   });
   const [photoUrl, setPhotoUrl] = useState(initialResume.contact.photoUrl);
   const [saveState, setSaveState] = useState<SaveState>("saved");
@@ -1535,9 +1551,6 @@ export function ResumeBuilder({
   const [photoSaving, setPhotoSaving] = useState(false);
   const [dragTarget, setDragTarget] = useState<DragTarget | null>(null);
   const [dropIndicator, setDropIndicator] = useState<DropIndicator | null>(null);
-  const [collapsedEntryIds, setCollapsedEntryIds] = useState<Set<string>>(
-    () => new Set(),
-  );
   const [previewZoom, setPreviewZoom] = useState(0.78);
   const [previewPan, setPreviewPan] = useState({ x: 0, y: 0 });
   const [mobilePane, setMobilePane] = useState<"edit" | "preview">("edit");
@@ -1781,6 +1794,9 @@ export function ResumeBuilder({
         sectionOrder: normalizeResumeSectionOrder(
           emergencyDraft.sectionOrder,
           customSections.map((section) => section.id),
+        ),
+        collapsedSectionIds: normalizeResumeCollapsedSectionIds(
+          emergencyDraft.collapsedSectionIds,
         ),
       });
       setSaveState("unsaved");
@@ -2138,9 +2154,9 @@ export function ResumeBuilder({
     }));
   };
 
-  const toggleEntryCollapsed = (id: string) => {
-    setCollapsedEntryIds((current) => {
-      const next = new Set(current);
+  const toggleCollapsed = (id: string) => {
+    setResume((current) => {
+      const next = new Set(current.collapsedSectionIds);
 
       if (next.has(id)) {
         next.delete(id);
@@ -2148,7 +2164,10 @@ export function ResumeBuilder({
         next.add(id);
       }
 
-      return next;
+      return {
+        ...current,
+        collapsedSectionIds: [...next],
+      };
     });
   };
 
@@ -2680,6 +2699,7 @@ export function ResumeBuilder({
     resume.sectionOrder,
     resume.customSections.map((section) => section.id),
   );
+  const isCollapsed = (id: string) => resume.collapsedSectionIds.includes(id);
   const totalPreviewPages =
     resumePageCount + (resume.coverLetter.included ? 1 : 0);
   const hasPreviewContent = hasResumeContent(resume, photoUrl);
@@ -2920,6 +2940,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("workExperience"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("workExperience"))
+            }
             action={
               <Button
                 type="button"
@@ -2988,9 +3012,11 @@ export function ResumeBuilder({
                       aria-hidden="true"
                     />
                     <CollapseButton
-                      collapsed={collapsedEntryIds.has(`work:${item.id}`)}
+                      collapsed={isCollapsed(entryCollapseId("work", item.id))}
                       label={`${item.role || "work experience"} entry`}
-                      onClick={() => toggleEntryCollapsed(`work:${item.id}`)}
+                      onClick={() =>
+                        toggleCollapsed(entryCollapseId("work", item.id))
+                      }
                     />
                     <Toggle
                       checked={item.included}
@@ -3023,7 +3049,7 @@ export function ResumeBuilder({
                 </div>
                 <div
                   className="grid gap-3"
-                  hidden={collapsedEntryIds.has(`work:${item.id}`)}
+                  hidden={isCollapsed(entryCollapseId("work", item.id))}
                 >
                   <div className="grid gap-3 sm:grid-cols-2">
                     <Field
@@ -3137,6 +3163,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("education"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("education"))
+            }
             action={
               <Button
                 type="button"
@@ -3176,6 +3206,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("education", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("education", item.id))
+                }
                 onToggle={() =>
                   updateEducation(item.id, (education) => ({
                     ...education,
@@ -3257,6 +3291,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("publications"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("publications"))
+            }
             action={
               <Button
                 type="button"
@@ -3298,6 +3336,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("publications", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("publications", item.id))
+                }
                 onToggle={() =>
                   updatePublication(item.id, (publication) => ({
                     ...publication,
@@ -3402,6 +3444,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("certifications"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("certifications"))
+            }
             action={
               <Button
                 type="button"
@@ -3443,6 +3489,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("certifications", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("certifications", item.id))
+                }
                 onToggle={() =>
                   updateCertification(item.id, (certification) => ({
                     ...certification,
@@ -3551,6 +3601,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("achievements"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("achievements"))
+            }
             action={
               <Button
                 type="button"
@@ -3587,6 +3641,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("achievements", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("achievements", item.id))
+                }
                 onToggle={() =>
                   updateAchievement(item.id, (achievement) => ({
                     ...achievement,
@@ -3638,6 +3696,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("activities"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("activities"))
+            }
             action={
               <Button
                 type="button"
@@ -3705,9 +3767,11 @@ export function ResumeBuilder({
                       aria-hidden="true"
                     />
                     <CollapseButton
-                      collapsed={collapsedEntryIds.has(`activity:${item.id}`)}
+                      collapsed={isCollapsed(entryCollapseId("activity", item.id))}
                       label={`${item.role || "activity"} entry`}
-                      onClick={() => toggleEntryCollapsed(`activity:${item.id}`)}
+                      onClick={() =>
+                        toggleCollapsed(entryCollapseId("activity", item.id))
+                      }
                     />
                     <Toggle
                       checked={item.included}
@@ -3740,7 +3804,7 @@ export function ResumeBuilder({
                 </div>
                 <div
                   className="grid gap-3"
-                  hidden={collapsedEntryIds.has(`activity:${item.id}`)}
+                  hidden={isCollapsed(entryCollapseId("activity", item.id))}
                 >
                   <div className="grid gap-3 sm:grid-cols-2">
                     <Field
@@ -3858,6 +3922,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("skills"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("skills"))
+            }
             action={
               <Button
                 type="button"
@@ -3894,6 +3962,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("skills", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("skills", item.id))
+                }
                 onToggle={() =>
                   updateSkill(item.id, (skill) => ({
                     ...skill,
@@ -3939,6 +4011,10 @@ export function ResumeBuilder({
             onDrop={handleDrop}
             dragTarget={dragTarget}
             dropIndicator={dropIndicator}
+            collapsed={isCollapsed(sectionCollapseId("references"))}
+            onToggleCollapsed={() =>
+              toggleCollapsed(sectionCollapseId("references"))
+            }
             action={
               <Button
                 type="button"
@@ -3978,6 +4054,10 @@ export function ResumeBuilder({
                 onDragOverTarget={handleDragOverTarget}
                 onDrop={handleDrop}
                 dropIndicator={dropIndicator}
+                collapsed={isCollapsed(entryCollapseId("references", item.id))}
+                onToggleCollapsed={() =>
+                  toggleCollapsed(entryCollapseId("references", item.id))
+                }
                 onToggle={() =>
                   updateReference(item.id, (reference) => ({
                     ...reference,
@@ -4066,6 +4146,10 @@ export function ResumeBuilder({
               onDrop={handleDrop}
               dragTarget={dragTarget}
               dropIndicator={dropIndicator}
+              collapsed={isCollapsed(sectionCollapseId(section.id))}
+              onToggleCollapsed={() =>
+                toggleCollapsed(sectionCollapseId(section.id))
+              }
               action={
                 <div className="flex items-center gap-1">
                   <Button
@@ -4127,9 +4211,11 @@ export function ResumeBuilder({
                         aria-hidden="true"
                       />
                       <CollapseButton
-                        collapsed={collapsedEntryIds.has(`custom:${item.id}`)}
+                        collapsed={isCollapsed(entryCollapseId("custom", item.id))}
                         label={`${item.heading || "custom"} entry`}
-                        onClick={() => toggleEntryCollapsed(`custom:${item.id}`)}
+                        onClick={() =>
+                          toggleCollapsed(entryCollapseId("custom", item.id))
+                        }
                       />
                       <Toggle
                         checked={item.included}
@@ -4166,7 +4252,7 @@ export function ResumeBuilder({
                   </div>
                   <div
                     className="grid gap-3"
-                    hidden={collapsedEntryIds.has(`custom:${item.id}`)}
+                    hidden={isCollapsed(entryCollapseId("custom", item.id))}
                   >
                     <div className="grid gap-3 sm:grid-cols-2">
                       <Field
@@ -5033,6 +5119,8 @@ function GridRowEditor({
   onDragOverTarget,
   onDrop,
   dropIndicator,
+  collapsed,
+  onToggleCollapsed,
 }: {
   included: boolean;
   title: string;
@@ -5049,8 +5137,9 @@ function GridRowEditor({
   ) => void;
   onDrop: (group: string, id: string) => void;
   dropIndicator: DropIndicator | null;
+  collapsed: boolean;
+  onToggleCollapsed: () => void;
 }) {
-  const [collapsed, setCollapsed] = useState(false);
   const indicator =
     dropIndicator?.group === dragGroup && dropIndicator.id === dragId
       ? dropIndicator.position
@@ -5085,7 +5174,7 @@ function GridRowEditor({
           <CollapseButton
             collapsed={collapsed}
             label={`${title || "item"} entry`}
-            onClick={() => setCollapsed((current) => !current)}
+            onClick={onToggleCollapsed}
           />
           <Toggle
             checked={included}
