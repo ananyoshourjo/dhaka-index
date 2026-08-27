@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.6.3 - 2026-08-27
+
+- Remember profile section collapse state after refresh
+
 ## 1.6.2 - 2026-08-26
 
 - Repair retained future-deadline jobs even when the feed returns an unchanged snapshot.
