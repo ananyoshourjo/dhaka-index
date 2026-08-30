@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-29T08:22:38.792Z",
+  "generatedAt": "2026-08-30T06:13:21.463Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -37,13 +37,6 @@
       "deadline": "2026-09-15",
       "url": "https://apps.idlc.com/career/jobsDetails/1180",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Investment Analyst, IDLC Asset Management Limited",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-08-29",
-      "url": "https://apps.idlc.com/career/jobsDetails/1181",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Technical Analyst (Credit Risk Management – Consumer Division) IDLC Finance PLC.",
@@ -186,13 +179,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Management Trainee Officer (MTO)",
-      "company": "Snowtex Group/Snowtex Outerwear Ltd.",
-      "deadline": "2026-08-29",
-      "url": "https://bdrecruit.net/jobs-in-bangladesh/snowtex-group/career-bd/management-trainee-officer-mto/freshers/dhamrai/dhaka",
-      "functionTag": "other"
-    },
-    {
       "title": "Marketing Manager (Deputy Manager/Manager)",
       "company": "10 Minute School",
       "deadline": null,
@@ -284,13 +270,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Territory Sales In-Charge",
-      "company": "Beximco LPG",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/beximco-lpg/career/territory-sales-in-charge/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Executive/Senior Executive",
       "company": "Bikroy Marketplace Ltd.",
       "deadline": null,
@@ -354,6 +333,13 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Manager – HR (PMS)",
+      "company": "Fakir Fashion Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/fakir-fashion/career/manager-hr-pms/2026",
+      "functionTag": "human_resources"
+    },
+    {
       "title": "Merchandiser",
       "company": "FCI (BD) Ltd.",
       "deadline": null,
@@ -368,11 +354,18 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Senior Executive",
-      "company": "Global Brand PLC",
+      "title": "Executive – Business Development & Operations",
+      "company": "Foodi Express Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/global-brand-plc/career-bd/senior-executive/dhaka",
-      "functionTag": "other"
+      "url": "https://bdrecruit.net/jobs-in-bd/foodi/career/executive-business-development-operations/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Cooperative Finance Officer",
+      "company": "Good Neighbors Bangladesh (GNB)",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/good-neighbors-bangladesh/career/cooperative-finance-officer/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Executive (Pharmacovigilance), SMD",
@@ -410,10 +403,10 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Executive / Senior Executive",
-      "company": "Kansai Nerolac Paints (Bangladesh) Limited/Kansai Nerolac Paints BD Ltd.",
+      "title": "Territory Service Engineer",
+      "company": "Rancon Global Trucks Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/kansai-nerolac-paints-bd-ltd./career-bd/executive-senior-executive/thakurgaon/2026",
+      "url": "https://bdrecruit.net/jobs-in-bd/jac-motors-bangladesh-rancon-global-trucks-limited/career/territory-service-engineer/2026",
       "functionTag": "other"
     },
     {
@@ -436,13 +429,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/mutual-trust-bank-plc/banking-career/head-of-collection/2026",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Assistant Lead Engineer",
-      "company": "Nagad Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career/assistant-lead-engineer/2026",
-      "functionTag": "other"
     },
     {
       "title": "Manager – Brand Strategy & Communication",
@@ -487,11 +473,25 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "In-charge, Accounts Payable",
+      "company": "Remark HB Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/remark-hb-limited/career/in-charge-accounts-payable/2026",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Territory Sales Officer",
       "company": "Route to Market International Limited (RTM)",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/route-to-market-international-limited/careers/territory-sales-officer/2026",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Finance & Accounts Specialist",
+      "company": "Save the Children International",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/save-the-children/career/finance-accounts-specialist/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Head of Debt Capital Markets (DCM)",
@@ -520,13 +520,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/sml-bangladesh/career/executive-senior-executive/2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Executive / Sr. Executive",
-      "company": "Square Food & Beverage Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/square-food-beverage-ltd./career/executive-sr-executive/2026",
-      "functionTag": "other"
     },
     {
       "title": "HR Intern (Paid Internship)",
@@ -753,32 +746,32 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Product Lead - MyGP",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-30",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IjdxVnNTRVBMS1JkMTZ6T3VuTGJGcnc9PSIsInZhbHVlIjoiWDJWTnlkN3F3SENvVlU0Z25mMERRQT09IiwibWFjIjoiN2QwMGNlNTI1MmVmZmQ1YjUyNjEzZDczZGVhMTQwYjljZTU4NTBhMDYzYzBkOTE4NjZjYjQ2ZWI3NTdhNjFhMiJ9",
-      "functionTag": "product"
-    },
-    {
       "title": "Platform Excellence and QA Lead, S&D Platform",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-09-03",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IjhLQXFyUjdETkhzZ09la29GM3FaeWc9PSIsInZhbHVlIjoic09GMytFMzFjdDM3KzBlOTVwV2E1dz09IiwibWFjIjoiN2NkZDZjNDA0NDQ1MTYzZmE3YTM3YmQ3MGU5MzgwYjllNmM4YTE1NmRjYjFiMGY5MzdkNGNlNzQ0YzAwNDA0ZCJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IjkzRUFTMTM4aUJtVUQzazZqVUJVQWc9PSIsInZhbHVlIjoiaXFSRmNQSG05TDZGcEh2Q0lPc0kvZz09IiwibWFjIjoiYzhkNTI3MTQwMmNkMTc0ZTQ2MmJhYTg3YTAzMGFjNTQ1YjkyNWRkNTMyNjJiYjAxODIwNjczYWI3MDVlZGE3OCJ9",
+      "functionTag": "product"
+    },
+    {
+      "title": "Contextual Campaign Quality Governance",
+      "company": "Grameenphone Ltd.",
+      "deadline": "2026-09-02",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IkJmRkhzSjJSN1hwTGFsMnhFM0Z5aHc9PSIsInZhbHVlIjoiYWpvdWJldWRzRHFtRHRGaEhySFhJdz09IiwibWFjIjoiZTA4ODJjZDAxZmIxNjQ5NTlkMDE4Y2JmOTM0N2Y2NTk0YWNhZTRkYzhmMmEyMmQwMzE1YTk1ODk0YjkzNmVhMiJ9",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Product Lead - MyGP",
+      "company": "Grameenphone Ltd.",
+      "deadline": "2026-08-30",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IkRLNTJlc1F5ZXczWi9QV25iWnVhVXc9PSIsInZhbHVlIjoibW1NM0lpWGhCbFRRRGhSc0Z6MFptUT09IiwibWFjIjoiMzM2MmU3MGNjNWM0YWVlZjBlNWU4YmUzNDRiMDQ2Y2UyYWE4NDFhYTZhM2M2NTk1ZDZlNDI2YjNiOGMwNTY4MCJ9",
       "functionTag": "product"
     },
     {
       "title": "Coordinator - CCAO Office",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-08-30",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6Im5jekRINGZnUkRycWVWeXVhampaemc9PSIsInZhbHVlIjoiKzE2TnZoSHRIM3c3NWdKdkdHZExnUT09IiwibWFjIjoiYTk3NGY4NTJiZmY1ZDZhOWMwYmE5YmQ1ZDBlNzQxNjI1Yzg3YjlhZDFmYWEwZjc2MjA2YzI4OGE2N2U3ZThmYSJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IkpRVUt5Rk4xNlh6U3RYWTlyaGJnU0E9PSIsInZhbHVlIjoielRxRmsyc0p0WEw3cElWbC9wdk1CUT09IiwibWFjIjoiODBkNWMyMjNiMjMyNmM3ZjIwZjZiZDM5MWIxM2FlZDgwYTVkMWIxZTQyMzJiZjY1MWUxMDgxZDQ2ZjY3NmFmMyJ9",
       "functionTag": "operations"
-    },
-    {
-      "title": "Contextual Campaign Quality Governance",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-09-02",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6InJRMDJIblZ2WXlUS0pUU09NZjJnTUE9PSIsInZhbHVlIjoiRldOcjIrb1NCS0d1S2VNNFBqQU11dz09IiwibWFjIjoiOTNhZjlhYWRmMWUxYzY1Mjg0MGQ3MTk5MzViMjI1MGM0ZDZjYjMyNWY3ZGNjM2NmNDVmNzc3NDZlMzY5ZjcxMiJ9",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Facilities Executive",
@@ -853,7 +846,7 @@
     {
       "title": "শাখা হিসাব কর্মকর্তা, অর্থ ও হিসাব বিভাগ",
       "company": "BRAC",
-      "deadline": "2026-08-29",
+      "deadline": "2026-08-30",
       "url": "https://careers.brac.net/jobs/%E0%A6%B6%E0%A6%96-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%95%E0%A6%B0%E0%A6%AE%E0%A6%95%E0%A6%B0%E0%A6%A4-%E0%A6%85%E0%A6%B0%E0%A6%A5-%E0%A6%93-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%AC%E0%A6%AD%E0%A6%97-2952?bulk=false",
       "functionTag": "finance_accounting"
     },
@@ -884,13 +877,6 @@
       "deadline": "2026-09-05",
       "url": "https://careers.brac.net/jobs/divisional-manager-medhabikash-and-cultural-sports-olympiad-brac-education-programme-2908?bulk=false",
       "functionTag": "program_project_management"
-    },
-    {
-      "title": "Manager, DevOps Specialist; Microfinance Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-29",
-      "url": "https://careers.brac.net/jobs/manager-devops-specialist-microfinance-programme-2953?bulk=false",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Manager, Field Execution; Microfinance Programme",
@@ -975,13 +961,6 @@
       "deadline": "2026-09-02",
       "url": "https://careers.brac.net/jobs/sales-officer-modern-trade-brac-dairy-and-food-project-2959?bulk=false",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Manager, Qualitative Research; Microfinance Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-29",
-      "url": "https://careers.brac.net/jobs/senior-manager-qualitative-research-microfinance-programme-2956?bulk=false",
-      "functionTag": "research_consulting"
     },
     {
       "title": "Senior Specialist, Sustainability and Carbon Management; Climate and Environmental Innovation Programme",
@@ -1502,6 +1481,13 @@
       "functionTag": "legal_compliance"
     },
     {
+      "title": "Business Development Officer, SME Client Acquisition",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-06",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-SME-Client-Acquisition/53030-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Director & Head of Trade Business Risk Management",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-08",
@@ -1726,13 +1712,6 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Robi GEM Intern - Flagship Internship Program (Fall 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-08-29",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6930",
-      "functionTag": "other"
-    },
-    {
       "title": "Consultant, QA Automation, Market Operation (Ref. August 24, 2026)",
       "company": "Robi Axiata Limited",
       "deadline": "2026-08-31",
@@ -1829,13 +1808,6 @@
       "deadline": "2026-09-22",
       "url": "https://thecvguy.net/bank-jobs/start-your-banking-ab-bank-plc-abso-bso",
       "functionTag": "operations"
-    },
-    {
-      "title": "Impact 90 Internship Program Fall 2026",
-      "company": "Marico Bangladesh Limited",
-      "deadline": "2026-08-29",
-      "url": "https://thecvguy.net/internships/marico-bangladesh-impact-90-internship-26",
-      "functionTag": "other"
     },
     {
       "title": "RANCON Future Leadership Program 2026",
