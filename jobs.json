@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-30T06:13:21.463Z",
+  "generatedAt": "2026-08-31T07:17:50.999Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -144,13 +144,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Paid Internship",
-      "company": "ACI PLC",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bangladesh/aci-plc/career-bd/paid-internship/2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Asst. / Brand Manager",
       "company": "ACI PLC",
       "deadline": null,
@@ -186,13 +179,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Senior Executive / Assistant Manager",
-      "company": "Abdul Monem Limited (AML) | Abdul Monem Ltd.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/abdul-monem-ltd./career-bd/coca-cola/senior-executive-assistant-manager/chittagong/2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Senior Executive",
       "company": "ACI Motors Limited",
       "deadline": null,
@@ -221,18 +207,11 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "Executive / Senior Executive",
+      "title": "Intern – Supply Chain Management",
       "company": "Arogga Ltd./Arogga Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/executive-senior-executive/2026",
-      "functionTag": "other"
-    },
-    {
-      "title": "Management Trainee Officer (MTO)",
-      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career-bd/management-trainee-officer-mto/2026",
-      "functionTag": "other"
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/intern-supply-chain-management/2026",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Da’ee",
@@ -242,11 +221,11 @@
       "functionTag": "education"
     },
     {
-      "title": "Fiqh Content Writer (Islamic Scholar)",
-      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
+      "title": "Assistant Project Engineer",
+      "company": "BANGLAMARK",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career/fiqh-content-writer-islamic-scholar/2026",
-      "functionTag": "education"
+      "url": "https://bdrecruit.net/jobs-in-bd/banglamark/career/assistant-project-engineer/2026",
+      "functionTag": "operations"
     },
     {
       "title": "Executive, Human Resources",
@@ -277,20 +256,6 @@
       "functionTag": "other"
     },
     {
-      "title": "Sales Agent (Commission-Based)",
-      "company": "Bikroy Marketplace Ltd.",
-      "deadline": "2026-08-30",
-      "url": "https://bdrecruit.net/jobs-in-bd/bikroy-marketplace-ltd./sales-agent-commission-based/dhaka",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Software Engineer",
-      "company": "Aarong (BRAC Enterprises)",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/brac-aarong/career/software-engineer/2026",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Senior Analyst – Research",
       "company": "BRAC EPL Investments Limited",
       "deadline": null,
@@ -303,6 +268,20 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/brac-it/career-bd/lead-system-engineer/2026",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Customer Support Executive – Night Shift",
+      "company": "BRAC IT / BRAC IT Services Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/brac-it/career/customer-support-executive-night-shift/2026",
+      "functionTag": "customer_service"
+    },
+    {
+      "title": "Senior Executive / Assistant Manager – Regulatory",
+      "company": "BRACNet Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/bracnet-limited/career/senior-executive-assistant-manager/2026",
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Business Analyst – AI Solutions",
@@ -324,6 +303,20 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/buro-bangladesh/career/manager-digital-financial-service/2026",
       "functionTag": "product"
+    },
+    {
+      "title": "Associate/Executive – Growth & Partnerships",
+      "company": "CarryBee Express Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/carrybee-express-ltd./career/associate-executive-growth-partnerships/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Officer- Temporary",
+      "company": "City Bank PLC/City Bank PLC.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/city-bank-plc/banking-career/officer-temporary/2026",
+      "functionTag": "other"
     },
     {
       "title": "Training Executive",
@@ -410,6 +403,13 @@
       "functionTag": "other"
     },
     {
+      "title": "Executive / Senior Executive",
+      "company": "Kansai Nerolac Paints (Bangladesh) Limited/Kansai Nerolac Paints BD Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/kansai-nerolac-paints-bd-ltd./career-bd/executive-senior-executive/thakurgaon/2026",
+      "functionTag": "other"
+    },
+    {
       "title": "Branch Manager",
       "company": "LankaBangla Finance PLC",
       "deadline": null,
@@ -424,18 +424,18 @@
       "functionTag": "legal_compliance"
     },
     {
+      "title": "Intern – HR & Administration",
+      "company": "Meena Bazar",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/meena-bazar/career/intern-hr-administration/2026",
+      "functionTag": "human_resources"
+    },
+    {
       "title": "Head of Collection",
       "company": "Mutual Trust Bank PLC",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/mutual-trust-bank-plc/banking-career/head-of-collection/2026",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Manager – Brand Strategy & Communication",
-      "company": "Nagad Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career/manager-brand-strategy-communication/2026",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Sr. Customer Service Agent / Customer Service Agent",
@@ -512,13 +512,6 @@
       "company": "Singapore Airlines (GSA Saimon Global Limited)",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/singapore-airlines-saimon-global-ltd./careers/inside-sales-admin-executive/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Executive / Senior Executive",
-      "company": "SML Group/SML Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/sml-bangladesh/career/executive-senior-executive/2026",
       "functionTag": "sales_business_development"
     },
     {
@@ -749,29 +742,22 @@
       "title": "Platform Excellence and QA Lead, S&D Platform",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-09-03",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IjkzRUFTMTM4aUJtVUQzazZqVUJVQWc9PSIsInZhbHVlIjoiaXFSRmNQSG05TDZGcEh2Q0lPc0kvZz09IiwibWFjIjoiYzhkNTI3MTQwMmNkMTc0ZTQ2MmJhYTg3YTAzMGFjNTQ1YjkyNWRkNTMyNjJiYjAxODIwNjczYWI3MDVlZGE3OCJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IjFoelFMdmlGK1U4bWpySTJ4V0k4VXc9PSIsInZhbHVlIjoiYjFrZDFJWXBPcDV2RUlFM3kzRTZJQT09IiwibWFjIjoiYTJiYjQ2NmYyOGM3YTljYWFiMmIwMzg1NWY1OWE0MjhhZmI2MWM1NzcxYTFjNTViOTQ3ZmUwZTAxNDgxZDY1MiJ9",
       "functionTag": "product"
     },
     {
       "title": "Contextual Campaign Quality Governance",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-09-02",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IkJmRkhzSjJSN1hwTGFsMnhFM0Z5aHc9PSIsInZhbHVlIjoiYWpvdWJldWRzRHFtRHRGaEhySFhJdz09IiwibWFjIjoiZTA4ODJjZDAxZmIxNjQ5NTlkMDE4Y2JmOTM0N2Y2NTk0YWNhZTRkYzhmMmEyMmQwMzE1YTk1ODk0YjkzNmVhMiJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6IlZzd1gzT3VTaXVTNCtkcitKZEJVYmc9PSIsInZhbHVlIjoia0ZRMkR0Tml3Sy9IRXpvK21RNFdyZz09IiwibWFjIjoiZmJlZjcxOWEzM2M1ZDhmNjc0ZjQ1YjRiYTBjODVhMjYxNmMxOTg4MTdiM2I0Y2Q0MGU4YTEwYTNjMTVhYjAxZiJ9",
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Product Lead - MyGP",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-30",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IkRLNTJlc1F5ZXczWi9QV25iWnVhVXc9PSIsInZhbHVlIjoibW1NM0lpWGhCbFRRRGhSc0Z6MFptUT09IiwibWFjIjoiMzM2MmU3MGNjNWM0YWVlZjBlNWU4YmUzNDRiMDQ2Y2UyYWE4NDFhYTZhM2M2NTk1ZDZlNDI2YjNiOGMwNTY4MCJ9",
-      "functionTag": "product"
-    },
-    {
-      "title": "Coordinator - CCAO Office",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-08-30",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IkpRVUt5Rk4xNlh6U3RYWTlyaGJnU0E9PSIsInZhbHVlIjoielRxRmsyc0p0WEw3cElWbC9wdk1CUT09IiwibWFjIjoiODBkNWMyMjNiMjMyNmM3ZjIwZjZiZDM5MWIxM2FlZDgwYTVkMWIxZTQyMzJiZjY1MWUxMDgxZDQ2ZjY3NmFmMyJ9",
-      "functionTag": "operations"
+      "title": "Expression of Interest: Team Leader",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-team-leader/1045/34502635712",
+      "functionTag": "general_management"
     },
     {
       "title": "Facilities Executive",
@@ -800,13 +786,6 @@
       "deadline": null,
       "url": "https://careers.bat.com/en/job/bangladesh/project-officer/1045/43373429440",
       "functionTag": "program_project_management"
-    },
-    {
-      "title": "R&RS Executive- Savar",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/bangladesh/r-and-rs-executive-savar/1045/43357367872",
-      "functionTag": "operations"
     },
     {
       "title": "Head of Talent, Culture & Inclusion - Bangladesh",
@@ -844,13 +823,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "শাখা হিসাব কর্মকর্তা, অর্থ ও হিসাব বিভাগ",
-      "company": "BRAC",
-      "deadline": "2026-08-30",
-      "url": "https://careers.brac.net/jobs/%E0%A6%B6%E0%A6%96-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%95%E0%A6%B0%E0%A6%AE%E0%A6%95%E0%A6%B0%E0%A6%A4-%E0%A6%85%E0%A6%B0%E0%A6%A5-%E0%A6%93-%E0%A6%B9%E0%A6%B8%E0%A6%AC-%E0%A6%AC%E0%A6%AD%E0%A6%97-2952?bulk=false",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "Agriculturist, JO-CREWSNet; Climate and Environmental Innovation Programme",
       "company": "BRAC",
       "deadline": "2026-10-04",
@@ -879,18 +851,11 @@
       "functionTag": "program_project_management"
     },
     {
-      "title": "Manager, Field Execution; Microfinance Programme",
+      "title": "Manager, Field Operations, BRAC Education Programme",
       "company": "BRAC",
-      "deadline": "2026-08-30",
-      "url": "https://careers.brac.net/jobs/manager-field-execution-microfinance-programme-2957?bulk=false",
+      "deadline": "2026-09-09",
+      "url": "https://careers.brac.net/jobs/manager-field-operations-brac-education-programme-2974?bulk=false",
       "functionTag": "operations"
-    },
-    {
-      "title": "Manager, Knowledge Management & Partnership; Microfinance Programme",
-      "company": "BRAC",
-      "deadline": "2026-08-30",
-      "url": "https://careers.brac.net/jobs/manager-knowledge-management-partnership-microfinance-programme-2958?bulk=false",
-      "functionTag": "program_project_management"
     },
     {
       "title": "Officer, Accounts (BRAC Dairy and Food Project)",
@@ -1010,6 +975,13 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Senior Executive, Accounts Payable",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-executive-accounts-payable-in-dhaka-bangladesh-jid-3129",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Senior Executive, Finance (R2R)",
@@ -1495,6 +1467,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Senior Credit Officer, Bangladesh",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-07",
+      "url": "https://jobs.standardchartered.com/job/Senior-Credit-Officer%2C-Bangladesh/61444-en_GB",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Senior Manager, WRB Data & Analytics",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-03",
@@ -1621,13 +1600,6 @@
       "functionTag": "research_consulting"
     },
     {
-      "title": "Pre-sales & Business Analyst",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/business-analyst",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Executive, Business Development",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1712,6 +1684,20 @@
       "functionTag": "design_creative"
     },
     {
+      "title": "Manager or Senior Manager, SME Business, Operation, Axentec PLC ‘a fully owned subsidiary of Robi Axiata PLC’. (Ref. February 24, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-31",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6777",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Sales Manager/ Senior Sales Manager, Market Operations (Ref. 08 June2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-08-31",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6862",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Consultant, QA Automation, Market Operation (Ref. August 24, 2026)",
       "company": "Robi Axiata Limited",
       "deadline": "2026-08-31",
@@ -1724,6 +1710,13 @@
       "deadline": "2026-08-31",
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6934",
       "functionTag": "human_resources"
+    },
+    {
+      "title": "Senior Associate or Associate Manager, Energy & Partner Management (Ref. August 30, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-09-03",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6936",
+      "functionTag": "operations"
     },
     {
       "title": "ERP Support (Engineer/Specialist/Lead)",
@@ -1831,11 +1824,11 @@
       "functionTag": "other"
     },
     {
-      "title": "Brand Executive",
-      "company": "Programming Hero",
-      "deadline": "2026-08-30",
-      "url": "https://thecvguy.net/jobs-in-bd/programming-hero-is-hiring-for-multiple-26",
-      "functionTag": "marketing_communications"
+      "title": "R&RS Executive",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-09-03",
+      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-job-circular-2026-mnc",
+      "functionTag": "other"
     },
     {
       "title": "Litigation & Corporate Counsel",
@@ -1983,6 +1976,20 @@
       "deadline": "2026-08-31",
       "url": "https://www.adb.org/careers/260785",
       "functionTag": "program_project_management"
+    },
+    {
+      "title": "Executive Officer, Claims",
+      "company": "MetLife Bangladesh",
+      "deadline": null,
+      "url": "https://www.metlifecareers.com/en_US/ml/JobDetail/Executive-Officer-Claims/20042",
+      "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Head of IT Infrastructure",
+      "company": "MetLife Bangladesh",
+      "deadline": "2026-09-10",
+      "url": "https://www.metlifecareers.com/en_US/ml/JobDetail/Head-of-IT-Infrastructure/14463",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Senior Software Engineer (Full-Stack)",
