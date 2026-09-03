@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-02T10:17:59.395Z",
+  "generatedAt": "2026-09-03T07:20:29.752Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -144,6 +144,13 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "Regional / Zonal Sales Manager",
+      "company": "ACI Motors Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/regional-zonal-sales-manager/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Senior Executive",
       "company": "ACI Motors Limited",
       "deadline": null,
@@ -155,13 +162,6 @@
       "company": "ACI PLC",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career/executive-senior-executive/2026",
-      "functionTag": "other"
-    },
-    {
-      "title": "Agora Limited is Hiring for Multiple Positions",
-      "company": "Agora Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/agora-limited-is-hiring-for-multiple-positions/career/2026",
       "functionTag": "other"
     },
     {
@@ -184,13 +184,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/intern-supply-chain-management/2026",
       "functionTag": "supply_chain_procurement"
-    },
-    {
-      "title": "Da’ee",
-      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-foundation/career/daee/2026",
-      "functionTag": "education"
     },
     {
       "title": "Assistant Project Engineer",
@@ -324,6 +317,13 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/intellier-ltd.-a-concern-of-team-group/career/intern-human-resource-management/2026",
       "functionTag": "human_resources"
+    },
+    {
+      "title": "Sales Excellence Program",
+      "company": "IPDC Finance PLC",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/ipdc-finance-plc/career/sales-excellence-program/2026",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Territory Service Engineer",
@@ -658,15 +658,8 @@
       "title": "Platform Excellence and QA Lead, S&D Platform",
       "company": "Grameenphone Ltd.",
       "deadline": "2026-09-03",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6Ijd2aTYxMndBQjhXSmsvWjJQY0hXQ2c9PSIsInZhbHVlIjoiZ2xNNURFU3BrRnptbXAvbWRQeDJDZz09IiwibWFjIjoiMjZjNGM4MWIzMGFjYWY1YzA4MDdiNzc4NTBmNDVkM2ZmY2Q5M2E2MGQ3YjMzZDgzYzc4MjdiODlmYWMyMDk4YSJ9",
+      "url": "https://career.grameenphone.com/job/eyJpdiI6InFSN3R6UkZidXRJNjFyWHFGcW0vOEE9PSIsInZhbHVlIjoiYitjYjA0RnVqQ085RUc1SzFtdDV1UT09IiwibWFjIjoiNzNkZGI3ZjhmMzIwNzRjZWJmYmUwMzQ2ZGUwMDIwNTE4MWU1NWE2Y2I5ZjM1OTkwODU4MDllYzRkNjg0ZjljOSJ9",
       "functionTag": "product"
-    },
-    {
-      "title": "Contextual Campaign Quality Governance",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-09-02",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6ImcwOXNYNnhvWkJJS055aG40aC9mREE9PSIsInZhbHVlIjoiVkV1MnBSMnovUTNwUUJ4WE1lUFg2Zz09IiwibWFjIjoiMTFkZmE3Yzg3ZWE4N2U1MWQ0YzAzZDI2ZmU1NmM1MDU5YTc3ZjQxZWI1MGNjNjNmYmFhMDRlYWMzNWU1NjZhYSJ9",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Facilities Executive",
@@ -739,6 +732,20 @@
       "functionTag": "operations"
     },
     {
+      "title": "পাবলিক এরিয়া এ্যাটেনডেন্ট, ব্র্যাক লার্নিং সেন্টার",
+      "company": "BRAC",
+      "deadline": "2026-09-12",
+      "url": "https://careers.brac.net/jobs/%E0%A6%AA%E0%A6%AC%E0%A6%B2%E0%A6%95-%E0%A6%8F%E0%A6%B0%E0%A6%AF-%E0%A6%8F%E0%A6%AF%E0%A6%9F%E0%A6%A8%E0%A6%A1%E0%A6%A8%E0%A6%9F-%E0%A6%AC%E0%A6%B0%E0%A6%AF%E0%A6%95-%E0%A6%B2%E0%A6%B0%E0%A6%A8-%E0%A6%B8%E0%A6%A8%E0%A6%9F%E0%A6%B0-2999?bulk=false",
+      "functionTag": "operations"
+    },
+    {
+      "title": "রুম সার্ভিস এ্যাসিসটেন্ট, ব্র্যাক লার্নিং সেন্টার",
+      "company": "BRAC",
+      "deadline": "2026-09-12",
+      "url": "https://careers.brac.net/jobs/%E0%A6%B0%E0%A6%AE-%E0%A6%B8%E0%A6%B0%E0%A6%AD%E0%A6%B8-%E0%A6%8F%E0%A6%AF%E0%A6%B8%E0%A6%B8%E0%A6%9F%E0%A6%A8%E0%A6%9F-%E0%A6%AC%E0%A6%B0%E0%A6%AF%E0%A6%95-%E0%A6%B2%E0%A6%B0%E0%A6%A8-%E0%A6%B8%E0%A6%A8%E0%A6%9F%E0%A6%B0-3000?bulk=false",
+      "functionTag": "operations"
+    },
+    {
       "title": "Academic Coordinator, BRAC Education Programme",
       "company": "BRAC",
       "deadline": "2026-09-06",
@@ -751,13 +758,6 @@
       "deadline": "2026-10-04",
       "url": "https://careers.brac.net/jobs/agriculturist-jo-crewsnet-climate-and-environmental-innovation-programme-2970?bulk=false",
       "functionTag": "research_consulting"
-    },
-    {
-      "title": "Assistant Officer, Distribution (BRAC Seed and Agro Enterprise)",
-      "company": "BRAC",
-      "deadline": "2026-09-02",
-      "url": "https://careers.brac.net/jobs/assistant-officer-distribution-brac-seed-and-agro-enterprise-2962?bulk=false",
-      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Deputy Manager, Tax, Finance & Accounts",
@@ -795,13 +795,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Officer, Production (BRAC Fisheries Enterprise)",
-      "company": "BRAC",
-      "deadline": "2026-09-02",
-      "url": "https://careers.brac.net/jobs/officer-production-brac-fisheries-enterprise-2961?bulk=false",
-      "functionTag": "operations"
-    },
-    {
       "title": "Officer, Purchase (BRAC Seed and Agro Enterprise)",
       "company": "BRAC",
       "deadline": "2026-09-12",
@@ -809,31 +802,10 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Programme Organiser, Integrated Climate Change",
-      "company": "BRAC",
-      "deadline": "2026-09-02",
-      "url": "https://careers.brac.net/jobs/programme-organiser-integrated-climate-change-2965?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
-      "title": "Programme Organiser, Integrated Development Programme",
-      "company": "BRAC",
-      "deadline": "2026-09-02",
-      "url": "https://careers.brac.net/jobs/programme-organiser-integrated-development-programme-2964?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Sales Associate (Inside Dhaka)",
       "company": "BRAC",
       "deadline": "2026-09-05",
       "url": "https://careers.brac.net/jobs/sales-associate-inside-dhaka-2833?bulk=true",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Sales Officer, Modern Trade (BRAC Dairy and Food Project)",
-      "company": "BRAC",
-      "deadline": "2026-09-02",
-      "url": "https://careers.brac.net/jobs/sales-officer-modern-trade-brac-dairy-and-food-project-2959?bulk=false",
       "functionTag": "sales_business_development"
     },
     {
@@ -886,13 +858,6 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Lead, Telesales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Manager, Sales",
       "company": "Foodpanda",
       "deadline": null,
@@ -914,18 +879,18 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Senior Executive, Finance (R2R)",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "Shift Lead, Partner Service",
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/shift-lead-partner-service-in-dhaka-bangladesh-jid-3122",
       "functionTag": "operations"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Specialist, Field Sales",
@@ -947,6 +912,13 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3110",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Warehouse Supervisor",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/warehouse-supervisor-in-dhaka-bangladesh-jid-3142",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Associate Marketing Manager",
@@ -984,6 +956,13 @@
       "functionTag": "product"
     },
     {
+      "title": "Project Manager",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Project-Manager-1212-BD/1364927455",
+      "functionTag": "program_project_management"
+    },
+    {
       "title": "Senior Customer Success Manager",
       "company": "Optimizely",
       "deadline": null,
@@ -1017,13 +996,6 @@
       "deadline": "2026-09-30",
       "url": "https://enosisbd.pinpointhq.com/en/postings/3906b6a8-5e41-4c01-98c1-8657cc69ad50",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Project Manager",
-      "company": "UNDP Bangladesh",
-      "deadline": "2026-09-02",
-      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36357",
-      "functionTag": "program_project_management"
     },
     {
       "title": "UN Women: National Consultant-Disability Inclusion Officer, Dhaka Bangladesh",
@@ -1313,13 +1285,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Senior Content Specialist",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/df9f8a50-44df-4787-b2a6-06f1dc7c444a",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Senior Marketing Operations Manager",
       "company": "Field Nation",
       "deadline": null,
@@ -1418,18 +1383,18 @@
       "functionTag": "design_creative"
     },
     {
+      "title": "Head of Client Services and Client Connectivity, Global Payment Solutions, CIB (SVP)",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774610899005",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Manager, Structured Finance",
       "company": "HSBC Bangladesh",
       "deadline": null,
       "url": "https://portal.careers.hsbc.com/careers/job/563774611967603",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Senior Relationship Manager, Global Corporates and International Mid-Markets (SVP)",
-      "company": "HSBC Bangladesh",
-      "deadline": null,
-      "url": "https://portal.careers.hsbc.com/careers/job/563774612135646",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Client Relationship Support Associate, GCIMM, Chittagong (AVP)",
@@ -1579,6 +1544,13 @@
       "functionTag": "customer_service"
     },
     {
+      "title": "Junior Executive, Program Operations",
+      "company": "Shikho",
+      "deadline": null,
+      "url": "https://shikho.freshteam.com/jobs/Jnq4qhOLWXJ9/junior-executive-program-operations",
+      "functionTag": "operations"
+    },
+    {
       "title": "Executive/Sr. Executive, Visual Design",
       "company": "Shikho",
       "deadline": null,
@@ -1598,13 +1570,6 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/pV54kjEWqJ_z/android-developer-sr-software-engineer",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "COMPASS Fall 2026 | Internship Program",
-      "company": "BRAC Bank PLC",
-      "deadline": "2026-09-02",
-      "url": "https://thecvguy.net/bank-jobs/brac-bank-internship-program-2026-compass",
-      "functionTag": "other"
     },
     {
       "title": "Manager, AML, Payment Systems & Application Maintenance",
@@ -1649,6 +1614,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Trainee Officer, Cards Sales",
+      "company": "Eastern Bank PLC",
+      "deadline": "2026-09-13",
+      "url": "https://thecvguy.net/bank-jobs/eastern-bank-plc-ebl-career-trainee-officer",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Associate Business Support Officer / Business Support Officer",
       "company": "AB Bank PLC",
       "deadline": "2026-09-22",
@@ -1677,11 +1649,25 @@
       "functionTag": "other"
     },
     {
+      "title": "National Sales Manager (Lift Sales)",
+      "company": "Walton Hi-Tech Industries PLC",
+      "deadline": "2026-09-11",
+      "url": "https://thecvguy.net/jobs-in-bd/walton-hi-tech-industries-plc-is-hiring-26",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "R&RS Executive",
       "company": "British American Tobacco Bangladesh",
       "deadline": "2026-09-03",
       "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-job-circular-2026-mnc",
       "functionTag": "other"
+    },
+    {
+      "title": "Assistant Leaf Officer",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": "2026-09-30",
+      "url": "https://thecvguy.net/mnc-jobs/bat-bangladesh-job-circular-2026-mnc-career",
+      "functionTag": "operations"
     },
     {
       "title": "Litigation & Corporate Counsel",
@@ -1752,6 +1738,13 @@
       "deadline": "2026-09-05",
       "url": "https://thecvguy.net/mnc-jobs/nestle-bangladesh-hiring-territory-officer",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Management Trainee Officer (MTO), Procurement",
+      "company": "New Zealand Dairy Products Bangladesh Ltd",
+      "deadline": "2026-09-11",
+      "url": "https://thecvguy.net/mnc-jobs/new-zealand-dairy-products-bd-limited-hiring-2",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Electronic Technician",
