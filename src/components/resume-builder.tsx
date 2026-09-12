@@ -58,7 +58,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { createPhotoThumbnail } from "@/lib/photo-client";
-import { captureProductEvent } from "@/lib/product-analytics";
 import {
   hasResumeContent,
   normalizeResumeCollapsedSectionIds,
@@ -1557,8 +1556,6 @@ export function ResumeBuilder({
   const [resumePageCount, setResumePageCount] = useState(1);
   const [isPanning, setIsPanning] = useState(false);
   const didMount = useRef(false);
-  const didCaptureEditingStartedRef = useRef(false);
-  const didCaptureSaveCompletedRef = useRef(false);
   const dirtyRef = useRef(false);
   const lastQueuedRevisionRef = useRef(0);
   const latestSavePromiseRef = useRef<Promise<boolean> | null>(null);
@@ -1601,11 +1598,6 @@ export function ResumeBuilder({
             const result = await saveResumeAction(snapshot);
 
             if (result.ok) {
-              if (!didCaptureSaveCompletedRef.current) {
-                didCaptureSaveCompletedRef.current = true;
-                captureProductEvent("resume save completed", {});
-              }
-
               if (revision === revisionRef.current) {
                 dirtyRef.current = false;
                 window.localStorage.removeItem(EMERGENCY_DRAFT_KEY);
@@ -1630,7 +1622,6 @@ export function ResumeBuilder({
         if (revision === revisionRef.current) {
           dirtyRef.current = true;
           setSaveState("failed");
-          captureProductEvent("resume save failed", {});
         }
 
         return false;
@@ -1800,7 +1791,6 @@ export function ResumeBuilder({
         ),
       });
       setSaveState("unsaved");
-      captureProductEvent("resume draft restored", {});
     });
 
     return () => window.cancelAnimationFrame(frame);
@@ -1815,10 +1805,6 @@ export function ResumeBuilder({
     }
 
     revisionRef.current += 1;
-    if (!didCaptureEditingStartedRef.current) {
-      didCaptureEditingStartedRef.current = true;
-      captureProductEvent("resume editing started", {});
-    }
     const revision = revisionRef.current;
     dirtyRef.current = true;
     setSaveState("unsaved");
@@ -1984,20 +1970,12 @@ export function ResumeBuilder({
       }
 
       setPhotoUrl(result.photoUrl);
-      captureProductEvent("profile photo changed", {
-        action: "uploaded",
-        outcome: "succeeded",
-      });
       window.dispatchEvent(
         new CustomEvent("profile-photo-change", {
           detail: { photoUrl: result.photoUrl },
         }),
       );
     } catch (error) {
-      captureProductEvent("profile photo changed", {
-        action: "uploaded",
-        outcome: "failed",
-      });
       setPhotoError(
         error instanceof Error ? error.message : "The photo could not be saved.",
       );
@@ -2022,18 +2000,10 @@ export function ResumeBuilder({
       }
 
       setPhotoUrl("");
-      captureProductEvent("profile photo changed", {
-        action: "removed",
-        outcome: "succeeded",
-      });
       window.dispatchEvent(
         new CustomEvent("profile-photo-change", { detail: { photoUrl: "" } }),
       );
     } catch (error) {
-      captureProductEvent("profile photo changed", {
-        action: "removed",
-        outcome: "failed",
-      });
       setPhotoError(
         error instanceof Error
           ? error.message
@@ -2655,17 +2625,8 @@ export function ResumeBuilder({
       saveDownloadedBlob(pdf, filename);
 
       setDownloadState("saved");
-      captureProductEvent("resume pdf downloaded", {
-        cover_letter_included: resume.coverLetter.included,
-        document_type: document === "coverLetter" ? "cover_letter" : "resume",
-        resume_page_count: resumePageCount,
-        section_count: sectionOrder.length,
-      });
     } catch (error) {
       setDownloadState("unsaved");
-      captureProductEvent("resume pdf failed", {
-        document_type: document === "coverLetter" ? "cover_letter" : "resume",
-      });
       setDownloadError(
         error instanceof Error ? error.message : "PDF download failed.",
       );

@@ -1,7 +1,6 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Download } from "lucide-react";
 
 import { AccountDangerZone } from "@/components/account-danger-zone";
-import { AccountExportLink } from "@/components/account-export-link";
 import { ChangePasswordForm } from "@/components/change-password-form";
 import { JobInterestForm } from "@/components/job-interest-form";
 import { Button } from "@/components/ui/button";
@@ -65,7 +64,12 @@ export default async function SettingsPage() {
               Download a portable copy of your profile, resume, bookmarks, and
               archive.
             </p>
-            <AccountExportLink />
+            <Button asChild className="mt-4 w-full sm:w-auto" variant="outline">
+              <a href="/api/account/export">
+                <Download className="size-4" />
+                Export my data
+              </a>
+            </Button>
           </div>
         </section>
 

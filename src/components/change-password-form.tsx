@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
-import { captureProductEvent } from "@/lib/product-analytics";
 
 export function ChangePasswordForm() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -42,17 +41,11 @@ export function ChangePasswordForm() {
 
           if (newPassword !== confirmation) {
             setError("The new passwords do not match.");
-            captureProductEvent("account password changed", {
-              outcome: "failed",
-            });
             return;
           }
 
           if (currentPassword === newPassword) {
             setError("Choose a new password that is different from your current one.");
-            captureProductEvent("account password changed", {
-              outcome: "failed",
-            });
             return;
           }
 
@@ -64,15 +57,9 @@ export function ChangePasswordForm() {
 
             if (result.error) {
               setError(result.error.message || "The password could not be changed.");
-              captureProductEvent("account password changed", {
-                outcome: "failed",
-              });
               return;
             }
 
-            captureProductEvent("account password changed", {
-              outcome: "succeeded",
-            });
             setCurrentPassword("");
             setNewPassword("");
             setConfirmation("");
