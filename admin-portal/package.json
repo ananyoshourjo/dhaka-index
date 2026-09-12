@@ -1,6 +1,6 @@
 {
   "name": "dhaka-index-admin-portal",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
@@ -23,7 +23,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.11.0",
-    "next": "^16.2.11",
+    "next": "^16.3.5",
     "radix-ui": "^1.6.7",
     "react": "^19.2.5",
     "react-day-picker": "^10.0.1",

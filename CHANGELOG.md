@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.6.4 - 2026-09-12
+
+- Remove PostHog analytics, event tracking, configuration, and dependency from the member app.
+
 ## 1.6.3 - 2026-08-27
 
 - Remember profile section collapse state after refresh

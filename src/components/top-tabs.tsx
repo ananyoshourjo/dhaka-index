@@ -16,10 +16,6 @@ import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
-import {
-  captureProductEvent,
-  resetProductAnalytics,
-} from "@/lib/product-analytics";
 import { cn } from "@/lib/utils";
 
 const tabs = [
@@ -213,8 +209,6 @@ export function TopTabs() {
                   onClick={async () => {
                     setMenuOpen(false);
                     await authClient.signOut();
-                    captureProductEvent("account logged out", {});
-                    await resetProductAnalytics();
                     router.push("/login");
                     router.refresh();
                   }}

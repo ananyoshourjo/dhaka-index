@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { CloudflareWebAnalytics } from "@/components/cloudflare-web-analytics";
-import { ProductAnalyticsLifecycle } from "@/components/product-analytics-lifecycle";
 import { TopTabs } from "@/components/top-tabs";
 
 import "./globals.css";
@@ -78,7 +77,6 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TopTabs />
         {children}
-        <ProductAnalyticsLifecycle />
         <CloudflareWebAnalytics />
       </body>
     </html>

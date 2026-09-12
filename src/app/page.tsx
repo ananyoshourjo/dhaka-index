@@ -5,7 +5,6 @@ import { revalidatePath } from "next/cache";
 import { JobFeedSync } from "@/components/job-feed-sync";
 import { JobFilterBar } from "@/components/job-filter-bar";
 import { JobList } from "@/components/job-list";
-import { JobSearchAnalytics } from "@/components/job-search-analytics";
 import {
   archiveJobById,
   bookmarkJobById,
@@ -67,12 +66,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   return (
     <>
       <JobFeedSync />
-      <JobSearchAnalytics
-        currentPage={page.currentPage}
-        jobFunction={filters.jobFunction}
-        queryLength={filters.query.length}
-        resultCount={page.jobs.length}
-      />
       <JobList
         action={archiveJobAction}
         actionLabel="Archive"
@@ -86,7 +79,6 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         filters={filters}
         header={<JobFilterBar filters={filters} />}
         jobs={page.jobs}
-        surface="jobs"
         totalPages={page.totalPages}
       />
     </>
