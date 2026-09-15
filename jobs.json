@@ -1,29 +1,8 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-13T07:53:56.818Z",
+  "generatedAt": "2026-09-15T08:13:18.414Z",
   "license": "CC0-1.0",
   "jobs": [
-    {
-      "title": "Management Trainee Officer",
-      "company": "Dutch-Bangla Bank",
-      "deadline": "2026-09-13",
-      "url": "https://app.dutchbanglabank.com/Online_Job//jobDetails?positionCode=466&positionName=Management+Trainee+Officer&positionDetails=&lastDate=13-09-2026",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Assistant Officer",
-      "company": "Dutch-Bangla Bank",
-      "deadline": "2026-09-13",
-      "url": "https://app.dutchbanglabank.com/Online_Job//jobDetails?positionCode=467&positionName=Assistant+Officer&positionDetails=&lastDate=13-09-2026",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Trainee Cash Officer",
-      "company": "Dutch-Bangla Bank",
-      "deadline": "2026-09-13",
-      "url": "https://app.dutchbanglabank.com/Online_Job//jobDetails?positionCode=468&positionName=Trainee+Cash+Officer&positionDetails=&lastDate=13-09-2026",
-      "functionTag": "finance_accounting"
-    },
     {
       "title": "Linux System Administrator",
       "company": "Dynamic Solution Innovators",
@@ -37,13 +16,6 @@
       "deadline": "2026-09-15",
       "url": "https://apps.idlc.com/career/jobsDetails/1180",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Associate, Call Center & Customer Support IDLC Asset Management Limited",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-09-14",
-      "url": "https://apps.idlc.com/career/jobsDetails/2185",
-      "functionTag": "customer_service"
     },
     {
       "title": "Category Manager, Commercial",
@@ -529,18 +501,18 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Gaming Lead",
-      "company": "Grameenphone Ltd.",
-      "deadline": "2026-09-13",
-      "url": "https://career.grameenphone.com/job/eyJpdiI6IjFzZ0MyWjdtQmw3ZWl4Q0pleDY2Qmc9PSIsInZhbHVlIjoiZ2g3N2tNZVN2UEJHU3U1ZXkrakZvZz09IiwibWFjIjoiNjEwYTZjMjRkMzFkNTc2YzQ5ODM1N2FhZjU3MjNiMTczMDk0M2NjYmY1Yzc4MzViZWVmZTk3ZjhjMWIzNzI4NCJ9",
-      "functionTag": "other"
-    },
-    {
       "title": "Assistant Leaf Officer- Bonpara",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
       "url": "https://careers.bat.com/en/job/allahdargah/assistant-leaf-officer-bonpara/1045/44224471296",
       "functionTag": "operations"
+    },
+    {
+      "title": "Expression of Interest: Team Leader",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/bangladesh/expression-of-interest-team-leader/1045/34502635712",
+      "functionTag": "general_management"
     },
     {
       "title": "Junior Team Leader - Savar",
@@ -557,13 +529,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Warehouse Executive - Savar",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/dhaka/warehouse-executive-savar/1045/43881912960",
-      "functionTag": "supply_chain_procurement"
-    },
-    {
       "title": "Assistant Leaf Officer - Jhenaidah",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -578,18 +543,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Assistant Leaf Officer- Chechua",
+      "title": "Expression of Interest: Leaf Officer",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
-      "url": "https://careers.bat.com/en/job/kansabar-chechua/assistant-leaf-officer-chechua/1045/43884981504",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Assistant Leaf Officer- Lalmonirhat",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/lalmonirhat/assistant-leaf-officer-lalmonirhat/1045/43884981312",
-      "functionTag": "operations"
+      "url": "https://careers.bat.com/en/job/kushtia/expression-of-interest-leaf-officer/1045/42780083008",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Stewardship Officer - Rangpur",
@@ -627,6 +585,13 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "MRSC Coordinator, Migration Programme",
+      "company": "BRAC",
+      "deadline": "2026-09-20",
+      "url": "https://careers.brac.net/jobs/mrsc-coordinator-migration-programme-3021?bulk=false",
+      "functionTag": "program_project_management"
+    },
+    {
       "title": "Officer, QC (BRAC Seed and Agro Enterprise)",
       "company": "BRAC",
       "deadline": "2026-09-15",
@@ -648,6 +613,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Senior Manager, Legal, Estate Department",
+      "company": "BRAC",
+      "deadline": "2026-09-21",
+      "url": "https://careers.brac.net/jobs/senior-manager-legal-estate-department-3023?bulk=false",
+      "functionTag": "legal_compliance"
+    },
+    {
       "title": "Senior Officer, Data, IT and Project Management Support; Microfinance Programme",
       "company": "BRAC",
       "deadline": "2026-09-15",
@@ -667,13 +639,6 @@
       "deadline": "2026-09-19",
       "url": "https://careers.brac.net/jobs/senior-specialist-fisheries-integrated-development-programme-idp-3012?bulk=false",
       "functionTag": "other"
-    },
-    {
-      "title": "Technician (BRAC Seed and Agro Enterrpise)",
-      "company": "BRAC",
-      "deadline": "2026-09-13",
-      "url": "https://careers.brac.net/jobs/technician-brac-seed-and-agro-enterrpise-2995?bulk=false",
-      "functionTag": "operations"
     },
     {
       "title": "Trainer, BRAC Education Programme",
@@ -725,24 +690,10 @@
       "functionTag": "general_management"
     },
     {
-      "title": "Kitchen Runner",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-3157",
-      "functionTag": "operations"
-    },
-    {
       "title": "Lead, Telesales",
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager, Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/manager-sales-in-dhaka-bangladesh-jid-3132",
       "functionTag": "sales_business_development"
     },
     {
@@ -751,13 +702,6 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
       "functionTag": "customer_service"
-    },
-    {
-      "title": "Senior Executive, Accounts Payable",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-executive-accounts-payable-in-dhaka-bangladesh-jid-3129",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Senior Executive, Finance (R2R)",
@@ -844,13 +788,6 @@
       "functionTag": "product"
     },
     {
-      "title": "Project Manager",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Project-Manager-1212-BD/1364927455",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Sales Operations Associate",
       "company": "Optimizely",
       "deadline": null,
@@ -870,6 +807,13 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Software-Engineer-II-1212-BD/1363501155",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Content Creation Intern [Marketing]",
+      "company": "Reckitt Bangladesh",
+      "deadline": null,
+      "url": "https://careers.reckitt.com/job/Dhaka-Content-Creation-Intern-Marketing-Dhak-98033/1436734133",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Strategic Sourcing Manager - MBS (Bangladesh)",
@@ -923,7 +867,7 @@
     {
       "title": "Project Manager [Open to internal and external applicants]",
       "company": "UNDP Bangladesh",
-      "deadline": "2026-09-26",
+      "deadline": "2026-09-24",
       "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36804",
       "functionTag": "program_project_management"
     },
@@ -933,6 +877,20 @@
       "deadline": null,
       "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11845",
       "functionTag": "product"
+    },
+    {
+      "title": "Head of Sales-Cyber Security",
+      "company": "Banglalink",
+      "deadline": null,
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11863",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Head of Project & Delivery",
+      "company": "Banglalink",
+      "deadline": null,
+      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11864",
+      "functionTag": "program_project_management"
     },
     {
       "title": "Android Developer (Native)",
@@ -1054,13 +1012,6 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Operations Support Specialist, (Bangladesh)",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/a7fed3d7-32d1-44cd-9de5-03f27e73c387",
-      "functionTag": "operations"
-    },
-    {
       "title": "Assistant Manager, RCM Operations (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1096,10 +1047,24 @@
       "functionTag": "operations"
     },
     {
+      "title": "LEGAL MANAGER",
+      "company": "JTI Bangladesh",
+      "deadline": null,
+      "url": "https://jobs.jti.com/job/DHAKA-LEGAL-MANAGER-1212/1436482333",
+      "functionTag": "legal_compliance"
+    },
+    {
       "title": "CELL LEAD, FMD",
       "company": "JTI Bangladesh",
       "deadline": null,
       "url": "https://jobs.jti.com/job/TONGI-CELL-LEAD%2C-FMD-1710/1401800733",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Electronic Technician M&P",
+      "company": "JTI Bangladesh",
+      "deadline": "2026-09-20",
+      "url": "https://jobs.jti.com/job/TONGI-Electronic-Technician-M&P-1710/1436961933",
       "functionTag": "operations"
     },
     {
@@ -1187,6 +1152,20 @@
       "functionTag": "general_management"
     },
     {
+      "title": "Business Development Officer, Employee Banking",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-22",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/62201-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Business Development Officer, Employee Banking",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-21",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/62203-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Manager, WRB Data & Analytics",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-20",
@@ -1236,13 +1215,6 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Software QA Engineer",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/software-qa-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Tech Support Associate",
       "company": "Ollyo",
       "deadline": null,
@@ -1271,6 +1243,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Client Relationship Support Associate",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774612090146",
+      "functionTag": "customer_service"
+    },
+    {
       "title": "Head of CTO (Chief Technology Office) Technology (Vice President)",
       "company": "HSBC Bangladesh",
       "deadline": null,
@@ -1297,13 +1276,6 @@
       "deadline": null,
       "url": "https://riseuplabs.com/jobs/b2b-research-writer",
       "functionTag": "research_consulting"
-    },
-    {
-      "title": "Brand and Communication Manager",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/brand-and-communication-manager",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Executive, Business Development",
@@ -1355,13 +1327,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": ".Net Developer",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/net-developer",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Social Media Executive",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1383,45 +1348,17 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Manager / Senior Manager, Govt. & Strategic Business, Axentec PLC. (Ref. September 9, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-13",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6937",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager or Senior Manager, SME Business, Axentec PLC. (Ref. September 7, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-14",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6939",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager or Senior Manager, Corporate Business, Axentec PLC. (Ref. September 7, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-14",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6940",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "General Manager/ Senior General Manager, Technology Support Services (Ref. September 09, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-14",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6943",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Manager/Senior Manager, Transport Network Optimization and Efficiency (Ref. September 09, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-14",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6946",
-      "functionTag": "operations"
-    },
-    {
       "title": "Senior Associate or Associate Manager, Voice, BTL – Robi Marketing (Ref. Sep 10, 2026)",
       "company": "Robi Axiata Limited",
       "deadline": "2026-09-17",
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6949",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "General Manager or Senior General Manager, Media Management, Cirkle Marketing (Reff. September 14, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-09-22",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6952",
       "functionTag": "marketing_communications"
     },
     {
@@ -1476,14 +1413,21 @@
     {
       "title": "Key Account Manager",
       "company": "ShopUp",
-      "deadline": "2026-09-16",
+      "deadline": "2026-09-23",
       "url": "https://shopup.org/job-postings/key-account-manager",
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Manager/ Senior Manager, Internal Audit",
+      "company": "ShopUp",
+      "deadline": "2026-09-23",
+      "url": "https://shopup.org/job-postings/manager-senior-manager-internal-audit-2",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Sales Performance Executive",
       "company": "ShopUp",
-      "deadline": "2026-09-17",
+      "deadline": "2026-09-23",
       "url": "https://shopup.org/job-postings/sales-performance-executive",
       "functionTag": "sales_business_development"
     },
@@ -1495,45 +1439,10 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Head of SAM-SME",
-      "company": "BRAC Bank PLC",
-      "deadline": "2026-09-13",
-      "url": "https://thecvguy.net/bank-jobs/brac-bank-plc-career-opportunity-2026-bank-3",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Associate Relationship Manager / Relationship Manager",
       "company": "BRAC Bank PLC",
       "deadline": "2026-09-15",
       "url": "https://thecvguy.net/bank-jobs/brac-bank-plc-career-opportunity-2026-bank-4",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Assistant Officer",
-      "company": "Dutch-Bangla Bank PLC",
-      "deadline": "2026-09-14",
-      "url": "https://thecvguy.net/bank-jobs/dutch-bangla-bank-plc-assistant-officer-26",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Management Trainee Officer (MTO)",
-      "company": "Dutch-Bangla Bank PLC",
-      "deadline": "2026-09-14",
-      "url": "https://thecvguy.net/bank-jobs/dutch-bangla-bank-plc-mto-job-circular-2026",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Trainee Cash Officer",
-      "company": "Dutch-Bangla Bank PLC",
-      "deadline": "2026-09-14",
-      "url": "https://thecvguy.net/bank-jobs/dutch-bangla-bank-plc-trainee-cash-officer",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Trainee Officer, Cards Sales",
-      "company": "Eastern Bank PLC",
-      "deadline": "2026-09-13",
-      "url": "https://thecvguy.net/bank-jobs/eastern-bank-plc-ebl-career-trainee-officer",
       "functionTag": "sales_business_development"
     },
     {
@@ -1551,18 +1460,25 @@
       "functionTag": "general_management"
     },
     {
+      "title": "Analyst, Client Lifecycle Management Operations",
+      "company": "Standard Chartered Bank",
+      "deadline": "2026-09-17",
+      "url": "https://thecvguy.net/bank-jobs/standard-chartered-bank-is-hiring-mnc-jobs",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Manager, WRB Data & Analytics",
+      "company": "Standard Chartered Bank",
+      "deadline": "2026-09-21",
+      "url": "https://thecvguy.net/bank-jobs/standard-chartered-is-hiring-manager-bank",
+      "functionTag": "data_analytics"
+    },
+    {
       "title": "Associate Business Support Officer / Business Support Officer",
       "company": "AB Bank PLC",
       "deadline": "2026-09-22",
       "url": "https://thecvguy.net/bank-jobs/start-your-banking-ab-bank-plc-abso-bso",
       "functionTag": "operations"
-    },
-    {
-      "title": "Aarong Internship Program (AIP) - Fall 2026",
-      "company": "Aarong",
-      "deadline": "2026-09-13",
-      "url": "https://thecvguy.net/internships/aarong-internship-program-aip-fall-2026",
-      "functionTag": "other"
     },
     {
       "title": "RANCON Future Leadership Program 2026",
@@ -1698,6 +1614,20 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Head of Marketing Communications",
+      "company": "DHL Global Forwarding (Bangladesh) Limited",
+      "deadline": "2026-09-30",
+      "url": "https://thecvguy.net/mnc-jobs/dhl-global-forwarding-bd-ltd-is-hiring-mnc-2",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Manager – Legal",
+      "company": "Emami Bangladesh Limited",
+      "deadline": "2026-10-01",
+      "url": "https://thecvguy.net/mnc-jobs/emami-bangladesh-ltd-is-hiring-manager-mnc",
+      "functionTag": "legal_compliance"
+    },
+    {
       "title": "Specialist, Field Sales",
       "company": "Foodpanda",
       "deadline": "2026-09-30",
@@ -1726,11 +1656,11 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Nesternship 2026 Intern",
-      "company": "Nestle Bangladesh PLC",
-      "deadline": "2026-09-13",
-      "url": "https://thecvguy.net/mnc-jobs/nestle-bangladesh-nesternship-2026",
-      "functionTag": "other"
+      "title": "Officer- Imports & Packaging Materials",
+      "company": "Nestlé Bangladesh",
+      "deadline": "2026-09-30",
+      "url": "https://thecvguy.net/mnc-jobs/nestle-career-is-hiring-officer-imports",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Management Trainee Officer",
@@ -1740,11 +1670,25 @@
       "functionTag": "general_management"
     },
     {
+      "title": "Territory Sales Manager",
+      "company": "Perfetti Van Melle Bangladesh",
+      "deadline": "2026-09-30",
+      "url": "https://thecvguy.net/mnc-jobs/perfetti-van-melle-bangladesh-is-hiring-2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Electronic Technician",
       "company": "Philip Morris International",
       "deadline": "2026-09-15",
       "url": "https://thecvguy.net/mnc-jobs/philip-morris-international-mnc-jobs-2026",
       "functionTag": "other"
+    },
+    {
+      "title": "Senior Associate or Associate Manager",
+      "company": "Robi Career",
+      "deadline": "2026-09-18",
+      "url": "https://thecvguy.net/mnc-jobs/robi-axiata-plc-job-circular-2026-mnc-career-2",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "General Manager / Senior General Manager",
