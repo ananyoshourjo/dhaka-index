@@ -11,6 +11,7 @@ import {
   Download,
   Eye,
   GripVertical,
+  ImagePlus,
   Italic,
   Link2,
   Loader2,
@@ -1495,7 +1496,7 @@ function CoverLetterPreview({
 export function ResumeBuilder({
   initialResume,
   showPreview = true,
-  subtitle = "CV format editor",
+  subtitle,
   title = "Resume Builder",
 }: ResumeBuilderProps) {
   const initialCustomSections = normalizeResumeCustomSections(
@@ -2707,7 +2708,9 @@ export function ResumeBuilder({
           <div className="z-[1] flex min-h-16 shrink-0 items-center justify-between gap-3 border-b bg-background px-4 py-3 sm:px-5">
             <div className="min-w-0">
               <h1 className="text-base font-semibold">{title}</h1>
-              <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
+              {subtitle ? (
+                <p className="truncate text-xs text-muted-foreground">{subtitle}</p>
+              ) : null}
             </div>
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -2754,9 +2757,9 @@ export function ResumeBuilder({
               <div className="sm:col-span-2">
                 <div className="grid gap-2 text-xs font-medium text-muted-foreground">
                   Photo
-                  <div className="grid gap-3 rounded-md border bg-background p-3 sm:grid-cols-[auto_1fr] sm:items-center">
+                  <div className="grid gap-3 bg-muted/20">
                     <div
-                      className="h-[1.55in] w-[1.28in] justify-self-center overflow-hidden border bg-muted sm:justify-self-auto"
+                      className="flex h-48 w-40 items-center justify-center justify-self-center overflow-hidden rounded-md border bg-muted/50 sm:justify-self-auto"
                       aria-hidden="true"
                     >
                       {photoUrl ? (
@@ -2766,9 +2769,11 @@ export function ResumeBuilder({
                             backgroundImage: `url("${photoUrl}")`,
                           }}
                         />
-                      ) : null}
+                      ) : (
+                        <ImagePlus className="size-5 text-muted-foreground" />
+                      )}
                     </div>
-                    <div className="grid gap-2">
+                    <div className="grid min-w-0 gap-3">
                       <input
                         ref={photoInputRef}
                         type="file"
@@ -2778,21 +2783,23 @@ export function ResumeBuilder({
                         }
                         className="sr-only"
                       />
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex w-40 items-center gap-2">
                         <Button
                           type="button"
-                          variant="outline"
+                          variant="secondary"
                           size="sm"
+                          className="flex-1"
                           disabled={photoSaving}
                           onClick={() => photoInputRef.current?.click()}
                         >
-                          {photoSaving ? "Saving photo" : "Choose photo"}
+                          {photoSaving ? "Saving photo" : "Upload photo"}
                         </Button>
                         {photoUrl ? (
                           <Button
                             type="button"
-                            variant="ghost"
+                            variant="secondary"
                             size="sm"
+                            className="size-9 px-0"
                             disabled={photoSaving}
                             onClick={removeContactPhoto}
                             aria-label="Remove photo"
@@ -2801,10 +2808,6 @@ export function ResumeBuilder({
                           </Button>
                         ) : null}
                       </div>
-                      <p className="text-xs text-muted-foreground">
-                        Upload a portrait image. It is compressed to a small WebP
-                        and stored separately for the preview, navigation, and PDF.
-                      </p>
                       {photoError ? (
                         <p className="text-xs text-destructive">{photoError}</p>
                       ) : null}
@@ -4412,16 +4415,9 @@ export function ResumeBuilder({
               <PencilLine className="size-4" />
               Edit
             </Button>
-            <div className="hidden min-w-0 gap-0.5 text-xs text-muted-foreground sm:grid">
-              <span className="font-medium text-foreground">Preview</span>
-              <span className="truncate">
-                {resume.coverLetter.included
-                  ? `Letter 1 · Resume ${resumePageCount}`
-                  : `Resume · ${resumePageCount} ${
-                      resumePageCount === 1 ? "page" : "pages"
-                    }`}
-              </span>
-            </div>
+            <h2 className="shrink-0 text-base font-semibold text-foreground">
+              Preview
+            </h2>
           </div>
           <div className="ml-auto flex shrink-0 items-center gap-1 sm:ml-0 sm:gap-2">
             <Button
@@ -4455,7 +4451,7 @@ export function ResumeBuilder({
               onChange={(event) =>
                 setPreviewZoom(Number(event.target.value) / 100)
               }
-              className="hidden w-28 sm:block"
+              className="hidden w-20 sm:block xl:w-28"
             />
             <Button
               type="button"

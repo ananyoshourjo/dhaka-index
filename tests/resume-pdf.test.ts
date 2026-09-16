@@ -190,12 +190,25 @@ test("resume builder keeps the preview toolbar usable on narrow screens", () => 
   assert.match(builder, /flex-nowrap items-center justify-between/);
   assert.match(
     builder,
-    /hidden min-w-0 gap-0\.5 text-xs text-muted-foreground sm:grid/,
+    /<h2 className="shrink-0 text-base font-semibold text-foreground">\s*Preview\s*<\/h2>/,
   );
+  assert.doesNotMatch(builder, /Letter 1 · Resume/);
+  assert.doesNotMatch(builder, /Resume · \$\{resumePageCount\}/);
   assert.match(
     builder,
     /ml-auto flex shrink-0 items-center gap-1 sm:ml-0 sm:gap-2/,
   );
   assert.match(builder, /size-8 shrink-0 p-0 sm:size-9/);
   assert.match(builder, /h-8 shrink-0 gap-1 px-2 sm:h-9 sm:gap-2 sm:px-3/);
+  assert.match(builder, /hidden w-20 sm:block xl:w-28/);
+});
+
+test("profile editor uses the Details heading", () => {
+  const profilePage = fs.readFileSync(
+    path.join(process.cwd(), "src", "app", "profile", "page.tsx"),
+    "utf8",
+  );
+
+  assert.match(profilePage, /title="Details"/);
+  assert.doesNotMatch(profilePage, /subtitle=/);
 });
