@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.6.5 - 2026-09-16
+
+- Polish profile photo controls and layout
+- Clarify editor and preview headings
+
 ## 1.6.4 - 2026-09-12
 
 - Remove PostHog analytics, event tracking, configuration, and dependency from the member app.

@@ -11,8 +11,7 @@ export default async function ProfilePage() {
   return (
     <ResumeBuilder
       initialResume={resume}
-      subtitle="Your application-ready resume"
-      title="Profile"
+      title="Details"
     />
   );
 }
