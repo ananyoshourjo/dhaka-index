@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T07:31:40.617Z",
+  "generatedAt": "2026-09-17T12:48:29.727Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -728,13 +728,6 @@
       "title": "Specialist, Field Sales",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3108",
       "functionTag": "sales_business_development"
     },
@@ -1208,6 +1201,13 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Relationship Manager, SME Banking",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-23",
+      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-SME-Banking/62212-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Artist/Designer",
       "company": "Ollyo",
       "deadline": null,
@@ -1404,11 +1404,11 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Junior Executive, Program Operations",
+      "title": "Jr. Executive, Customer Experience",
       "company": "Shikho",
       "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/Jnq4qhOLWXJ9/junior-executive-program-operations",
-      "functionTag": "operations"
+      "url": "https://shikho.freshteam.com/jobs/31iBR0RnZ79e/jr-executive-customer-experience",
+      "functionTag": "customer_service"
     },
     {
       "title": "Executive/Sr. Executive, Visual Design",
@@ -1416,6 +1416,20 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/WfqEGsHMYiPP/executive-sr-executive-visual-design",
       "functionTag": "design_creative"
+    },
+    {
+      "title": "Academic Counsellor (Jashore Tele-sales)",
+      "company": "Shikho",
+      "deadline": null,
+      "url": "https://shikho.freshteam.com/jobs/nJvOk0czhX0Y/academic-counsellor-jashore-tele-sales",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Android Developer (Sr. Software Engineer)",
+      "company": "Shikho",
+      "deadline": null,
+      "url": "https://shikho.freshteam.com/jobs/pV54kjEWqJ_z/android-developer-sr-software-engineer",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Key Account Manager",
