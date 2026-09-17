@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-16T07:24:00.813Z",
+  "generatedAt": "2026-09-17T07:31:40.617Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -655,6 +655,20 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Associate, Content Onboarding",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/associate-content-onboarding-in-dhaka-bangladesh-jid-3182",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Associate, Customer Support",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/associate-customer-support-in-dhaka-bangladesh-jid-3086",
+      "functionTag": "customer_service"
+    },
+    {
       "title": "Business Performance Analyst (Shops) - Quick Commerce",
       "company": "Foodpanda",
       "deadline": null,
@@ -737,6 +751,20 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3110",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Associate Marketing Manager",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Associate-Marketing-Manager-1212-BD/1364794255",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Developer",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Developer-1212-BD/1364883455",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Enablement Associate",
@@ -865,11 +893,67 @@
       "functionTag": "program_project_management"
     },
     {
+      "title": "Android Developer (Native)",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/android-developer-native",
+      "functionTag": "software_engineering"
+    },
+    {
       "title": "Business Development Executive – Hire-a-Mind",
       "company": "Inument Solution Limited",
       "deadline": "2026-09-20",
       "url": "https://inument.com/job/business-development-executive-hire-a-mind",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "iOS Developer (Native)",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/ios-developer-native",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Lead React Native Engineer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/lead-react-native-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Drupal Developer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/senior-drupal-developer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Flutter Engineer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/senior-flutter-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Frontend Engineer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/senior-frontend-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Java Engineer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/senior-java-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "SQA Engineer",
+      "company": "Inument Solution Limited",
+      "deadline": null,
+      "url": "https://inument.com/job/sqa-engineer",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Customer Success Manager",
@@ -893,11 +977,46 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Sales Development Representative",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/20f73638-b92f-4d47-bab0-6431db54f0c9",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Business Intelligence Engineer",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/2ae9c7b2-6fe3-4bc8-8ab0-be31450ca961",
+      "functionTag": "data_analytics"
+    },
+    {
       "title": "Senior Data Operations Analyst (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
       "url": "https://jobs.ashbyhq.com/Commure/2efd9a17-1510-4c5c-9538-5eeb6435824b",
       "functionTag": "data_analytics"
+    },
+    {
+      "title": "Data Operations Analyst (Bangladesh)",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/4f984c29-f4f8-465b-a20e-b9c9e81a8e1c",
+      "functionTag": "data_analytics"
+    },
+    {
+      "title": "Facilities Intern (Bangladesh)",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/514b797e-df41-4145-96de-b30564827801",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Assistant Manager, RCM Operations (Bangladesh)",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60",
+      "functionTag": "operations"
     },
     {
       "title": "Business Intelligence & Analytics Officer",
@@ -1061,13 +1180,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Analyst, Client Lifecycle Management Operations",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-16",
-      "url": "https://jobs.standardchartered.com/job/Analyst%2C-Client-Lifecycle-Management-Operations/62064-en_GB",
-      "functionTag": "operations"
-    },
-    {
       "title": "Branch Manager - Chattogram",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-17",
@@ -1096,11 +1208,39 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Artist/Designer",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/artist-designer",
+      "functionTag": "design_creative"
+    },
+    {
+      "title": "Full-stack Developer",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/full-stack-developer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Performance Marketing & Growth Specialist",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/performance-marketing-growth-specialist",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Sales Associate",
       "company": "Ollyo",
       "deadline": null,
       "url": "https://ollyo.com/job/sales-associate",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Senior Motion Designer (UI & Marketing)",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/senior-motion-designer-ui-marketing",
+      "functionTag": "design_creative"
     },
     {
       "title": "Tech Support Associate",
@@ -1110,6 +1250,20 @@
       "functionTag": "customer_service"
     },
     {
+      "title": "Technical Content Developer/Writer",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/technical-content-developer-writer",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "UI/UX Designer",
+      "company": "Ollyo",
+      "deadline": null,
+      "url": "https://ollyo.com/job/ui-ux-designer",
+      "functionTag": "design_creative"
+    },
+    {
       "title": "Client Relationship Support Associate",
       "company": "HSBC Bangladesh",
       "deadline": null,
@@ -1117,11 +1271,25 @@
       "functionTag": "customer_service"
     },
     {
+      "title": "Senior Product Manager, Global Trade Solutions (SVP)",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774612167161",
+      "functionTag": "product"
+    },
+    {
       "title": "Head of CTO (Chief Technology Office) Technology (Vice President)",
       "company": "HSBC Bangladesh",
       "deadline": null,
       "url": "https://portal.careers.hsbc.com/careers/job/563774612237474",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Relationship Manager, Global Apparel Supply Chain (SVP)",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774612274945",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Quality Assurance (QA) Engineer",
@@ -1143,13 +1311,6 @@
       "deadline": null,
       "url": "https://riseuplabs.com/jobs/b2b-research-writer",
       "functionTag": "research_consulting"
-    },
-    {
-      "title": "Brand and Communication Manager",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/brand-and-communication-manager",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Executive, Business Development",
@@ -1320,13 +1481,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "RANCON Future Leadership Program 2026",
-      "company": "RANCON",
-      "deadline": "2026-09-16",
-      "url": "https://thecvguy.net/internships/rancon-future-leadership-program-2026",
-      "functionTag": "general_management"
-    },
-    {
       "title": "ASPIRE Internship Program 2026",
       "company": "Syngenta Group",
       "deadline": "2026-09-20",
@@ -1339,13 +1493,6 @@
       "deadline": "2026-10-15",
       "url": "https://thecvguy.net/jobs-in-bd/akash-digital-tv-internship-2026-intern-bd",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Service Engineer",
-      "company": "Advance Scientific Instrument Consortium (ASIC)",
-      "deadline": "2026-09-16",
-      "url": "https://thecvguy.net/jobs-in-bd/asic-bangladesh-service-engineer-freshers",
-      "functionTag": "other"
     },
     {
       "title": "Business Intelligence Senior Manager, NEO PSP Limited",
