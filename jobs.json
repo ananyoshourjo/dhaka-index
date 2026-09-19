@@ -1,8 +1,15 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T12:48:29.727Z",
+  "generatedAt": "2026-09-19T07:26:20.435Z",
   "license": "CC0-1.0",
   "jobs": [
+    {
+      "title": "Junior Software Enigneer (.NET)",
+      "company": "Dynamic Solution Innovators",
+      "deadline": "2026-09-30",
+      "url": "https://app.hrythmic.com/recruit/openings/720506b7-f775-4957-996e-510317a987d0",
+      "functionTag": "software_engineering"
+    },
     {
       "title": "Linux System Administrator",
       "company": "Dynamic Solution Innovators",
@@ -46,46 +53,18 @@
       "functionTag": "human_resources"
     },
     {
-      "title": "Manager, Portfolio & Strategic Initiatives, Card Business Unit (EO–AVP)",
+      "title": "Sub-Branch In-Charge",
       "company": "United Commercial Bank (UCB)",
       "deadline": null,
-      "url": "https://bdjobs.com/h/details/1519984?ln=1",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Officer, Debit & Prepaid Card Portfolio, Card Business Unit (Officer–SO)",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1519990?ln=1",
+      "url": "https://bdjobs.com/h/details/1533481?ln=1",
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Manager, Offline Partnership & Business Development, Card Business Unit (EO–SEO)",
+      "title": "Relationship Officer / Relationship Manager – Branch Credit Operations",
       "company": "United Commercial Bank (UCB)",
       "deadline": null,
-      "url": "https://bdjobs.com/h/details/1519995?ln=1",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager, Ecommerce Partnership & Business Development, Card Business Unit (SO–EO)",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1520007?ln=1",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Channel Support Officer, Card Business Unit (JO–SO)",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1520012?ln=1",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Customer Service Officer, Card Business Unit (JO–EO)",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1520014?ln=1",
-      "functionTag": "customer_service"
+      "url": "https://bdjobs.com/h/details/1533487?ln=1",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Content Producer, Media",
@@ -494,13 +473,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Assistant Leaf Officer- Bonpara",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/allahdargah/assistant-leaf-officer-bonpara/1045/44224471296",
-      "functionTag": "operations"
-    },
-    {
       "title": "Expression of Interest: Team Leader",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -519,20 +491,6 @@
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
       "url": "https://careers.bat.com/en/job/dhaka/team-leader-savar/1045/44417102784",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Assistant Leaf Officer - Jhenaidah",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/jhenaidah-sardar-uz/assistant-leaf-officer-jhenaidah/1045/44160544640",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Leaf Depot Operations Officer - Jhenaidah",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/jhenaidah-sardar-uz/leaf-depot-operations-officer-jhenaidah/1045/44153007552",
       "functionTag": "operations"
     },
     {
@@ -627,13 +585,6 @@
       "functionTag": "other"
     },
     {
-      "title": "Trainer, BRAC Education Programme",
-      "company": "BRAC",
-      "deadline": "2026-09-17",
-      "url": "https://careers.brac.net/jobs/trainer-brac-education-programme-3014?bulk=false",
-      "functionTag": "education"
-    },
-    {
       "title": "Business Development Executive (Night Shift & Remote)",
       "company": "Enosis Solutions",
       "deadline": "2026-09-30",
@@ -676,18 +627,25 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Head, Local Shops",
+      "title": "Demand Planner",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/head-local-shops-in-dhaka-bangladesh-jid-3151",
-      "functionTag": "general_management"
+      "url": "https://careers.foodpanda.com/job/demand-planner-in-dhaka-bangladesh-jid-3191",
+      "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Lead, Telesales",
+      "title": "Intern, Demand Planning",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
-      "functionTag": "sales_business_development"
+      "url": "https://careers.foodpanda.com/job/intern-demand-planning-in-dhaka-bangladesh-jid-3189",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
+      "title": "Kitchen Runner",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-3190",
+      "functionTag": "operations"
     },
     {
       "title": "Manager, Sales",
@@ -704,13 +662,6 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "Senior Executive, Finance (R2R)",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "Shift Lead, Partner Service",
       "company": "Foodpanda",
       "deadline": null,
@@ -722,6 +673,13 @@
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-corporate-sales-in-dhaka-bangladesh-jid-3155",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
       "functionTag": "sales_business_development"
     },
     {
@@ -802,6 +760,13 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Talent Acquisition Specialist",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Talent-Acquisition-Specialist-1212-BD/1368790055",
+      "functionTag": "human_resources"
+    },
+    {
       "title": "Content Creation Intern [Marketing]",
       "company": "Reckitt Bangladesh",
       "deadline": null,
@@ -869,6 +834,13 @@
       "company": "UNDP Bangladesh",
       "deadline": "2026-09-24",
       "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36804",
+      "functionTag": "program_project_management"
+    },
+    {
+      "title": "Associate Programme Monitoring and Liaison Officer-UNOCHA-(Nationals Only)",
+      "company": "UNDP Bangladesh",
+      "deadline": "2026-10-02",
+      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36992",
       "functionTag": "program_project_management"
     },
     {
@@ -977,13 +949,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Business Intelligence Engineer",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/2ae9c7b2-6fe3-4bc8-8ab0-be31450ca961",
-      "functionTag": "data_analytics"
-    },
-    {
       "title": "Senior Data Operations Analyst (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1009,34 +974,6 @@
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
       "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Business Intelligence & Analytics Officer",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://jobs.bdjobs.com/jobdetails?id=1515050&ln=0",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Center Manager (AVP-FVP) – Imperial Banking Division",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://jobs.bdjobs.com/jobdetails?id=1519404&ln=0",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Relationship Manager (SO-FAVP) – Imperial Banking Division",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://jobs.bdjobs.com/jobdetails?id=1519448&ln=0",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Service Manager (SEO-FAVP) – Imperial Banking Division",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://jobs.bdjobs.com/jobdetails?id=1519461&ln=0",
       "functionTag": "operations"
     },
     {
@@ -1145,13 +1082,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Senior Content Specialist",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/df9f8a50-44df-4787-b2a6-06f1dc7c444a",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Senior Marketing Operations Manager",
       "company": "Field Nation",
       "deadline": null,
@@ -1173,13 +1103,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Branch Manager - Chattogram",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-17",
-      "url": "https://jobs.standardchartered.com/job/Branch-Manager-Chattogram/62195-en_GB",
-      "functionTag": "general_management"
-    },
-    {
       "title": "Business Development Officer, Employee Banking",
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-22",
@@ -1192,6 +1115,13 @@
       "deadline": "2026-09-21",
       "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/62203-en_GB",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Director - Trade Momentum Advisor",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-10-01",
+      "url": "https://jobs.standardchartered.com/job/Director-Trade-Momentum-Advisor/62533-en_GB",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Manager, WRB Data & Analytics",
@@ -1229,25 +1159,11 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Sales Associate",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/sales-associate",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Senior Motion Designer (UI & Marketing)",
       "company": "Ollyo",
       "deadline": null,
       "url": "https://ollyo.com/job/senior-motion-designer-ui-marketing",
       "functionTag": "design_creative"
-    },
-    {
-      "title": "Tech Support Associate",
-      "company": "Ollyo",
-      "deadline": null,
-      "url": "https://ollyo.com/job/tech-support-associate",
-      "functionTag": "customer_service"
     },
     {
       "title": "Technical Content Developer/Writer",
@@ -1341,13 +1257,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "International Business Development- Intern",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/global-business-intern",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Content Writer (Intern)",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1376,13 +1285,6 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "Senior Associate or Associate Manager, Voice, BTL – Robi Marketing (Ref. Sep 10, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-17",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6949",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "General Manager or Senior General Manager, Media Management, Cirkle Marketing (Reff. September 14, 2026)",
       "company": "Robi Axiata Limited",
       "deadline": "2026-09-22",
@@ -1409,6 +1311,13 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/31iBR0RnZ79e/jr-executive-customer-experience",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Junior Executive, Program Operations",
+      "company": "Shikho",
+      "deadline": null,
+      "url": "https://shikho.freshteam.com/jobs/Jnq4qhOLWXJ9/junior-executive-program-operations",
+      "functionTag": "operations"
     },
     {
       "title": "Executive/Sr. Executive, Visual Design",
@@ -1460,27 +1369,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Chief Human Resources Officer (CHRO)",
-      "company": "Jamuna Bank PLC.",
-      "deadline": "2026-09-17",
-      "url": "https://thecvguy.net/bank-jobs/jamuna-bank-plc-career-chro-bank-jobs-2026",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Branch Manager",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-09-18",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-bank-is-hiring-banking",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Analyst, Client Lifecycle Management Operations",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-09-17",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-bank-is-hiring-mnc-jobs",
-      "functionTag": "operations"
-    },
-    {
       "title": "Manager, WRB Data & Analytics",
       "company": "Standard Chartered Bank",
       "deadline": "2026-09-21",
@@ -1507,13 +1395,6 @@
       "deadline": "2026-10-15",
       "url": "https://thecvguy.net/jobs-in-bd/akash-digital-tv-internship-2026-intern-bd",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Business Intelligence Senior Manager, NEO PSP Limited",
-      "company": "Banglalink",
-      "deadline": "2026-09-17",
-      "url": "https://thecvguy.net/jobs-in-bd/banglalink-is-hiring-jobs-in-bd-circular",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Marketing Manager",
@@ -1682,13 +1563,6 @@
       "deadline": "2026-09-30",
       "url": "https://thecvguy.net/mnc-jobs/perfetti-van-melle-bangladesh-is-hiring-2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Associate or Associate Manager",
-      "company": "Robi Career",
-      "deadline": "2026-09-18",
-      "url": "https://thecvguy.net/mnc-jobs/robi-axiata-plc-job-circular-2026-mnc-career-2",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Senior Technical Trainer – Information Technology & Cybersecurity",
