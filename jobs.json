@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-19T07:53:00.543Z",
+  "generatedAt": "2026-09-20T07:30:18.621Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -774,20 +774,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Senior Specialist, Agriculture, Integrated Development Programme (IDP)",
-      "company": "BRAC",
-      "deadline": "2026-09-19",
-      "url": "https://careers.brac.net/jobs/senior-specialist-agriculture-integrated-development-programme-idp-3011?bulk=false",
-      "functionTag": "other"
-    },
-    {
-      "title": "Senior Specialist, Fisheries, Integrated Development Programme (IDP)",
-      "company": "BRAC",
-      "deadline": "2026-09-19",
-      "url": "https://careers.brac.net/jobs/senior-specialist-fisheries-integrated-development-programme-idp-3012?bulk=false",
-      "functionTag": "other"
-    },
-    {
       "title": "Senior Specialist, Social Compliance",
       "company": "BRAC",
       "deadline": "2026-09-28",
@@ -851,6 +837,13 @@
       "functionTag": "supply_chain_procurement"
     },
     {
+      "title": "Head, Local Shops",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/head-local-shops-in-dhaka-bangladesh-jid-3151",
+      "functionTag": "general_management"
+    },
+    {
       "title": "Intern, Demand Planning",
       "company": "Foodpanda",
       "deadline": null,
@@ -865,6 +858,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Lead, Telesales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Manager, Sales",
       "company": "Foodpanda",
       "deadline": null,
@@ -877,6 +877,13 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Senior Executive, Finance (R2R)",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Shift Lead, Partner Service",
@@ -1299,6 +1306,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Senior Content Specialist",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/df9f8a50-44df-4787-b2a6-06f1dc7c444a",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Senior Marketing Operations Manager",
       "company": "Field Nation",
       "deadline": null,
@@ -1331,6 +1345,13 @@
       "company": "Standard Chartered Bangladesh",
       "deadline": "2026-09-21",
       "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/62203-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Business Development Officer, PL, V&V",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-26",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-PL%2C-V&amp;V/62552-en_GB",
       "functionTag": "sales_business_development"
     },
     {
@@ -1507,6 +1528,13 @@
       "deadline": "2026-09-22",
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6952",
       "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Manager or Senior Manager, Financial Accounting and Management Reporting, Finance (Ref. September 20, 2026)",
+      "company": "Robi Axiata Limited",
+      "deadline": "2026-09-25",
+      "url": "https://robicareer.com/job-portal/jobs/job-detail/6955",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "ERP Support (Engineer/Specialist/Lead)",
