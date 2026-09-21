@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-20T07:30:18.621Z",
+  "generatedAt": "2026-09-21T07:43:05.003Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -11,11 +11,46 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Assistant/Associate Software Quality Assurance Engineer",
+      "company": "Dynamic Solution Innovators",
+      "deadline": "2026-10-29",
+      "url": "https://app.hrythmic.com/recruit/openings/b3f48675-c79a-4ba3-b187-d6ddc45b206d",
+      "functionTag": "software_engineering"
+    },
+    {
       "title": "Linux System Administrator",
       "company": "Dynamic Solution Innovators",
       "deadline": "2026-09-29",
       "url": "https://app.hrythmic.com/recruit/openings/c7ca8c3c-5313-46de-bd50-3106ceda012f",
       "functionTag": "operations"
+    },
+    {
+      "title": "Credit Analyst (Credit-SME) IDLC Finance PLC",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-10-05",
+      "url": "https://apps.idlc.com/career/jobsDetails/2186",
+      "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Data Scientist (Credit-SME) IDLC Finance PLC",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-10-05",
+      "url": "https://apps.idlc.com/career/jobsDetails/2187",
+      "functionTag": "data_analytics"
+    },
+    {
+      "title": "Credit Verifier (Credit-SME) IDLC Finance PLC",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-10-05",
+      "url": "https://apps.idlc.com/career/jobsDetails/2188",
+      "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Network Engineer / Senior Network Engineer IDLC Finance PLC",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-10-03",
+      "url": "https://apps.idlc.com/career/jobsDetails/2189",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Category Manager, Commercial",
@@ -65,6 +100,13 @@
       "deadline": null,
       "url": "https://bdjobs.com/h/details/1533487?ln=1",
       "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Agri Sales Officer (JO-OFFICER)",
+      "company": "United Commercial Bank (UCB)",
+      "deadline": null,
+      "url": "https://bdjobs.com/h/details/1535751?ln=1",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "MTO – Research and Development",
@@ -641,6 +683,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Maintenance lead - FMD - Saver",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/dhaka/maintenance-lead-fmd-saver/1045/44978730560",
+      "functionTag": "operations"
+    },
+    {
       "title": "Team Leader - Savar",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -655,20 +704,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Stewardship Officer - Rangpur",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/manikganj/stewardship-officer-rangpur/1045/44232843008",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Stewardship Officer - Manikganj",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/rangpur-city/stewardship-officer-manikganj/1045/44232843776",
-      "functionTag": "operations"
-    },
-    {
       "title": "কর্মসূচি সংগঠক, আলট্রা—পুওর গ্র্যাজুয়েশন প্রোগ্রাম",
       "company": "BRAC",
       "deadline": "2026-09-28",
@@ -681,13 +716,6 @@
       "deadline": "2026-09-30",
       "url": "https://careers.brac.net/jobs/%E0%A6%B8%E0%A6%95%E0%A6%89%E0%A6%B0%E0%A6%9F-%E0%A6%97%E0%A6%B0%E0%A6%A1-%E0%A6%B8%E0%A6%95%E0%A6%89%E0%A6%B0%E0%A6%9F-%E0%A6%B8%E0%A6%B0%E0%A6%AD%E0%A6%B8%E0%A6%B8-3025?bulk=false",
       "functionTag": "operations"
-    },
-    {
-      "title": "Additional Chief Engineer, Project Execution, Construction Department",
-      "company": "BRAC",
-      "deadline": "2026-09-20",
-      "url": "https://careers.brac.net/jobs/additional-chief-engineer-project-execution-construction-department-3018?bulk=false",
-      "functionTag": "program_project_management"
     },
     {
       "title": "Engineer, Construction Department",
@@ -722,13 +750,6 @@
       "company": "BRAC",
       "deadline": "2026-09-28",
       "url": "https://careers.brac.net/jobs/manager-mis-and-meal-social-compliance-3036?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
-      "title": "MRSC Coordinator, Migration Programme",
-      "company": "BRAC",
-      "deadline": "2026-09-20",
-      "url": "https://careers.brac.net/jobs/mrsc-coordinator-migration-programme-3021?bulk=false",
       "functionTag": "program_project_management"
     },
     {
@@ -1089,13 +1110,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Business Development Executive – Hire-a-Mind",
-      "company": "Inument Solution Limited",
-      "deadline": "2026-09-20",
-      "url": "https://inument.com/job/business-development-executive-hire-a-mind",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "iOS Developer (Native)",
       "company": "Inument Solution Limited",
       "deadline": null,
@@ -1215,53 +1229,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Electronic Technician M&P",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-Electronic-Technician-M&P-1710/1436961933",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Focke Mechanic",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-Focke-Mechanic-1710/1437034833",
-      "functionTag": "operations"
-    },
-    {
-      "title": "KDF Mechanic",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-KDF-Mechanic-1710/1437047733",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Maintenance Mechanic M&P",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-Maintenance-Mechanic-M&P-1710/1437135833",
-      "functionTag": "operations"
-    },
-    {
       "title": "People & Culture Business Partner Manager, GSC Manufacturing",
       "company": "JTI Bangladesh",
       "deadline": null,
       "url": "https://jobs.jti.com/job/TONGI-People-&-Culture-Business-Partner-Manager%2C-GSC-Manufacturing-1710/1436979033",
       "functionTag": "human_resources"
-    },
-    {
-      "title": "Protos Mechanic",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-Protos-Mechanic-1710/1437061233",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Shift Lead",
-      "company": "JTI Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.jti.com/job/TONGI-Shift-Lead-1710/1437116833",
-      "functionTag": "operations"
     },
     {
       "title": "Staff Platform Engineer, Infrastructure",
@@ -1289,13 +1261,6 @@
       "company": "Field Nation",
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/8b600331-0a88-4218-9dd5-90da25adc840",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Customer Success Manager (Low Touch)",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/b18a7188-473a-48dd-8d9d-9a54513fc6fd",
       "functionTag": "customer_service"
     },
     {
@@ -1360,13 +1325,6 @@
       "deadline": "2026-10-01",
       "url": "https://jobs.standardchartered.com/job/Director-Trade-Momentum-Advisor/62533-en_GB",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Manager, WRB Data & Analytics",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://jobs.standardchartered.com/job/Manager%2C-WRB-Data-&amp;-Analytics/58725-en_GB",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Relationship Manager, SME Banking",
@@ -1446,6 +1404,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Manager, Corporate & Institutional Banking (CIB) Business Finance, Finance (Vice President)",
+      "company": "HSBC Bangladesh",
+      "deadline": null,
+      "url": "https://portal.careers.hsbc.com/careers/job/563774612312014",
+      "functionTag": "finance_accounting"
+    },
+    {
       "title": "Quality Assurance (QA) Engineer",
       "company": "WellDev",
       "deadline": "2026-09-30",
@@ -1481,13 +1446,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Cloud Engineering / DevOps Engineering Support Service",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/cloud-engineer",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Digital PR & Communication Specialist",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1495,18 +1453,18 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "Graphics Designer",
+      "company": "Riseup Labs",
+      "deadline": null,
+      "url": "https://riseuplabs.com/jobs/graphics-designer",
+      "functionTag": "design_creative"
+    },
+    {
       "title": "Content Writer (Intern)",
       "company": "Riseup Labs",
       "deadline": null,
       "url": "https://riseuplabs.com/jobs/internship-content-writer",
       "functionTag": "marketing_communications"
-    },
-    {
-      "title": "IT Infrastructure & Network Lead",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/it-infrastructure-network-lead",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Social Media Executive",
@@ -1628,13 +1586,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "ASPIRE Internship Program 2026",
-      "company": "Syngenta Group",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/internships/syngenta-aspire-internship-program-2026",
-      "functionTag": "other"
-    },
-    {
       "title": "Entertainment & Content Intern",
       "company": "Akash Digital TV",
       "deadline": "2026-10-15",
@@ -1654,20 +1605,6 @@
       "deadline": "2026-09-23",
       "url": "https://thecvguy.net/jobs-in-bd/first4freelancers-is-hiring-jobs-bd-2026",
       "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Marketing Manager",
-      "company": "ShareViral",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/jobs-in-bd/shareviral-job-circular-2026-opportunities",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Education Counselor",
-      "company": "StairTouch Education Consultancy",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/jobs-in-bd/stairtouch-education-consultancy-is-hiring",
-      "functionTag": "education"
     },
     {
       "title": "Senior Counselor – UK Division",
@@ -1703,13 +1640,6 @@
       "deadline": "2026-09-25",
       "url": "https://thecvguy.net/mnc-jobs/a-p-moller-maersk-is-hiring-mnc-career",
       "functionTag": "program_project_management"
-    },
-    {
-      "title": "Intern – Trade Marketing",
-      "company": "Arla Foods Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/mnc-jobs/arla-internship-2026-intern-trade-marketing",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Assistant Leaf Officer",
@@ -1751,13 +1681,6 @@
       "company": "Colgate Palmolive Bangladesh",
       "deadline": "2026-09-30",
       "url": "https://thecvguy.net/mnc-jobs/colgate-palmolive-hiring-territory-manager",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Territory Manager",
-      "company": "Colgate Palmolive Bangladesh",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/mnc-jobs/colgate-palmolive-hiring-territory-manager-2",
       "functionTag": "sales_business_development"
     },
     {
@@ -1815,13 +1738,6 @@
       "deadline": "2026-10-01",
       "url": "https://thecvguy.net/mnc-jobs/marico-bangladesh-ltd-is-hiring-deputy-tm",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager - Business Finance",
-      "company": "Marico Bangladesh Limited",
-      "deadline": "2026-09-20",
-      "url": "https://thecvguy.net/mnc-jobs/marico-bangladesh-ltd-job-circular-2026",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Officer- Imports & Packaging Materials",
