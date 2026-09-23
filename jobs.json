@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-22T17:01:34.244Z",
+  "generatedAt": "2026-09-23T07:25:43.598Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -788,13 +788,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Sales Supervisor (Aarong Dairy)",
-      "company": "BRAC",
-      "deadline": "2026-09-22",
-      "url": "https://careers.brac.net/jobs/sales-supervisor-aarong-dairy-3019?bulk=false",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Senior Officer, Inquiry, Safeguarding & Grievance Management",
       "company": "BRAC",
       "deadline": "2026-09-28",
@@ -928,10 +921,38 @@
       "functionTag": "operations"
     },
     {
+      "title": "Specialist, Corporate Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-corporate-sales-in-dhaka-bangladesh-jid-3155",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Specialist, Field Sales",
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3108",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3109",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Specialist, Field Sales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3110",
       "functionTag": "sales_business_development"
     },
     {
@@ -1089,13 +1110,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Head of Project & Delivery",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11864",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Android Developer (Native)",
       "company": "Inument Solution Limited",
       "deadline": null,
@@ -1205,6 +1219,13 @@
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
       "url": "https://jobs.ashbyhq.com/Commure/cd6b0b25-51f7-4bc6-9c1e-e339421dcc60",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Corporate Security Manager, Leaf",
+      "company": "JTI Bangladesh",
+      "deadline": null,
+      "url": "https://jobs.jti.com/job/DHAKA-Corporate-Security-Manager%2C-Leaf-1212/1432748233",
       "functionTag": "operations"
     },
     {
@@ -1334,6 +1355,13 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "Senior Marketing Operations Manager",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/fc54bc9d-428a-42c4-a0bd-dd7cf3d7b7e0",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Software Engineer (Fullstack)Full-time",
       "company": "Portonics",
       "deadline": null,
@@ -1346,13 +1374,6 @@
       "deadline": null,
       "url": "https://jobs.smartrecruiters.com/portonicslimited/744000145960279-legal-executive",
       "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Business Development Officer, Employee Banking",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-22",
-      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-Employee-Banking/62201-en_GB",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Business Development Officer, PL, V&V",
@@ -1416,13 +1437,6 @@
       "deadline": null,
       "url": "https://ollyo.com/job/ui-ux-designer",
       "functionTag": "design_creative"
-    },
-    {
-      "title": "Senior Product Manager, Global Trade Solutions (SVP)",
-      "company": "HSBC Bangladesh",
-      "deadline": null,
-      "url": "https://portal.careers.hsbc.com/careers/job/563774612167161",
-      "functionTag": "product"
     },
     {
       "title": "Head of CTO (Chief Technology Office) Technology (Vice President)",
@@ -1551,32 +1565,11 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "General Manager or Senior General Manager, Media Management, Cirkle Marketing (Reff. September 14, 2026)",
-      "company": "Robi Axiata Limited",
-      "deadline": "2026-09-22",
-      "url": "https://robicareer.com/job-portal/jobs/job-detail/6952",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Manager or Senior Manager, Financial Accounting and Management Reporting, Finance (Ref. September 20, 2026)",
       "company": "Robi Axiata Limited",
       "deadline": "2026-09-25",
       "url": "https://robicareer.com/job-portal/jobs/job-detail/6955",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "ERP Support (Engineer/Specialist/Lead)",
-      "company": "SELISE Digital Platforms",
-      "deadline": null,
-      "url": "https://selisegroup.com/job/erp-support-engineer-specialist-lead",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Microsoft Dynamics 365 Developer",
-      "company": "SELISE Digital Platforms",
-      "deadline": null,
-      "url": "https://selisegroup.com/job/microsoft-dynamics-365-developer",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Jr. Executive, Customer Experience",
@@ -1647,13 +1640,6 @@
       "deadline": "2026-09-30",
       "url": "https://thecvguy.net/bank-jobs/ab-bank-plc-career-opportunity-2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Associate Business Support Officer / Business Support Officer",
-      "company": "AB Bank PLC",
-      "deadline": "2026-09-22",
-      "url": "https://thecvguy.net/bank-jobs/start-your-banking-ab-bank-plc-abso-bso",
-      "functionTag": "operations"
     },
     {
       "title": "Entertainment & Content Intern",
