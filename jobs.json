@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T07:25:43.598Z",
+  "generatedAt": "2026-09-23T07:57:57.704Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -123,11 +123,11 @@
       "functionTag": "research_consulting"
     },
     {
-      "title": "Territory Sales Officer",
-      "company": "Abul Khair Group",
+      "title": "Executive – Spare Parts (Yamaha Service)",
+      "company": "ACI Motors Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/abul-khair-group/career/territory-sales-officer/2026",
-      "functionTag": "sales_business_development"
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/executive-spare-parts-yamaha-service/2026",
+      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Management Trainee",
@@ -137,6 +137,13 @@
       "functionTag": "other"
     },
     {
+      "title": "Regional / Zonal Sales Manager",
+      "company": "ACI Motors Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/regional-zonal-sales-manager/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Officer, Corporate Sales (Renewable Energy)",
       "company": "ACI Motors Limited",
       "deadline": null,
@@ -144,10 +151,38 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Executive / Senior Executive",
+      "company": "ACI PLC",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career/executive-senior-executive/2026",
+      "functionTag": "other"
+    },
+    {
       "title": "Supervisor, Engineering",
       "company": "ACI PLC",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career/supervisor-engineering/2026",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Technician",
+      "company": "ACI PLC",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-plc/career/technician/2026",
+      "functionTag": "other"
+    },
+    {
+      "title": "Engineering Intern",
+      "company": "ACI/ACI Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/aci-semiconductor-limited/career/engineering-intern/2026",
+      "functionTag": "other"
+    },
+    {
+      "title": "Centre Manager – WFS",
+      "company": "ActionAid Bangladesh (AAB)",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/actionaid-bangladesh/career/centre-manager-wfs/2026",
       "functionTag": "operations"
     },
     {
@@ -158,11 +193,39 @@
       "functionTag": "product"
     },
     {
-      "title": "Intern – AI Engineer",
+      "title": "Sr. Officer, Marketing",
+      "company": "Agora Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/agora-limited/career/sr-officer-marketing/2026",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Executive – Audit",
+      "company": "Amanat Shah Group",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/amanat-shah-group/career/executive-audit/2026",
+      "functionTag": "finance_accounting"
+    },
+    {
+      "title": "Data Engineer",
       "company": "Anwar Group of Industries",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/anwar-group-of-industries/career/intern-ai-engineer/2026",
-      "functionTag": "software_engineering"
+      "url": "https://bdrecruit.net/jobs-in-bd/anwar-group-of-industries/career/data-engineer/2026",
+      "functionTag": "data_analytics"
+    },
+    {
+      "title": "Operation Manager",
+      "company": "Apex Footwear Limited/Apex Footwear Ltd.",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/apex-footwear-limited/career/operation-manager/2026",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Intern – Finance & Accounts",
+      "company": "Arogga Ltd./Arogga Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/intern-finance-accounts/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Manager / Senior Manager",
@@ -172,6 +235,20 @@
       "functionTag": "other"
     },
     {
+      "title": "Senior Executive / Assistant Manager – Lab Operations",
+      "company": "Arogga Ltd./Arogga Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/senior-executive-assistant-manager-lab-operations/2026",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Trainer (Construction Trade)",
+      "company": "As-Sunnah Foundation/ As-Sunnah Skill Development Institute",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/as-sunnah-skill-development-institute/career/trainer-construction-trade/2026",
+      "functionTag": "education"
+    },
+    {
       "title": "Officer – Protective Coatings",
       "company": "Asian Paints Bangladesh",
       "deadline": null,
@@ -179,25 +256,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Officer – Stores",
-      "company": "Asian Paints Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/asian-paints-bangladesh/career/officer-stores/2026",
-      "functionTag": "supply_chain_procurement"
-    },
-    {
       "title": "Sales Manager – Solar Energy",
       "company": "BANGLAMARK",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/banglamark-fusion-energy/career/sales-manager-solar-energy/2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "IT & Product Operations Coordinator",
-      "company": "BANGLAMARK",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/banglamark-limited/career/it-product-operations-coordinator/2026",
-      "functionTag": "product"
     },
     {
       "title": "Deputy Manager / Jr. Assistant Manager",
@@ -235,6 +298,13 @@
       "functionTag": "education"
     },
     {
+      "title": "Senior Executive / Assistant Manager – Regulatory",
+      "company": "BRACNet Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/bracnet-limited/career/senior-executive-assistant-manager/2026",
+      "functionTag": "legal_compliance"
+    },
+    {
       "title": "Senior Executive/Assistant Manager",
       "company": "BRACNet Limited",
       "deadline": null,
@@ -256,6 +326,20 @@
       "functionTag": "supply_chain_procurement"
     },
     {
+      "title": "Sr. Executive / Asst. Brand Manager – Marketing",
+      "company": "Chery Bangladesh",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/chery-bangladesh/career/sr-executive-asst-brand-manager-marketing/2026",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Regional Sales Manager/Territory Sales Manager",
+      "company": "City Group",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/city-group/career/regional-sales-manager-rsm/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Senior Sales Manager",
       "company": "Coats",
       "deadline": null,
@@ -263,24 +347,17 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Sr. Officer / Executive",
-      "company": "Crown Cement PLC",
+      "title": "Territory Sales Executive",
+      "company": "Dabur Bangladesh",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/crown-cement/crown-polymer-bagging-ltd./career/sr-officer-executive-store/2026",
-      "functionTag": "other"
+      "url": "https://bdrecruit.net/jobs-in-bd/dabur-bangladesh/career/territory-sales-executive/2026",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Assistant Manager – Brands & Social Media",
       "company": "Daraz Bangladesh",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/daraz-bangladesh/career/assistant-manager-brands-social-media/2026",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Executive – Campaigns & Channels",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/daraz-bangladesh/career/executive-campaigns-channels/2026",
       "functionTag": "marketing_communications"
     },
     {
@@ -298,11 +375,11 @@
       "functionTag": "operations"
     },
     {
-      "title": "Business Development Executive",
-      "company": "First4freelancers",
+      "title": "Head of Marketing & Merchandising",
+      "company": "Fakir Fashion Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/first4freelancers/career/business-development-executive/2026",
-      "functionTag": "sales_business_development"
+      "url": "https://bdrecruit.net/jobs-in-bd/fakir-fashion/career/head-of-marketing-merchandising/2026",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Assistant Manager – HORECA",
@@ -312,18 +389,11 @@
       "functionTag": "other"
     },
     {
-      "title": "Medical Information Officer",
-      "company": "Healthcare Pharmaceuticals Ltd.",
+      "title": "Education Coordinator (Teachers’ Supervisor)",
+      "company": "JAAGO Foundation",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/healthcare-pharmaceuticals-ltd./career/medical-information-officer/2026",
-      "functionTag": "healthcare"
-    },
-    {
-      "title": "Executive – Compliance",
-      "company": "Hirdaramani Bangladesh",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/hirdaramani-bangladesh/career/executive-compliance/2026",
-      "functionTag": "legal_compliance"
+      "url": "https://bdrecruit.net/jobs-in-bd/jaago-foundation/career/education-coordinator-teachers-supervisor/2026",
+      "functionTag": "education"
     },
     {
       "title": "Deputy CRM Manager",
@@ -340,32 +410,25 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Key Account Manager",
-      "company": "Nagad Limited",
+      "title": "Officer / Executive, Technical Service",
+      "company": "Omera LPG",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career/key-account-manager/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Software Engineer",
-      "company": "Nagad Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career/senior-software-engineer/2026",
-      "functionTag": "software_engineering"
-    },
-    {
-      "title": "Assistant Manager – Door Operation",
-      "company": "NPOLY (National Polymer)",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/national-polymer-group/career/assistant-manager-door-operation/2026",
+      "url": "https://bdrecruit.net/jobs-in-bd/omera-lpg/career/officer-executive-technical-service/2026",
       "functionTag": "operations"
     },
     {
-      "title": "Executive – Issue Resolution",
+      "title": "Claims & Issue Resolution Expert",
       "company": "Paperfly/Paperfly Private Limited",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/paperfly-private-limited/career/executive-issue-resolution/2026",
+      "url": "https://bdrecruit.net/jobs-in-bd/paperfly-private-limited/career/claims-issue-resolution-expert/2026",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Executive / Sr. Executive – FP&A",
+      "company": "Paperfly/Paperfly Private Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/paperfly/career/executive-sr-executive/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "BI Analyst, Rides",
@@ -375,18 +438,11 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Intern, Couriertech",
-      "company": "Pathao",
+      "title": "Head of Fraud Risk Management, ICCD",
+      "company": "Prime Bank PLC",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/pathao/career/intern-couriertech/2026",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Senior Executive, Data & Business Automation",
-      "company": "Pathao Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/pathao/career/senior-executive-data-business-automation/2026",
-      "functionTag": "data_analytics"
+      "url": "https://bdrecruit.net/jobs-in-bd/prime-bank-plc./career/head-of-fraud-risk-management-iccd/2026",
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Management Trainee Officer",
@@ -396,18 +452,18 @@
       "functionTag": "other"
     },
     {
+      "title": "Territory Sales Manager",
+      "company": "Radiant Care Limited",
+      "deadline": null,
+      "url": "https://bdrecruit.net/jobs-in-bd/radiant-care-limited/career/territory-sales-manager/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Assistant Manager – Quality Control",
       "company": "RANCON Engineering & Consultants",
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/rancon-engineering-consultants/career/assistant-manager-quality-control/2026",
       "functionTag": "operations"
-    },
-    {
-      "title": "Manager / Deputy Manager",
-      "company": "RANCON Engineering & Consultants",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/rancon-engineering-consultants/career/manager-deputy-manager/2026",
-      "functionTag": "other"
     },
     {
       "title": "Head of Sales",
@@ -431,13 +487,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Senior Brand Executive / Brand Manager",
-      "company": "Remark HB Limited",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/remark-hb-limited/career/senior-brand-executive-brand-manager/2026",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Outlet Branch In-Charge",
       "company": "Sailor",
       "deadline": null,
@@ -450,13 +499,6 @@
       "deadline": null,
       "url": "https://bdrecruit.net/jobs-in-bd/shanta-holdings-ltd./career/head-of-sales-regional-office/2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Digital Product Manager",
-      "company": "Shanta Securities",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/shanta-securities/career/digital-product-manager/2026",
-      "functionTag": "product"
     },
     {
       "title": "Junior Officer, ERP",
@@ -480,18 +522,11 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Executive – Airport Operations",
-      "company": "US-Bangla Airlines",
+      "title": "Sr. Officer / Executive / Sr. Executive",
+      "company": "Upay/ উপায় (UCB Fintech Company Limited)",
       "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/us-bangla-airlines/career/executive-airport-operations/2026",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Business Analyst to Director",
-      "company": "Walton Hi-Tech Industries PLC.",
-      "deadline": null,
-      "url": "https://bdrecruit.net/jobs-in-bd/walton-hi-tech-industries-plc/career/business-analyst-to-director/2026",
-      "functionTag": "data_analytics"
+      "url": "https://bdrecruit.net/jobs-in-bd/upay/career/sr-officer-executive-sr-executive/2026",
+      "functionTag": "other"
     },
     {
       "title": "Executive – Accounts",
@@ -732,6 +767,27 @@
       "functionTag": "operations"
     },
     {
+      "title": "Deputy Manager, Operations",
+      "company": "BRAC",
+      "deadline": "2026-10-29",
+      "url": "https://careers.brac.net/jobs/deputy-manager-operations-3044?bulk=false",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Deputy Manager, Procurement & Admin (BRAC Kumon Ltd.)",
+      "company": "BRAC",
+      "deadline": "2026-09-26",
+      "url": "https://careers.brac.net/jobs/deputy-manager-procurement-admin-brac-kumon-ltd-3041?bulk=false",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
+      "title": "Deputy Manager, Procurement, Procurement Department",
+      "company": "BRAC",
+      "deadline": "2026-10-01",
+      "url": "https://careers.brac.net/jobs/deputy-manager-procurement-procurement-department-3042?bulk=false",
+      "functionTag": "supply_chain_procurement"
+    },
+    {
       "title": "Engineer, Construction Department",
       "company": "BRAC",
       "deadline": "2026-09-26",
@@ -807,6 +863,13 @@
       "deadline": "2026-09-23",
       "url": "https://careers.brac.net/jobs/trainer-brac-education-programme-3037?bulk=false",
       "functionTag": "education"
+    },
+    {
+      "title": "Organic Traffic & Growth Manager",
+      "company": "Enosis Solutions",
+      "deadline": "2026-10-31",
+      "url": "https://careers.enosisbd.com/en/postings/28f5f5c5-8b7e-4c2b-8097-0243a668a1e3",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Business Development Executive (Night Shift & Remote)",
@@ -1633,6 +1696,13 @@
       "deadline": "2026-09-23",
       "url": "https://shopup.org/job-postings/sales-performance-executive",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "ShopUp Fast Track (Tech)",
+      "company": "ShopUp",
+      "deadline": "2026-09-30",
+      "url": "https://shopup.org/job-postings/shopup-fast-track-tech-2",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Sales Officer",
