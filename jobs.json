@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T07:57:57.704Z",
+  "generatedAt": "2026-09-24T07:32:41.432Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -718,6 +718,20 @@
       "functionTag": "general_management"
     },
     {
+      "title": "Area IT Manager Operations",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/dhaka/area-it-manager-operations/1045/45065086400",
+      "functionTag": "operations"
+    },
+    {
+      "title": "External Engagement Manager- General",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/dhaka/external-engagement-manager-general/1045/42281076544",
+      "functionTag": "marketing_communications"
+    },
+    {
       "title": "Junior Team Leader - Savar",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -858,13 +872,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Trainer, BRAC Education Programme",
-      "company": "BRAC",
-      "deadline": "2026-09-23",
-      "url": "https://careers.brac.net/jobs/trainer-brac-education-programme-3037?bulk=false",
-      "functionTag": "education"
-    },
-    {
       "title": "Organic Traffic & Growth Manager",
       "company": "Enosis Solutions",
       "deadline": "2026-10-31",
@@ -963,25 +970,11 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Partner Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
-      "functionTag": "customer_service"
-    },
-    {
       "title": "Senior Executive, Finance (R2R)",
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Shift Lead, Partner Service",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/shift-lead-partner-service-in-dhaka-bangladesh-jid-3122",
-      "functionTag": "operations"
     },
     {
       "title": "Specialist, Corporate Sales",
@@ -1059,13 +1052,6 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Product-Manager-1212-BD/1360527755",
       "functionTag": "product"
-    },
-    {
-      "title": "Sales Operations Associate",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Sales-Operations-Associate-1212-BD/1367702255",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Senior Customer Success Manager",
@@ -1166,11 +1152,11 @@
       "functionTag": "program_project_management"
     },
     {
-      "title": "Head of Sales-Cyber Security",
-      "company": "Banglalink",
-      "deadline": null,
-      "url": "https://fa-esth-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/11863",
-      "functionTag": "sales_business_development"
+      "title": "Project Analyst (M&E)(Open to Internal & External Applicants)",
+      "company": "UNDP Bangladesh",
+      "deadline": "2026-10-07",
+      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/37087",
+      "functionTag": "program_project_management"
     },
     {
       "title": "Android Developer (Native)",
@@ -1255,13 +1241,6 @@
       "deadline": null,
       "url": "https://jobs.ashbyhq.com/Commure/20f73638-b92f-4d47-bab0-6431db54f0c9",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Senior Data Operations Analyst (Bangladesh)",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/2efd9a17-1510-4c5c-9538-5eeb6435824b",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Data Operations Analyst (Bangladesh)",
@@ -1453,11 +1432,11 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Relationship Manager, SME Banking",
+      "title": "Officer, Regulatory Reporting, WRB Ops",
       "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-23",
-      "url": "https://jobs.standardchartered.com/job/Relationship-Manager%2C-SME-Banking/62212-en_GB",
-      "functionTag": "sales_business_development"
+      "deadline": "2026-09-30",
+      "url": "https://jobs.standardchartered.com/job/Officer%2C-Regulatory-Reporting%2C-WRB-Ops/62950-en_GB",
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Artist/Designer",
@@ -1537,13 +1516,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Jr. Executive, Admin & Compliance",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/admin-executive",
-      "functionTag": "administration"
-    },
-    {
       "title": "Research Writer",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1572,6 +1544,13 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Customer Service Representative (Content Moderation)",
+      "company": "Riseup Labs",
+      "deadline": null,
+      "url": "https://riseuplabs.com/jobs/customer-service-representative",
+      "functionTag": "customer_service"
+    },
+    {
       "title": "Digital PR & Communication Specialist",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1591,6 +1570,13 @@
       "deadline": null,
       "url": "https://riseuplabs.com/jobs/graphics-designer",
       "functionTag": "design_creative"
+    },
+    {
+      "title": "International Customer Support Specialist",
+      "company": "Riseup Labs",
+      "deadline": null,
+      "url": "https://riseuplabs.com/jobs/international-customer-support-specialist",
+      "functionTag": "customer_service"
     },
     {
       "title": "Content Writer (Intern)",
@@ -1635,6 +1621,20 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Associate DevOps Engineer",
+      "company": "SELISE Digital Platforms",
+      "deadline": null,
+      "url": "https://selisegroup.com/job/associate-devops-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior SecOps Engineer",
+      "company": "SELISE Digital Platforms",
+      "deadline": null,
+      "url": "https://selisegroup.com/job/senior-secops-engineer",
+      "functionTag": "software_engineering"
+    },
+    {
       "title": "Jr. Executive, Customer Experience",
       "company": "Shikho",
       "deadline": null,
@@ -1677,27 +1677,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Key Account Manager",
-      "company": "ShopUp",
-      "deadline": "2026-09-23",
-      "url": "https://shopup.org/job-postings/key-account-manager",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Manager/ Senior Manager, Internal Audit",
-      "company": "ShopUp",
-      "deadline": "2026-09-23",
-      "url": "https://shopup.org/job-postings/manager-senior-manager-internal-audit-2",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Sales Performance Executive",
-      "company": "ShopUp",
-      "deadline": "2026-09-23",
-      "url": "https://shopup.org/job-postings/sales-performance-executive",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "ShopUp Fast Track (Tech)",
       "company": "ShopUp",
       "deadline": "2026-09-30",
@@ -1719,20 +1698,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Recruitment Executive / Recruitment & Compliance Executive",
-      "company": "first4freelancers",
-      "deadline": "2026-09-23",
-      "url": "https://thecvguy.net/jobs-in-bd/first4freelancers-hiring-jobs-in-bd-2026",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Compliance Executive – Bookings / Business Development Executive",
-      "company": "first4freelancers",
-      "deadline": "2026-09-23",
-      "url": "https://thecvguy.net/jobs-in-bd/first4freelancers-is-hiring-jobs-bd-2026",
-      "functionTag": "legal_compliance"
-    },
-    {
       "title": "Senior Counselor – UK Division",
       "company": "StudyAra",
       "deadline": "2026-09-30",
@@ -1745,13 +1710,6 @@
       "deadline": "2026-09-30",
       "url": "https://thecvguy.net/jobs-in-bd/studyara-is-hiring-job-circular-2026-2",
       "functionTag": "education"
-    },
-    {
-      "title": "Sr. Executive - Brand",
-      "company": "Travela",
-      "deadline": "2026-09-23",
-      "url": "https://thecvguy.net/jobs-in-bd/travela-is-hiring-senior-executive-brand",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Operations Technology (OT) Project Manager",
