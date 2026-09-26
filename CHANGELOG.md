@@ -2,7 +2,7 @@
 
 All notable changes are documented here.
 
-## 1.7.0 - 2026-09-26
+## 1.6.6 - 2026-09-26
 
 - Add a public landing page for logged-out visitors.
 - Simplify sign-up by removing redundant helper copy.
@@ -152,7 +152,7 @@ All notable changes are documented here.
 - Make resume pagination automatic and add an administrator deadline calendar
 - Deliver a mobile-friendly application with preview-local pinch and trackpad zoom
 - Align administrator job cards with the main app and add protected user deletion
-- Add agent-managed Semantic Versioning and automated GitHub releases
+- Add agent-managed release versioning and automated GitHub releases
 
 ## 0.1.0
 

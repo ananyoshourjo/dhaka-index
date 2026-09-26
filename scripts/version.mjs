@@ -13,7 +13,7 @@ const files = {
   packageLock: path.join(repositoryRoot, "package-lock.json"),
   changelog: path.join(repositoryRoot, "CHANGELOG.md"),
 };
-const validImpacts = new Set(["patch", "minor", "major"]);
+const validImpacts = new Set(["minor", "major", "phase"]);
 
 function fail(message) {
   console.error(message);
@@ -32,24 +32,24 @@ function parseVersion(version) {
   const match = /^(\d+)\.(\d+)\.(\d+)$/.exec(version);
 
   if (!match) {
-    fail(`Invalid Semantic Version: ${version}`);
+    fail(`Invalid phase.major.minor version: ${version}`);
   }
 
   return match.slice(1).map(Number);
 }
 
 function nextVersion(version, impact) {
-  const [major, minor, patch] = parseVersion(version);
+  const [phase, major, minor] = parseVersion(version);
+
+  if (impact === "phase") {
+    return `${phase + 1}.0.0`;
+  }
 
   if (impact === "major") {
-    return `${major + 1}.0.0`;
+    return `${phase}.${major + 1}.0`;
   }
 
-  if (impact === "minor") {
-    return `${major}.${minor + 1}.0`;
-  }
-
-  return `${major}.${minor}.${patch + 1}`;
+  return `${phase}.${major}.${minor + 1}`;
 }
 
 function loadVersionState() {
@@ -142,10 +142,67 @@ if (command === "plan") {
   const impact = args[0];
 
   if (!validImpacts.has(impact)) {
-    fail("Usage: node scripts/version.mjs plan <patch|minor|major>");
+    fail("Usage: node scripts/version.mjs plan <minor|major|phase>");
   }
 
   console.log(nextVersion(currentVersion, impact));
+  process.exit(0);
+}
+
+if (command === "correct-release") {
+  const from = optionValues(args, "--from")[0];
+  const to = optionValues(args, "--to")[0];
+
+  if (!from || !to) {
+    fail(
+      "Usage: node scripts/version.mjs correct-release --from <version> --to <version>",
+    );
+  }
+
+  parseVersion(from);
+  parseVersion(to);
+
+  if (currentVersion !== from) {
+    fail(`Current package version is ${currentVersion}, not ${from}.`);
+  }
+
+  const changelog = fs.readFileSync(files.changelog, "utf8");
+  const headings = [
+    ...changelog.matchAll(/^## (\d+\.\d+\.\d+)(?: - [^\r\n]+)?$/gm),
+  ];
+  const [currentHeading, previousHeading] = headings;
+
+  if (!currentHeading || currentHeading[1] !== from || !previousHeading) {
+    fail(
+      "The changelog does not have the expected current and previous releases.",
+    );
+  }
+
+  if (headings.some((heading) => heading[1] === to)) {
+    fail(`CHANGELOG.md already contains ${to}.`);
+  }
+
+  if (nextVersion(previousHeading[1], "minor") !== to) {
+    fail(
+      `The corrected version must be the next MINOR version after ${previousHeading[1]}.`,
+    );
+  }
+
+  const correctedChangelog = changelog.replace(
+    /^## \d+\.\d+\.\d+(?= - |$)/m,
+    `## ${to}`,
+  );
+  state.rootPackage.version = to;
+  state.adminPackage.version = to;
+  state.packageLock.version = to;
+  state.packageLock.packages[""].version = to;
+  state.packageLock.packages["admin-portal"].version = to;
+
+  writeJson(files.rootPackage, state.rootPackage);
+  writeJson(files.adminPackage, state.adminPackage);
+  writeJson(files.packageLock, state.packageLock);
+  fs.writeFileSync(files.changelog, correctedChangelog);
+  console.log(`Corrected the latest release version ${from} -> ${to}.`);
   process.exit(0);
 }
 
@@ -156,14 +213,14 @@ if (command === "notes") {
 
 if (command !== "bump") {
   fail(
-    "Usage: node scripts/version.mjs <check|notes|plan|bump> [patch|minor|major]",
+    "Usage: node scripts/version.mjs <check|notes|plan|bump|correct-release> [minor|major|phase]",
   );
 }
 
 const impact = args[0];
 
 if (!validImpacts.has(impact)) {
-  fail("Usage: node scripts/version.mjs bump <patch|minor|major> --note <text>");
+  fail("Usage: node scripts/version.mjs bump <minor|major|phase> --note <text>");
 }
 
 const notes = optionValues(args.slice(1), "--note");
