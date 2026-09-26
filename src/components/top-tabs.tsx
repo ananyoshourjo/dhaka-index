@@ -77,7 +77,12 @@ export function TopTabs() {
       window.removeEventListener("profile-photo-change", handleProfilePhotoChange);
   }, [user?.id]);
 
-  if (pathname === "/login" || pathname === "/signup") {
+  const showLogoOnlyHeader =
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    (pathname === "/" && !session.data);
+
+  if (showLogoOnlyHeader) {
     return (
       <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
         <nav className="mx-auto flex h-14 w-full max-w-3xl items-center justify-center px-4 sm:px-6">

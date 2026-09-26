@@ -94,10 +94,7 @@ export function AuthForm({ mode }: AuthFormProps) {
             required
             value={preferredJobFunction}
           >
-            <SelectTrigger
-              aria-describedby="job-interest-description"
-              className="w-full"
-            >
+            <SelectTrigger className="w-full">
               <SelectValue placeholder="Select a job function" />
             </SelectTrigger>
             <SelectContent>
@@ -108,12 +105,6 @@ export function AuthForm({ mode }: AuthFormProps) {
               ))}
             </SelectContent>
           </Select>
-          <span
-            id="job-interest-description"
-            className="font-normal leading-5 text-muted-foreground"
-          >
-            Used to keep future job alerts relevant to the work you want.
-          </span>
         </label>
       ) : null}
 
