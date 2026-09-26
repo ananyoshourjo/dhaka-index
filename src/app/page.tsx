@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { JobFeedSync } from "@/components/job-feed-sync";
 import { JobFilterBar } from "@/components/job-filter-bar";
 import { JobList } from "@/components/job-list";
+import { PublicLanding } from "@/components/public-landing";
 import {
   archiveJobById,
   bookmarkJobById,
@@ -16,7 +17,7 @@ import {
   type JobSearchParams,
 } from "@/lib/job-search";
 import { getActiveJobs } from "@/lib/jobs";
-import { requireUser } from "@/lib/session";
+import { getSession, requireUser } from "@/lib/session";
 
 async function archiveJobAction(formData: FormData) {
   "use server";
@@ -57,11 +58,14 @@ type HomePageProps = {
 };
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  const [user, filters] = await Promise.all([
-    requireUser(),
-    searchParams.then(parseActiveJobFilters),
-  ]);
-  const page = await getActiveJobs(user.id, filters);
+  const session = await getSession();
+
+  if (!session) {
+    return <PublicLanding />;
+  }
+
+  const filters = await searchParams.then(parseActiveJobFilters);
+  const page = await getActiveJobs(session.user.id, filters);
 
   return (
     <>

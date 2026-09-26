@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.7.0 - 2026-09-26
+
+- Add a public landing page for logged-out visitors.
+- Simplify sign-up by removing redundant helper copy.
+
 ## 1.6.5 - 2026-09-16
 
 - Polish profile photo controls and layout
