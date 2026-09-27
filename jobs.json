@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T16:44:04.738Z",
+  "generatedAt": "2026-09-27T12:52:42.224Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -79,6 +79,41 @@
       "deadline": "2026-10-06",
       "url": "https://apps.idlc.com/career/jobsDetails/2195",
       "functionTag": "software_engineering"
+    },
+    {
+      "title": "Category Manager, Commercial",
+      "company": "Daraz Bangladesh",
+      "deadline": null,
+      "url": "https://bd.daraz.io/cms/2018/voucher/commercial.png",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Junior Executive/Executive, Customer Service",
+      "company": "Daraz Bangladesh",
+      "deadline": null,
+      "url": "https://bd.daraz.io/cms/2018/voucher/customer.png",
+      "functionTag": "customer_service"
+    },
+    {
+      "title": "Internship, Marketing",
+      "company": "Daraz Bangladesh",
+      "deadline": null,
+      "url": "https://bd.daraz.io/cms/2018/voucher/marketing.png",
+      "functionTag": "marketing_communications"
+    },
+    {
+      "title": "Internship, Operations",
+      "company": "Daraz Bangladesh",
+      "deadline": null,
+      "url": "https://bd.daraz.io/cms/2018/voucher/operations.png",
+      "functionTag": "operations"
+    },
+    {
+      "title": "Executive, Talent Management",
+      "company": "Daraz Bangladesh",
+      "deadline": null,
+      "url": "https://bd.daraz.io/cms/2018/voucher/talent.png",
+      "functionTag": "human_resources"
     },
     {
       "title": "Sub-Branch In-Charge",
@@ -872,13 +907,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Deputy Manager, Procurement & Admin (BRAC Kumon Ltd.)",
-      "company": "BRAC",
-      "deadline": "2026-09-26",
-      "url": "https://careers.brac.net/jobs/deputy-manager-procurement-admin-brac-kumon-ltd-3041?bulk=false",
-      "functionTag": "supply_chain_procurement"
-    },
-    {
       "title": "Deputy Manager, Procurement, Procurement Department",
       "company": "BRAC",
       "deadline": "2026-10-01",
@@ -893,13 +921,6 @@
       "functionTag": "human_resources"
     },
     {
-      "title": "Engineer, Construction Department",
-      "company": "BRAC",
-      "deadline": "2026-09-26",
-      "url": "https://careers.brac.net/jobs/engineer-construction-department-3029?bulk=false",
-      "functionTag": "operations"
-    },
-    {
       "title": "Manager, Budget and Finance, Social Compliance",
       "company": "BRAC",
       "deadline": "2026-09-28",
@@ -907,31 +928,10 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Manager, MEAL, BRAC Health Programme (BHP)",
-      "company": "BRAC",
-      "deadline": "2026-09-26",
-      "url": "https://careers.brac.net/jobs/manager-meal-brac-health-programme-bhp-3031?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
       "title": "Manager, MIS and MEAL, Social Compliance",
       "company": "BRAC",
       "deadline": "2026-09-28",
       "url": "https://careers.brac.net/jobs/manager-mis-and-meal-social-compliance-3036?bulk=false",
-      "functionTag": "program_project_management"
-    },
-    {
-      "title": "Plumber, Maintenance Department",
-      "company": "BRAC",
-      "deadline": "2026-09-26",
-      "url": "https://careers.brac.net/jobs/plumber-maintenance-department-3030?bulk=false",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Project Manager, BRAC Health Programme (BHP)",
-      "company": "BRAC",
-      "deadline": "2026-09-26",
-      "url": "https://careers.brac.net/jobs/project-manager-brac-health-programme-bhp-3028?bulk=false",
       "functionTag": "program_project_management"
     },
     {
@@ -1124,13 +1124,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Marketing Operations Specialist",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Marketing-Operations-Specialist-1212-BD/1362499855",
-      "functionTag": "marketing_communications"
-    },
-    {
       "title": "Sales Operations Associate",
       "company": "Optimizely",
       "deadline": null,
@@ -1143,6 +1136,13 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Senior-Product-Manager-1212-BD/1360527755",
       "functionTag": "product"
+    },
+    {
+      "title": "Software Engineer II",
+      "company": "Optimizely",
+      "deadline": null,
+      "url": "https://careers.optimizely.com/job/Dhaka-Software-Engineer-II-1212-BD/1363501155",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Strategy & Value Consultant - Data Analyst",
@@ -1159,13 +1159,6 @@
       "functionTag": "human_resources"
     },
     {
-      "title": "Sales Interns",
-      "company": "Reckitt Bangladesh",
-      "deadline": null,
-      "url": "https://careers.reckitt.com/job/Dhaka-Sales-Interns-Dhak-98033/1439534533",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Territory Sales Manager/ Junior Territory Sales Manager",
       "company": "Reckitt Bangladesh",
       "deadline": null,
@@ -1178,6 +1171,34 @@
       "deadline": null,
       "url": "https://careers.unilever.com/en/job/dhaka/strategic-sourcing-manager-mbs-bangladesh/34155/100245211296",
       "functionTag": "supply_chain_procurement"
+    },
+    {
+      "title": "Principal .NET Engineer/Senior .NET Engineer",
+      "company": "Ding",
+      "deadline": null,
+      "url": "https://ding.bamboohr.com/careers/342",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Principal Android Engineer/Senior Android Engineer",
+      "company": "Ding",
+      "deadline": null,
+      "url": "https://ding.bamboohr.com/careers/343",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Principal iOS Engineer/Senior iOS Engineer",
+      "company": "Ding",
+      "deadline": null,
+      "url": "https://ding.bamboohr.com/careers/344",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Principal Web Engineer/Senior Web Engineer",
+      "company": "Ding",
+      "deadline": null,
+      "url": "https://ding.bamboohr.com/careers/345",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Business Development Executive (Night Shift & Remote)",
@@ -1264,6 +1285,27 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Customer Success Manager",
+      "company": "Populate",
+      "deadline": null,
+      "url": "https://job-boards.greenhouse.io/applytopopulate/jobs/4883540004",
+      "functionTag": "customer_service"
+    },
+    {
+      "title": "Senior .NET Software Engineer (Remote: BD)",
+      "company": "Populate",
+      "deadline": null,
+      "url": "https://job-boards.greenhouse.io/applytopopulate/jobs/4962897004",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Front End Engineer (Remote: BD)",
+      "company": "Populate",
+      "deadline": null,
+      "url": "https://job-boards.greenhouse.io/applytopopulate/jobs/4962901004",
+      "functionTag": "software_engineering"
+    },
+    {
       "title": "Sales Development Representative",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1311,13 +1353,6 @@
       "deadline": null,
       "url": "https://jobs.jti.com/job/DHAKA-LEGAL-MANAGER-1212/1436482333",
       "functionTag": "legal_compliance"
-    },
-    {
-      "title": "CELL LEAD, FMD",
-      "company": "JTI Bangladesh",
-      "deadline": null,
-      "url": "https://jobs.jti.com/job/TONGI-CELL-LEAD%2C-FMD-1710/1401800733",
-      "functionTag": "operations"
     },
     {
       "title": "Electronic Technician M&P",
@@ -1369,6 +1404,27 @@
       "functionTag": "software_engineering"
     },
     {
+      "title": "Software Engineer",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/6a0bb6af-674c-4691-9976-f591d2b81642",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Senior Information Security Analyst, GRC",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/7cecef53-6686-45b0-b7a6-8c9b69b0d989",
+      "functionTag": "legal_compliance"
+    },
+    {
+      "title": "Support Coordinator (Night Shift)",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/8b600331-0a88-4218-9dd5-90da25adc840",
+      "functionTag": "customer_service"
+    },
+    {
       "title": "Accounting Manager",
       "company": "Field Nation",
       "deadline": null,
@@ -1381,6 +1437,13 @@
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/b18a7188-473a-48dd-8d9d-9a54513fc6fd",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Marketplace Onboarding Coordinator",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/cb899357-d2c0-4fe2-b70b-8a407fa332cd",
+      "functionTag": "operations"
     },
     {
       "title": "Senior Content Specialist",
@@ -1397,10 +1460,38 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "Software Engineer (Fullstack)Full-time",
+      "company": "Portonics",
+      "deadline": null,
+      "url": "https://jobs.smartrecruiters.com/portonicslimited/744000135481563-software-engineer-fullstack-",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Legal ExecutiveFull-time",
+      "company": "Portonics",
+      "deadline": null,
+      "url": "https://jobs.smartrecruiters.com/portonicslimited/744000145960279-legal-executive",
+      "functionTag": "legal_compliance"
+    },
+    {
+      "title": "Business Development Manager, Outbound",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-30",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Manager%2C-Outbound/62379-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Business Development Officer, CC, V&V",
+      "company": "Standard Chartered Bangladesh",
+      "deadline": "2026-09-30",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-CC%2C-V&amp;V/62310-en_GB",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Business Development Officer, PL, V&V",
       "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-09-26",
-      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-PL%2C-V&amp;V/62552-en_GB",
+      "deadline": "2026-09-29",
+      "url": "https://jobs.standardchartered.com/job/Business-Development-Officer%2C-PL%2C-V&amp;V/62553-en_GB",
       "functionTag": "sales_business_development"
     },
     {
@@ -1458,13 +1549,6 @@
       "deadline": null,
       "url": "https://ollyo.com/job/ui-ux-designer",
       "functionTag": "design_creative"
-    },
-    {
-      "title": "Head of CTO (Chief Technology Office) Technology (Vice President)",
-      "company": "HSBC Bangladesh",
-      "deadline": null,
-      "url": "https://portal.careers.hsbc.com/careers/job/563774612237474",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Senior Relationship Manager, Global Apparel Supply Chain (SVP)",
@@ -1626,13 +1710,6 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/Q7tQZqONBrlW/software-engineer-backend",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Executive/Sr. Executive, Visual Design",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/WfqEGsHMYiPP/executive-sr-executive-visual-design",
-      "functionTag": "design_creative"
     },
     {
       "title": "Academic Counsellor (Jashore Tele-sales)",
@@ -1850,6 +1927,55 @@
       "deadline": "2026-10-01",
       "url": "https://thecvguy.net/mnc-jobs/remark-hb-limited-hiring-sales-manager-mnc",
       "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Associate System Administrator",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk06psj",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Software Engineer, Testing",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0hw8d",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Associate Training and Content Specialist",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0hwee",
+      "functionTag": "education"
+    },
+    {
+      "title": "Training and Implementation Associate",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0sro5",
+      "functionTag": "customer_service"
+    },
+    {
+      "title": "Associate Oncall Engineer",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0xn86",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "Experienced React Developer",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0xsl4",
+      "functionTag": "software_engineering"
+    },
+    {
+      "title": "DevOps Administrator",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0zqwd",
+      "functionTag": "software_engineering"
     },
     {
       "title": "Senior Software Engineer (Full-Stack)",
