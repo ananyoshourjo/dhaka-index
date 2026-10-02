@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T07:28:01.492Z",
+  "generatedAt": "2026-10-02T07:41:49.143Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -72,6 +72,13 @@
       "deadline": "2026-10-09",
       "url": "https://apps.idlc.com/career/jobsDetails/2196",
       "functionTag": "legal_compliance"
+    },
+    {
+      "title": "Officer Grade I/II – Operations Division IDLC Finance PLC",
+      "company": "IDLC Finance PLC",
+      "deadline": "2026-10-10",
+      "url": "https://apps.idlc.com/career/jobsDetails/2197",
+      "functionTag": "operations"
     },
     {
       "title": "Category Manager, Commercial",
@@ -228,6 +235,13 @@
       "functionTag": "other"
     },
     {
+      "title": "Senior Executive, Factory Administration",
+      "company": "ACME Laboratories Ltd.",
+      "deadline": "2026-10-08",
+      "url": "https://bdrecruit.net/jobs-in-bd/acme-laboratories-ltd./career/senior-executive-factory-administration/2026",
+      "functionTag": "administration"
+    },
+    {
       "title": "Data Annotator",
       "company": "Advanced AI Lab Ltd. (ACI)",
       "deadline": "2026-10-11",
@@ -247,6 +261,20 @@
       "deadline": "2026-10-16",
       "url": "https://bdrecruit.net/jobs-in-bd/air-astra/career/executive-ground-operations/2026",
       "functionTag": "operations"
+    },
+    {
+      "title": "Intern, Partnership",
+      "company": "Arogga",
+      "deadline": "2026-10-30",
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga-limited/career/intern-partnership/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
+      "title": "Assistant Manager / Deputy Manager",
+      "company": "Arogga",
+      "deadline": "2026-10-30",
+      "url": "https://bdrecruit.net/jobs-in-bd/arogga/career/assistant-manager-deputy-manager/2026",
+      "functionTag": "other"
     },
     {
       "title": "Intern - Finance & Accounts",
@@ -333,6 +361,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Senior Associate / Executive",
+      "company": "CarryBee Express Ltd.",
+      "deadline": "2026-10-11",
+      "url": "https://bdrecruit.net/jobs-in-bd/carrybee-express-ltd./career/senior-associate-executive/2026",
+      "functionTag": "other"
+    },
+    {
       "title": "Hub In-charge",
       "company": "CarryBee Express",
       "deadline": "2026-10-10",
@@ -340,18 +375,18 @@
       "functionTag": "operations"
     },
     {
+      "title": "Training & Development Manager",
+      "company": "Citizens Bank PLC",
+      "deadline": "2026-10-13",
+      "url": "https://bdrecruit.net/jobs-in-bd/citizens-bank-plc/career/training-development-manager/2026",
+      "functionTag": "human_resources"
+    },
+    {
       "title": "Regional Sales Manager (RSM) & Territory Sales Manager (TSM)",
       "company": "City Group",
       "deadline": "2026-10-05",
       "url": "https://bdrecruit.net/jobs-in-bd/city-group/career/regional-sales-manager-rsm/2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Assistant Manager - Brands & Social Media | Daraz Bangladesh",
-      "company": "Daraz Bangladesh",
-      "deadline": "2026-10-01",
-      "url": "https://bdrecruit.net/jobs-in-bd/daraz-bangladesh/career/assistant-manager-brands-social-media/2026",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Manager - Sample (Knit Products)",
@@ -396,6 +431,13 @@
       "functionTag": "sales_business_development"
     },
     {
+      "title": "Deputy Manager/Manager – Product Development",
+      "company": "Kazi Food Industries Limited",
+      "deadline": "2026-10-08",
+      "url": "https://bdrecruit.net/jobs-in-bd/kazi-food-industries-limited/career/deputy-manager-manager/2026",
+      "functionTag": "product"
+    },
+    {
       "title": "Sales Engineer",
       "company": "Sales Engineer | KSRM Steel Plant Limited (KSRM Group)",
       "deadline": "2026-10-16",
@@ -424,6 +466,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Territory Officer / Territory Manager | Nagad Limited",
+      "company": "Nagad Limited",
+      "deadline": "2026-10-12",
+      "url": "https://bdrecruit.net/jobs-in-bd/nagad-limited/career/territory-officer-territory-manager/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Relationship Officer (AO–Officer) - Branch Banking",
       "company": "National Credit and Commerce Bank PLC",
       "deadline": "2026-10-04",
@@ -450,6 +499,13 @@
       "deadline": "2026-10-11",
       "url": "https://bdrecruit.net/jobs-in-bd/popular-pharmaceuticals-plc/career/executive-microbiology/2026",
       "functionTag": "healthcare"
+    },
+    {
+      "title": "Law Officer, Warrant Execution & Asset Recovery Unit",
+      "company": "Prime Bank PLC.",
+      "deadline": "2026-10-15",
+      "url": "https://bdrecruit.net/jobs-in-bd/prime-bank-plc./career/law-officer-warrant-execution-asset-recovery-unit/2026",
+      "functionTag": "legal_compliance"
     },
     {
       "title": "Manager - Cost & Budget",
@@ -508,6 +564,13 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Sales Coordinator",
+      "company": "Shwapno Express",
+      "deadline": "2026-10-30",
+      "url": "https://bdrecruit.net/jobs-in-bd/shwapno-express/career/sales-coordinator/2026",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Project Manager",
       "company": "Shwapno",
       "deadline": "2026-10-05",
@@ -527,6 +590,13 @@
       "deadline": "2026-10-04",
       "url": "https://bdrecruit.net/jobs-in-bd/square-textiles-division-square-group/career/front-desk-officer/2026",
       "functionTag": "administration"
+    },
+    {
+      "title": "Intern &#8211; Fund of Funds | Startup Bangladesh Limited",
+      "company": "Startup Bangladesh Limited",
+      "deadline": "2026-10-11",
+      "url": "https://bdrecruit.net/jobs-in-bd/startup-bangladesh-limited/career/intern-fund-of-funds/2026",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Senior Executive / Assistant Manager – Sales (Softlines)",
@@ -599,6 +669,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Leaf Depot Operations Officer - Jhenaidah",
+      "company": "British American Tobacco Bangladesh",
+      "deadline": null,
+      "url": "https://careers.bat.com/en/job/jhenaidah-sardar-uz/leaf-depot-operations-officer-jhenaidah/1045/44153007552",
+      "functionTag": "operations"
+    },
+    {
       "title": "Expression of Interest: Leaf Officer",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -632,13 +709,6 @@
       "deadline": "2026-10-03",
       "url": "https://careers.brac.net/jobs/area-manager-brac-education-programme-3045?bulk=false",
       "functionTag": "education"
-    },
-    {
-      "title": "Deputy Manager, Procurement, Procurement Department",
-      "company": "BRAC",
-      "deadline": "2026-10-01",
-      "url": "https://careers.brac.net/jobs/deputy-manager-procurement-procurement-department-3042?bulk=false",
-      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Deputy Manager, Staff Development; Microfinance Programme",
@@ -725,6 +795,13 @@
       "functionTag": "marketing_communications"
     },
     {
+      "title": "Associate, Content & Onboarding",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3239",
+      "functionTag": "operations"
+    },
+    {
       "title": "Associate, Content Onboarding",
       "company": "Foodpanda",
       "deadline": null,
@@ -751,13 +828,6 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/head-local-shops-in-dhaka-bangladesh-jid-3151",
       "functionTag": "general_management"
-    },
-    {
-      "title": "Intern, Demand Planning",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/intern-demand-planning-in-dhaka-bangladesh-jid-3189",
-      "functionTag": "supply_chain_procurement"
     },
     {
       "title": "Lead, Telesales",
@@ -837,34 +907,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Attendant-Food & Beverage",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/attendant-food-beverage/job/P1-7053317-0",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Attendant-Loss Prevention",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/attendant-loss-prevention/job/P1-6724174-0",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Cashier-Food & Beverage Service",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/cashier-food-beverage-service/job/P1-7053330-0",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Commis-II",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/commis-ii/job/P1-7053334-0",
-      "functionTag": "operations"
-    },
-    {
       "title": "Commis",
       "company": "Le Méridien Dhaka",
       "deadline": null,
@@ -877,13 +919,6 @@
       "deadline": null,
       "url": "https://careers.marriott.com/credit-manager/job/P1-6647927-0",
       "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Demi Chef De Partie",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/demi-chef-de-partie/job/P1-7053312-0",
-      "functionTag": "operations"
     },
     {
       "title": "Executive Chef II",
@@ -907,13 +942,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Guest Services Agent",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/guest-services-agent/job/P1-6664910-0",
-      "functionTag": "customer_service"
-    },
-    {
       "title": "Housekeeping - Public Area Attendant",
       "company": "Le Méridien Dhaka",
       "deadline": null,
@@ -926,13 +954,6 @@
       "deadline": null,
       "url": "https://careers.marriott.com/human-resources-assistant/job/P1-6722673-0",
       "functionTag": "human_resources"
-    },
-    {
-      "title": "Sous Chef",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/sous-chef/job/P1-7053311-0",
-      "functionTag": "operations"
     },
     {
       "title": "Waiter/Waitress",
@@ -996,6 +1017,13 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Talent-Acquisition-Specialist-1212-BD/1368790055",
       "functionTag": "human_resources"
+    },
+    {
+      "title": "Executive/Senior Executive, Key Account Management",
+      "company": "Pathao",
+      "deadline": "2026-10-10",
+      "url": "https://careers.pathao.com/blog/jobs/executive-senior-executive-key-account-management",
+      "functionTag": "sales_business_development"
     },
     {
       "title": "Intern, Consumertech",
@@ -1187,13 +1215,6 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Facilities Intern (Bangladesh)",
-      "company": "Commure (Bangladesh Operations)",
-      "deadline": null,
-      "url": "https://jobs.ashbyhq.com/Commure/514b797e-df41-4145-96de-b30564827801",
-      "functionTag": "operations"
-    },
-    {
       "title": "Assistant Manager, RCM Operations (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1220,13 +1241,6 @@
       "deadline": null,
       "url": "https://jobs.jti.com/job/DHAKA-LEGAL-MANAGER-1212/1436482333",
       "functionTag": "legal_compliance"
-    },
-    {
-      "title": "CELL LEAD, FMD",
-      "company": "JTI Bangladesh",
-      "deadline": null,
-      "url": "https://jobs.jti.com/job/TONGI-CELL-LEAD%2C-FMD-1710/1401800733",
-      "functionTag": "operations"
     },
     {
       "title": "Staff Software Engineer",
@@ -1332,13 +1346,6 @@
       "deadline": null,
       "url": "https://jobs.smartrecruiters.com/ShantaAssetManagementLimited/743999766401976-executive-wealth-management",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Director - Trade Momentum Advisor",
-      "company": "Standard Chartered Bangladesh",
-      "deadline": "2026-10-01",
-      "url": "https://jobs.standardchartered.com/job/Director-Trade-Momentum-Advisor/62533-en_GB",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Artist/Designer",
@@ -1579,41 +1586,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Business Development Manager, Outbound",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/bank-jobs/business-development-manager-job-circular-2026-standard-chartered",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Investment Officer",
-      "company": "NRBC Bank PLC",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/bank-jobs/nrbc-bank-plc-investment-officer-bank-jobs",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Relationship Manager",
-      "company": "NRBC Bank PLC",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/bank-jobs/nrbc-bank-plc-relationship-manager-banking",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Business Development Officer, CC, V&V",
-      "company": "Standard Chartered Bank",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/bank-jobs/standard-chartered-is-hiring-banking-jobs",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "BRAC Internship Opportunities 2026 | Multiple Internships at BRAC Bangladesh",
-      "company": "BRAC",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/internships/brac-internship-multiple-opportunities-26",
-      "functionTag": "other"
-    },
-    {
       "title": "Talent Coordinator",
       "company": "Accuretta Universal Services Pty Ltd",
       "deadline": "2026-10-10",
@@ -1656,20 +1628,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Manager – Legal",
-      "company": "Emami Bangladesh Limited",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/mnc-jobs/emami-bangladesh-ltd-is-hiring-manager-mnc",
-      "functionTag": "legal_compliance"
-    },
-    {
-      "title": "Deputy Territory Manager",
-      "company": "Marico Bangladesh Limited",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/mnc-jobs/marico-bangladesh-ltd-is-hiring-deputy-tm",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Executive, Health & Safety",
       "company": "New Zealand Dairy Products (BD) Limited",
       "deadline": "2026-10-04",
@@ -1703,13 +1661,6 @@
       "deadline": "2026-10-03",
       "url": "https://thecvguy.net/mnc-jobs/reckitt-bangladesh-hiring-multiple-mnc-jobs",
       "functionTag": "other"
-    },
-    {
-      "title": "National Sales Manager – HERLAN",
-      "company": "Remark HB Limited",
-      "deadline": "2026-10-01",
-      "url": "https://thecvguy.net/mnc-jobs/remark-hb-limited-hiring-sales-manager-mnc",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Head of Finance",
@@ -1789,17 +1740,17 @@
       "functionTag": "education"
     },
     {
-      "title": "Secondary School Drama",
+      "title": "Secondary Math / IBDP Mathematics Teacher",
       "company": "American International School Dhaka",
       "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/3fb3c7f3-93d6-4402-8b64-867f5622a9ca?dhaka_index_role=secondary-school-drama",
+      "url": "https://www.aisdhaka.org/fs/resource-manager/view/1df1f556-fc4b-4667-a039-8e3bae8fa8d2?dhaka_index_role=secondary-math-ibdp-mathematics-teacher",
       "functionTag": "education"
     },
     {
-      "title": "Secondary Math / IBDP Mathematics",
+      "title": "Secondary Theater Arts Teacher",
       "company": "American International School Dhaka",
       "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/7bd06aa9-d069-4f9a-b19b-1aa798e88b55?dhaka_index_role=secondary-math-ibdp-mathematics",
+      "url": "https://www.aisdhaka.org/fs/resource-manager/view/c378ec09-a2ba-4ecd-b378-a2be09611957?dhaka_index_role=secondary-theater-arts-teacher",
       "functionTag": "education"
     },
     {
@@ -1850,6 +1801,13 @@
       "deadline": null,
       "url": "https://www.isdbd.org/fs/resource-manager/view/f5109fc3-05d8-48aa-ad5b-51ae6d6e5dc4?dhaka_index_role=pyp-visual-arts-teacher",
       "functionTag": "education"
+    },
+    {
+      "title": "Assistant Manager 📍",
+      "company": "Glenrich International School, Uttara",
+      "deadline": null,
+      "url": "https://www.linkedin.com/posts/glenrichuttara_glenrichuttara-glenrichopening-schooloflife-activity-7511390016254681088-bBNF?dhaka_index_role=assistant-manager-uttara-dhaka",
+      "functionTag": "other"
     }
   ]
 }
