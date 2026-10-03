@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T07:41:49.143Z",
+  "generatedAt": "2026-10-03T15:40:31.156Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -116,20 +116,6 @@
       "functionTag": "human_resources"
     },
     {
-      "title": "Sub-Branch In-Charge",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1533481?ln=1",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Relationship Officer / Relationship Manager – Branch Credit Operations",
-      "company": "United Commercial Bank (UCB)",
-      "deadline": null,
-      "url": "https://bdjobs.com/h/details/1533487?ln=1",
-      "functionTag": "finance_accounting"
-    },
-    {
       "title": "Agri Sales Officer (JO-OFFICER)",
       "company": "United Commercial Bank (UCB)",
       "deadline": null,
@@ -151,18 +137,18 @@
       "functionTag": "other"
     },
     {
+      "title": "Head of Software Engineering",
+      "company": "Nagad Limited",
+      "deadline": "2026-10-11",
+      "url": "https://bdrecruit.net/jobs-in-bangladesh/nagad-limited/career/head-of-software-engineering/2026",
+      "functionTag": "software_engineering"
+    },
+    {
       "title": "Sr. Executive - MIS",
       "company": "RANCON Global Trucks Limited – JAC Motors",
       "deadline": "2026-10-15",
       "url": "https://bdrecruit.net/jobs-in-bangladesh/rancon-global-trucks-limited-jac-motors/career/sr-executive-mis/2026",
       "functionTag": "data_analytics"
-    },
-    {
-      "title": "Territory Sales Officer",
-      "company": "Abul Khair Group",
-      "deadline": "2026-10-02",
-      "url": "https://bdrecruit.net/jobs-in-bd/abul-khair-group/career/territory-sales-officer/2026",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Area Sales Manager (ASM)",
@@ -191,13 +177,6 @@
       "deadline": "2026-10-05",
       "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/management-trainee/2026",
       "functionTag": "other"
-    },
-    {
-      "title": "Officer, Corporate Sales (Renewable Energy) | ACI Motors",
-      "company": "ACI Motors",
-      "deadline": "2026-10-02",
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-motors/career/officer-corporate-sales-renewable-energy/2026",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Executive, Regulatory Affairs - Consumer Brands",
@@ -515,13 +494,6 @@
       "functionTag": "finance_accounting"
     },
     {
-      "title": "Territory Sales Manager | Radiant Care Limited",
-      "company": "Radiant Care Limited",
-      "deadline": "2026-10-02",
-      "url": "https://bdrecruit.net/jobs-in-bd/radiant-care-limited/career/territory-sales-manager/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Warehouse In-Charge/Manager",
       "company": "RAK Ceramics (Bangladesh) Limited",
       "deadline": "2026-10-06",
@@ -576,6 +548,13 @@
       "deadline": "2026-10-05",
       "url": "https://bdrecruit.net/jobs-in-bd/shwapno/career/project-manager/2026",
       "functionTag": "program_project_management"
+    },
+    {
+      "title": "Manager, EHS",
+      "company": "SMC Enterprise Ltd.",
+      "deadline": "2026-10-18",
+      "url": "https://bdrecruit.net/jobs-in-bd/smc-enterprise-ltd./career/manager-ehs/2026",
+      "functionTag": "operations"
     },
     {
       "title": "In-Charge / Asst. Manager",
@@ -662,13 +641,6 @@
       "functionTag": "operations"
     },
     {
-      "title": "Maintenance lead - FMD - Savar",
-      "company": "British American Tobacco Bangladesh",
-      "deadline": null,
-      "url": "https://careers.bat.com/en/job/dhaka/maintenance-lead-fmd-savar/1045/44978730560",
-      "functionTag": "operations"
-    },
-    {
       "title": "Leaf Depot Operations Officer - Jhenaidah",
       "company": "British American Tobacco Bangladesh",
       "deadline": null,
@@ -695,13 +667,6 @@
       "deadline": null,
       "url": "https://careers.bat.com/en/job/lalmonirhat/assistant-leaf-officer-lalmonirhat/1045/43884981312",
       "functionTag": "operations"
-    },
-    {
-      "title": "Area Ambassador (Project Staff)",
-      "company": "BRAC",
-      "deadline": "2026-10-02",
-      "url": "https://careers.brac.net/jobs/area-ambassador-project-staff-3046?bulk=false",
-      "functionTag": "other"
     },
     {
       "title": "Area Manager, BRAC Education Programme",
@@ -875,13 +840,6 @@
       "title": "Specialist, Field Sales",
       "company": "Foodpanda",
       "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-sylhet-bangladesh-jid-3205",
       "functionTag": "sales_business_development"
     },
@@ -1012,13 +970,6 @@
       "functionTag": "data_analytics"
     },
     {
-      "title": "Talent Acquisition Specialist",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Talent-Acquisition-Specialist-1212-BD/1368790055",
-      "functionTag": "human_resources"
-    },
-    {
       "title": "Executive/Senior Executive, Key Account Management",
       "company": "Pathao",
       "deadline": "2026-10-10",
@@ -1066,13 +1017,6 @@
       "deadline": null,
       "url": "https://ding.bamboohr.com/careers/345",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Associate Programme Monitoring and Liaison Officer-UNOCHA-(Nationals Only)",
-      "company": "UNDP Bangladesh",
-      "deadline": "2026-10-02",
-      "url": "https://estm.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/job/36992",
-      "functionTag": "program_project_management"
     },
     {
       "title": "Project Analyst (M&E)(Open to Internal & External Applicants)",
@@ -1530,13 +1474,6 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "Junior Executive, Program Operations",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/Jnq4qhOLWXJ9/junior-executive-program-operations",
-      "functionTag": "operations"
-    },
-    {
       "title": "Software Engineer, Backend",
       "company": "Shikho",
       "deadline": null,
@@ -1649,13 +1586,6 @@
       "functionTag": "supply_chain_procurement"
     },
     {
-      "title": "Officer – Production",
-      "company": "Pidilite Specialty Chemicals (Bangladesh) Private Ltd.",
-      "deadline": "2026-10-02",
-      "url": "https://thecvguy.net/mnc-jobs/pidilite-bangladesh-is-hiring-mnc-career-26",
-      "functionTag": "operations"
-    },
-    {
       "title": "Multiple Contractual Vacancies at Reckitt Bangladesh",
       "company": "Reckitt Bangladesh",
       "deadline": "2026-10-03",
@@ -1703,6 +1633,13 @@
       "deadline": null,
       "url": "https://therap.hire.trakstar.com/jobs/fk0hwee",
       "functionTag": "education"
+    },
+    {
+      "title": "Junior Web Designer (Entry Level / Fresher)",
+      "company": "Therap (BD) Ltd.",
+      "deadline": null,
+      "url": "https://therap.hire.trakstar.com/jobs/fk0qd95",
+      "functionTag": "design_creative"
     },
     {
       "title": "Training and Implementation Associate",
