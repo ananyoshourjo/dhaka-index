@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T16:23:40.546Z",
+  "generatedAt": "2026-10-06T07:20:41.440Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -23,27 +23,6 @@
       "deadline": "2026-10-29",
       "url": "https://app.hrythmic.com/recruit/openings/b3f48675-c79a-4ba3-b187-d6ddc45b206d",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Credit Analyst (Credit-SME) IDLC Finance PLC",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-10-05",
-      "url": "https://apps.idlc.com/career/jobsDetails/2186",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Data Scientist (Credit-SME) IDLC Finance PLC",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-10-05",
-      "url": "https://apps.idlc.com/career/jobsDetails/2187",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Credit Verifier (Credit-SME) IDLC Finance PLC",
-      "company": "IDLC Finance PLC",
-      "deadline": "2026-10-05",
-      "url": "https://apps.idlc.com/career/jobsDetails/2188",
-      "functionTag": "finance_accounting"
     },
     {
       "title": "Team Lead – Software Development IDLC Finance PLC",
@@ -130,6 +109,13 @@
       "functionTag": "finance_accounting"
     },
     {
+      "title": "Agri Sales Officer (JO-OFFICER)",
+      "company": "United Commercial Bank (UCB)",
+      "deadline": null,
+      "url": "https://bdjobs.com/h/details/1535751?ln=1",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Sr. Officer / Executive | Agora Limited",
       "company": "Agora Limited",
       "deadline": "2026-10-12",
@@ -177,13 +163,6 @@
       "deadline": "2026-10-21",
       "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/executive-spare-parts-yamaha-service/2026",
       "functionTag": "supply_chain_procurement"
-    },
-    {
-      "title": "Management Trainee",
-      "company": "ACI Motors Limited",
-      "deadline": "2026-10-05",
-      "url": "https://bdrecruit.net/jobs-in-bd/aci-motors-limited/career/management-trainee/2026",
-      "functionTag": "other"
     },
     {
       "title": "Junior Audit Officer",
@@ -347,13 +326,6 @@
       "functionTag": "human_resources"
     },
     {
-      "title": "Regional Sales Manager (RSM) & Territory Sales Manager (TSM)",
-      "company": "City Group",
-      "deadline": "2026-10-05",
-      "url": "https://bdrecruit.net/jobs-in-bd/city-group/career/regional-sales-manager-rsm/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Manager - Sample (Knit Products)",
       "company": "Fakir Fashion Limited",
       "deadline": "2026-10-15",
@@ -494,13 +466,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Executive - Sales",
-      "company": "Rangs Properties",
-      "deadline": "2026-10-05",
-      "url": "https://bdrecruit.net/jobs-in-bd/rangs-properties/career/executive-sales/2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Management Trainee Officer (MTO) - Brand",
       "company": "RFL Group",
       "deadline": "2026-10-26",
@@ -520,13 +485,6 @@
       "deadline": "2026-10-30",
       "url": "https://bdrecruit.net/jobs-in-bd/shwapno-express/career/sales-coordinator/2026",
       "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Project Manager",
-      "company": "Shwapno",
-      "deadline": "2026-10-05",
-      "url": "https://bdrecruit.net/jobs-in-bd/shwapno/career/project-manager/2026",
-      "functionTag": "program_project_management"
     },
     {
       "title": "Manager, EHS",
@@ -725,6 +683,13 @@
       "functionTag": "human_resources"
     },
     {
+      "title": "Senior Specialist, Sustainability and Carbon Management; Climate and Environmental Innovation Programme",
+      "company": "BRAC",
+      "deadline": "2026-10-11",
+      "url": "https://careers.brac.net/jobs/senior-specialist-sustainability-and-carbon-management-climate-and-environmental-innovation-programme-2971?bulk=false",
+      "functionTag": "research_consulting"
+    },
+    {
       "title": "Specialist, Mental Health & Psychosocial Support, Ultra-Poor Graduation",
       "company": "BRAC",
       "deadline": "2026-10-18",
@@ -751,20 +716,6 @@
       "deadline": "2026-10-31",
       "url": "https://careers.enosisbd.com/en/postings/df096503-c907-4adf-a891-500940d3b2a9",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3202",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3206",
-      "functionTag": "marketing_communications"
     },
     {
       "title": "Associate, Content & Onboarding",
@@ -802,6 +753,13 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Head, Local Shops",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/head-local-shops-in-dhaka-bangladesh-jid-3151",
+      "functionTag": "general_management"
+    },
+    {
       "title": "Kitchen Runner",
       "company": "Foodpanda",
       "deadline": null,
@@ -816,6 +774,13 @@
       "functionTag": "operations"
     },
     {
+      "title": "Lead, Telesales",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/lead-telesales-in-dhaka-bangladesh-jid-3100",
+      "functionTag": "sales_business_development"
+    },
+    {
       "title": "Manager, Sales",
       "company": "Foodpanda",
       "deadline": null,
@@ -828,6 +793,13 @@
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
       "functionTag": "customer_service"
+    },
+    {
+      "title": "Senior Executive, Finance (R2R)",
+      "company": "Foodpanda",
+      "deadline": null,
+      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
+      "functionTag": "finance_accounting"
     },
     {
       "title": "Shift Lead, Partner Service",
@@ -848,13 +820,6 @@
       "company": "Foodpanda",
       "deadline": null,
       "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-sylhet-bangladesh-jid-3205",
       "functionTag": "sales_business_development"
     },
     {
@@ -940,13 +905,6 @@
       "deadline": null,
       "url": "https://careers.optimizely.com/job/Dhaka-Software-Engineer-II-1212-BD/1363501155",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Strategy & Value Consultant - Data Analyst",
-      "company": "Optimizely",
-      "deadline": null,
-      "url": "https://careers.optimizely.com/job/Dhaka-Strategy-&-Value-Consultant-Data-Analyst-1212-BD/1369195455",
-      "functionTag": "data_analytics"
     },
     {
       "title": "Talent Acquisition Specialist",
@@ -1173,6 +1131,13 @@
       "functionTag": "data_analytics"
     },
     {
+      "title": "Intern, HR Operations",
+      "company": "Commure (Bangladesh Operations)",
+      "deadline": null,
+      "url": "https://jobs.ashbyhq.com/Commure/99c269fa-008a-4848-af20-c65201a7f552",
+      "functionTag": "human_resources"
+    },
+    {
       "title": "Assistant Manager, RCM Operations (Bangladesh)",
       "company": "Commure (Bangladesh Operations)",
       "deadline": null,
@@ -1201,13 +1166,6 @@
       "functionTag": "legal_compliance"
     },
     {
-      "title": "Staff Software Engineer",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/4fefe9f0-5bd5-441d-b22e-3f837e91d88a",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Software Engineer",
       "company": "Field Nation",
       "deadline": null,
@@ -1229,25 +1187,18 @@
       "functionTag": "customer_service"
     },
     {
-      "title": "Accounting Manager",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/ac3e935e-9375-45f9-ae40-38980b9399b9",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Customer Success Manager (Low Touch)",
-      "company": "Field Nation",
-      "deadline": null,
-      "url": "https://jobs.lever.co/fieldnation/b18a7188-473a-48dd-8d9d-9a54513fc6fd",
-      "functionTag": "customer_service"
-    },
-    {
       "title": "Marketplace Onboarding Coordinator",
       "company": "Field Nation",
       "deadline": null,
       "url": "https://jobs.lever.co/fieldnation/cb899357-d2c0-4fe2-b70b-8a407fa332cd",
       "functionTag": "operations"
+    },
+    {
+      "title": "Senior Content Specialist",
+      "company": "Field Nation",
+      "deadline": null,
+      "url": "https://jobs.lever.co/fieldnation/df9f8a50-44df-4787-b2a6-06f1dc7c444a",
+      "functionTag": "marketing_communications"
     },
     {
       "title": "Senior Marketing Operations Manager",
@@ -1341,13 +1292,6 @@
       "functionTag": "design_creative"
     },
     {
-      "title": "HSBC Bangladesh Student Work Placement Programme",
-      "company": "HSBC Bangladesh",
-      "deadline": null,
-      "url": "https://portal.careers.hsbc.com/careers/job/563774612313143",
-      "functionTag": "other"
-    },
-    {
       "title": "Quality Assurance (QA) Engineer",
       "company": "WellDev",
       "deadline": "2026-10-31",
@@ -1397,11 +1341,11 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "International Business Development- Intern",
+      "title": "Graphics Designer",
       "company": "Riseup Labs",
       "deadline": null,
-      "url": "https://riseuplabs.com/jobs/global-business-intern",
-      "functionTag": "sales_business_development"
+      "url": "https://riseuplabs.com/jobs/graphics-designer",
+      "functionTag": "design_creative"
     },
     {
       "title": "International Customer Support Specialist",
@@ -1418,13 +1362,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "IT Infrastructure & Network Lead",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/it-infrastructure-network-lead",
-      "functionTag": "software_engineering"
-    },
-    {
       "title": "Social Media Executive",
       "company": "Riseup Labs",
       "deadline": null,
@@ -1437,13 +1374,6 @@
       "deadline": null,
       "url": "https://riseuplabs.com/jobs/uiux-designer-intern",
       "functionTag": "design_creative"
-    },
-    {
-      "title": "Unity Developer",
-      "company": "Riseup Labs",
-      "deadline": null,
-      "url": "https://riseuplabs.com/jobs/unity-developer",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Video Editor",
@@ -1493,13 +1423,6 @@
       "deadline": null,
       "url": "https://shikho.freshteam.com/jobs/Jnq4qhOLWXJ9/junior-executive-program-operations",
       "functionTag": "operations"
-    },
-    {
-      "title": "Software Engineer, Backend",
-      "company": "Shikho",
-      "deadline": null,
-      "url": "https://shikho.freshteam.com/jobs/Q7tQZqONBrlW/software-engineer-backend",
-      "functionTag": "software_engineering"
     },
     {
       "title": "Executive/Sr. Executive, Visual Design",
@@ -1772,6 +1695,13 @@
       "company": "American International School Dhaka",
       "deadline": null,
       "url": "https://www.aisdhaka.org/fs/resource-manager/view/c378ec09-a2ba-4ecd-b378-a2be09611957?dhaka_index_role=secondary-theater-arts-teacher",
+      "functionTag": "education"
+    },
+    {
+      "title": "Secondary Principal",
+      "company": "International School Dhaka",
+      "deadline": null,
+      "url": "https://www.isdbd.org/fs/resource-manager/view/af67f645-1af6-410f-a8e8-16a274179864?dhaka_index_role=secondary-principal",
       "functionTag": "education"
     },
     {
