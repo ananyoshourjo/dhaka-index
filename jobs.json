@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T16:03:02.796Z",
+  "generatedAt": "2026-10-07T16:27:50.699Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -37,41 +37,6 @@
       "deadline": "2026-10-10",
       "url": "https://apps.idlc.com/career/jobsDetails/2197",
       "functionTag": "operations"
-    },
-    {
-      "title": "Category Manager, Commercial",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bd.daraz.io/cms/2018/voucher/commercial.png",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Junior Executive/Executive, Customer Service",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bd.daraz.io/cms/2018/voucher/customer.png",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Internship, Marketing",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bd.daraz.io/cms/2018/voucher/marketing.png",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Internship, Operations",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bd.daraz.io/cms/2018/voucher/operations.png",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Executive, Talent Management",
-      "company": "Daraz Bangladesh",
-      "deadline": null,
-      "url": "https://bd.daraz.io/cms/2018/voucher/talent.png",
-      "functionTag": "human_resources"
     },
     {
       "title": "Sub-Branch In-Charge",
@@ -877,132 +842,6 @@
       "deadline": "2026-10-31",
       "url": "https://careers.enosisbd.com/en/postings/df096503-c907-4adf-a891-500940d3b2a9",
       "functionTag": "software_engineering"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3202",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3206",
-      "functionTag": "marketing_communications"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3239",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Associate, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-and-onboarding-in-dhaka-bangladesh-jid-3243",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Associate, Content Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-content-onboarding-in-dhaka-bangladesh-jid-3182",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Associate, Customer Support",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/associate-customer-support-in-dhaka-bangladesh-jid-3086",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Business Performance Analyst (Shops) - Qcommerce",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/business-performance-analyst-shops-qcommerce-in-dhaka-bangladesh-jid-3167",
-      "functionTag": "data_analytics"
-    },
-    {
-      "title": "Head, Local Shops",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/head-local-shops-in-dhaka-bangladesh-jid-3151",
-      "functionTag": "general_management"
-    },
-    {
-      "title": "Kitchen Runner",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-3241",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Kitchen Runner",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/kitchen-runner-in-dhaka-bangladesh-jid-3242",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Manager, Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/manager-sales-in-dhaka-bangladesh-jid-3132",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Partner Service Agent",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/partner-service-agent-in-dhaka-bangladesh-jid-3121",
-      "functionTag": "customer_service"
-    },
-    {
-      "title": "Senior Executive, Finance (R2R)",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/senior-executive-finance-r2r-in-dhaka-bangladesh-jid-3098",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Shift Lead, Partner Service",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/shift-lead-partner-service-in-dhaka-bangladesh-jid-3122",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Specialist, Corporate Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-corporate-sales-in-dhaka-bangladesh-jid-3155",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-dhaka-bangladesh-jid-3094",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Specialist, Field Sales",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/specialist-field-sales-in-sylhet-bangladesh-jid-3205",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Team Lead, Content & Onboarding",
-      "company": "Foodpanda",
-      "deadline": null,
-      "url": "https://careers.foodpanda.com/job/team-lead-content-and-onboarding-in-dhaka-bangladesh-jid-3235",
-      "functionTag": "sales_business_development"
     },
     {
       "title": "Associate Marketing Manager",
