@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T14:30:53.766Z",
+  "generatedAt": "2026-10-07T16:03:02.796Z",
   "license": "CC0-1.0",
   "jobs": [
     {
@@ -1005,48 +1005,6 @@
       "functionTag": "sales_business_development"
     },
     {
-      "title": "Agent-Reservation Sales",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/agent-reservation-sales/job/P1-6664886-0",
-      "functionTag": "sales_business_development"
-    },
-    {
-      "title": "Credit Manager",
-      "company": "Le Méridien Dhaka",
-      "deadline": null,
-      "url": "https://careers.marriott.com/credit-manager/job/P1-6647927-0",
-      "functionTag": "finance_accounting"
-    },
-    {
-      "title": "Executive Chef II",
-      "company": "Renaissance Dhaka Gulshan Hotel",
-      "deadline": null,
-      "url": "https://careers.marriott.com/executive-chef-ii/job/P1-5890879-0",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Executive Chef",
-      "company": "Le Méridien Dhaka",
-      "deadline": null,
-      "url": "https://careers.marriott.com/executive-chef/job/P1-7053328-0",
-      "functionTag": "operations"
-    },
-    {
-      "title": "Human Resources Assistant",
-      "company": "Le Méridien Dhaka",
-      "deadline": null,
-      "url": "https://careers.marriott.com/human-resources-assistant/job/P1-6722673-0",
-      "functionTag": "human_resources"
-    },
-    {
-      "title": "Waiter/Waitress",
-      "company": "Le Méridien Dhaka",
-      "deadline": null,
-      "url": "https://careers.marriott.com/waiter-waitress/job/P1-6924703-0",
-      "functionTag": "customer_service"
-    },
-    {
       "title": "Associate Marketing Manager",
       "company": "Optimizely",
       "deadline": null,
@@ -1775,13 +1733,6 @@
       "functionTag": "marketing_communications"
     },
     {
-      "title": "Sales and Customer Care Executive",
-      "company": "Neel Diganto Hotel & Resort",
-      "deadline": "2026-10-25",
-      "url": "https://thecvguy.net/jobs-in-bd/neel-diganto-hotel-resort-is-hiring-2026",
-      "functionTag": "sales_business_development"
-    },
-    {
       "title": "Specialist – Digital Media & Communications, Bangladesh",
       "company": "Arla Foods",
       "deadline": "2026-10-15",
@@ -1943,83 +1894,6 @@
       "functionTag": "software_engineering"
     },
     {
-      "title": "Secondary (6-12) Visual Art Teacher",
-      "company": "American International School Dhaka",
-      "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/046b8891-88fd-4078-a38f-8bd6cc9fe501?dhaka_index_role=secondary-6-12-visual-art-teacher",
-      "functionTag": "education"
-    },
-    {
-      "title": "Elementary Classroom Teacher",
-      "company": "American International School Dhaka",
-      "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/0de8b24e-1e3b-4142-9c75-733fa9b29552?dhaka_index_role=elementary-classroom-teacher",
-      "functionTag": "education"
-    },
-    {
-      "title": "Secondary Math / IBDP Mathematics Teacher",
-      "company": "American International School Dhaka",
-      "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/1df1f556-fc4b-4667-a039-8e3bae8fa8d2?dhaka_index_role=secondary-math-ibdp-mathematics-teacher",
-      "functionTag": "education"
-    },
-    {
-      "title": "Secondary Theater Arts Teacher",
-      "company": "American International School Dhaka",
-      "deadline": null,
-      "url": "https://www.aisdhaka.org/fs/resource-manager/view/c378ec09-a2ba-4ecd-b378-a2be09611957?dhaka_index_role=secondary-theater-arts-teacher",
-      "functionTag": "education"
-    },
-    {
-      "title": "Secondary Principal",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/af67f645-1af6-410f-a8e8-16a274179864?dhaka_index_role=secondary-principal",
-      "functionTag": "education"
-    },
-    {
-      "title": "Social/Emotional Counselor (Primary)",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/b21cd51c-3ce9-4ca7-9cb6-4cd513613d00?dhaka_index_role=social-emotional-counselor-primary",
-      "functionTag": "education"
-    },
-    {
-      "title": "DP Mathematics (AA) with MYP Maths Teacher (Secondary)",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/bbc635f2-406d-43a8-90d3-e0baacb9f793?dhaka_index_role=dp-mathematics-aa-with-myp-maths-teacher-secondary",
-      "functionTag": "education"
-    },
-    {
-      "title": "Social/Emotional Counselor (Secondary)",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/d38b896e-4391-492a-b3d9-6c5ddeb4f87f?dhaka_index_role=social-emotional-counselor-secondary",
-      "functionTag": "education"
-    },
-    {
-      "title": "DP Chemistry with MYP Science",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/d99520d2-b27a-4c25-8fe2-037215920b81?dhaka_index_role=dp-chemistry-with-myp-science",
-      "functionTag": "education"
-    },
-    {
-      "title": "DP/ MYP Theater Teacher",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/f5109fc3-05d8-48aa-ad5b-51ae6d6e5dc4?dhaka_index_role=dp-myp-theater-teacher",
-      "functionTag": "education"
-    },
-    {
-      "title": "PYP Visual Arts Teacher",
-      "company": "International School Dhaka",
-      "deadline": null,
-      "url": "https://www.isdbd.org/fs/resource-manager/view/f5109fc3-05d8-48aa-ad5b-51ae6d6e5dc4?dhaka_index_role=pyp-visual-arts-teacher",
-      "functionTag": "education"
-    },
-    {
       "title": "Assistant Manager/Manager, Treasury Operations, Finance & Accounts",
       "company": "bKash Limited",
       "deadline": null,
@@ -2039,13 +1913,6 @@
       "deadline": null,
       "url": "https://www.linkedin.com/jobs/view/4473895899",
       "functionTag": "operations"
-    },
-    {
-      "title": "Assistant Manager 📍",
-      "company": "Glenrich International School, Uttara",
-      "deadline": null,
-      "url": "https://www.linkedin.com/posts/glenrichuttara_glenrichuttara-glenrichopening-schooloflife-activity-7511390016254681088-bBNF?dhaka_index_role=assistant-manager-uttara-dhaka",
-      "functionTag": "other"
     }
   ]
 }
