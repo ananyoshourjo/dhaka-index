@@ -3,6 +3,8 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 const config = [
   {
     ignores: [
+      "output/**",
+      "videos/**",
       ".next*/**",
       ".open-next/**",
       "admin-portal/.next/**",

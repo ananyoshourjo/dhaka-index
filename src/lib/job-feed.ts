@@ -16,7 +16,7 @@ import { nowDhakaIso } from "@/lib/time";
 
 const CHECK_INTERVAL_MS = 15 * 60 * 1000;
 const SYNC_LEASE_MS = 2 * 60 * 1000;
-const MAX_FEED_BYTES = 5 * 1024 * 1024;
+const MAX_FEED_BYTES = 16 * 1024 * 1024;
 
 export type JobFeedStatus = {
   configured: boolean;
@@ -160,6 +160,10 @@ export async function syncJobFeed(options: { force?: boolean } = {}) {
         company: job.company,
         deadlineAt: job.deadline,
         canonicalUrl: job.url,
+        description: job.description,
+        applyUrl: job.applyUrl,
+        applicationInstructions: job.applicationInstructions,
+        contentCheckedAt: job.contentCheckedAt,
         jobFunctions: classifyJobFunctions(job.title),
       })),
       {

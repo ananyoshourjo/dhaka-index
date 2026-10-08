@@ -1,4 +1,6 @@
-export type ManualJobInput = {
+import { validateJobContent, type JobContent } from "./job-content";
+
+export type ManualJobInput = JobContent & {
   title: string;
   company: string;
   detailUrl: string;
@@ -69,6 +71,7 @@ export function normalizeManualJobInput(input: ManualJobInput) {
   }
 
   return {
+    ...validateJobContent(input),
     title: normalizeRequiredText(input.title, "Role"),
     company: normalizeRequiredText(input.company, "Company"),
     detailUrl: normalizeDetailUrl(input.detailUrl),

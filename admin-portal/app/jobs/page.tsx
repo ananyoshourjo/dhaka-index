@@ -1,10 +1,7 @@
 import { BriefcaseBusiness } from "lucide-react";
 import { revalidatePath } from "next/cache";
 
-import {
-  AddJobForm,
-  type AddManualJobState,
-} from "@/app/jobs/add-job-form";
+import { AddJobForm, type AddManualJobState } from "@/app/jobs/add-job-form";
 import { JobFilterBar } from "@/app/jobs/job-filter-bar";
 import { EditableJobCard } from "@/app/jobs/editable-job-card";
 import {
@@ -42,6 +39,8 @@ async function addManualJobAction(
       company: String(formData.get("company") ?? ""),
       title: String(formData.get("title") ?? ""),
       detailUrl: String(formData.get("detailUrl") ?? ""),
+      description: String(formData.get("description") ?? ""),
+      applyUrl: String(formData.get("applyUrl") ?? ""),
       deadlineAt: String(formData.get("deadlineAt") ?? ""),
     });
 
@@ -69,7 +68,11 @@ async function updateJobAction(formData: FormData) {
   const field = String(formData.get("field")) as EditableJobField;
   const value = String(formData.get("value") ?? "");
 
-  if (!Number.isSafeInteger(jobId) || jobId <= 0 || !editableFields.has(field)) {
+  if (
+    !Number.isSafeInteger(jobId) ||
+    jobId <= 0 ||
+    !editableFields.has(field)
+  ) {
     throw new Error("Invalid job update.");
   }
 

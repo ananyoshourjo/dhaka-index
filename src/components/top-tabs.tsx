@@ -51,10 +51,7 @@ export function TopTabs() {
     }
 
     function handlePointerDown(event: PointerEvent) {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
-      ) {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setMenuOpen(false);
       }
     }
@@ -74,13 +71,16 @@ export function TopTabs() {
 
     window.addEventListener("profile-photo-change", handleProfilePhotoChange);
     return () =>
-      window.removeEventListener("profile-photo-change", handleProfilePhotoChange);
+      window.removeEventListener(
+        "profile-photo-change",
+        handleProfilePhotoChange,
+      );
   }, [user?.id]);
 
   const showLogoOnlyHeader =
     pathname === "/login" ||
     pathname === "/signup" ||
-    (pathname === "/" && !session.data);
+    ((pathname === "/" || pathname.startsWith("/jobs/")) && !session.data);
 
   if (showLogoOnlyHeader) {
     return (
@@ -108,132 +108,136 @@ export function TopTabs() {
 
   return (
     <>
-    <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
-      <nav
-        aria-label="Primary navigation"
-        className="mx-auto grid h-14 w-full max-w-3xl grid-cols-[1fr_1fr] items-center gap-3 px-4 sm:grid-cols-[1fr_auto_1fr] sm:px-6"
-      >
-        <Link
-          href="/"
-          className="flex size-9 items-center justify-center"
-          aria-label="Dhaka Index home"
+      <header className="sticky top-0 z-10 border-b bg-background/95 backdrop-blur">
+        <nav
+          aria-label="Primary navigation"
+          className="mx-auto grid h-14 w-full max-w-3xl grid-cols-[1fr_1fr] items-center gap-3 px-4 sm:grid-cols-[1fr_auto_1fr] sm:px-6"
         >
-          <Image
-            alt=""
-            aria-hidden="true"
-            className="h-7 w-auto"
-            height={1415}
-            priority
-            src="/brand/di-logo-transparent.svg"
-            width={1226}
-          />
-        </Link>
+          <Link
+            href="/"
+            className="flex size-9 items-center justify-center"
+            aria-label="Dhaka Index home"
+          >
+            <Image
+              alt=""
+              aria-hidden="true"
+              className="h-7 w-auto"
+              height={1415}
+              priority
+              src="/brand/di-logo-transparent.svg"
+              width={1226}
+            />
+          </Link>
 
-        <div className="hidden h-full items-center justify-center gap-5 overflow-x-auto sm:flex">
-          {tabs.map((tab) => {
-            const isActive = pathname === tab.href;
+          <div className="hidden h-full items-center justify-center gap-5 overflow-x-auto sm:flex">
+            {tabs.map((tab) => {
+              const isActive =
+                pathname === tab.href ||
+                (tab.href === "/" && pathname.startsWith("/jobs/"));
 
-            return (
-              <Link
-                key={tab.href}
-                href={tab.href}
-                prefetch={tab.prefetch}
-                aria-current={isActive ? "page" : undefined}
-                className={cn(
-                  "flex h-full items-center border-b-2 border-transparent px-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
-                  isActive && "border-primary text-foreground",
-                )}
-              >
-                {tab.label}
-              </Link>
-            );
-          })}
-        </div>
-
-        {session.data ? (
-          <div ref={menuRef} className="relative justify-self-end">
-            <button
-              type="button"
-              aria-label="Open account menu"
-              aria-expanded={menuOpen}
-              className="flex size-9 items-center justify-center overflow-hidden rounded-full border bg-muted text-sm font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
-              onClick={() => setMenuOpen((open) => !open)}
-            >
-              {avatarImage ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  aria-hidden="true"
-                  alt=""
-                  className="size-full object-cover"
-                  src={avatarImage}
-                  onError={() =>
-                    setProfilePhoto({ url: "", userId: user?.id || "" })
-                  }
-                />
-              ) : (
-                <span
-                  aria-hidden="true"
-                  className="flex size-full items-center justify-center rounded-full bg-muted text-sm font-medium text-foreground"
+              return (
+                <Link
+                  key={tab.href}
+                  href={tab.href}
+                  prefetch={tab.prefetch}
+                  aria-current={isActive ? "page" : undefined}
+                  className={cn(
+                    "flex h-full items-center border-b-2 border-transparent px-1 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground",
+                    isActive && "border-primary text-foreground",
+                  )}
                 >
-                  {avatarInitial}
-                </span>
-              )}
-            </button>
-
-            {menuOpen ? (
-              <div className="absolute right-0 mt-2 grid w-44 gap-1 rounded-md border bg-popover p-1 text-popover-foreground shadow-sm">
-                <Button
-                  asChild
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <Link href="/archive">
-                    <Archive className="size-4" />
-                    Archive
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  <Link href="/settings">
-                    <Settings className="size-4" />
-                    Settings
-                  </Link>
-                </Button>
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  className="justify-start text-destructive hover:text-destructive"
-                  onClick={async () => {
-                    setMenuOpen(false);
-                    await authClient.signOut();
-                    router.push("/login");
-                    router.refresh();
-                  }}
-                >
-                  <LogOut className="size-4" />
-                  Logout
-                </Button>
-              </div>
-            ) : null}
+                  {tab.label}
+                </Link>
+              );
+            })}
           </div>
-        ) : null}
-      </nav>
-    </header>
-    <nav
+
+          {session.data ? (
+            <div ref={menuRef} className="relative justify-self-end">
+              <button
+                type="button"
+                aria-label="Open account menu"
+                aria-expanded={menuOpen}
+                className="flex size-9 items-center justify-center overflow-hidden rounded-full border bg-muted text-sm font-semibold text-muted-foreground transition-colors hover:border-primary hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+                onClick={() => setMenuOpen((open) => !open)}
+              >
+                {avatarImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    aria-hidden="true"
+                    alt=""
+                    className="size-full object-cover"
+                    src={avatarImage}
+                    onError={() =>
+                      setProfilePhoto({ url: "", userId: user?.id || "" })
+                    }
+                  />
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="flex size-full items-center justify-center rounded-full bg-muted text-sm font-medium text-foreground"
+                  >
+                    {avatarInitial}
+                  </span>
+                )}
+              </button>
+
+              {menuOpen ? (
+                <div className="absolute right-0 mt-2 grid w-44 gap-1 rounded-md border bg-popover p-1 text-popover-foreground shadow-sm">
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <Link href="/archive">
+                      <Archive className="size-4" />
+                      Archive
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="ghost"
+                    size="sm"
+                    className="justify-start"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <Link href="/settings">
+                      <Settings className="size-4" />
+                      Settings
+                    </Link>
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="justify-start text-destructive hover:text-destructive"
+                    onClick={async () => {
+                      setMenuOpen(false);
+                      await authClient.signOut();
+                      router.push("/login");
+                      router.refresh();
+                    }}
+                  >
+                    <LogOut className="size-4" />
+                    Logout
+                  </Button>
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </nav>
+      </header>
+      <nav
         data-mobile-app-nav
         aria-label="Mobile navigation"
         className="fixed inset-x-0 bottom-0 z-30 grid grid-cols-3 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] shadow-[0_-8px_24px_-18px_rgba(0,0,0,0.35)] backdrop-blur sm:hidden"
       >
         {tabs.map((tab) => {
-          const isActive = pathname === tab.href;
+          const isActive =
+            pathname === tab.href ||
+            (tab.href === "/" && pathname.startsWith("/jobs/"));
           const Icon = tab.icon;
 
           return (
@@ -258,7 +262,7 @@ export function TopTabs() {
             </Link>
           );
         })}
-    </nav>
+      </nav>
     </>
   );
 }

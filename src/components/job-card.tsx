@@ -1,12 +1,8 @@
 "use client";
 
-import {
-  Archive,
-  ArrowUpRight,
-  Bookmark,
-  CalendarDays,
-} from "lucide-react";
+import { Archive, ArrowRight, Bookmark, CalendarDays } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -85,15 +81,10 @@ function JobCardButtons({
       </Button>
 
       <Button asChild className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none">
-        <a
-          href={job.detailUrl}
-          target="_blank"
-          rel="noreferrer"
-          aria-label={`Open ${job.title}`}
-        >
-          Open
-          <ArrowUpRight className="size-4" />
-        </a>
+        <Link href={`/jobs/${job.id}`} aria-label={`Open ${job.title}`}>
+          View job
+          <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
       </Button>
     </>
   );
@@ -122,7 +113,9 @@ export function JobCard({
       await request;
     } catch {
       removeOptimistically(false);
-      setError(`Could not ${actionLabel.toLowerCase()} this job. Please try again.`);
+      setError(
+        `Could not ${actionLabel.toLowerCase()} this job. Please try again.`,
+      );
     }
   }
 
@@ -158,7 +151,14 @@ export function JobCard({
       <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="min-w-0 space-y-1">
           <p className="text-sm text-muted-foreground">{job.company}</p>
-          <h2 className="text-xl font-semibold leading-[1.2]">{job.title}</h2>
+          <h2 className="text-xl font-semibold leading-[1.2]">
+            <Link
+              href={`/jobs/${job.id}`}
+              className="hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
+            >
+              {job.title}
+            </Link>
+          </h2>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <CalendarDays className="size-4" aria-hidden="true" />
             <span>{formattedDeadline}</span>

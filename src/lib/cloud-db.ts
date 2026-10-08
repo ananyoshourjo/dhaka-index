@@ -4,6 +4,7 @@ import { getCloudflareDb } from "@/lib/cloudflare";
 import { JOBS_PAGE_SIZE, type ActiveJobFilters } from "@/lib/job-search";
 import { parseJobFunctions, type JobFunction } from "@/lib/job-functions";
 import { nowDhakaIso, todayDhaka } from "@/lib/time";
+import type { JobContent } from "@/lib/job-content";
 
 export type ActiveJob = {
   id: number;
@@ -25,13 +26,41 @@ export type ActiveJobPage = {
   totalPages: number;
 };
 
-export type OfficialFeedJob = {
+export type OfficialFeedJob = JobContent & {
   title: string;
   company: string;
   deadlineAt: string | null;
   canonicalUrl: string;
   jobFunctions: JobFunction[];
 };
+
+export type JobDetail = ActiveJob & JobContent & { expiredAt: string | null };
+
+export async function getJobByIdFromDb(id: number): Promise<JobDetail | null> {
+  if (!Number.isSafeInteger(id) || id < 1) return null;
+  const row = await statement(
+    `
+    SELECT id, COALESCE(admin_title,title) AS title,
+      COALESCE(admin_company,company) AS company,
+      CASE WHEN admin_deadline_override=1 THEN admin_deadline_at ELSE deadline_at END AS deadlineAt,
+      detail_url AS detailUrl, job_functions AS jobFunctionsSerialized,
+      description, apply_url AS applyUrl, application_instructions AS applicationInstructions,
+      content_checked_at AS contentCheckedAt, expired_at AS expiredAt
+    FROM jobs WHERE id=? AND deleted_at IS NULL`,
+    [id],
+  ).first<
+    Omit<JobDetail, "jobFunctions" | "bookmarkedAt"> & {
+      jobFunctionsSerialized: string;
+    }
+  >();
+  if (!row) return null;
+  const { jobFunctionsSerialized, ...job } = row;
+  return {
+    ...job,
+    bookmarkedAt: null,
+    jobFunctions: parseJobFunctions(jobFunctionsSerialized),
+  };
+}
 
 export type JobFeedStateRow = {
   feed_url: string | null;
@@ -67,18 +96,12 @@ export async function cleanupUserData(userId: string) {
   const db = getCloudflareDb();
 
   await db.batch([
-    db
-      .prepare(`DELETE FROM job_user_state WHERE user_id = ?`)
-      .bind(userId),
+    db.prepare(`DELETE FROM job_user_state WHERE user_id = ?`).bind(userId),
     db
       .prepare(`DELETE FROM resume_profiles WHERE id = ?`)
       .bind(`profile:${userId}`),
-    db
-      .prepare(`DELETE FROM profile_photos WHERE user_id = ?`)
-      .bind(userId),
-    db
-      .prepare(`DELETE FROM app_admins WHERE user_id = ?`)
-      .bind(userId),
+    db.prepare(`DELETE FROM profile_photos WHERE user_id = ?`).bind(userId),
+    db.prepare(`DELETE FROM app_admins WHERE user_id = ?`).bind(userId),
   ]);
 }
 
@@ -192,7 +215,10 @@ export async function unbookmarkJobById(userId: string, jobId: number) {
   ).run();
 }
 
-async function getJobs(userId: string, mode: "active" | "archived" | "bookmarked") {
+async function getJobs(
+  userId: string,
+  mode: "active" | "archived" | "bookmarked",
+) {
   const fromClause =
     mode === "active"
       ? `
@@ -312,12 +338,10 @@ export async function getActiveJobsPageFromDb(
     [...values, JOBS_PAGE_SIZE, offset],
   ).all<ActiveJobDbRow>();
 
-  const jobs = result.results.map(
-    ({ jobFunctionsSerialized, ...job }) => ({
-      ...job,
-      jobFunctions: parseJobFunctions(jobFunctionsSerialized),
-    }),
-  );
+  const jobs = result.results.map(({ jobFunctionsSerialized, ...job }) => ({
+    ...job,
+    jobFunctions: parseJobFunctions(jobFunctionsSerialized),
+  }));
 
   return {
     currentPage,
@@ -336,9 +360,9 @@ export function getBookmarkedJobsFromDb(userId: string) {
 
 export async function getJobFeedState() {
   return (
-    (await statement(`SELECT * FROM job_feed_state WHERE id = 1`).first<
-      JobFeedStateRow
-    >()) ?? null
+    (await statement(
+      `SELECT * FROM job_feed_state WHERE id = 1`,
+    ).first<JobFeedStateRow>()) ?? null
   );
 }
 
@@ -451,8 +475,8 @@ export async function applyOfficialFeed(
 ) {
   const db = getCloudflareDb();
   const statements: D1PreparedStatement[] = [];
-  // Keep each statement below D1's 100-bound-parameter limit (12 x 8 = 96).
-  const chunkSize = 12;
+  // Twelve values per job; keep below D1's 100-bound-parameter limit.
+  const chunkSize = 8;
 
   for (let index = 0; index < jobs.length; index += chunkSize) {
     const chunk = jobs.slice(index, index + chunkSize);
@@ -466,10 +490,14 @@ export async function applyOfficialFeed(
           job.canonicalUrl,
           job.deadlineAt,
           `|${job.jobFunctions.join("|")}|`,
+          job.description ?? null,
+          job.applyUrl ?? null,
+          job.applicationInstructions ?? null,
+          job.contentCheckedAt ?? null,
           input.checkedAt,
           input.checkedAt,
         );
-        return `(?, ?, ?, ?, ?, ?, ?, ?)`;
+        return `(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
       })
       .join(", ");
 
@@ -484,6 +512,10 @@ export async function applyOfficialFeed(
               canonical_url,
               deadline_at,
               job_functions,
+              description,
+              apply_url,
+              application_instructions,
+              content_checked_at,
               first_seen_at,
               last_seen_at
             )
@@ -493,6 +525,10 @@ export async function applyOfficialFeed(
               company = excluded.company,
               detail_url = excluded.detail_url,
               deadline_at = excluded.deadline_at,
+              description = excluded.description,
+              apply_url = excluded.apply_url,
+              application_instructions = excluded.application_instructions,
+              content_checked_at = excluded.content_checked_at,
               job_functions = CASE
                 WHEN jobs.admin_title IS NULL THEN excluded.job_functions
                 ELSE jobs.job_functions

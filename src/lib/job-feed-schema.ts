@@ -1,15 +1,19 @@
+import { validateJobContent, type JobContent } from "./job-content";
+
 const MAX_FEED_JOBS = 10_000;
 
 export type FeedDocument = {
   schemaVersion: 1;
   generatedAt: string;
   license: "CC0-1.0";
-  jobs: Array<{
-    title: string;
-    company: string;
-    deadline: string | null;
-    url: string;
-  }>;
+  jobs: Array<
+    JobContent & {
+      title: string;
+      company: string;
+      deadline: string | null;
+      url: string;
+    }
+  >;
 };
 
 function validateDateOnly(value: unknown) {
@@ -83,6 +87,7 @@ export function validateJobFeed(input: unknown): FeedDocument {
       company,
       deadline: validateDateOnly(job.deadline),
       url: canonicalUrl,
+      ...validateJobContent(job),
     };
   });
 
