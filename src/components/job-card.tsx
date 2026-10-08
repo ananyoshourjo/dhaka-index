@@ -3,6 +3,7 @@
 import { Archive, ArrowRight, Bookmark, CalendarDays } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { getJobPath } from "@/lib/job-url";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -81,8 +82,8 @@ function JobCardButtons({
       </Button>
 
       <Button asChild className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none">
-        <Link href={`/jobs/${job.id}`} aria-label={`Open ${job.title}`}>
-          View job
+        <Link href={getJobPath(job)} aria-label={`Open ${job.title}`}>
+          Open
           <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </Button>
@@ -153,8 +154,8 @@ export function JobCard({
           <p className="text-sm text-muted-foreground">{job.company}</p>
           <h2 className="text-xl font-semibold leading-[1.2]">
             <Link
-              href={`/jobs/${job.id}`}
-              className="hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
+              href={getJobPath(job)}
+              className="no-underline hover:no-underline active:no-underline focus-visible:outline-2 focus-visible:outline-offset-4"
             >
               {job.title}
             </Link>

@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 1.7.1 - 2026-10-08
+
+- Polish job cards and detail pages with consistent Open and Apply actions, a flat divided layout, and balanced spacing.
+- Use descriptive company and job URLs with redirects for existing links and a copy-link action.
+- Normalize job descriptions into rich text and remove original-listing links.
+
 ## 1.7.0 - 2026-10-08
 
 - Read complete job descriptions inside Dhaka Index and apply directly through employer application or candidate login links.
