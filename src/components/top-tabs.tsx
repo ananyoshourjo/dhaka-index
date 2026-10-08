@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { isJobPath } from "@/lib/job-url";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -80,7 +81,7 @@ export function TopTabs() {
   const showLogoOnlyHeader =
     pathname === "/login" ||
     pathname === "/signup" ||
-    ((pathname === "/" || pathname.startsWith("/jobs/")) && !session.data);
+    ((pathname === "/" || isJobPath(pathname)) && !session.data);
 
   if (showLogoOnlyHeader) {
     return (
@@ -133,7 +134,7 @@ export function TopTabs() {
             {tabs.map((tab) => {
               const isActive =
                 pathname === tab.href ||
-                (tab.href === "/" && pathname.startsWith("/jobs/"));
+                (tab.href === "/" && isJobPath(pathname));
 
               return (
                 <Link
@@ -237,7 +238,7 @@ export function TopTabs() {
         {tabs.map((tab) => {
           const isActive =
             pathname === tab.href ||
-            (tab.href === "/" && pathname.startsWith("/jobs/"));
+            (tab.href === "/" && isJobPath(pathname));
           const Icon = tab.icon;
 
           return (

@@ -1,14 +1,16 @@
 # Internal job pages
 
-Job cards open `/jobs/<id>` in Dhaka Index. The page includes the employer’s
+Job cards open `/<company>-<job-title>-<id>` in Dhaka Index. Old `/jobs/<id>`
+links redirect permanently to the canonical descriptive URL. The page includes the employer’s
 description, deadline, job categories and application instructions. Descriptions
-are plain text rendered by React; source HTML, scripts and forms are never
-embedded. The original listing remains available as a separate reference link.
+are normalized into headings, paragraphs, lists and inline emphasis rendered by
+React; source HTML, scripts and forms are never embedded. Original listings are
+not linked. The flat page uses dividing lines and a copy-link action.
 
 The primary action uses the separately collected application destination.
 Email applications open the specified address. Portals requiring authentication
 use their actual candidate login link, retaining any published return-to-job
-parameters, and show “Log in to apply”. An unavailable destination does not
+parameters. The button always says “Apply” and sits below the date. An unavailable destination does not
 fall back to a description page under an Apply label. Closed jobs disable applying.
 
 Migration `0007_job_descriptions.sql` adds nullable description, application URL,

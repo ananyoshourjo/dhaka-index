@@ -65,7 +65,7 @@ export default async function SettingsPage() {
               archive.
             </p>
             <Button asChild className="mt-4 w-full sm:w-auto" variant="outline">
-              <a href="/api/account/export">
+              <a href="/api/account/export" download>
                 <Download className="size-4" />
                 Export my data
               </a>
