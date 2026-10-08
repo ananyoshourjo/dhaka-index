@@ -103,11 +103,15 @@ export async function addManualJob(input: ManualJobInput) {
           source_priority,
           deadline_at,
           job_functions,
+          description,
+          apply_url,
+          application_instructions,
+          content_checked_at,
           first_seen_at,
           last_seen_at,
           first_listed_at
         )
-        VALUES (?, ?, ?, ?, 'admin-manual', 'Dhaka Index Admin', 'manual', 0, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, 'admin-manual', 'Dhaka Index Admin', 'manual', 0, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
       [
         job.title,
@@ -116,6 +120,10 @@ export async function addManualJob(input: ManualJobInput) {
         job.detailUrl,
         job.deadlineAt,
         serializeJobFunctions(classifyJobFunctions(job.title)),
+        job.description ?? null,
+        job.applyUrl ?? null,
+        job.applicationInstructions ?? null,
+        listedAt,
         listedAt,
         listedAt,
         listedAt,
@@ -139,7 +147,9 @@ export async function updateAdminJobField(
   allowDeleted = false,
 ) {
   const editedAt = new Date().toISOString();
-  const activeOnlyCondition = allowDeleted ? "" : "\n          AND deleted_at IS NULL";
+  const activeOnlyCondition = allowDeleted
+    ? ""
+    : "\n          AND deleted_at IS NULL";
 
   if (field === "deadline") {
     const value = rawValue.trim();
@@ -165,7 +175,9 @@ export async function updateAdminJobField(
   const value = rawValue.trim();
 
   if (!value) {
-    throw new Error(`${field === "title" ? "Role" : "Company"} cannot be empty.`);
+    throw new Error(
+      `${field === "title" ? "Role" : "Company"} cannot be empty.`,
+    );
   }
 
   if (value.length > 240) {

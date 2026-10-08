@@ -2,12 +2,7 @@
 
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
-import {
-  useActionState,
-  useCallback,
-  useRef,
-  useState,
-} from "react";
+import { useActionState, useCallback, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -94,16 +89,12 @@ export function AddJobForm({ action }: { action: AddManualJobAction }) {
         <Button type="button">Add new</Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[30rem]">
+      <DialogContent className="max-h-[85dvh] overflow-y-auto sm:max-w-[30rem]">
         <DialogHeader>
           <DialogTitle>Add a new job</DialogTitle>
         </DialogHeader>
 
-        <form
-          ref={formRef}
-          action={formAction}
-          className="grid gap-4"
-        >
+        <form ref={formRef} action={formAction} className="grid gap-4">
           <div className="grid gap-4 sm:grid-cols-2">
             <label className="grid gap-1.5 text-sm font-medium">
               Company
@@ -117,12 +108,7 @@ export function AddJobForm({ action }: { action: AddManualJobAction }) {
 
             <label className="grid gap-1.5 text-sm font-medium">
               Role
-              <Input
-                name="title"
-                autoComplete="off"
-                maxLength={240}
-                required
-              />
+              <Input name="title" autoComplete="off" maxLength={240} required />
             </label>
           </div>
 
@@ -137,9 +123,32 @@ export function AddJobForm({ action }: { action: AddManualJobAction }) {
             />
           </label>
 
+          <label className="grid gap-1.5 text-sm font-medium">
+            Job description
+            <textarea
+              name="description"
+              rows={6}
+              maxLength={50000}
+              required
+              className="min-h-32 rounded-md border bg-background px-3 py-2 text-sm font-normal focus-visible:outline-2 focus-visible:outline-offset-2"
+            />
+          </label>
+          <label className="grid gap-1.5 text-sm font-medium">
+            Application or candidate login URL
+            <Input
+              name="applyUrl"
+              autoComplete="off"
+              maxLength={4000}
+              required
+            />
+          </label>
+
           <div className="grid gap-1.5 text-sm font-medium">
             <span>
-              Deadline <span className="font-normal text-muted-foreground">(optional)</span>
+              Deadline{" "}
+              <span className="font-normal text-muted-foreground">
+                (optional)
+              </span>
             </span>
             <input type="hidden" name="deadlineAt" value={deadlineValue} />
             <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -153,7 +162,9 @@ export function AddJobForm({ action }: { action: AddManualJobAction }) {
                   )}
                 >
                   <CalendarDays className="size-4" aria-hidden="true" />
-                  {selectedDate ? format(selectedDate, "PPP") : "Select a deadline"}
+                  {selectedDate
+                    ? format(selectedDate, "PPP")
+                    : "Select a deadline"}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-auto p-0" align="start">

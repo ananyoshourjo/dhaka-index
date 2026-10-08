@@ -16,7 +16,7 @@ the publishing agent rather than entered manually.
 - Documentation, CI-only work, tests, and data-only feed refreshes do not create
   an application release.
 
-The latest release was deliberately corrected from `v1.7.0` to `v1.6.6` at the
+The preceding release was deliberately corrected from `v1.7.0` to `v1.6.6` at the
 user's request, following the previous `v1.6.5` tag. Its release notes and
 GitHub Release display title remain unchanged; the tag, packages, lockfile, and
 changelog use `1.6.6`. The correction command was:
@@ -25,7 +25,8 @@ changelog use `1.6.6`. The correction command was:
 node scripts/version.mjs correct-release --from 1.7.0 --to 1.6.6
 ```
 
-Earlier historical tags remain untouched.
+Earlier historical tags remain untouched. The new job-description workflow is
+a separate feature release at `1.7.0`, following the corrected `1.6.6` baseline.
 
 For a fix, feature, or lifecycle transition, the agent runs:
 

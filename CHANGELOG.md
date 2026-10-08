@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.7.0 - 2026-10-08
+
+- Read complete job descriptions inside Dhaka Index and apply directly through employer application or candidate login links.
+- Collect descriptions and application destinations in the daily crawler; support the same fields for admin job entry.
+
 ## 1.6.6 - 2026-09-26
 
 - Add a public landing page for logged-out visitors.
