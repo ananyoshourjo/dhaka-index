@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { normalizeJobDescription } from "../src/lib/job-description";
+import { normalizeJobDescription, splitJobDescription } from "../src/lib/job-description";
 
 test("normalization creates headings and lists while keeping wrapped content", () => {
   assert.deepEqual(normalizeJobDescription("Responsibilities\n\n• Build tools\nfor customers\n\n• Review work\n\nRequirements:\n\nA degree.\nRelevant experience."), [
@@ -32,4 +32,20 @@ test("employer section label variants normalize to headings", () => {
     { type: "paragraph", text: "Build tools." },
     { type: "heading", text: "Apply Procedure" },
   ]);
+});
+
+test("old captures lose page controls and split interview stages from application details", () => {
+  const result = splitJobDescription("Job Context:\n\nSupport customers.\n\nQualifications & Requirements:\n\n• Fluent English.\n\nThe Application Process:\n\n• Telephone interview.\n\nApply Now\n\nApplication Form\n\nContact Us Now\n\nMarketing text.", "Application Process:\n\n• Telephone interview.\n\nApply Now\n\nContact Us Now\n\nMarketing text.");
+  assert.match(result.description, /## Qualifications & Requirements/);
+  assert.doesNotMatch(result.description, /Apply Now|Marketing text|Telephone interview/);
+  assert.equal(result.hiringProcess, "• Telephone interview.");
+  assert.equal(result.applicationInstructions, null);
+});
+
+test("application instructions retain complete long text and nested labels", () => {
+  const instructions = "Send the required documents with your application. ".repeat(90);
+  const result = splitJobDescription(`## Responsibilities\n\n• Build tools.\n\n## How to apply\n\n${instructions}\n\nDocuments:\n\n• CV and portfolio.`);
+  assert.ok(result.applicationInstructions?.includes(instructions.trim()));
+  assert.match(result.applicationInstructions!, /CV and portfolio/);
+  assert.doesNotMatch(result.description, /CV and portfolio/);
 });

@@ -1,12 +1,15 @@
 import { ArrowUpRight, CalendarDays } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { JobDescription } from "@/components/job-description";
 import { JobPageActions } from "@/components/job-page-actions";
 import type { JobDetail } from "@/lib/cloud-db";
 import { todayDhaka } from "@/lib/time";
 import { getJobPath } from "@/lib/job-url";
+import { splitJobDescription } from "@/lib/job-description";
 
-export function JobDetailView({ job }: { job: JobDetail }) {
+export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boolean }) {
+  const content = splitJobDescription(job.description ?? "", job.applicationInstructions);
   const closed = Boolean(job.expiredAt || (job.deadlineAt && job.deadlineAt < todayDhaka()));
   const deadline = job.deadlineAt
     ? new Intl.DateTimeFormat("en", {
@@ -31,7 +34,11 @@ export function JobDetailView({ job }: { job: JobDetail }) {
             <CalendarDays className="size-4 shrink-0" aria-hidden="true" />{deadline}
           </p>
           <div className="mt-6 sm:mt-8">
-            {job.applyUrl && job.description && !closed ? (
+            {!signedIn && !closed ? (
+              <Button asChild className="h-11 sm:h-9">
+                <Link href="/login">Login to Apply<ArrowUpRight className="size-4" aria-hidden="true" /></Link>
+              </Button>
+            ) : job.applyUrl && !closed ? (
               <Button asChild className="h-11 sm:h-9">
                 <a href={job.applyUrl} target={email ? undefined : "_blank"} rel="noopener noreferrer">
                   Apply<ArrowUpRight className="size-4" aria-hidden="true" />
@@ -52,14 +59,20 @@ export function JobDetailView({ job }: { job: JobDetail }) {
         <div className="mt-6 divide-y border-y sm:mt-8">
           <section aria-labelledby="description-heading" className="space-y-5 py-7">
             <h2 id="description-heading" className="font-semibold">About this role</h2>
-            {job.description ? <JobDescription text={job.description} /> : (
+            {content.description ? <JobDescription text={content.description} /> : (
               <p className="text-sm leading-6 text-muted-foreground">The employer’s description is currently unavailable.</p>
             )}
           </section>
-          {job.applicationInstructions ? (
+          {content.hiringProcess ? (
+            <section aria-labelledby="hiring-heading" className="space-y-5 py-7">
+              <h2 id="hiring-heading" className="font-semibold">Hiring process</h2>
+              <JobDescription text={content.hiringProcess} />
+            </section>
+          ) : null}
+          {content.applicationInstructions ? (
             <section aria-labelledby="application-heading" className="space-y-5 py-7">
               <h2 id="application-heading" className="font-semibold">How to apply</h2>
-              <JobDescription text={job.applicationInstructions} />
+              <JobDescription text={content.applicationInstructions} />
             </section>
           ) : null}
         </div>

@@ -29,21 +29,13 @@ export function validateJobContent(input: JobContent): JobContent {
   for (const key of ["description", "applicationInstructions"] as const) {
     if (input[key] !== undefined) {
       const value = input[key];
-      if (value !== null && (typeof value !== "string" || value.length > 50000))
-        throw new Error(`Invalid job ${key}.`);
       content[key] = typeof value === "string" ? value.trim() || null : null;
     }
   }
   if (input.applyUrl !== undefined)
     content.applyUrl = validateApplicationUrl(input.applyUrl);
   if (input.contentCheckedAt !== undefined) {
-    if (
-      input.contentCheckedAt !== null &&
-      (typeof input.contentCheckedAt !== "string" ||
-        Number.isNaN(Date.parse(input.contentCheckedAt)))
-    )
-      throw new Error("Invalid job content timestamp.");
-    content.contentCheckedAt = input.contentCheckedAt;
+    content.contentCheckedAt = typeof input.contentCheckedAt === "string" && !Number.isNaN(Date.parse(input.contentCheckedAt)) ? input.contentCheckedAt : null;
   }
   return content;
 }

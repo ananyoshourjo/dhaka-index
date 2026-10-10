@@ -24,6 +24,27 @@ remain readable. Both visitor/Cron import and the supported seed preserve these
 fields. Application URLs allow HTTPS or a single email recipient; unsafe schemes
 and credential-bearing URLs are rejected. Application fragments are preserved.
 
+Descriptions use readable headings and complete bullet points. Application
+controls, navigation, contact promotions and cookie text are removed from older
+captures as well as new content. Interview stages appear under Hiring process,
+separate from application instructions. Descriptions and instructions are not
+cut at a character boundary.
+
+The private crawler rewrites collected descriptions using the locally installed
+Codex CLI and its existing sign-in. Each rewrite is saved privately under a hash
+of the source text and editing instructions. Unchanged content reuses that file;
+page requests never launch Codex. There is no score, review, schema validation or
+approval stage for a rewrite. If Codex is unavailable, cleaned employer text is
+saved and collection continues. To regenerate, change the editing instructions
+or remove the relevant cached Markdown file. `content:refresh -- --normalize-stored`
+rewrites existing captures; `--job-id=<crawler-id>` limits the operation to one job.
+`DHAKA_INDEX_CODEX_BIN` optionally selects a native Codex executable.
+
+Publication no longer waits for a catalogue audit or complete description
+capture coverage. Unreviewed categories use the existing title classifier.
+Application-URL security, source availability, import size limits and concurrent
+write locks remain independent of description editing.
+
 The private crawler owns collection and source evidence. Its locked
 `content:refresh` stage follows advert intermediaries, collects employer text and
 application/login destinations, and records unresolved cases explicitly. Only
