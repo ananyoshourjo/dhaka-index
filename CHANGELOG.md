@@ -2,6 +2,12 @@
 
 All notable changes are documented here.
 
+## 1.7.2 - 2026-10-10
+
+- Improve job description readability and separate hiring stages from application instructions.
+- Show Login to Apply for signed-out visitors and rename the category filter to All Categories.
+- Keep usable job descriptions when optional content fields are malformed.
+
 ## 1.7.1 - 2026-10-08
 
 - Polish job cards and detail pages with consistent Open and Apply actions, a flat divided layout, and balanced spacing.

@@ -57,11 +57,11 @@ export function JobFilterBar({ filters }: JobFilterBarProps) {
             >
               <SelectValue
                 className="min-w-0 flex-1 text-left"
-                placeholder="All job functions"
+                placeholder="All Categories"
               />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All job functions</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {JOB_FUNCTIONS.map((jobFunction) => (
                 <SelectItem key={jobFunction} value={jobFunction}>
                   {jobFunction}

@@ -4,6 +4,7 @@ import { cache } from "react";
 import { JobDetailView } from "@/components/job-detail";
 import { getJobByIdFromDb } from "@/lib/cloud-db";
 import { getJobIdFromSlug, getJobPath, getJobSlug } from "@/lib/job-url";
+import { getSession } from "@/lib/session";
 
 export const dynamic = "force-dynamic";
 const getJob = cache((slug: string) => {
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!job) return { title: "Job unavailable | Dhaka Index" };
   return {
     title: `${job.title} at ${job.company} | Dhaka Index`,
-    description: job.description?.slice(0, 160),
+    description: `${job.title} at ${job.company}. View role details and application information on Dhaka Index.`,
     alternates: { canonical: getJobPath(job) },
     openGraph: { title: job.title, description: job.company, url: getJobPath(job) },
   };
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function JobPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const job = await getJob(slug);
+  const [job, session] = await Promise.all([getJob(slug), getSession()]);
   if (!job) notFound();
   if (slug !== getJobSlug(job)) permanentRedirect(getJobPath(job));
-  return <JobDetailView job={job} />;
+  return <JobDetailView job={job} signedIn={Boolean(session)} />;
 }
