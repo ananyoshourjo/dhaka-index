@@ -4573,10 +4573,12 @@ export function ResumeBuilder({
                         {previewContactItems.map((item, index) => (
                           <span key={item.label}>
                             {index > 0 ? " | " : null}
-                            {item.label}: {" "}
-                            <ResumePreviewLink href={item.href}>
-                              {item.value}
-                            </ResumePreviewLink>
+                            <span className="whitespace-nowrap">
+                              {item.label}: {" "}
+                              <ResumePreviewLink href={item.href}>
+                                {item.value}
+                              </ResumePreviewLink>
+                            </span>
                           </span>
                         ))}
                       </p>

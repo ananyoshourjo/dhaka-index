@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.7.3 - 2026-10-19
+
+- Keep resume contact labels and their links together when the contact line wraps.
+
 ## 1.7.2 - 2026-10-10
 
 - Improve job description readability and separate hiring stages from application instructions.

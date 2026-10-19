@@ -443,6 +443,7 @@ function buildResumeHtml(
       : "",
   ]
     .filter(Boolean)
+    .map((item) => `<span class="contact-item">${item}</span>`)
     .join(" | ");
 
   return `
@@ -463,6 +464,7 @@ function buildResumeHtml(
           h3 { margin: 0 0 7px; border-bottom: 2px solid #000; padding-bottom: 2px; font-size: 13px; line-height: 1; text-transform: uppercase; }
           p { margin: 0; }
           .contact { margin-top: 6px; font-size: 11.5px; line-height: 1.15; }
+          .contact-item { white-space: nowrap; }
           .summary { margin-top: 15px; max-width: 6.35in; font-size: 11.5px; line-height: 1.18; }
           .photo { width: 1.28in; height: 1.55in; border: 1px solid #000; object-fit: cover; }
           .sections { display: grid; gap: 9px; margin-top: 12px; font-size: 11.5px; line-height: 1.18; }
