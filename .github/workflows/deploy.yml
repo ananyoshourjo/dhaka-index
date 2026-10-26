@@ -1,0 +1,75 @@
+name: Deploy production
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dhaka-index-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: >-
+      vars.DHAKA_INDEX_DEPLOY_ENABLED == 'true' &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+       (github.event.workflow_run.conclusion == 'success' &&
+        github.event.workflow_run.event == 'push' &&
+        github.event.workflow_run.head_branch == 'main'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      CLOUDFLARE_API_TOKEN: ${{ secrets.DHAKA_INDEX_CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.DHAKA_INDEX_CLOUDFLARE_ACCOUNT_ID }}
+      DHAKA_INDEX_D1_DATABASE_ID: ${{ vars.DHAKA_INDEX_D1_DATABASE_ID }}
+      DHAKA_INDEX_PUBLIC_URL: https://dhakaindex.com
+      DHAKA_INDEX_ADMIN_URL: https://admin.dhakaindex.com
+
+    steps:
+      - name: Check out verified source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Require the current main commit
+        run: |
+          git fetch --no-tags origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse FETCH_HEAD)"
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify a manually requested deployment
+        if: github.event_name == 'workflow_dispatch'
+        run: npm run verify
+
+      - name: Validate deployment configuration
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$DHAKA_INDEX_D1_DATABASE_ID"
+          npm run cf:prepare-build
+
+      - name: Build and deploy member app
+        run: |
+          npm run cf:build
+          npx wrangler deploy
+
+      - name: Build and deploy admin portal
+        run: |
+          npm run admin:cf:build
+          npx wrangler deploy --config admin-portal/wrangler.jsonc

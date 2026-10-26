@@ -101,12 +101,27 @@ visitor-triggered checks from running at the same time.
 
 ## Automatic deployments
 
-The production member and administration Workers are connected to this
-repository. Changes merged into `main` trigger both builds; non-production
-branch builds are disabled. The Cloudflare GitHub App is limited to this
-repository rather than receiving access to every repository in the account.
+The hosted member and administration Workers deploy through the **Deploy
+production** GitHub Actions workflow after **CI** succeeds for a push to
+`main`. Pull requests do not deploy production. The workflow serializes
+deployments and uses a token scoped to the product's Cloudflare account,
+independently of the Cloudflare GitHub App used by other projects.
 
-For another deployment, connect both Workers to the same GitHub repository
+Configure the encrypted repository secret
+`DHAKA_INDEX_CLOUDFLARE_API_TOKEN` and repository variables
+`DHAKA_INDEX_CLOUDFLARE_ACCOUNT_ID` and `DHAKA_INDEX_D1_DATABASE_ID`.
+Set `DHAKA_INDEX_DEPLOY_ENABLED` to `true` only after the target database,
+runtime secrets, bindings, and custom domains are ready. Existing user data
+must be migrated separately; deployment never recreates accounts or copies
+the database. Keep the same authentication secret to preserve signed sessions.
+
+The workflow builds both apps from the verified commit and preserves their
+existing runtime secrets. A manual workflow run is also available on `main`.
+Disable any older native build triggers for these two Workers when enabling
+this workflow, so only one deployment system owns production.
+
+For an alternative deployment using native Cloudflare Builds, connect both
+Workers to the same GitHub repository
 with `main` as the production branch. Add these encrypted build variables to
 each Worker:
 
