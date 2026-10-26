@@ -1,6 +1,6 @@
 {
   "name": "@dhaka-index/web",
-  "version": "1.7.4",
+  "version": "1.8.0",
   "private": true,
   "workspaces": [
     "admin-portal"
@@ -75,6 +75,7 @@
     "@radix-ui/react-popover": "^1.1.23",
     "@radix-ui/react-select": "^2.3.7",
     "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-tooltip": "1.2.16",
     "better-auth": "^1.6.22",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

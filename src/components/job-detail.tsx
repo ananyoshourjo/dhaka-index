@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { JobDescription } from "@/components/job-description";
 import { JobPageActions } from "@/components/job-page-actions";
+import { JobTextTransition } from "@/components/job-text-transition";
 import type { JobDetail } from "@/lib/cloud-db";
 import { todayDhaka } from "@/lib/time";
 import { getJobPath } from "@/lib/job-url";
@@ -22,9 +23,14 @@ export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boo
       <JobPageActions path={getJobPath(job)} />
       <article>
         <header>
-          <p className="text-sm font-medium text-muted-foreground">{job.company}</p>
-          <h1 className="mt-2 text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">{job.title}</h1>
+          <JobTextTransition jobId={job.id} field="company">
+            <p className="w-fit text-sm font-medium text-muted-foreground">{job.company}</p>
+          </JobTextTransition>
+          <JobTextTransition jobId={job.id} field="role">
+            <h1 className="mt-2 w-fit text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">{job.title}</h1>
+          </JobTextTransition>
           <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className="rounded-md bg-muted px-2.5 py-1 text-xs font-medium">{job.seniorityLevel}</span>
             {job.jobFunctions.map((label) => (
               <span key={label} className="rounded-md bg-muted px-2.5 py-1 text-xs font-medium">{label}</span>
             ))}

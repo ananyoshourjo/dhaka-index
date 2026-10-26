@@ -1,9 +1,11 @@
+import { isSeniorityLevel, type SeniorityLevel } from "./job-seniority";
 import { isJobFunction, type JobFunction } from "./job-functions";
 
 export const JOBS_PAGE_SIZE = 40;
 
 export type ActiveJobFilters = {
   jobFunction: JobFunction | "";
+  seniority?: SeniorityLevel | "";
   page: number;
   query: string;
 };
@@ -27,7 +29,9 @@ export function parseActiveJobFilters(
   const requestedJobFunction = firstValue(searchParams.function);
   const requestedPage = Number(firstValue(searchParams.page));
 
+  const seniority = firstValue(searchParams.seniority);
   return {
+    seniority: isSeniorityLevel(seniority) ? seniority : "",
     jobFunction: isJobFunction(requestedJobFunction)
       ? requestedJobFunction
       : "",
@@ -40,7 +44,7 @@ export function parseActiveJobFilters(
 }
 
 export function hasActiveJobFilters(filters: ActiveJobFilters) {
-  return Boolean(filters.query || filters.jobFunction);
+  return Boolean(filters.query || filters.jobFunction || filters.seniority);
 }
 
 export function createJobsHref(filters: ActiveJobFilters, page = 1) {
@@ -52,6 +56,7 @@ export function createJobsHref(filters: ActiveJobFilters, page = 1) {
   if (filters.jobFunction) {
     params.set("function", filters.jobFunction);
   }
+  if (filters.seniority) params.set("seniority", filters.seniority);
   if (page > 1) {
     params.set("page", String(page));
   }

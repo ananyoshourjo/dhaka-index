@@ -87,6 +87,54 @@ body {
   @apply bg-background text-foreground font-sans antialiased;
 }
 
+.gulshan-ascii {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  color: color-mix(in oklch, var(--foreground) 48%, var(--background));
+  mask-image: radial-gradient(ellipse 34% 28% at 50% 49%, transparent 10%, #000 100%);
+}
+
+.gulshan-ascii pre {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: max-content;
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: max(3.5px, 0.347vw);
+  line-height: 1;
+  font-weight: 400;
+  font-variant-ligatures: none;
+  letter-spacing: 0;
+  white-space: pre;
+}
+
+.public-landing-copy {
+  padding-block: 3rem;
+}
+
+@media (max-width: 639px) {
+  .public-landing-copy {
+    padding-block: 2rem;
+    gap: 1.75rem;
+  }
+
+  .gulshan-ascii {
+    color: color-mix(in oklch, var(--foreground) 35%, var(--background));
+    mask-image: radial-gradient(ellipse 95% 40% at 50% 48%, transparent 30%, #000 100%);
+  }
+
+  .gulshan-ascii pre {
+    top: 50%;
+    transform: translate(-52%, -50%);
+    font-size: max(3.5px, 0.48svh);
+  }
+}
+
 button,
 a,
 input,
