@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.7.4 - 2026-10-26
+
+- Update runtime dependencies to address published security vulnerabilities.
+
 ## 1.7.3 - 2026-10-19
 
 - Keep resume contact labels and their links together when the contact line wraps.
