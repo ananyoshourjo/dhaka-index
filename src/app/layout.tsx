@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { CloudflareWebAnalytics } from "@/components/cloudflare-web-analytics";
 import { TopTabs } from "@/components/top-tabs";
+import { JobTransitionProvider } from "@/components/job-text-transition";
 
 import "./globals.css";
 
@@ -76,7 +77,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <TopTabs />
-        {children}
+        <JobTransitionProvider>{children}</JobTransitionProvider>
         <CloudflareWebAnalytics />
       </body>
     </html>

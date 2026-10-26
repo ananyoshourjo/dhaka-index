@@ -64,6 +64,9 @@ jobs:
           test -n "$DHAKA_INDEX_D1_DATABASE_ID"
           npm run cf:prepare-build
 
+      - name: Apply backward-compatible database migrations
+        run: npm run cf:migrate
+
       - name: Build and deploy member app
         run: |
           npm run cf:build

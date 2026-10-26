@@ -1,4 +1,5 @@
 import "server-only";
+import type { SeniorityLevel } from "@/lib/job-seniority";
 
 import { getCloudflareDb } from "@/lib/cloudflare";
 import { JOBS_PAGE_SIZE, type ActiveJobFilters } from "@/lib/job-search";
@@ -13,6 +14,7 @@ export type ActiveJob = {
   deadlineAt: string | null;
   detailUrl: string;
   bookmarkedAt: string | null;
+  seniorityLevel: SeniorityLevel;
   jobFunctions: JobFunction[];
 };
 
@@ -43,7 +45,7 @@ export async function getJobByIdFromDb(id: number): Promise<JobDetail | null> {
     SELECT id, COALESCE(admin_title,title) AS title,
       COALESCE(admin_company,company) AS company,
       CASE WHEN admin_deadline_override=1 THEN admin_deadline_at ELSE deadline_at END AS deadlineAt,
-      detail_url AS detailUrl, job_functions AS jobFunctionsSerialized,
+      detail_url AS detailUrl, seniority_level AS seniorityLevel, job_functions AS jobFunctionsSerialized,
       description, apply_url AS applyUrl, application_instructions AS applicationInstructions,
       content_checked_at AS contentCheckedAt, expired_at AS expiredAt
     FROM jobs WHERE id=? AND deleted_at IS NULL`,
@@ -253,6 +255,7 @@ async function getJobs(
           ELSE jobs.deadline_at
         END AS deadlineAt,
         jobs.detail_url AS detailUrl,
+        jobs.seniority_level AS seniorityLevel,
         jobs.job_functions AS jobFunctionsSerialized,
         state.bookmarked_at AS bookmarkedAt
       ${fromClause}
@@ -302,6 +305,11 @@ export async function getActiveJobsPageFromDb(
     values.push(`|${filters.jobFunction}|`);
   }
 
+  if (filters.seniority) {
+    conditions.push("jobs.seniority_level = ?");
+    values.push(filters.seniority);
+  }
+
   const fromAndWhereSql = `
     FROM jobs
     LEFT JOIN job_user_state AS state
@@ -328,6 +336,7 @@ export async function getActiveJobsPageFromDb(
           ELSE jobs.deadline_at
         END AS deadlineAt,
         jobs.detail_url AS detailUrl,
+        jobs.seniority_level AS seniorityLevel,
         jobs.job_functions AS jobFunctionsSerialized,
         state.bookmarked_at AS bookmarkedAt
       ${fromAndWhereSql}

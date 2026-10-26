@@ -2,6 +2,13 @@
 
 All notable changes are documented here.
 
+## 1.8.0 - 2026-10-26
+
+- Introduce a responsive ASCII city landing page with interactive character trails.
+- Animate job company and role text between cards and detail pages.
+- Add automatic seniority tagging and live search with instant category and seniority filters.
+- Add bookmark and archive tooltips.
+
 ## 1.7.4 - 2026-10-26
 
 - Update runtime dependencies to address published security vulnerabilities.

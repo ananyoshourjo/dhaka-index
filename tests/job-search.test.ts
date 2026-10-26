@@ -15,6 +15,7 @@ test("normalizes supported job filters and ignores invalid values", () => {
   });
 
   assert.deepEqual(filters, {
+    seniority: "",
     jobFunction: "Marketing & Communications",
     page: 3,
     query: "product designer",

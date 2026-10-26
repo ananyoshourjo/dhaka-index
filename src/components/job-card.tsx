@@ -5,7 +5,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { getJobPath } from "@/lib/job-url";
 
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
+import { JobTextTransition } from "@/components/job-text-transition";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ActiveJob } from "@/lib/cloud-db";
 
@@ -39,8 +41,10 @@ function JobCardButtons({
   pending,
 }: JobCardButtonsProps) {
   return (
-    <>
+    <TooltipProvider delayDuration={300}>
       {canBookmark ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
         <Button
           type="button"
           variant={bookmarkedAt ? "default" : "outline"}
@@ -63,8 +67,13 @@ function JobCardButtons({
             aria-hidden="true"
           />
         </Button>
+          </TooltipTrigger>
+          <TooltipContent>{bookmarkedAt ? "Remove bookmark" : "Bookmark"}</TooltipContent>
+        </Tooltip>
       ) : null}
 
+      <Tooltip>
+        <TooltipTrigger asChild>
       <Button
         type="button"
         variant="outline"
@@ -80,6 +89,9 @@ function JobCardButtons({
       >
         <Archive className="size-4" aria-hidden="true" />
       </Button>
+        </TooltipTrigger>
+        <TooltipContent>{actionLabel}</TooltipContent>
+      </Tooltip>
 
       <Button asChild className="h-11 min-w-0 flex-1 sm:h-9 sm:flex-none">
         <Link href={getJobPath(job)} aria-label={`Open ${job.title}`}>
@@ -87,7 +99,7 @@ function JobCardButtons({
           <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </Button>
-    </>
+    </TooltipProvider>
   );
 }
 
@@ -151,8 +163,11 @@ export function JobCard({
     <Card className="overflow-hidden">
       <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="min-w-0 space-y-1">
-          <p className="text-sm text-muted-foreground">{job.company}</p>
-          <h2 className="text-xl font-semibold leading-[1.2]">
+          <JobTextTransition jobId={job.id} field="company">
+            <p className="w-fit text-sm text-muted-foreground">{job.company}</p>
+          </JobTextTransition>
+          <JobTextTransition jobId={job.id} field="role">
+          <h2 className="w-fit text-xl font-semibold leading-[1.2]">
             <Link
               href={getJobPath(job)}
               className="no-underline hover:no-underline active:no-underline focus-visible:outline-2 focus-visible:outline-offset-4"
@@ -160,6 +175,7 @@ export function JobCard({
               {job.title}
             </Link>
           </h2>
+          </JobTextTransition>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <CalendarDays className="size-4" aria-hidden="true" />
             <span>{formattedDeadline}</span>
