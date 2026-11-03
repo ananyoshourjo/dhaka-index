@@ -4,6 +4,7 @@ All notable changes are documented here.
 
 ## 1.8.1 - 2026-11-03
 
+- Update Better Auth in both applications to address security advisories.
 - Improve profile editing with photo visibility, inclusion switches, resizable text editors, and clearer editable section titles.
 - Smooth profile reordering and keep text selection separate from dragging.
 - Clean pasted clipboard markers and encoded characters, and omit empty company separators in resumes.
