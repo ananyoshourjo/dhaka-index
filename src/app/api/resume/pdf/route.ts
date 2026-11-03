@@ -101,7 +101,7 @@ function sanitizeResumeForPdf(
     ),
     contact: {
       ...resume.contact,
-      photoUrl,
+      photoUrl: resume.contact.photoIncluded === false ? "" : photoUrl,
     },
   };
 }
@@ -151,7 +151,7 @@ function buildResumeHtml(
       (item, index) => `
         <div class="block">
           <div class="row strong">
-            <p>${index + 1}. ${escapeHtml(item.role)} - <em>${escapeHtml(item.company)}</em></p>
+            <p>${index + 1}. ${escapeHtml(item.role)}${item.company.trim() ? ` - <em>${escapeHtml(item.company)}</em>` : ""}</p>
             <p>${renderPlaceAndDates(item.place, item.dates)}</p>
           </div>
           <ul>

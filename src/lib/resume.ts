@@ -167,6 +167,7 @@ export type ResumeContent = {
     linkedin: string;
     website: string;
     photoUrl: string;
+    photoIncluded?: boolean;
   };
   summary: {
     included: boolean;
@@ -198,6 +199,7 @@ export const defaultResumeContent: ResumeContent = {
     linkedin: "",
     website: "",
     photoUrl: "",
+    photoIncluded: true,
   },
   summary: {
     included: true,

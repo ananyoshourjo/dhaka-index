@@ -178,7 +178,7 @@ export function hasResumeContent(
       contact.email,
       contact.linkedin,
       contact.website,
-      photoUrl,
+      contact.photoIncluded === false ? "" : photoUrl,
     ].some(hasText)
   ) {
     return true;

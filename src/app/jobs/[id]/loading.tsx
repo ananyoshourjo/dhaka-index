@@ -1,6 +1,6 @@
 export default function LoadingJob() {
   return (
-    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6" role="status">
+    <main className="mx-auto w-full max-w-3xl px-4 py-8 sm:px-6" role="status" data-route-skeleton>
       <span className="sr-only">Loading job…</span>
       <div aria-hidden="true" className="space-y-6">
         <div className="flex justify-between gap-4">

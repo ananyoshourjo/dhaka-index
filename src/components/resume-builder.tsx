@@ -36,6 +36,8 @@ import {
   useState,
 } from "react";
 
+import { useProfileReorder } from "@/components/use-profile-reorder";
+
 import { saveResumeAction } from "@/app/profile/actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -88,6 +90,7 @@ import type {
 import { normalizeResumeLink } from "@/lib/resume-links";
 import {
   normalizeRichTextHtml,
+  plainTextToRichText,
   richTextToPlainText,
   sanitizeRichTextHtml,
 } from "@/lib/rich-text";
@@ -436,8 +439,7 @@ function autoResizeContentEditable(editor: HTMLElement | null) {
     return;
   }
 
-  editor.style.height = "auto";
-  editor.style.height = `${editor.scrollHeight}px`;
+  editor.style.height = `${Math.max(editor.clientHeight, editor.scrollHeight)}px`;
 }
 
 type RichTextCommand =
@@ -602,6 +604,7 @@ function RichTextInlineEditor({
   const [toolbarPosition, setToolbarPosition] = useState<{
     left: number;
     top: number;
+    mobile: boolean;
   } | null>(null);
 
   const closeToolbar = useCallback(() => {
@@ -644,9 +647,16 @@ function RichTextInlineEditor({
     }
 
     selectionRef.current = createRichTextSelectionBookmark(editor, range);
+    const mobile = window.matchMedia("(max-width: 639px)").matches;
+    const viewport = window.visualViewport;
     setToolbarPosition({
-      left: rect.left + rect.width / 2,
-      top: Math.max(8, rect.top),
+      left: mobile
+        ? (viewport?.offsetLeft ?? 0) + (viewport?.width ?? window.innerWidth) / 2
+        : rect.left + rect.width / 2,
+      top: mobile
+        ? (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight) - 16
+        : Math.max(8, rect.top),
+      mobile,
     });
     setToolbarOpen(true);
   }, [closeToolbar, linkFormOpen]);
@@ -758,9 +768,30 @@ function RichTextInlineEditor({
   }, [value]);
 
   useEffect(() => {
+    const repositionToolbar = () => {
+      updateSelectionToolbar();
+      // Link inputs own focus while editing a URL, so there may no longer be
+      // a live text selection when the on-screen keyboard changes height.
+      setToolbarPosition((position) => {
+        if (!position?.mobile) return position;
+        const viewport = window.visualViewport;
+        return {
+          ...position,
+          left: (viewport?.offsetLeft ?? 0) + (viewport?.width ?? window.innerWidth) / 2,
+          top: (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight) - 16,
+        };
+      });
+    };
     document.addEventListener("selectionchange", updateSelectionToolbar);
-    return () =>
+    window.addEventListener("resize", repositionToolbar);
+    window.visualViewport?.addEventListener("resize", repositionToolbar);
+    window.visualViewport?.addEventListener("scroll", repositionToolbar);
+    return () => {
       document.removeEventListener("selectionchange", updateSelectionToolbar);
+      window.removeEventListener("resize", repositionToolbar);
+      window.visualViewport?.removeEventListener("resize", repositionToolbar);
+      window.visualViewport?.removeEventListener("scroll", repositionToolbar);
+    };
   }, [updateSelectionToolbar]);
 
   return (
@@ -792,12 +823,11 @@ function RichTextInlineEditor({
           onPaste={(event) => {
             const html = event.clipboardData.getData("text/html");
 
-            if (!html) {
-              return;
-            }
-
             event.preventDefault();
-            document.execCommand("insertHTML", false, sanitizeRichTextHtml(html));
+            document.execCommand("insertHTML", false, html
+              ? sanitizeRichTextHtml(html)
+              : plainTextToRichText(event.clipboardData.getData("text/plain")));
+
             syncEditorValue();
             updateSelectionToolbar();
           }}
@@ -828,9 +858,10 @@ function RichTextInlineEditor({
               side="top"
               align="center"
               sideOffset={8}
+              avoidCollisions={!toolbarPosition.mobile}
               onOpenAutoFocus={(event) => event.preventDefault()}
               onCloseAutoFocus={(event) => event.preventDefault()}
-              className="w-auto max-w-[calc(100vw-1rem)] p-1"
+              className="w-auto max-w-[calc(100vw-1rem)] p-1 max-sm:mb-[env(safe-area-inset-bottom)] max-sm:[&_button]:min-h-11 max-sm:[&_button]:min-w-11"
             >
               {linkFormOpen ? (
                 <form
@@ -1212,15 +1243,14 @@ function RichTextEditor({
             onPaste={(event) => {
               const html = event.clipboardData.getData("text/html");
 
-              if (!html) {
-                return;
-              }
-
               event.preventDefault();
-              document.execCommand("insertHTML", false, sanitizeRichTextHtml(html));
+              document.execCommand("insertHTML", false, html
+                ? sanitizeRichTextHtml(html)
+                : plainTextToRichText(event.clipboardData.getData("text/plain")));
+
               syncEditorValue();
             }}
-            className="rich-text-editor-content min-h-[220px] overflow-y-hidden px-3 py-3 text-sm leading-6 text-foreground outline-none"
+            className="rich-text-editor-content min-h-[220px] resize-y overflow-auto px-3 py-3 text-sm leading-6 text-foreground outline-none"
           />
         </div>
       </div>
@@ -1290,7 +1320,10 @@ function EditorSection({
         indicator === "after" &&
           "after:absolute after:-bottom-3 after:left-0 after:right-0 after:h-1 after:rounded-full after:bg-primary",
       )}
-      draggable={draggable}
+      draggable={false}
+      data-reorder-group={draggable ? dragGroup : undefined}
+      data-reorder-id={draggable ? dragId : undefined}
+      onDragEnd={onDragEnd}
       onDragStart={(event) => {
         if ((event.target as Element | null)?.closest("input,button,textarea,select")) {
           event.preventDefault();
@@ -1318,7 +1351,8 @@ function EditorSection({
           {isCollapsible ? (
             <>
               <GripVertical
-                className="size-4 cursor-grab text-muted-foreground transition-colors hover:text-foreground active:cursor-grabbing"
+                data-drag-handle
+                className="size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground transition-colors hover:text-foreground active:cursor-grabbing"
                 aria-hidden="true"
               />
               <CollapseButton
@@ -1329,13 +1363,23 @@ function EditorSection({
             </>
           ) : null}
           {onTitleChange ? (
-            <input
-              value={title}
-              onChange={(event) => onTitleChange(event.target.value)}
-              aria-label={`${title || "Section"} title`}
-              draggable={false}
-              className="min-w-0 bg-transparent text-sm font-semibold text-foreground outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring/30"
-            />
+            <label
+              className="group inline-flex min-w-0 cursor-text items-center gap-1.5"
+              title="Edit section title"
+            >
+              <input
+                value={title}
+                size={Math.max(1, title.length)}
+                onChange={(event) => onTitleChange(event.target.value)}
+                aria-label={`${title || "Section"} title`}
+                draggable={false}
+                className="min-w-[1ch] max-w-full [field-sizing:content] bg-transparent text-sm font-semibold text-foreground outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-ring/30"
+              />
+              <PencilLine
+                aria-hidden="true"
+                className="size-3 shrink-0 text-muted-foreground/60 transition-colors group-hover:text-muted-foreground group-focus-within:text-muted-foreground"
+              />
+            </label>
           ) : (
             <h2 className="text-sm font-semibold text-foreground">{title}</h2>
           )}
@@ -2358,6 +2402,12 @@ export function ResumeBuilder({
     id: string,
     event?: React.DragEvent<Element>,
   ) => {
+    // Text selections can emit native dragstart events even when their
+    // containing section is not draggable. Only grips may start reordering.
+    if (!event || event.defaultPrevented ||
+      !(event.target as Element | null)?.closest("[data-drag-handle]")) {
+      return;
+    }
     event?.dataTransfer.setData("text/plain", `${group}:${id}`);
     if (event?.dataTransfer) {
       event.dataTransfer.effectAllowed = "move";
@@ -2420,7 +2470,9 @@ export function ResumeBuilder({
     group: string,
     id: string,
     position: "before" | "after" = dropIndicator?.position ?? "before",
+    source: DragTarget | null = dragTarget,
   ) => {
+    const dragTarget = source;
     if (!dragTarget || dragTarget.group !== group || dragTarget.id === id) {
       setDragTarget(null);
       setDropIndicator(null);
@@ -2470,6 +2522,14 @@ export function ResumeBuilder({
     setDragTarget(null);
     setDropIndicator(null);
   };
+
+  const pointerReorder = useProfileReorder({
+    containerRef: editorScrollRef,
+    onStart: (source) => setDragTarget(source),
+    onIndicator: setDropIndicator,
+    onCommit: (source, target) => handleDrop(target.group, target.id, target.position, source),
+    onEnd: handleDragEnd,
+  });
 
   const handleEditorDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -2664,7 +2724,8 @@ export function ResumeBuilder({
   const isCollapsed = (id: string) => resume.collapsedSectionIds.includes(id);
   const totalPreviewPages =
     resumePageCount + (resume.coverLetter.included ? 1 : 0);
-  const hasPreviewContent = hasResumeContent(resume, photoUrl);
+  const documentPhotoUrl = resume.contact.photoIncluded === false ? "" : photoUrl;
+  const hasPreviewContent = hasResumeContent(resume, documentPhotoUrl);
   const previewContactItems = [
     {
       label: "Phone",
@@ -2751,70 +2812,88 @@ export function ResumeBuilder({
             showPreview && "overflow-y-auto",
           )}
           onDragOver={handleEditorDragOver}
+          onPointerDown={pointerReorder.onPointerDown}
+          onDragStartCapture={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+          }}
         >
+          <EditorSection
+            title="Photo"
+            action={
+              <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                <Switch
+                  checked={resume.contact.photoIncluded !== false}
+                  label="Include photo in document"
+                  onClick={() => setResume((current) => ({
+                    ...current,
+                    contact: { ...current.contact, photoIncluded: current.contact.photoIncluded === false },
+                  }))}
+                />
+                <span>Include in document</span>
+              </div>
+            }
+          >
+            <div className="grid gap-3 bg-muted/20">
+              <div
+                className="flex h-48 w-40 items-center justify-center justify-self-center overflow-hidden rounded-md border bg-muted/50 sm:justify-self-auto"
+                aria-hidden="true"
+              >
+                {photoUrl ? (
+                  <div
+                    className="size-full bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url("${photoUrl}")`,
+                    }}
+                  />
+                ) : (
+                  <ImagePlus className="size-5 text-muted-foreground" />
+                )}
+              </div>
+              <div className="grid min-w-0 gap-3">
+                <input
+                  ref={photoInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={(event) =>
+                    uploadContactPhoto(event.target.files?.[0])
+                  }
+                  className="sr-only"
+                />
+                <div className="flex w-40 items-center gap-2">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="flex-1"
+                    disabled={photoSaving}
+                    onClick={() => photoInputRef.current?.click()}
+                  >
+                    {photoSaving ? "Saving photo" : "Upload photo"}
+                  </Button>
+                  {photoUrl ? (
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      size="sm"
+                      className="size-9 px-0"
+                      disabled={photoSaving}
+                      onClick={removeContactPhoto}
+                      aria-label="Remove photo"
+                    >
+                      <Trash2 className="size-4" />
+                    </Button>
+                  ) : null}
+                </div>
+                {photoError ? (
+                  <p className="text-xs text-destructive">{photoError}</p>
+                ) : null}
+              </div>
+            </div>
+          </EditorSection>
+
           <EditorSection title="Contact">
             <div className="grid gap-3 sm:grid-cols-2">
-              <div className="sm:col-span-2">
-                <div className="grid gap-2 text-xs font-medium text-muted-foreground">
-                  Photo
-                  <div className="grid gap-3 bg-muted/20">
-                    <div
-                      className="flex h-48 w-40 items-center justify-center justify-self-center overflow-hidden rounded-md border bg-muted/50 sm:justify-self-auto"
-                      aria-hidden="true"
-                    >
-                      {photoUrl ? (
-                        <div
-                          className="size-full bg-cover bg-center"
-                          style={{
-                            backgroundImage: `url("${photoUrl}")`,
-                          }}
-                        />
-                      ) : (
-                        <ImagePlus className="size-5 text-muted-foreground" />
-                      )}
-                    </div>
-                    <div className="grid min-w-0 gap-3">
-                      <input
-                        ref={photoInputRef}
-                        type="file"
-                        accept="image/jpeg,image/png,image/webp"
-                        onChange={(event) =>
-                          uploadContactPhoto(event.target.files?.[0])
-                        }
-                        className="sr-only"
-                      />
-                      <div className="flex w-40 items-center gap-2">
-                        <Button
-                          type="button"
-                          variant="secondary"
-                          size="sm"
-                          className="flex-1"
-                          disabled={photoSaving}
-                          onClick={() => photoInputRef.current?.click()}
-                        >
-                          {photoSaving ? "Saving photo" : "Upload photo"}
-                        </Button>
-                        {photoUrl ? (
-                          <Button
-                            type="button"
-                            variant="secondary"
-                            size="sm"
-                            className="size-9 px-0"
-                            disabled={photoSaving}
-                            onClick={removeContactPhoto}
-                            aria-label="Remove photo"
-                          >
-                            <Trash2 className="size-4" />
-                          </Button>
-                        ) : null}
-                      </div>
-                      {photoError ? (
-                        <p className="text-xs text-destructive">{photoError}</p>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
               <Field
                 label="Name"
                 value={resume.contact.name}
@@ -2847,7 +2926,7 @@ export function ResumeBuilder({
             title="Summary"
             action={
               <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                <Toggle
+                <Switch
                   checked={resume.summary.included}
                   label={
                     resume.summary.included
@@ -2956,7 +3035,9 @@ export function ResumeBuilder({
                     dropIndicator.position === "after" &&
                     "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
                 )}
-                draggable
+                draggable={false}
+                data-reorder-group="workExperience"
+                data-reorder-id={item.id}
                 onDragStart={(event) => {
                   event.stopPropagation();
                   handleDragStart("workExperience", item.id);
@@ -2972,7 +3053,8 @@ export function ResumeBuilder({
                 <div className="flex items-center justify-between gap-2">
                   <div className="inline-flex items-center gap-2 text-left text-sm font-semibold">
                     <GripVertical
-                      className="size-4 cursor-grab text-muted-foreground"
+                      data-drag-handle
+                      className="size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground"
                       aria-hidden="true"
                     />
                     <CollapseButton
@@ -3711,7 +3793,9 @@ export function ResumeBuilder({
                     dropIndicator.position === "after" &&
                     "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
                 )}
-                draggable
+                draggable={false}
+                data-reorder-group="activities"
+                data-reorder-id={item.id}
                 onDragStart={(event) => {
                   event.stopPropagation();
                   handleDragStart("activities", item.id);
@@ -3727,7 +3811,8 @@ export function ResumeBuilder({
                 <div className="flex items-center justify-between gap-2">
                   <div className="inline-flex items-center gap-2 text-left text-sm font-semibold">
                     <GripVertical
-                      className="size-4 cursor-grab text-muted-foreground"
+                      data-drag-handle
+                      className="size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground"
                       aria-hidden="true"
                     />
                     <CollapseButton
@@ -4151,7 +4236,9 @@ export function ResumeBuilder({
                       dropIndicator.position === "after" &&
                       "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
                   )}
-                  draggable
+                  draggable={false}
+                  data-reorder-group={`customEntries|${section.id}`}
+                  data-reorder-id={item.id}
                   onDragStart={(event) => {
                     event.stopPropagation();
                     handleDragStart(`customEntries|${section.id}`, item.id);
@@ -4171,7 +4258,8 @@ export function ResumeBuilder({
                   <div className="flex items-center justify-between gap-2">
                     <div className="inline-flex items-center gap-2 text-left text-sm font-semibold">
                       <GripVertical
-                        className="size-4 cursor-grab text-muted-foreground"
+                        data-drag-handle
+                        className="size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground"
                         aria-hidden="true"
                       />
                       <CollapseButton
@@ -4369,7 +4457,7 @@ export function ResumeBuilder({
             title="Cover Letter"
             action={
               <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                <Toggle
+                <Switch
                   checked={resume.coverLetter.included}
                   label={
                     resume.coverLetter.included
@@ -4559,7 +4647,7 @@ export function ResumeBuilder({
               <>
                 <header
                   className={cn(
-                    photoUrl && "grid grid-cols-[1fr_1.28in] gap-[0.25in]",
+                    documentPhotoUrl && "grid grid-cols-[1fr_1.28in] gap-[0.25in]",
                   )}
                 >
                   <div>
@@ -4591,11 +4679,11 @@ export function ResumeBuilder({
                       />
                     ) : null}
                   </div>
-                  {photoUrl ? (
+                  {documentPhotoUrl ? (
                     <div className="h-[1.55in] w-[1.28in] border border-black">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
-                        src={photoUrl}
+                        src={documentPhotoUrl}
                         alt=""
                         className="size-full object-cover"
                       />
@@ -4614,8 +4702,10 @@ export function ResumeBuilder({
                       <div key={item.id}>
                         <div className="grid grid-cols-[1fr_auto] gap-4 font-bold">
                           <p>
-                            {index + 1}. {item.role} -{" "}
-                            <span className="font-normal italic">{item.company}</span>
+                            {index + 1}. {item.role}
+                            {item.company.trim() ? (
+                              <> - <span className="font-normal italic">{item.company}</span></>
+                            ) : null}
                           </p>
                           <p>
                             {item.place ? (
@@ -5019,7 +5109,9 @@ function BulletEditor({
         indicator === "after" &&
           "after:absolute after:-bottom-1.5 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
       )}
-      draggable
+      draggable={false}
+      data-reorder-group={dragGroup}
+      data-reorder-id={bullet.id}
       onDragStart={(event) => {
         event.stopPropagation();
 
@@ -5037,7 +5129,8 @@ function BulletEditor({
       }}
     >
       <GripVertical
-        className="mt-2 size-4 cursor-grab text-muted-foreground"
+        data-drag-handle
+        className="mt-2 size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground"
         aria-hidden="true"
       />
       <div className="mt-2">
@@ -5113,7 +5206,9 @@ function GridRowEditor({
         indicator === "after" &&
           "after:absolute after:-bottom-2 after:left-0 after:right-0 after:h-0.5 after:bg-foreground",
       )}
-      draggable
+      draggable={false}
+      data-reorder-group={dragGroup}
+      data-reorder-id={dragId}
       onDragStart={(event) => {
         event.stopPropagation();
         onDragStart(dragGroup, dragId);
@@ -5127,7 +5222,8 @@ function GridRowEditor({
       <div className="flex items-center justify-between gap-2">
         <div className="inline-flex min-w-0 items-center gap-2">
           <GripVertical
-            className="size-4 cursor-grab text-muted-foreground"
+            data-drag-handle
+            className="size-4 cursor-grab touch-none select-none box-content p-2 -m-2 text-muted-foreground"
             aria-hidden="true"
           />
           <CollapseButton
