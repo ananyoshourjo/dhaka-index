@@ -2,6 +2,15 @@
 
 All notable changes are documented here.
 
+## 1.8.1 - 2026-11-03
+
+- Update Better Auth in both applications to address security advisories.
+- Improve profile editing with photo visibility, inclusion switches, resizable text editors, and clearer editable section titles.
+- Smooth profile reordering and keep text selection separate from dragging.
+- Clean pasted clipboard markers and encoded characters, and omit empty company separators in resumes.
+- Improve whole-card job navigation and coordinate loading states with reduced-motion support.
+- Wait for Cloudflare bindings before starting the local development app.
+
 ## 1.8.0 - 2026-10-26
 
 - Introduce a responsive ASCII city landing page with interactive character trails.

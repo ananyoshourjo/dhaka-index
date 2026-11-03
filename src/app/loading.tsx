@@ -6,6 +6,7 @@ export default function Loading() {
       className="mx-auto flex min-h-screen w-full max-w-3xl flex-col gap-3 px-3 pb-24 pt-4 sm:gap-4 sm:px-6 sm:py-8"
       aria-label="Loading page"
       aria-busy="true"
+      data-route-skeleton
     >
       <div className="h-10 animate-pulse rounded-md bg-muted" />
       {Array.from({ length: 4 }, (_, index) => (

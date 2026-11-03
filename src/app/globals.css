@@ -234,3 +234,51 @@ select {
     font-size: 16px;
   }
 }
+
+/* Let the browser carry the complete job surface between routes. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  display: none;
+}
+
+::view-transition-group(job-card) {
+  animation-duration: 280ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  overflow: clip;
+}
+
+::view-transition-old(job-card),
+::view-transition-new(job-card) {
+  height: auto;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(job-card) {
+  animation: job-card-out 80ms ease-out both;
+}
+
+::view-transition-new(job-card) {
+  animation: job-card-in 180ms ease-out 80ms both;
+}
+
+@keyframes job-card-out {
+  to { opacity: 0; }
+}
+
+@keyframes job-card-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}

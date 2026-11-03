@@ -7,7 +7,6 @@ import { getJobPath } from "@/lib/job-url";
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { JobTextTransition } from "@/components/job-text-transition";
 import { Card, CardContent } from "@/components/ui/card";
 import type { ActiveJob } from "@/lib/cloud-db";
 
@@ -160,13 +159,10 @@ export function JobCard({
   }
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden" data-job-surface={job.id} data-job-view="card">
       <CardContent className="flex flex-col gap-4 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="min-w-0 space-y-1">
-          <JobTextTransition jobId={job.id} field="company">
             <p className="w-fit text-sm text-muted-foreground">{job.company}</p>
-          </JobTextTransition>
-          <JobTextTransition jobId={job.id} field="role">
           <h2 className="w-fit text-xl font-semibold leading-[1.2]">
             <Link
               href={getJobPath(job)}
@@ -175,7 +171,6 @@ export function JobCard({
               {job.title}
             </Link>
           </h2>
-          </JobTextTransition>
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <CalendarDays className="size-4" aria-hidden="true" />
             <span>{formattedDeadline}</span>

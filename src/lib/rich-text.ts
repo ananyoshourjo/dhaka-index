@@ -53,6 +53,7 @@ function escapeHtml(value: string) {
 
 function decodeSafeEntities(value: string) {
   return value
+    .replaceAll(/&nbsp;/gi, "\u00a0")
     .replaceAll(/&#x27;|&#39;/gi, "'")
     .replaceAll(/&quot;/gi, '"')
     .replaceAll(/&apos;/gi, "'")
@@ -61,12 +62,21 @@ function decodeSafeEntities(value: string) {
     .replaceAll(/&amp;/gi, "&")
     .replaceAll(/&#(\d+);/g, (match, code: string) => {
       const value = Number(code);
-      return Number.isSafeInteger(value) ? String.fromCodePoint(value) : match;
+      return Number.isSafeInteger(value) && value >= 0 && value <= 0x10ffff ? String.fromCodePoint(value) : match;
     })
     .replaceAll(/&#x([\da-f]+);/gi, (match, code: string) => {
       const value = Number.parseInt(code, 16);
-      return Number.isSafeInteger(value) ? String.fromCodePoint(value) : match;
+      return Number.isSafeInteger(value) && value >= 0 && value <= 0x10ffff ? String.fromCodePoint(value) : match;
     });
+}
+
+// Windows/Office clipboard HTML can contain fragment boundaries, including
+// versions already escaped into visible text by a previous paste.
+function cleanClipboardArtifacts(value: string) {
+  return value
+    .replace(/<!--\s*(?:Start|End)Fragment\s*-->/gi, "")
+    .replace(/&lt;!--\s*(?:Start|End)Fragment\s*--&gt;/gi, "")
+    .replace(/\u0000/g, "");
 }
 
 function safeHref(value: string) {
@@ -169,6 +179,10 @@ function sanitizeWithDomParser(value: string) {
   };
 
   const sanitizeNode = (node: Node) => {
+    if (node.nodeType === Node.COMMENT_NODE) {
+      node.parentNode?.removeChild(node);
+      return;
+    }
     if (node.nodeType !== Node.ELEMENT_NODE) {
       return;
     }
@@ -335,6 +349,7 @@ function sanitizeWithoutDomParser(value: string) {
 }
 
 export function sanitizeRichTextHtml(value: string) {
+  value = cleanClipboardArtifacts(value);
   if (typeof DOMParser !== "undefined") {
     return sanitizeWithDomParser(value);
   }
@@ -343,7 +358,8 @@ export function sanitizeRichTextHtml(value: string) {
 }
 
 export function plainTextToRichText(value: string) {
-  const normalized = value.replace(/\r\n?/g, "\n").trim();
+  const normalized = decodeSafeEntities(cleanClipboardArtifacts(value))
+    .replace(/\r\n?/g, "\n").trim();
 
   if (!normalized) {
     return "";
@@ -360,6 +376,7 @@ export function plainTextToRichText(value: string) {
 }
 
 export function normalizeRichTextHtml(value: string) {
+  value = cleanClipboardArtifacts(value);
   if (!value.trim()) {
     return "";
   }
@@ -370,6 +387,7 @@ export function normalizeRichTextHtml(value: string) {
 }
 
 export function richTextToPlainText(value: string) {
+  value = cleanClipboardArtifacts(value);
   if (typeof DOMParser !== "undefined") {
     const parsed = new DOMParser().parseFromString(value, "text/html");
     return parsed.body.textContent?.replace(/\u00a0/g, " ").trim() ?? "";
