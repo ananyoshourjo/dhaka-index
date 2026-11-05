@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.8.3 - 2026-11-05
+
+- Use Apply for every application button and remove the note beneath the original-posting fallback.
+
 ## 1.8.2 - 2026-11-05
 
 - Offer the original job posting when a direct Apply link is unavailable, block confirmed broken destinations, and preserve application links across unchecked feed updates.
