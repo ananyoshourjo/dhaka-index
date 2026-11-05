@@ -535,7 +535,10 @@ export async function applyOfficialFeed(
               detail_url = excluded.detail_url,
               deadline_at = excluded.deadline_at,
               description = excluded.description,
-              apply_url = excluded.apply_url,
+              apply_url = CASE
+                WHEN excluded.apply_url IS NULL AND excluded.content_checked_at IS NULL THEN jobs.apply_url
+                ELSE excluded.apply_url
+              END,
               application_instructions = excluded.application_instructions,
               content_checked_at = excluded.content_checked_at,
               job_functions = CASE
