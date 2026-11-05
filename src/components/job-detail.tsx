@@ -42,7 +42,7 @@ export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boo
           <div className="mt-6 sm:mt-8">
             {!signedIn && !closed && applyUrl ? (
               <Button asChild className="h-11 sm:h-9">
-                <Link href="/login">Login to Apply<ArrowUpRight className="size-4" aria-hidden="true" /></Link>
+                <Link href="/login">Apply<ArrowUpRight className="size-4" aria-hidden="true" /></Link>
               </Button>
             ) : applyUrl && !closed ? (
               <Button asChild className="h-11 sm:h-9">
@@ -51,16 +51,11 @@ export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boo
                 </a>
               </Button>
             ) : !closed && source ? (
-              <>
-                <Button asChild className="h-11 sm:h-9">
-                  <a href={source} target="_blank" rel="noopener noreferrer">
-                    View original posting<ArrowUpRight className="size-4" aria-hidden="true" />
-                  </a>
-                </Button>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  A direct application link is unavailable. Check the original posting for application instructions.
-                </p>
-              </>
+              <Button asChild className="h-11 sm:h-9">
+                <a href={source} target="_blank" rel="noopener noreferrer">
+                  Apply<ArrowUpRight className="size-4" aria-hidden="true" />
+                </a>
+              </Button>
             ) : (
               <>
                 <Button disabled className="h-11 sm:h-9" aria-describedby="apply-status">
