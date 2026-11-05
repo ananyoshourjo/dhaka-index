@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.8.2 - 2026-11-05
+
+- Offer the original job posting when a direct Apply link is unavailable, block confirmed broken destinations, and preserve application links across unchecked feed updates.
+
 ## 1.8.1 - 2026-11-03
 
 - Update Better Auth in both applications to address security advisories.

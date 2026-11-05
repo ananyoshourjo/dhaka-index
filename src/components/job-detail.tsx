@@ -1,6 +1,7 @@
 import { ArrowUpRight, CalendarDays } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getApplicationDestination } from "@/lib/job-content";
 import { JobDescription } from "@/components/job-description";
 import { JobPageActions } from "@/components/job-page-actions";
 import type { JobDetail } from "@/lib/cloud-db";
@@ -16,7 +17,11 @@ export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boo
         day: "numeric", month: "long", year: "numeric", timeZone: "Asia/Dhaka",
       }).format(new Date(`${job.deadlineAt}T00:00:00+06:00`))
     : "Not specified";
-  const email = job.applyUrl?.startsWith("mailto:");
+  const applyUrl = getApplicationDestination(job.applyUrl);
+  const email = applyUrl?.startsWith("mailto:");
+  const sourceUrl = getApplicationDestination(job.detailUrl);
+  const source = sourceUrl?.startsWith("https:") &&
+    new URL(sourceUrl).hostname !== "dhakaindex.com" ? sourceUrl : null;
   return (
     <main className="mx-auto min-h-screen w-full max-w-3xl px-4 pb-24 pt-6 sm:px-6 sm:py-8">
       <JobPageActions path={getJobPath(job)} />
@@ -35,16 +40,27 @@ export function JobDetailView({ job, signedIn }: { job: JobDetail; signedIn: boo
             <CalendarDays className="size-4 shrink-0" aria-hidden="true" />{deadline}
           </p>
           <div className="mt-6 sm:mt-8">
-            {!signedIn && !closed ? (
+            {!signedIn && !closed && applyUrl ? (
               <Button asChild className="h-11 sm:h-9">
                 <Link href="/login">Login to Apply<ArrowUpRight className="size-4" aria-hidden="true" /></Link>
               </Button>
-            ) : job.applyUrl && !closed ? (
+            ) : applyUrl && !closed ? (
               <Button asChild className="h-11 sm:h-9">
-                <a href={job.applyUrl} target={email ? undefined : "_blank"} rel="noopener noreferrer">
+                <a href={applyUrl} target={email ? undefined : "_blank"} rel="noopener noreferrer">
                   Apply<ArrowUpRight className="size-4" aria-hidden="true" />
                 </a>
               </Button>
+            ) : !closed && source ? (
+              <>
+                <Button asChild className="h-11 sm:h-9">
+                  <a href={source} target="_blank" rel="noopener noreferrer">
+                    View original posting<ArrowUpRight className="size-4" aria-hidden="true" />
+                  </a>
+                </Button>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  A direct application link is unavailable. Check the original posting for application instructions.
+                </p>
+              </>
             ) : (
               <>
                 <Button disabled className="h-11 sm:h-9" aria-describedby="apply-status">
