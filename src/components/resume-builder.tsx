@@ -87,7 +87,7 @@ import type {
   ResumeSkillGroup,
   ResumeWorkExperience,
 } from "@/lib/resume";
-import { normalizeResumeLink } from "@/lib/resume-links";
+import { normalizeGitHubLink, normalizeResumeLink } from "@/lib/resume-links";
 import {
   normalizeRichTextHtml,
   plainTextToRichText,
@@ -1503,6 +1503,11 @@ function CoverLetterPreview({
       value: resume.contact.linkedin,
       href: safeLinkedInUrl(resume.contact.linkedin),
     },
+    {
+      label: "GitHub",
+      value: resume.contact.github ?? "",
+      href: normalizeGitHubLink(resume.contact.github),
+    },
   ].filter((item) => item.value.trim());
 
   return (
@@ -1570,6 +1575,7 @@ export function ResumeBuilder({
     ...initialResume,
     contact: {
       ...initialResume.contact,
+      github: initialResume.contact.github ?? "",
       website: initialResume.contact.website ?? "",
       photoUrl: "",
     },
@@ -2743,6 +2749,11 @@ export function ResumeBuilder({
       href: safeLinkedInUrl(resume.contact.linkedin),
     },
     {
+      label: "GitHub",
+      value: resume.contact.github ?? "",
+      href: normalizeGitHubLink(resume.contact.github),
+    },
+    {
       label: "Website",
       value: resume.contact.website,
       href: normalizeResumeLink(resume.contact.website),
@@ -2913,6 +2924,11 @@ export function ResumeBuilder({
                 label="LinkedIn"
                 value={resume.contact.linkedin}
                 onChange={(value) => updateContact("linkedin", value)}
+              />
+              <Field
+                label="GitHub"
+                value={resume.contact.github ?? ""}
+                onChange={(value) => updateContact("github", value)}
               />
               <Field
                 label="Website"

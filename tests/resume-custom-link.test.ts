@@ -4,7 +4,7 @@ import path from "node:path";
 import test from "node:test";
 
 import { normalizeResumeCustomSections } from "../src/lib/resume-schema";
-import { normalizeResumeLink } from "../src/lib/resume-links";
+import { normalizeGitHubLink, normalizeResumeLink } from "../src/lib/resume-links";
 
 test("custom entry links are preserved and legacy entries get an empty link", () => {
   const sections = normalizeResumeCustomSections([
@@ -49,6 +49,15 @@ test("resume links normalize to safe HTTP(S) URLs", () => {
   );
   assert.equal(normalizeResumeLink("javascript:alert(1)"), "");
   assert.equal(normalizeResumeLink(""), "");
+});
+
+test("GitHub contacts accept usernames and profile URLs while rejecting unsafe links", () => {
+  for (const value of ["octocat", "@octocat", "github.com/octocat", "https://github.com/octocat"]) {
+    assert.equal(normalizeGitHubLink(value), "https://github.com/octocat");
+  }
+  for (const value of [undefined, "", "javascript:alert(1)", "https://example.com/octocat", "https://github.com@evil.com/octocat"]) {
+    assert.equal(normalizeGitHubLink(value), "");
+  }
 });
 
 test("custom links are wired into the PDF anchor path", () => {

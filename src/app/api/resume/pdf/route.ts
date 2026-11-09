@@ -19,7 +19,7 @@ import {
   normalizeRichTextHtml,
   richTextToPlainText,
 } from "@/lib/rich-text";
-import { normalizeResumeLink } from "@/lib/resume-links";
+import { normalizeGitHubLink, normalizeResumeLink } from "@/lib/resume-links";
 import { getSession } from "@/lib/session";
 
 const MAX_REQUEST_BYTES = 1024 * 1024;
@@ -438,6 +438,9 @@ function buildResumeHtml(
           linkedinHref(contact.linkedin),
         )}`
       : "",
+    contact.github
+      ? `GitHub: ${contactLink(contact.github, normalizeGitHubLink(contact.github))}`
+      : "",
     contact.website
       ? `Website: ${contactLink(contact.website, contact.website)}`
       : "",
@@ -550,6 +553,9 @@ function buildCoverLetterHtml(resume: ResumeContent) {
           resume.contact.linkedin,
           linkedinHref(resume.contact.linkedin),
         )}`
+      : "",
+    resume.contact.github
+      ? `GitHub: ${contactLink(resume.contact.github, normalizeGitHubLink(resume.contact.github))}`
       : "",
   ]
     .filter(Boolean)
