@@ -4674,7 +4674,7 @@ export function ResumeBuilder({
                     {resume.summary.included &&
                     hasRichTextContent(resume.summary.value) ? (
                       <RichTextPreview
-                        className="mt-[15px] max-w-[6.35in] text-[11.5px] leading-[1.18]"
+                        className="mt-[15px] text-[11.5px] leading-[1.18]"
                         value={resume.summary.value}
                       />
                     ) : null}

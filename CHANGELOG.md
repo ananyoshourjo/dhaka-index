@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.8.4 - 2026-11-09
+
+- Let the resume summary use the full document width when the photo is turned off, in both preview and PDF.
+
 ## 1.8.3 - 2026-11-05
 
 - Use Apply for every application button and remove the note beneath the original-posting fallback.
