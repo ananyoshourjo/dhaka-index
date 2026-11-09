@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.8.4 - 2026-11-09
+
+- Add an optional GitHub contact field with clickable links in resume and cover-letter previews and PDFs.
+- Let the resume summary use the full document width when the photo is turned off.
+
 ## 1.8.3 - 2026-11-05
 
 - Use Apply for every application button and remove the note beneath the original-posting fallback.

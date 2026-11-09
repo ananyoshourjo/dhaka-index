@@ -165,6 +165,7 @@ export type ResumeContent = {
     phone: string;
     email: string;
     linkedin: string;
+    github?: string;
     website: string;
     photoUrl: string;
     photoIncluded?: boolean;
@@ -197,6 +198,7 @@ export const defaultResumeContent: ResumeContent = {
     phone: "",
     email: "",
     linkedin: "",
+    github: "",
     website: "",
     photoUrl: "",
     photoIncluded: true,
@@ -296,6 +298,7 @@ async function readResumeContent(id: string): Promise<ResumeContent | null> {
         ...normalized,
         contact: {
           ...parsed.contact,
+          github: parsed.contact.github ?? "",
           website:
             parsed.contact.website || defaultResumeContent.contact.website,
           photoUrl:
