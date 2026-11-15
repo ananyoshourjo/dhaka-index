@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.9.0 - 2026-11-15
+
+- Add a public sitemap of active job pages for independent discovery and live publication verification.
+
 ## 1.8.4 - 2026-11-09
 
 - Add an optional GitHub contact field with clickable links in resume and cover-letter previews and PDFs.
