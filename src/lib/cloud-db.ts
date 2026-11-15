@@ -6,6 +6,7 @@ import { JOBS_PAGE_SIZE, type ActiveJobFilters } from "@/lib/job-search";
 import { parseJobFunctions, type JobFunction } from "@/lib/job-functions";
 import { nowDhakaIso, todayDhaka } from "@/lib/time";
 import type { JobContent } from "@/lib/job-content";
+import { PUBLIC_JOB_IDENTITIES_SQL, type PublicJobIdentity } from "@/lib/job-sitemap";
 
 export type ActiveJob = {
   id: number;
@@ -37,6 +38,12 @@ export type OfficialFeedJob = JobContent & {
 };
 
 export type JobDetail = ActiveJob & JobContent & { expiredAt: string | null };
+
+export async function getPublicJobIdentities() {
+  const result = await statement(PUBLIC_JOB_IDENTITIES_SQL, [todayDhaka()])
+    .all<PublicJobIdentity>();
+  return result.results;
+}
 
 export async function getJobByIdFromDb(id: number): Promise<JobDetail | null> {
   if (!Number.isSafeInteger(id) || id < 1) return null;
