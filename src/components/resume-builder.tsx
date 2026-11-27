@@ -4736,7 +4736,7 @@ export function ResumeBuilder({
                             {item.dates}
                           </p>
                         </div>
-                        <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
+                        <ul className="ml-[0.3in] mt-[4px] list-disc pl-[0.16in]">
                           {item.bullets
                             .filter(
                               (bullet) =>
@@ -4931,7 +4931,7 @@ export function ResumeBuilder({
                           </p>
                           <p>{item.dates}</p>
                         </div>
-                        <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
+                        <ul className="ml-[0.3in] mt-[4px] list-disc pl-[0.16in]">
                           {item.bullets
                             .filter(
                               (bullet) =>
@@ -5053,7 +5053,7 @@ export function ResumeBuilder({
                             </div>
                             {item.useBullets ? (
                               visibleBullets.length > 0 ? (
-                                <ul className="ml-[0.3in] mt-[4px] list-disc space-y-[1px]">
+                                <ul className="ml-[0.3in] mt-[4px] list-disc pl-[0.16in]">
                                   {visibleBullets.map((bullet) => (
                                     <li key={bullet.id} className="pl-[0.02in]">
                                       <RichTextPreview value={bullet.text} />
