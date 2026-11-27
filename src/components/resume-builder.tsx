@@ -1512,8 +1512,8 @@ function CoverLetterPreview({
 
   return (
     <article
-      className="absolute top-0 h-[11in] w-[8.5in] overflow-hidden bg-transparent p-[1in] text-[11pt] leading-[1.45] text-black"
-      style={{ fontFamily: "Arial, Helvetica, sans-serif", left }}
+      className="cover-letter-document-font absolute top-0 h-[11in] w-[8.5in] overflow-hidden bg-transparent p-[1in] text-[11pt] leading-[1.45] text-black"
+      style={{ left }}
     >
       <header className="border-b border-neutral-300 pb-[0.18in]">
         <h2 className="text-[17pt] font-bold uppercase tracking-[0.01em]">
@@ -1965,10 +1965,13 @@ export function ResumeBuilder({
     const frame = window.requestAnimationFrame(measure);
     const observer = new ResizeObserver(measure);
     observer.observe(preview);
+    // Font swaps can change column overflow without resizing the article.
+    document.fonts.addEventListener("loadingdone", measure);
 
     return () => {
       window.cancelAnimationFrame(frame);
       observer.disconnect();
+      document.fonts.removeEventListener("loadingdone", measure);
     };
   }, [resume, showPreview]);
 
@@ -4651,7 +4654,7 @@ export function ResumeBuilder({
           </div>
           <article
             ref={resumePreviewRef}
-            className="absolute top-0 z-10 h-[11in] w-[8.5in] overflow-visible px-[0.25in] py-[0.25in] font-sans text-black"
+            className="resume-document-font absolute top-0 z-10 h-[11in] w-[8.5in] overflow-visible px-[0.25in] py-[0.25in] text-black"
             style={{
               left: resume.coverLetter.included ? "9in" : "0",
               columnFill: "auto",
