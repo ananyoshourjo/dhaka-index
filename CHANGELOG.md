@@ -2,6 +2,10 @@
 
 All notable changes are documented here.
 
+## 1.9.2 - 2026-11-27
+
+- Match resume preview bullet wrapping and spacing to the exported PDF.
+
 ## 1.9.1 - 2026-11-27
 
 - Keep PDF typography consistent with the resume and cover letter canvas.
