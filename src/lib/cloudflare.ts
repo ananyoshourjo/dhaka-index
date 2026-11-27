@@ -2,6 +2,7 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 export type DhakaIndexCloudflareEnv = CloudflareEnv & {
   ADMIN_PORTAL_URL?: string;
+  ASSETS: Fetcher;
   BETTER_AUTH_SECRET: string;
   BETTER_AUTH_URL: string;
   BROWSER: BrowserRun;

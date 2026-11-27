@@ -24,6 +24,37 @@ import { getSession } from "@/lib/session";
 
 const MAX_REQUEST_BYTES = 1024 * 1024;
 
+async function getPdfFontCss(assets: Fetcher, coverLetter: boolean) {
+  const font = coverLetter ? "Arimo" : "Geist";
+  const weight = coverLetter ? "400 700" : "100 900";
+  const faces = await Promise.all(
+    ["normal", "italic"].map(async (style) => {
+      const filename = style === "italic" ? `${font}-Italic` : font;
+      const response = await assets.fetch(`https://assets.internal/fonts/${filename}.woff2`);
+
+      if (!response.ok) {
+        throw new Error(`Could not load PDF font ${filename} (HTTP ${response.status}).`);
+      }
+
+      const data = Buffer.from(await response.arrayBuffer()).toString("base64");
+      return `@font-face {
+        font-family: "Document";
+        src: url("data:font/woff2;base64,${data}") format("woff2");
+        font-style: ${style};
+        font-weight: ${weight};
+      }`;
+    }),
+  );
+
+  return faces.join("\n");
+}
+
+const waitForPdfFonts = `<script>
+  document.fonts.ready.then(() => {
+    document.documentElement.dataset.fontsReady = "true";
+  });
+</script>`;
+
 function escapeHtml(value: string) {
   return value
     .replaceAll("&", "&amp;")
@@ -143,6 +174,7 @@ function renderPlaceAndDates(place: string | undefined, dates: string) {
 function buildResumeHtml(
   resume: ResumeContent,
   sectionOrder: ResumeSectionId[],
+  fontCss: string,
 ) {
   const summary = renderRichTextHtml(resume.summary.value);
   const work = resume.workExperience
@@ -457,16 +489,17 @@ function buildResumeHtml(
         <style>
           @page { size: letter; margin: .25in; }
           * { box-sizing: border-box; }
-          body { margin: 0; font-family: Arial, sans-serif; color: #000; }
+          ${fontCss}
+          body { margin: 0; font-family: "Document", sans-serif; color: #000; }
           main {
             width: 100%;
           }
           header { display: grid; grid-template-columns: 1fr 1.28in; gap: .25in; }
           .header-no-photo { display: block; }
-          h2 { margin: 0; font-size: 18px; line-height: 1.2; text-transform: uppercase; }
+          h2 { margin: 0; font-size: 18px; line-height: 1.25; text-transform: uppercase; }
           h3 { margin: 0 0 7px; border-bottom: 2px solid #000; padding-bottom: 2px; font-size: 13px; line-height: 1; text-transform: uppercase; }
           p { margin: 0; }
-          .contact { margin-top: 6px; font-size: 11.5px; line-height: 1.15; }
+          .contact { margin-top: 6px; font-size: 11.5px; line-height: 1.25; }
           .contact-item { white-space: nowrap; }
           .summary { margin-top: 15px; font-size: 11.5px; line-height: 1.18; }
           .photo { width: 1.28in; height: 1.55in; border: 1px solid #000; object-fit: cover; }
@@ -479,10 +512,10 @@ function buildResumeHtml(
           em { font-weight: 400; }
           ul { margin: 4px 0 0 .3in; padding-left: .16in; }
           li { padding-left: .02in; }
-          table { width: 100%; border-collapse: collapse; text-align: center; font-size: 11px; line-height: 1.2; }
+          table { width: 100%; border-collapse: collapse; text-align: center; font-size: 11px; line-height: 1.25; }
           th, td { border: 1px solid #000; padding: 3px 8px; }
           th { font-weight: 700; }
-          .references { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #000; font-size: 11px; line-height: 1.2; }
+          .references { display: grid; grid-template-columns: repeat(2, 1fr); border: 1px solid #000; font-size: 11px; line-height: 1.25; }
           .references > div { padding: 7px; border-right: 1px solid #000; }
           .references > div:last-child { border-right: 0; }
           .certification-meta { font-size: 10.5px; }
@@ -538,7 +571,7 @@ function buildResumeHtml(
   `;
 }
 
-function buildCoverLetterHtml(resume: ResumeContent) {
+function buildCoverLetterHtml(resume: ResumeContent, fontCss: string) {
   const coverLetter = resume.coverLetter;
   const body = normalizeRichTextHtml(coverLetter?.body ?? "");
   const contactLine = [
@@ -569,7 +602,8 @@ function buildCoverLetterHtml(resume: ResumeContent) {
         <style>
           @page { size: letter; margin: 0; }
           * { box-sizing: border-box; }
-          body { margin: 0; color: #111; font-family: Arial, Helvetica, sans-serif; }
+          ${fontCss}
+          body { margin: 0; color: #000; font-family: "Document", sans-serif; }
           main { width: 8.5in; height: 11in; overflow: hidden; padding: 1in; font-size: 11pt; line-height: 1.45; }
           header { border-bottom: 1px solid #d4d4d4; padding-bottom: .18in; }
           h1 { margin: 0; font-size: 17pt; line-height: 1.2; letter-spacing: .01em; text-transform: uppercase; }
@@ -651,18 +685,22 @@ export async function POST(request: Request) {
       await getProfilePhotoDataUrl(session.user.id),
     );
     const requestedDocument = payload.document ?? "resume";
+    const { ASSETS, BROWSER } = getCloudflareEnv();
+    const fontCss = await getPdfFontCss(ASSETS, requestedDocument === "coverLetter");
     const html =
       requestedDocument === "coverLetter"
-        ? buildCoverLetterHtml(resume)
+        ? buildCoverLetterHtml(resume, fontCss)
         : buildResumeHtml(
             resume,
             normalizeResumeSectionOrder(
               payload.sectionOrder ?? resume.sectionOrder,
               resume.customSections.map((section) => section.id),
             ),
+            fontCss,
           );
-    const pdf = await getCloudflareEnv().BROWSER.quickAction("pdf", {
-      html,
+    const pdf = await BROWSER.quickAction("pdf", {
+      html: html.replace("</body>", `${waitForPdfFonts}</body>`),
+      waitForSelector: { selector: 'html[data-fonts-ready="true"]' },
       pdfOptions: {
         format: "letter",
         preferCSSPageSize: true,

@@ -2,6 +2,11 @@
 
 All notable changes are documented here.
 
+## 1.9.1 - 2026-11-27
+
+- Keep PDF typography consistent with the resume and cover letter canvas.
+- Update Next.js to address security advisories.
+
 ## 1.9.0 - 2026-11-15
 
 - Add a public sitemap of active job pages for independent discovery and live publication verification.

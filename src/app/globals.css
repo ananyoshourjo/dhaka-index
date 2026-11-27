@@ -1,5 +1,39 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Resume Geist";
+  src: url("/fonts/Geist.woff2") format("woff2");
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Resume Geist";
+  src: url("/fonts/Geist-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: "Cover Letter Arimo";
+  src: url("/fonts/Arimo.woff2") format("woff2");
+  font-weight: 400 700;
+}
+
+@font-face {
+  font-family: "Cover Letter Arimo";
+  src: url("/fonts/Arimo-Italic.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 400 700;
+}
+
+.resume-document-font {
+  font-family: "Resume Geist", sans-serif;
+}
+
+.cover-letter-document-font {
+  font-family: "Cover Letter Arimo", sans-serif;
+}
+
 @source "../app";
 @source "../components";
 @source "../lib";
